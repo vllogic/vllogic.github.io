@@ -49,6 +49,7 @@ Vllogic 产品使用指南
 
 .. toctree::
    :maxdepth: 1
+   :caption: 其他
    :hidden:
    
    readme.md
