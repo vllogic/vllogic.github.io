@@ -41,6 +41,7 @@ Vllogic 产品使用指南
 
    software/iar.md
    software/keil_mdk.md
+   software/probe_rs.md
    software/openocd.md
    software/pyocd.md
 
