@@ -41,17 +41,23 @@
 * 图中调试器为有线模式，硬件为5V版本，且配置文件中`Vout=enable`，故调试器可为目标板提供5V电源
 
 ### 无线模式连接示例
-#### 1. STA为开发板供电
+#### 1. STA为目标板供电
 ![](../_static/vllink_basic_wireless1.png)
-* 图中调试器一个为AP模式，不接开发板；另一个为STA模式，USB接电源、调试口接目标板
+* 图中调试器一个为AP模式，不接目标板；另一个为STA模式，USB接电源、调试口接目标板
 * STA端硬件为5V版本，且配置文件中`Vout=enable`，故STA端可目标板提供5V电源
 * 注意：3.3V版本的调试器仅能提供3.3V电源，且目标板电流不应超过100mA
 
-#### 2. 开发板为STA供电
+#### 2. 目标板为STA供电
 ![](../_static/vllink_basic_wireless2.png)
-* 图中调试器一个为AP模式，不接开发板；另一个为STA模式，调试口接目标板
+* 图中调试器一个为AP模式，不接目标板；另一个为STA模式，调试口接目标板
 * STA端硬件为5V版本，目标板可通过Vout口为STA端供电
 * 因为调试器是通过PMOS管控制Vout，即使`Vout=disable`，未开启的PMOS也仅等效一个二极管，并不影响STA端的启动，所以此方式不不要求修改配置文件
 * 注意：3.3V版本的调试器不支持此种用法
 
-
+## 开发工具使用说明
+* [IAR 使用说明](../software/iar.md)
+* [Keil MDK 使用说明](../software/keil_mdk.md)
+* [Probe RS 使用说明](../software/probe_rs.md)
+* [OpenOCD 使用说明](../software/openocd.md)
+* [PyOCD 使用说明](../software/pyocd.md)
+* [CDC 使用说明](../software/cdc.md)

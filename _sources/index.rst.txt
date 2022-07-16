@@ -48,13 +48,14 @@ QQ群：791104674
 
 .. toctree::
    :maxdepth: 1
-   :caption: IDE使用教程
+   :caption: 开发工具使用说明
 
    software/iar.md
    software/keil_mdk.md
    software/probe_rs.md
    software/openocd.md
    software/pyocd.md
+   software/cdc.md
 
 ===================================
 

@@ -50,12 +50,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#sta">无线发送模式（STA）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id5">有线模式连接示例</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id6">无线模式连接示例</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id7">1. STA为开发板供电</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id8">2. 开发板为STA供电</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">1. STA为目标板供电</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">2. 目标板为STA供电</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">开发工具使用说明</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_sdcard.html">Vllink Sdcard 快速上手</a></li>
@@ -68,13 +69,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_sdcard_hme.html">Vllink Sdcard HME 硬件介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic_vout.html">Vout口使用说明</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">IDE使用教程</span></p>
+<p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../software/iar.html">IAR 使用教程</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../software/keil_mdk.html">Keil MDK 使用教程</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../software/probe_rs.html">Probe RS 使用教程</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../software/openocd.html">OpenOCD 使用教程</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../software/pyocd.html">PyOCD 使用教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/iar.html">IAR 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/keil_mdk.html">Keil MDK 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/probe_rs.html">Probe RS 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/openocd.html">OpenOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/pyocd.html">PyOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/cdc.html">CDC 使用说明</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">其他</span></p>
 <ul>
@@ -193,25 +195,36 @@
 <section id="id6">
 <h3>无线模式连接示例<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
 <section id="id7">
-<h4>1. STA为开发板供电<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h4>
+<h4>1. STA为目标板供电<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h4>
 <p><img alt="" src="../_images/vllink_basic_wireless1.png" /></p>
 <ul class="simple">
-<li><p>图中调试器一个为AP模式，不接开发板；另一个为STA模式，USB接电源、调试口接目标板</p></li>
+<li><p>图中调试器一个为AP模式，不接目标板；另一个为STA模式，USB接电源、调试口接目标板</p></li>
 <li><p>STA端硬件为5V版本，且配置文件中<code class="docutils literal notranslate"><span class="pre">Vout=enable</span></code>，故STA端可目标板提供5V电源</p></li>
 <li><p>注意：3.3V版本的调试器仅能提供3.3V电源，且目标板电流不应超过100mA</p></li>
 </ul>
 </section>
 <section id="id8">
-<h4>2. 开发板为STA供电<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h4>
+<h4>2. 目标板为STA供电<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h4>
 <p><img alt="" src="../_images/vllink_basic_wireless2.png" /></p>
 <ul class="simple">
-<li><p>图中调试器一个为AP模式，不接开发板；另一个为STA模式，调试口接目标板</p></li>
+<li><p>图中调试器一个为AP模式，不接目标板；另一个为STA模式，调试口接目标板</p></li>
 <li><p>STA端硬件为5V版本，目标板可通过Vout口为STA端供电</p></li>
 <li><p>因为调试器是通过PMOS管控制Vout，即使<code class="docutils literal notranslate"><span class="pre">Vout=disable</span></code>，未开启的PMOS也仅等效一个二极管，并不影响STA端的启动，所以此方式不不要求修改配置文件</p></li>
 <li><p>注意：3.3V版本的调试器不支持此种用法</p></li>
 </ul>
 </section>
 </section>
+</section>
+<section id="id9">
+<h2>开发工具使用说明<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../software/iar.html"><span class="doc std std-doc">IAR 使用说明</span></a></p></li>
+<li><p><a class="reference internal" href="../software/keil_mdk.html"><span class="doc std std-doc">Keil MDK 使用说明</span></a></p></li>
+<li><p><a class="reference internal" href="../software/probe_rs.html"><span class="doc std std-doc">Probe RS 使用说明</span></a></p></li>
+<li><p><a class="reference internal" href="../software/openocd.html"><span class="doc std std-doc">OpenOCD 使用说明</span></a></p></li>
+<li><p><a class="reference internal" href="../software/pyocd.html"><span class="doc std std-doc">PyOCD 使用说明</span></a></p></li>
+<li><p><a class="reference internal" href="../software/cdc.html"><span class="doc std std-doc">CDC 使用说明</span></a></p></li>
+</ul>
 </section>
 </section>
 

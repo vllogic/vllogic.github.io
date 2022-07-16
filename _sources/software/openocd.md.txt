@@ -1,2 +1,2 @@
-# OpenOCD 使用教程
+# OpenOCD 使用说明
 施工中
