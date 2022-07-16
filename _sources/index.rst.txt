@@ -1,6 +1,16 @@
 Vllogic 产品使用指南
 ===================================
 
+相关渠道
+--------
+论坛：http://bbs.vllogic.com/
+
+淘宝：https://vllogic.taobao.com/
+
+Github：https://github.com/vllogic
+
+QQ群：791104674
+
 快速上手
 --------
 
@@ -34,6 +44,7 @@ Vllogic 产品使用指南
    hardware/vllink_basic.md
    hardware/vllink_sdcard.md
    hardware/vllink_sdcard_hme.md
+   hardware/vllink_basic_vout.md
 
 .. toctree::
    :maxdepth: 1
