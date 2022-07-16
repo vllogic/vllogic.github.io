@@ -1,4 +1,4 @@
-# Vllink Basic 硬件介绍
+# Vout口使用说明
 ## 模式介绍及切换
 ### 有线模式
 ![](../_static/vllink_basic_wired.png)
