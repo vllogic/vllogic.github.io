@@ -48,6 +48,13 @@ QQ群：791104674
 
 .. toctree::
    :maxdepth: 1
+   :caption: 固件更新
+
+   update/vllink_basic.md
+   update/vllink_sdcard_hme.md
+
+.. toctree::
+   :maxdepth: 1
    :caption: 开发工具使用说明
 
    software/iar.md

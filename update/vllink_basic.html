@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vllink Sdcard 快速上手 &mdash; Vllogic  文档</title>
+  <title>Vllink Basic 固件更新 &mdash; Vllogic  文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="Vllink Sdcard HME 快速上手" href="vllink_sdcard_hme.html" />
-    <link rel="prev" title="Vllink Basic 快速上手" href="vllink_basic.html" /> 
+    <link rel="next" title="Vllink Sdcard HME 固件更新" href="vllink_sdcard_hme.html" />
+    <link rel="prev" title="Vout口使用说明" href="../hardware/vllink_basic_vout.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,14 +40,10 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="vllink_basic.html">Vllink Basic 快速上手</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Vllink Sdcard 快速上手</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#vllink-basic">相比Vllink Basic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">开发进度</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="vllink_sdcard_hme.html">Vllink Sdcard HME 快速上手</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic.html">Vllink Basic 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_sdcard.html">Vllink Sdcard 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_sdcard_hme.html">Vllink Sdcard HME 快速上手</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
 <ul>
@@ -57,9 +53,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic_vout.html">Vout口使用说明</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic.html">Vllink Basic 固件更新</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../update/vllink_sdcard_hme.html">Vllink Sdcard HME 固件更新</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Vllink Basic 固件更新</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">更新方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">固件列表</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cmsis-dap-v2cdcmsc">CMSIS-DAP V2、CDC、MSC接口固件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vllink_sdcard_hme.html">Vllink Sdcard HME 固件更新</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
 <ul>
@@ -89,9 +92,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Vllink Sdcard 快速上手</li>
+      <li>Vllink Basic 固件更新</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/quick/vllink_sdcard.md.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/update/vllink_basic.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -99,19 +102,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="vllink-sdcard">
-<h1>Vllink Sdcard 快速上手<a class="headerlink" href="#vllink-sdcard" title="Permalink to this heading"></a></h1>
-<section id="vllink-basic">
-<h2>相比Vllink Basic<a class="headerlink" href="#vllink-basic" title="Permalink to this heading"></a></h2>
+  <section id="vllink-basic">
+<h1>Vllink Basic 固件更新<a class="headerlink" href="#vllink-basic" title="Permalink to this heading"></a></h1>
+<section id="id1">
+<h2>更新方法<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>解压压缩包</p></li>
+<li><p>按住按键连接Win10电脑，再使用Chrome浏览器打开更新页面 <a class="reference external" href="https://devanlai.github.io/webdfu/dfu-util/">WebDFU&#64;Github</a>或<a class="reference external" href="https://talpachen.gitee.io/webdfu/dfu-util/">WebDFU&#64;Gitee</a></p></li>
+<li><p>点击<code class="docutils literal notranslate"><span class="pre">Connect</span></code>，找到<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic</span> <span class="pre">DFU</span> <span class="pre">Bootloader</span></code>并双击</p></li>
+<li><p>在<code class="docutils literal notranslate"><span class="pre">Firmware</span> <span class="pre">Download</span></code>栏目中选中解压得到.bin文件</p></li>
+<li><p>点击<code class="docutils literal notranslate"><span class="pre">Download</span></code>，等待一段时间后，完成更新。</p></li>
+</ol>
+</section>
+<section id="id2">
+<h2>固件列表<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<section id="cmsis-dap-v2cdcmsc">
+<h3>CMSIS-DAP V2、CDC、MSC接口固件<a class="headerlink" href="#cmsis-dap-v2cdcmsc" title="Permalink to this heading"></a></h3>
 <ul class="simple">
-<li><p>增加调试接口电平转换芯片，可支持IO电平在<code class="docutils literal notranslate"><span class="pre">1.65V</span> <span class="pre">-</span> <span class="pre">5.5V</span></code>范围内的目标芯片</p></li>
-<li><p>增加TF卡插槽</p></li>
-<li><p>适配透明CC-Debugger外壳</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/53ecdef33cd8db7b63838dbff170d0ba/vllink-basicsvcommon0016202207161200.zip"><span class="xref download myst">V00.16-202207161200</span></a></p>
+<ol class="arabic simple">
+<li><p>修复：修复CDC串口notify断点持续halt造成CDC功能不稳定的问题</p></li>
+<li><p>优化：STA将自动记录第一次连接的AP信息，并在下次启动时，自动连接此AP，以加快连接速度</p></li>
+<li><p>优化：将内核供电改为DCDC模式，大约能降低8mA&#64;5V的工作电流</p></li>
+<li><p>优化：修复配置文件字符串判定对’\r\n’依赖的兼容性问题</p></li>
+</ol>
+</li>
 </ul>
 </section>
-<section id="id1">
-<h2>开发进度<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
-<p>施工中</p>
 </section>
 </section>
 
@@ -119,8 +136,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="vllink_basic.html" class="btn btn-neutral float-left" title="Vllink Basic 快速上手" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="vllink_sdcard_hme.html" class="btn btn-neutral float-right" title="Vllink Sdcard HME 快速上手" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../hardware/vllink_basic_vout.html" class="btn btn-neutral float-left" title="Vout口使用说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="vllink_sdcard_hme.html" class="btn btn-neutral float-right" title="Vllink Sdcard HME 固件更新" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
