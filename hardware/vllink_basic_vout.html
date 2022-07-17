@@ -50,7 +50,15 @@
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic.html">Vllink Basic 硬件介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_sdcard.html">Vllink Sdcard 硬件介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_sdcard_hme.html">Vllink Sdcard HME 硬件介绍</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Vout口使用说明</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Vout口使用说明</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#vllink-basic">Vllink Basic 初代</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">外观</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">电路</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">总结</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
 <ul>
@@ -97,7 +105,47 @@
              
   <section id="vout">
 <h1>Vout口使用说明<a class="headerlink" href="#vout" title="Permalink to this heading"></a></h1>
-<p>施工中</p>
+<section id="vllink-basic">
+<h2>Vllink Basic 初代<a class="headerlink" href="#vllink-basic" title="Permalink to this heading"></a></h2>
+<section id="id1">
+<h3>外观<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p><img alt="" src="../_images/vllink_basic_vout_fuse.png" /></p>
+</section>
+<section id="id2">
+<h3>电路<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<p><img alt="" src="../_images/vllink_basic_vout_fuse_sch.png" /></p>
+<ul class="simple">
+<li><p>此版本<code class="docutils literal notranslate"><span class="pre">Vout</span></code>仅支持<code class="docutils literal notranslate"><span class="pre">3.3V</span></code>、<code class="docutils literal notranslate"><span class="pre">5V</span></code>二选一</p></li>
+<li><p>对于<code class="docutils literal notranslate"><span class="pre">3.3V</span></code>版本（贴F2，不贴F3），可通过PMOS管对外输出3.3V电源，此时输出持续电流不应大于100mA</p></li>
+<li><p>对于<code class="docutils literal notranslate"><span class="pre">5V</span></code>版本（贴F3，不贴F2），可通过PMOS管对外输出5V电源。并且，即使<code class="docutils literal notranslate"><span class="pre">GPIOB0</span></code>未拉低，未开启的PMOS也将等效一个二极管，调试器可从<code class="docutils literal notranslate"><span class="pre">Vout</span></code>脚获得电源输入</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>总结<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-center head"><p>功能</p></th>
+<th class="text-center head"><p>3.3V版本</p></th>
+<th class="text-center head"><p>5V版本</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>输出3.3V</p></td>
+<td class="text-center"><p>支持</p></td>
+<td class="text-center"><p>不支持</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>输出5V</p></td>
+<td class="text-center"><p>不支持</p></td>
+<td class="text-center"><p>支持</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>开发板5V反向供电</p></td>
+<td class="text-center"><p>不支持</p></td>
+<td class="text-center"><p>支持</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
 </section>
 
 
