@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Vllogic'
-copyright = '2022, TalpaChen'
-author = 'TalpaChen'
+copyright = '2022, Vllogic'
+author = 'Vllogic'
 
 
 # -- General configuration ---------------------------------------------------
