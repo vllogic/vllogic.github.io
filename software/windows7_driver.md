@@ -1,8 +1,8 @@
 # Windows7 驱动安装
 ## 下载驱动
-* [Vllink Windows7 Driver.zip](../_static/driver/Vllink Windows7 Driver.zip)
-* 解压，文件夹中有两个inf驱动文件，稍后会用到
-  
+1. [Vllink Windows7 Driver.zip](../_static/driver/Vllink_Windows7_Driver.zip)
+2. 解压，文件夹中有两个inf驱动文件，稍后会用到
+
 ## 安装CMSIS-DAP V2驱动
 1. 将DAP接上电脑，在设备管理器中出现CMSIS-DAP v2设备，右击打开操作菜单，左击`更新驱动程序软件`
    ![](../_static/win7_cmsisdapv2_update.png)
@@ -22,9 +22,10 @@
    ![](../_static/win7_cmsisdapv2_warning.png)
 
 ## 安装CDC驱动
-* 参考CMSIS-DAP V2驱动，唯一区别就是在第六步中，选中`ARM`，选中`CMSIS-DAP CDC`
+1. 参考安装CMSIS-DAP V2驱动过程，在设备管理器中选中设备`Vllink-CDCExt`
+   ![](../_static/win7_cmsisdapv2_update_cdc.png)
+2. 在第六步中，选中`ARM`，选中`CMSIS-DAP CDC`
    ![](../_static/win7_cmsisdapv2_selectcdc.png)
 
-
 ## 所有驱动安装完成
-![](../_static/win7_cmsisdapv2_all.png)
+* ![](../_static/win7_cmsisdapv2_all.png)

@@ -57,6 +57,7 @@ QQ群：791104674
    :maxdepth: 1
    :caption: 开发工具使用说明
 
+   software/windows7_driver.md
    software/iar.md
    software/keil_mdk.md
    software/probe_rs.md
