@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IAR 使用说明 &mdash; Vllogic  文档</title>
+  <title>Windows7 驱动安装 &mdash; Vllogic  文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="Keil MDK 使用说明" href="keil_mdk.html" />
-    <link rel="prev" title="Windows7 驱动安装" href="windows7_driver.html" /> 
+    <link rel="next" title="IAR 使用说明" href="iar.html" />
+    <link rel="prev" title="Vllink Sdcard HME 固件更新" href="../update/vllink_sdcard_hme.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -59,8 +59,14 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="windows7_driver.html">Windows7 驱动安装</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">IAR 使用说明</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Windows7 驱动安装</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">下载驱动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cmsis-dap-v2">安装CMSIS-DAP V2驱动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cdc">安装CDC驱动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">所有驱动安装完成</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="iar.html">IAR 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="keil_mdk.html">Keil MDK 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probe_rs.html">Probe RS 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="openocd.html">OpenOCD 使用说明</a></li>
@@ -86,9 +92,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>IAR 使用说明</li>
+      <li>Windows7 驱动安装</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/software/iar.md.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/software/windows7_driver.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -96,17 +102,59 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="iar">
-<h1>IAR 使用说明<a class="headerlink" href="#iar" title="Permalink to this heading"></a></h1>
-<p>施工中</p>
+  <section id="windows7">
+<h1>Windows7 驱动安装<a class="headerlink" href="#windows7" title="Permalink to this heading"></a></h1>
+<section id="id1">
+<h2>下载驱动<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/33750bd39ff56c4a57aaf557b791c047/Vllink_Windows7_Driver.zip"><span class="xref download myst">Vllink Windows7 Driver.zip</span></a></p></li>
+<li><p>解压，文件夹中有两个inf驱动文件，稍后会用到</p></li>
+</ol>
+</section>
+<section id="cmsis-dap-v2">
+<h2>安装CMSIS-DAP V2驱动<a class="headerlink" href="#cmsis-dap-v2" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>将DAP接上电脑，在设备管理器中出现CMSIS-DAP v2设备，右击打开操作菜单，左击<code class="docutils literal notranslate"><span class="pre">更新驱动程序软件</span></code>
+<img alt="" src="../_images/win7_cmsisdapv2_update.png" /></p></li>
+<li><p>左击<code class="docutils literal notranslate"><span class="pre">浏览计算机以查找驱动程序软件</span></code>
+<img alt="" src="../_images/win7_cmsisdapv2_manual.png" /></p></li>
+<li><p>左击<code class="docutils literal notranslate"><span class="pre">从计算机的设备驱动程序列表中选择</span></code>
+<img alt="" src="../_images/win7_cmsisdapv2_select.png" /></p></li>
+<li><p>选中<code class="docutils literal notranslate"><span class="pre">显示所有设备</span></code>，左击<code class="docutils literal notranslate"><span class="pre">下一步</span></code>
+<img alt="" src="../_images/win7_cmsisdapv2_selectalldeveice.png" /></p></li>
+<li><p>左击<code class="docutils literal notranslate"><span class="pre">从磁盘安装</span></code>，左击<code class="docutils literal notranslate"><span class="pre">浏览</span></code>，选中压缩包解压的路径
+<img alt="" src="../_images/win7_cmsisdapv2_selectpath.png" /></p></li>
+<li><p>选中<code class="docutils literal notranslate"><span class="pre">KEIL</span> <span class="pre">-</span> <span class="pre">Tools</span> <span class="pre">By</span> <span class="pre">ARM</span></code>，选中<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">v2</span></code>，左击<code class="docutils literal notranslate"><span class="pre">下一步</span></code>
+<img alt="" src="../_images/win7_cmsisdapv2_selectv2.png" /></p></li>
+<li><p>左击<code class="docutils literal notranslate"><span class="pre">是</span></code>
+<img alt="" src="../_images/win7_cmsisdapv2_selectyes.png" /></p></li>
+<li><p>若出现警告，点击<code class="docutils literal notranslate"><span class="pre">始终..</span></code>
+<img alt="" src="../_images/win7_cmsisdapv2_warning.png" /></p></li>
+</ol>
+</section>
+<section id="cdc">
+<h2>安装CDC驱动<a class="headerlink" href="#cdc" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>参考安装CMSIS-DAP V2驱动过程，在设备管理器中选中设备<code class="docutils literal notranslate"><span class="pre">Vllink-CDCExt</span></code>
+<img alt="" src="../_images/win7_cmsisdapv2_update_cdc.png" /></p></li>
+<li><p>在第六步中，选中<code class="docutils literal notranslate"><span class="pre">ARM</span></code>，选中<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">CDC</span></code>
+<img alt="" src="../_images/win7_cmsisdapv2_selectcdc.png" /></p></li>
+</ol>
+</section>
+<section id="id2">
+<h2>所有驱动安装完成<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><img alt="" src="../_images/win7_cmsisdapv2_all.png" /></p></li>
+</ul>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="windows7_driver.html" class="btn btn-neutral float-left" title="Windows7 驱动安装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="keil_mdk.html" class="btn btn-neutral float-right" title="Keil MDK 使用说明" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../update/vllink_sdcard_hme.html" class="btn btn-neutral float-left" title="Vllink Sdcard HME 固件更新" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="iar.html" class="btn btn-neutral float-right" title="IAR 使用说明" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
