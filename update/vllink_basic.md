@@ -9,12 +9,15 @@
 
 ## 固件列表
 ### CMSIS-DAP V2、CDC、MSC接口固件 
-* [V00.21-202208141754](../_static/firmware/vllink-basicsvcommon0021202208141754.zip)
+* [V00.22-202208242002](../_static/firmware/vllink_basic.SVCommon0022202208242002.zip)
   1. 优化：尝试识别IDE类型，对于Keil开发环境，自动使用优化参数
   2. 新功能：AP模式支持作为STA连接路由器；STA模式支持指定服务器IPv4
   3. 优化：AP模式下，根据远端串口的连接状态，自动切换本地串口与远端串口
   4. 优化：减少重连耗时
   5. 修复：修复无线串口在未连接时接收数据会导致溢出的问题
+  6. 修复：SWO功能异常
+  7. 修复：CMSIS-DAP V2协议下对Keil的主动识别异常
+
 ### CMSIS-DAP V2、CDC、MSC接口固件 
 * [V00.16-202207161200](../_static/firmware/vllink-basicsvcommon0016202207161200.zip)
   1. 修复：修复CDC串口notify短点持续halt造成CDC功能不稳定的问题
