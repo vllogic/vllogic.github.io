@@ -64,6 +64,7 @@ QQ群：791104674
    software/openocd.md
    software/pyocd.md
    software/cdc.md
+   software/hercules.md
 
 ===================================
 

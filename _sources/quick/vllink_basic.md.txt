@@ -3,7 +3,7 @@
 ## 调试接口定义
 ![](../_static/common_interface_desc_small.png)
 | 接口 | 介绍 |
-| :----: | :---- |
+| :---- | :---- |
 | TDI  | JTAG数据口 |
 | TMS / SWDIO  | JTAG模式口、SWD数据口 |
 | TCK / SWCLK  | JTAG时钟口、SWD时钟口 |

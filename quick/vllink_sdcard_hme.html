@@ -44,8 +44,21 @@
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic.html">Vllink Basic 快速上手</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_sdcard.html">Vllink Sdcard 快速上手</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Vllink Sdcard HME 快速上手</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#vllink-sdcard">相比Vllink Sdcard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">开发进度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">调试接口定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">模式介绍及切换</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">模式切换</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">离线编程功能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">简易演示</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">配置文件说明</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basic-config-txt"><code class="docutils literal notranslate"><span class="pre">basic_config.txt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mode4-config-txt"><code class="docutils literal notranslate"><span class="pre">mode4_config.txt</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">进阶资料</a></li>
 </ul>
 </li>
 </ul>
@@ -70,6 +83,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../software/openocd.html">OpenOCD 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../software/pyocd.html">PyOCD 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../software/cdc.html">CDC 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/hercules.html">Hercules 命令详解</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">其他</span></p>
 <ul>
@@ -103,15 +117,130 @@
   <section id="vllink-sdcard-hme">
 <h1>Vllink Sdcard HME 快速上手<a class="headerlink" href="#vllink-sdcard-hme" title="Permalink to this heading"></a></h1>
 <p>Vllink Sdcard HME 是为<a class="reference external" href="http://www.hercules-micro.com/">京微齐力</a>定制的编程、调试工具</p>
-<section id="vllink-sdcard">
-<h2>相比Vllink Sdcard<a class="headerlink" href="#vllink-sdcard" title="Permalink to this heading"></a></h2>
+<section id="id1">
+<h2>调试接口定义<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p><img alt="" src="../_images/hme_interface_desc_small.png" /></p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-left head"><p>接口</p></th>
+<th class="text-left head"><p>介绍</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>TCK</p></td>
+<td class="text-left"><p>JTAG时钟口</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>TDO</p></td>
+<td class="text-left"><p>JTAG数据口</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>TMS</p></td>
+<td class="text-left"><p>JTAG模式口</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>SRST</p></td>
+<td class="text-left"><p>芯片复位口</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>TDI</p></td>
+<td class="text-left"><p>JTAG数据口</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>GND</p></td>
+<td class="text-left"><p>共地口</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>VRef</p></td>
+<td class="text-left"><p>参考电压输入口</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>EFUSE_VDDQ</p></td>
+<td class="text-left"><p>EFuse编程电压输出口</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>EFUSE_CLK</p></td>
+<td class="text-left"><p>EFuse编程时钟输出口</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>GND</p></td>
+<td class="text-left"><p>共地口</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id2">
+<h2>模式介绍及切换<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<section id="id3">
+<h3>模式切换<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
 <ul class="simple">
-<li><p>调试口改为京微齐力标准</p></li>
+<li><p>可通过双击按键切换运行模式</p></li>
+<li><p>根据编程器上电时LED闪烁次数确定当前模式</p></li>
 </ul>
 </section>
-<section id="id1">
-<h2>开发进度<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
-<p>施工中</p>
+</section>
+<section id="id4">
+<h2>离线编程功能<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<section id="id5">
+<h3>简易演示<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<ol class="arabic">
+<li><p>将编程器连接电脑，等待出现<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">CFG</span></code>磁盘，若无磁盘出现，则需双击按键进入模式1</p></li>
+<li><p>修改磁盘中的<code class="docutils literal notranslate"><span class="pre">basic_config.txt</span></code>文件，如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">### Vllink Basic Config ###</span>
+
+<span class="c1"># Mode=1: USBD + IF; Mode=2: USBD + AP; Mode=3: STA + IF; Mode=4: User Define;</span>
+<span class="n">MODE</span><span class="o">=</span><span class="mi">4</span>
+
+<span class="c1"># END</span>
+</pre></div>
+</div>
+</li>
+<li><p>修改磁盘中的<code class="docutils literal notranslate"><span class="pre">mode4_config.txt</span></code>文件，如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">### Vllink Basic Mode4 Config ###</span>
+
+<span class="c1"># Mode4=disable; Mode4=enable;</span>
+<span class="n">Mode4</span><span class="o">=</span><span class="n">enable</span>
+
+<span class="c1"># USBD=disable; USBD=enable;</span>
+<span class="n">USBD</span><span class="o">=</span><span class="n">enable</span>
+
+<span class="c1"># CDC_Shell=disable; CDC_Shell=enable;</span>
+<span class="n">CDC_Shell</span><span class="o">=</span><span class="n">enable</span>
+
+<span class="c1"># Init_CMD=&lt;cmd&gt;: 128bytes max;</span>
+<span class="n">Init_CMD</span><span class="o">=</span><span class="n">hercules</span> <span class="n">auto</span> <span class="n">M7</span> <span class="n">trig_vref</span> <span class="n">flash</span> <span class="n">autoreset</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">top_bin</span><span class="o">.</span><span class="n">acf</span><span class="o">.</span><span class="n">bin</span> <span class="mh">0x0</span> <span class="mh">0x80000</span>
+
+<span class="c1"># Data1_Name=&lt;name&gt;: Path: /data/&lt;name&gt;, 32bytes max</span>
+<span class="n">Data1_Name</span><span class="o">=</span><span class="n">top_bin</span><span class="o">.</span><span class="n">acf</span><span class="o">.</span><span class="n">bin</span>
+
+<span class="c1"># Data1_Size</span>
+<span class="n">Data1_Size</span><span class="o">=</span><span class="mi">512</span>
+
+<span class="c1"># END</span>
+</pre></div>
+</div>
+</li>
+<li><p>保存文件后，重新上电一次</p></li>
+<li><p>将M7芯片的bin固件改名为<code class="docutils literal notranslate"><span class="pre">top_bin.acf.bin</span></code>，覆盖到<code class="docutils literal notranslate"><span class="pre">/data</span></code>路径下</p></li>
+</ol>
+</section>
+<section id="id6">
+<h3>配置文件说明<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<section id="basic-config-txt">
+<h4><code class="docutils literal notranslate"><span class="pre">basic_config.txt</span></code><a class="headerlink" href="#basic-config-txt" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MODE=4</span></code>：选定了模式4</p></li>
+</ul>
+</section>
+<section id="mode4-config-txt">
+<h4><code class="docutils literal notranslate"><span class="pre">mode4_config.txt</span></code><a class="headerlink" href="#mode4-config-txt" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Mode4=enable</span></code>：启用模式4</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">USBD=enable</span></code>：启用模式4下的USB Device</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CDC_Shell=enable</span></code>：启用模式4下的USB CDC Shell</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Init_CMD=...</span></code>：配置模式4的上电启动命令</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Data1_Name=top_bin.acf.bin</span></code>：在<code class="docutils literal notranslate"><span class="pre">/data</span></code>路径下生成一个bin文件，用于存储固件</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Data1_Size=512</span></code>：指定上述bin文件的长度，此处为512KB</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="id7">
+<h2>进阶资料<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../software/hercules.html"><span class="doc std std-doc">Hercules命令详解</span></a></p></li>
+</ul>
 </section>
 </section>
 
