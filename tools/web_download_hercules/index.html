@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <title>Web Download For Hercules FPGA</title>
+  <body>
+    <main style="max-width: 800px; margin: 0 auto;">
+      <h1>Web Download For Hercules FPGA</h1>
+      <p></p>
+      <button id="connect-device">
+        Connect Vllink Sdcard HME
+      </button>
+      <p></p>
+      <form action="">
+        <div>
+          <label>Version: </label>
+          <input
+            class="versionShow"
+            type="text"
+            id="versionShow"
+            disabled="disabled"
+            value="Unconnected"
+          />
+        </div>
+      </form>
+      <p></p>
+      <fieldset>
+        <legend>Status</legend>
+        <div>
+          <input
+            class="statusOut"
+            type="text"
+            id="statusOut"
+            disabled="disabled"
+            value=""
+          />
+        </div>
+      </fieldset>
+      <p></p>
+      <fieldset>
+        <legend>Chip Info</legend>
+        <form action="">
+          <div class="block" id="block-chip-name">
+            <label class="chipText">Chip Name:</label>
+            <input type="text" id="chip-name" disabled="disabled" />
+          </div>
+          <div class="block" id="block-flash-capacity">
+            <label class="chipText">Flash Capacity(KB):</label>
+            <input type="text" id="flash-capacity" disabled="disabled" />
+          </div>
+          <div class="block" id="block-auto-probe">
+            <label class="chipText">Auto Probe: </label>
+            <input type="checkbox" id="auto-probe" disabled="disabled" checked="true" />
+          </div>
+        </form>
+        <form></form>
+        <button class="probe" id="chip-probe" disabled="disabled">
+          Probe
+        </button>
+      </fieldset>
+      <p></p>
+      <fieldset>
+        <legend>Flash Download</legend>
+        <div class="block" id="block-auto-Erase">
+          <label class="chipText">Auto Erase: </label>
+          <input type="checkbox" id="auto-erase" disabled="disabled" checked="true" />
+        </div>
+        <div class="block" id="block-auto-verify">
+          <label class="chipText">Auto Verify: </label>
+          <input type="checkbox" id="auto-verify" disabled="disabled" checked="true" />
+        </div>
+        <div class="block" id="block-auto-reset">
+          <label class="chipText">Auto Run: </label>
+          <input type="checkbox" id="auto-reset" disabled="disabled" />
+        </div>
+        <input class="fileSelect" type="file" id="select-file-flash" accept=".acf,.bin" name="file" />
+        <p></p>
+        <button class="update" id="download-flash" disabled="disabled">
+          Update
+        </button>
+        <progress class="update" id="download-flash-process" max="100" value="0">
+        </progress>
+        <p></p>
+      </fieldset>
+      <p></p>
+      <fieldset>
+        <legend>Flash Read</legend>
+        <p></p>
+        <button class="update" id="read-flash" disabled="disabled">
+          Save
+        </button>
+        <progress class="update" id="read-flash-process" max="100" value="0">
+        </progress>
+        <p></p>
+      </fieldset>
+      <p></p>
+      <fieldset>
+        <legend>Chip Download</legend>
+        <p></p>
+        <input class="fileSelect" type="file" id="select-file-chip" accept=".acf,.bin" name="file" />
+        <p></p>
+        <button class="update" id="download-chip" disabled="disabled">
+          Update
+        </button>
+        <progress class="update" id="download-chip-process" max="100" value="0">
+        </progress>
+        <p></p>
+      </fieldset>
+    </main>
+    <script src="src/index.js"></script>
+  </body>
+</html>
