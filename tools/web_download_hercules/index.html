@@ -6,6 +6,9 @@
   <title>Web Download For Hercules FPGA</title>
   <body>
     <main style="max-width: 800px; margin: 0 auto;">
+      <a href="../update/index.html" target="_blank">固件更新</a>
+      <a href="../web_config/index.html">运行配置</a>
+      <a href="../web_download_hercules/index.html" target="_blank">HME烧写</a>
       <h1>Web Download For Hercules FPGA</h1>
       <p></p>
       <button id="connect-device">
@@ -107,7 +110,19 @@
         </progress>
         <p></p>
       </fieldset>
+      <p></p>
+      <fieldset>
+        <legend>Efuse</legend>
+        <p>此操作有风险，请通过离线编程器实现</p>
+      </fieldset>
+      <p></p>
+      <fieldset>
+        <legend>Readme</legend>
+        <h4><a href="http://www.vllogic.com/index.html" target="_blank">点此访问</a></h4>
+      </fieldset>
     </main>
     <script src="src/index.js"></script>
+    <script src="src/dapv2.js"></script>
+    <script src="src/hercules.js"></script>
   </body>
 </html>

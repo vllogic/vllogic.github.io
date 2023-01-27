@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <title>Vllink HID Update</title>
+  <body>
+    <main style="max-width: 800px; margin: 0 auto;">
+      <a href="../update/index.html" target="_blank">固件更新</a>
+      <a href="../web_config/index.html" target="_blank">运行配置</a>
+      <a href="../web_download_hercules/index.html" target="_blank">HME烧写</a>
+      <h1>Vllink HID Update</h1>
+      <p></p>
+      <button id="connect-device">
+        Connect Vllink Device
+      </button>
+      <p></p>
+      <form action="">
+        <div>
+          <label>Hardware Info: </label>
+          <input
+            class="hwVersionShow"
+            type="text"
+            id="hwVersionShow"
+            disabled="disabled"
+            value="Unconnected"
+          />
+        </div>
+      </form>
+      <p></p>
+      <form action="">
+        <div>
+          <label>Software Version: </label>
+          <input
+            class="swVersionShow"
+            type="text"
+            id="swVersionShow"
+            disabled="disabled"
+            value="Unconnected"
+          />
+        </div>
+      </form>
+      <p></p>
+      <fieldset>
+        <legend>Firmware Update</legend>
+        <p></p>
+        <input class="fileSelect" type="file" id="select-file" name="file" />
+        <p></p>
+        <div class="block" id="block-auto-reset">
+          <label class="chipText">Auto Reset: </label>
+          <input type="checkbox" id="auto-reset" disabled="disabled" checked="true" />
+        </div>
+        <p></p>
+        <button class="update" id="download" disabled="disabled">
+          Update
+        </button>
+        <progress class="update" id="download-process" max="100" value="0">
+        </progress>
+      </fieldset>
+      <p></p>
+      <fieldset>
+        <legend>Readme</legend>
+        <h4>1. <a href="http://www.vllogic.com/index.html" target="_blank">下载固件</a></h4>
+        <h4>2. 先按住设备上的按键，再连接电脑</h4>
+        <h4>3. 选中弹框中的"Vllink xxx Update"，点击连接</h4>
+        <h4>4. 在"Hardware Info"栏目中会显示硬件序列号</h4>
+        <h4>5. 在"Software Version"栏目中会显示设备已有固件版本</h4>
+        <h4>6. 点击"选择文件"，打开需要刷入的固件</h4>
+        <h4>7. 点击"Update"，稍待片刻，固件更新完成</h4>
+        <h4>8. "Auto Reset"选项默认选中，在固件更新完成后，设备会自动重启，进入一般模式</h4>
+        <h4>9. 一般模式下，本升级固件无法与设备通讯</h4>
+      </fieldset>
+    </main>
+    <script src="src/index.js"></script>
+  </body>
+</html>

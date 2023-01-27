@@ -1,0 +1,51 @@
+.block {
+  display: block;
+  margin: 10px;
+}
+.center {
+  text-align: center;
+}
+label.configSet {
+  display: inline-block;
+  width: 160px;
+  text-align: left;
+}
+button.save {
+  position: relative;
+  left: 120px;
+}
+progress.save {
+  position: relative;
+  left: 124px;
+  width: 170px;
+}
+button.update {
+  position: relative;
+  left: 28px;
+}
+progress.update {
+  position: relative;
+  left: 32px;
+  width: 170px;
+}
+div.block {
+  position: relative;
+  left: 12px;
+}
+input.fileSelect {
+  position: relative;
+  left: 23px;
+}
+input.hwVersionShow {
+  position: relative;
+  left: 35px;
+  width: 288px;
+}
+input.swVersionShow {
+  position: relative;
+  left: 16px;
+  width: 288px;
+}
+textarea {
+  vertical-align: top;
+}
