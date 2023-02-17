@@ -53,6 +53,25 @@
         <label id="Config_Password-tips" style="font-size:xx-small"></label>
       </fieldset>
       <p></p>
+      <fieldset>
+        <legend>记录器</legend>
+        <label id="Config_Password-tips" style="font-size:xx-small">提示：记录器理论寿命大于1000万次。总次数接近此次数时，请将硬件回收。</label>
+        <div></div>
+        <label class="chipText">总次数：</label>
+        <input type="text" id="Config_Reocrd-total" minlength="1" maxlength="8" size="8" disabled="disabled">
+        <div></div>
+        <label class="chipText">成功次数：</label>
+        <input type="text" id="Config_Reocrd-success" minlength="1" maxlength="8" size="8" disabled="disabled">
+        <div></div>
+        <label class="chipText">失败次数：</label>
+        <input type="text" id="Config_Reocrd-fail" minlength="1" maxlength="8" size="8" disabled="disabled">
+        <div></div>
+        <button class="buttonCommon" id="Config_Reocrd-reset" disabled="disabled">
+          重置记录器
+        </button>
+        <label id="Config_Password-tips" style="font-size:xx-small">注意：仅用于少量测试后的计数重置，批量使用后，请勿执行重置操作，以免因为Flash超寿命而导致记录器失效！</label>
+      </fieldset>
+      <p></p>
       <div>
         <label>UI配置模式：</label>
         <input type="checkbox" id="checkboxUseUI" disabled="disabled"/>
