@@ -54,7 +54,14 @@
 * 因为调试器是通过PMOS管控制Vout，即使`Vout=disable`，未开启的PMOS也仅等效一个二极管，并不影响STA端的启动，所以此方式不不要求修改配置文件
 * 注意：3.3V版本的调试器不支持此种用法
 
+## 注意事项
+1. 调试口信号线高电平为3.3V，已串接220欧电阻，一般可兼容IO电平2.4V至3.8V的芯片
+2. 当前无线仅传输CMSIS-DAP协议及CDC协议的数据，不涉及调试器的自身配置参数
+3. 升级程序需要使用支持WebUSB的操作系统及浏览器，如Windows10及Chrome内核浏览器
+4. Windows7系统用户请参考下方链接安装驱动
+
 ## 开发工具使用说明
+* [Windows7 驱动安装](../software/windows7_driver.md)
 * [IAR 使用说明](../software/iar.md)
 * [Keil MDK 使用说明](../software/keil_mdk.md)
 * [Probe RS 使用说明](../software/probe_rs.md)

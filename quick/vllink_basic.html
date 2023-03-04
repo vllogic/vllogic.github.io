@@ -56,7 +56,8 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id9">开发工具使用说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">注意事项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">开发工具使用说明</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_sdcard.html">Vllink Sdcard 快速上手</a></li>
@@ -223,8 +224,18 @@
 </section>
 </section>
 <section id="id9">
-<h2>开发工具使用说明<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
+<h2>注意事项<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>调试口信号线高电平为3.3V，已串接220欧电阻，一般可兼容IO电平2.4V至3.8V的芯片</p></li>
+<li><p>当前无线仅传输CMSIS-DAP协议及CDC协议的数据，不涉及调试器的自身配置参数</p></li>
+<li><p>升级程序需要使用支持WebUSB的操作系统及浏览器，如Windows10及Chrome内核浏览器</p></li>
+<li><p>Windows7系统用户请参考下方链接安装驱动</p></li>
+</ol>
+</section>
+<section id="id10">
+<h2>开发工具使用说明<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h2>
 <ul class="simple">
+<li><p><a class="reference internal" href="../software/windows7_driver.html"><span class="doc std std-doc">Windows7 驱动安装</span></a></p></li>
 <li><p><a class="reference internal" href="../software/iar.html"><span class="doc std std-doc">IAR 使用说明</span></a></p></li>
 <li><p><a class="reference internal" href="../software/keil_mdk.html"><span class="doc std std-doc">Keil MDK 使用说明</span></a></p></li>
 <li><p><a class="reference internal" href="../software/probe_rs.html"><span class="doc std std-doc">Probe RS 使用说明</span></a></p></li>

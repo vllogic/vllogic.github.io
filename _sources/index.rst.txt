@@ -1,10 +1,8 @@
 Vllogic 产品使用指南
 ===================================
 
-相关渠道
+相关链接
 --------
-论坛：http://bbs.vllogic.com/
-
 淘宝：https://vllogic.taobao.com/
 
 Github：https://github.com/vllogic
