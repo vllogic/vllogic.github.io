@@ -21,7 +21,9 @@
   7. 修复：CMSIS-DAP V2协议下对Keil的主动识别异常
 * [V00.5B-202208141927](../_static/firmware/vllink_basic.SVCommon005b202208141927.zip)
 
-### CMSIS-DAP V2、CDC、MSC接口固件 
+### 其他接口固件 
+* [V00.25-202303081103](../_static/firmware/vllink_basic.SVCommon0025202303081103.zip)
+  1. 变更：基于`V00.24-202302152043`，移除MSC磁盘
 * [V00.16-202207161200](../_static/firmware/vllink_basic.SVCommon0016202207161200.zip)
   1. 修复：修复CDC串口notify短点持续halt造成CDC功能不稳定的问题
   2. 优化：STA将自动记录第一次连接的AP信息，并在下次启动时，自动连接此AP，以加快连接速度
