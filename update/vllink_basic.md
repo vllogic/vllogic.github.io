@@ -9,6 +9,9 @@
 
 ## 固件列表
 ### CMSIS-DAP V2、CDC、MSC接口固件 
+* [V00.25-202303301453](../_static/firmware/vllink_basic.SVCommon0025202303301453.zip)
+  1. 修复：对要求低速调试的设备支持，比如PY32F0xx系列
+  2. 修复：JTAG IR命令中的一个逻辑BUG
 * [V00.24-202302152043](../_static/firmware/vllink_basic.SVCommon0024202302152043.zip)
   1. 修复：STA端不识别IDE类型，进而导致自动复位功能失效
 * [V00.22-202208242002](../_static/firmware/vllink_basic.SVCommon0022202208242002.zip)
