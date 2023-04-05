@@ -62,7 +62,12 @@
 <li class="toctree-l1"><a class="reference internal" href="windows7_driver.html">Windows7 驱动安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="iar.html">IAR 使用说明</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Keil MDK 使用说明</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#keilcmsis-dap-v2">旧版本Keil支持CMSIS-DAP V2的方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#keil5-36">若所用Keil版本低于5.36，可通过以下三种方法解决：</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dll">1. 替换新版DLL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmsis-dap-v1">2. 使用带有CMSIS-DAP V1接口的固件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keil-5-36">3. 升级Keil版本，最低5.36</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="probe_rs.html">Probe RS 使用说明</a></li>
@@ -102,12 +107,29 @@
              
   <section id="keil-mdk">
 <h1>Keil MDK 使用说明<a class="headerlink" href="#keil-mdk" title="Permalink to this heading"></a></h1>
-<section id="keilcmsis-dap-v2">
-<h2>旧版本Keil支持CMSIS-DAP V2的方法<a class="headerlink" href="#keilcmsis-dap-v2" title="Permalink to this heading"></a></h2>
-<ol class="arabic simple">
-<li><p><a class="reference download internal" download="" href="../_downloads/aeeb18006390d3d512dbf040cd6bd8c4/cmsis-dapdll-keilcmsis-dap-v2.zip"><span class="xref download myst">下载</span></a></p></li>
+<section id="keil5-36">
+<h2>若所用Keil版本低于5.36，可通过以下三种方法解决：<a class="headerlink" href="#keil5-36" title="Permalink to this heading"></a></h2>
+<section id="dll">
+<h3>1. 替换新版DLL<a class="headerlink" href="#dll" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/aeeb18006390d3d512dbf040cd6bd8c4/cmsis-dapdll-keilcmsis-dap-v2.zip"><span class="xref download myst">下载新版本DLL</span></a></p></li>
 <li><p>解压后，替换到 Keil_v5\ARM\BIN</p></li>
-</ol>
+<li><p>此方法不一定对任意版本Keil有效，若无效请选择下面两种方法</p></li>
+</ul>
+</section>
+<section id="cmsis-dap-v1">
+<h3>2. 使用带有CMSIS-DAP V1接口的固件<a class="headerlink" href="#cmsis-dap-v1" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../update/vllink_basic.html"><span class="doc std std-doc">下载页面</span></a></p></li>
+<li><p>可仅升级主机端硬件（即连接电脑的那个）</p></li>
+</ul>
+</section>
+<section id="keil-5-36">
+<h3>3. 升级Keil版本，最低5.36<a class="headerlink" href="#keil-5-36" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://developer.arm.com/">Arm官网</a></p></li>
+</ul>
+</section>
 </section>
 </section>
 
