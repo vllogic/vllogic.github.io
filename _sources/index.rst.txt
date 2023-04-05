@@ -61,7 +61,7 @@ QQ群：791104674
    software/probe_rs.md
    software/openocd.md
    software/pyocd.md
-   software/cdc.md
+   software/freemaster.md
    software/hercules.md
 
 ===================================
