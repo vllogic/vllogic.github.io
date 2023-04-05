@@ -7,6 +7,8 @@ Vllogic 产品使用指南
 
 Github：https://github.com/vllogic
 
+Discussions：https://github.com/vllogic/vllogic.github.io/discussions
+
 QQ群：791104674
 
 快速上手
@@ -61,7 +63,7 @@ QQ群：791104674
    software/probe_rs.md
    software/openocd.md
    software/pyocd.md
-   software/cdc.md
+   software/freemaster.md
    software/hercules.md
 
 ===================================
