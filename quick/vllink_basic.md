@@ -67,4 +67,4 @@
 * [Probe RS 使用说明](../software/probe_rs.md)
 * [OpenOCD 使用说明](../software/openocd.md)
 * [PyOCD 使用说明](../software/pyocd.md)
-* [CDC 使用说明](../software/cdc.md)
+* [FreeMASTER 使用说明](../software/freemaster.md)
