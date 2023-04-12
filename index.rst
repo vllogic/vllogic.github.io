@@ -73,6 +73,11 @@ QQ群：791104674
    software/freemaster.md
    software/hercules.md
 
+.. toctree::
+   :maxdepth: 1
+   :caption: 网页工具
+   tool/update.rst
+
 ===================================
 
 .. toctree::
