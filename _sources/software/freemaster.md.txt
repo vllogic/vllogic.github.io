@@ -4,4 +4,4 @@
   * 可仅升级主机端硬件（即连接电脑的那个）
 
 ## 配置方式
-![](../_static/freemaster_config.png)
+![](../_static/picture/freemaster_config.png)

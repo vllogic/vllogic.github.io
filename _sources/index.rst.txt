@@ -20,13 +20,13 @@ QQ群：791104674
 `Vllink Basic`_         `Vllink Sdcard`_        `Vllink Sdcard HME`_
 ======================  ======================  ======================
 
-.. |Vllink Basic| image:: _static/vllink_basic_top_45.png
+.. |Vllink Basic| image:: _static/picture/vllink_basic_top_45.png
 .. _Vllink Basic: quick/vllink_basic.html
 
-.. |Vllink Sdcard| image:: _static/vllink_sdcard_top_45.png
+.. |Vllink Sdcard| image:: _static/picture/vllink_sdcard_top_45.png
 .. _Vllink Sdcard: quick/vllink_sdcard.html
 
-.. |Vllink Sdcard HME| image:: _static/vllink_sdcard_hme_top_45.png
+.. |Vllink Sdcard HME| image:: _static/picture/vllink_sdcard_hme_top_45.png
 .. _Vllink Sdcard HME: quick/vllink_sdcard_hme.html
 
 .. toctree::

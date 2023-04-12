@@ -3,7 +3,7 @@
 Vllink Sdcard HME 是为[京微齐力](http://www.hercules-micro.com/)定制的编程、调试工具
 
 ## 调试接口定义
-![](../_static/hme_interface_desc_small.png)
+![](../_static/picture/hme_interface_desc_small.png)
 | 接口 | 介绍 |
 | :---- | :---- |
 | TCK  | JTAG时钟口 |
