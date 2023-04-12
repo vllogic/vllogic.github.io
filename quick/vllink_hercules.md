@@ -1,6 +1,6 @@
-# Vllink Sdcard HME 快速上手
+# Vllink Hercules 快速上手
 
-Vllink Sdcard HME 是为[京微齐力](http://www.hercules-micro.com/)定制的编程、调试工具
+Vllink Hercules是为[京微齐力](http://www.hercules-micro.com/)定制的编程、调试工具
 
 ## 调试接口定义
 ![](../_static/picture/hme_interface_desc_small.png)
@@ -9,7 +9,7 @@ Vllink Sdcard HME 是为[京微齐力](http://www.hercules-micro.com/)定制的�
 | TCK  | JTAG时钟口 |
 | TDO  | JTAG数据口 |
 | TMS  | JTAG模式口 |
-| SRST | 芯片复位口 |
+| NC | 未连接 |
 | TDI  | JTAG数据口 |
 | GND  | 共地口 |
 | VRef  | 参考电压输入口 |
