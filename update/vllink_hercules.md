@@ -1,2 +1,2 @@
-# Vllink Sdcard HME 固件更新
-施工中
+# Vllink Hercules 固件更新
+暂无固件发布
