@@ -1,6 +1,6 @@
 # Vout口使用说明
 
-## Vllink Basic 初代
+## Vllink Basic
 ### 外观
 ![](../_static/picture/vllink_basic_vout_fuse.png)
 ### 电路
@@ -14,3 +14,7 @@
 | 输出3.3V | 支持 | 不支持 |
 | 输出5V | 不支持 | 支持 |
 | 开发板5V反向供电 | 不支持 | 支持 |
+
+## Vllink Basic2
+在Basic2版本中，`Vout`脚简化为5V脚，无输出保险丝、无PMOS控制
+

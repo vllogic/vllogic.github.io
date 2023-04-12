@@ -15,35 +15,40 @@ QQ群：791104674
 --------
 
 ======================  ======================  ======================
-|Vllink Basic|_         |Vllink Sdcard|_        |Vllink Sdcard HME|_
+|Vllink Basic|_         |Vllink Pro|_           |Vllink Hercules|_
 ----------------------  ----------------------  ----------------------
-`Vllink Basic`_         `Vllink Sdcard`_        `Vllink Sdcard HME`_
+`Vllink Basic`_         `Vllink Pro`_           `Vllink Hercules`_
+======================  ======================  ======================
+|Vllink Basic2|_
+----------------------  ----------------------  ----------------------
+`Vllink Basic2`_
 ======================  ======================  ======================
 
 .. |Vllink Basic| image:: _static/picture/vllink_basic_top_45.png
 .. _Vllink Basic: quick/vllink_basic.html
 
-.. |Vllink Sdcard| image:: _static/picture/vllink_sdcard_top_45.png
-.. _Vllink Sdcard: quick/vllink_sdcard.html
+.. |Vllink Basic2| image:: _static/picture/vllink_basic2_top_45.png
+.. _Vllink Basic2: quick/vllink_basic2.html
 
-.. |Vllink Sdcard HME| image:: _static/picture/vllink_sdcard_hme_top_45.png
-.. _Vllink Sdcard HME: quick/vllink_sdcard_hme.html
+.. |Vllink Pro| image:: _static/picture/vllink_pro_top_45.png
+.. _Vllink Pro: quick/vllink_pro.html
+
+.. |Vllink Hercules| image:: _static/picture/vllink_hercules_top_45.png
+.. _Vllink Hercules: quick/vllink_hercules.html
 
 .. toctree::
    :caption: 快速上手
    :hidden:
 
    quick/vllink_basic.md
-   quick/vllink_sdcard.md
-   quick/vllink_sdcard_hme.md
+   quick/vllink_basic2.md
+   quick/vllink_pro.md
+   quick/vllink_hercules.md
 
 .. toctree::
    :maxdepth: 1
    :caption: 硬件资料
 
-   hardware/vllink_basic.md
-   hardware/vllink_sdcard.md
-   hardware/vllink_sdcard_hme.md
    hardware/vllink_basic_vout.md
 
 .. toctree::
@@ -51,7 +56,9 @@ QQ群：791104674
    :caption: 固件更新
 
    update/vllink_basic.md
-   update/vllink_sdcard_hme.md
+   update/vllink_basic2.md
+   update/vllink_pro.md
+   update/vllink_hercules.md
 
 .. toctree::
    :maxdepth: 1
