@@ -64,6 +64,7 @@ QQ群：791104674
    :maxdepth: 1
    :caption: 开发工具使用说明
 
+   software/tools.md
    software/windows7_driver.md
    software/iar.md
    software/keil_mdk.md
@@ -72,14 +73,6 @@ QQ群：791104674
    software/pyocd.md
    software/freemaster.md
    software/hercules.md
-
-.. toctree::
-   :maxdepth: 1
-   :caption: 网页工具
-
-   tools/update.rst
-   tools/web_config.rst
-   tools/web_download_hercules.rst
 
 ===================================
 

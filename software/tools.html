@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>升级工具 &mdash; Vllogic  文档</title>
+  <title>在线工具 &mdash; Vllogic  文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="配置工具" href="web_config.html" />
-    <link rel="prev" title="Hercules 命令详解" href="../software/hercules.html" /> 
+    <link rel="next" title="Windows7 驱动安装" href="windows7_driver.html" />
+    <link rel="prev" title="Vllink Hercules 固件更新" href="../update/vllink_hercules.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -58,21 +58,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../update/vllink_hercules.html">Vllink Hercules 固件更新</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../software/windows7_driver.html">Windows7 驱动安装</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../software/iar.html">IAR 使用说明</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../software/keil_mdk.html">Keil MDK 使用说明</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../software/probe_rs.html">Probe RS 使用说明</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../software/openocd.html">OpenOCD 使用说明</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../software/pyocd.html">PyOCD 使用说明</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../software/freemaster.html">FreeMASTER 使用说明</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../software/hercules.html">Hercules 命令详解</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">网页工具</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">升级工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="web_config.html">配置工具</a></li>
-<li class="toctree-l1"><a class="reference internal" href="web_download_hercules.html">Hercules 在线下载</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">在线工具</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">升级</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">京微齐力下载</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="windows7_driver.html">Windows7 驱动安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iar.html">IAR 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keil_mdk.html">Keil MDK 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probe_rs.html">Probe RS 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openocd.html">OpenOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyocd.html">PyOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="freemaster.html">FreeMASTER 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hercules.html">Hercules 命令详解</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">其他</span></p>
 <ul>
@@ -93,9 +93,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>升级工具</li>
+      <li>在线工具</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/tools/update.rst.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/software/tools.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -104,92 +104,33 @@
            <div itemprop="articleBody">
              
   <section id="id1">
-<h1>升级工具<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="style.css" />
-  </head>
-  <title>Vllink HID Update</title>
-  <body>
-    <main style="max-width: 800px; margin: 0 auto;">
-      <a href="../update/index.html" target="_blank">固件更新</a>
-      <a href="../web_config/index.html" target="_blank">运行配置</a>
-      <a href="../web_download_hercules/index.html" target="_blank">HME烧写</a>
-      <h1>Vllink HID Update</h1>
-      <p></p>
-      <button id="connect-device">
-        Connect Vllink Device
-      </button>
-      <p></p>
-      <form action="">
-        <div>
-          <label>Hardware Info: </label>
-          <input
-            class="hwVersionShow"
-            type="text"
-            id="hwVersionShow"
-            disabled="disabled"
-            value="Unconnected"
-          />
-        </div>
-      </form>
-      <p></p>
-      <form action="">
-        <div>
-          <label>Software Version: </label>
-          <input
-            class="swVersionShow"
-            type="text"
-            id="swVersionShow"
-            disabled="disabled"
-            value="Unconnected"
-          />
-        </div>
-      </form>
-      <p></p>
-      <fieldset>
-        <legend>Firmware Update</legend>
-        <p></p>
-        <input class="fileSelect" type="file" id="select-file" name="file" />
-        <p></p>
-        <div class="block" id="block-auto-reset">
-          <label class="chipText">Auto Reset: </label>
-          <input type="checkbox" id="auto-reset" disabled="disabled" checked="true" />
-        </div>
-        <p></p>
-        <button class="update" id="download" disabled="disabled">
-          Update
-        </button>
-        <progress class="update" id="download-process" max="100" value="0">
-        </progress>
-      </fieldset>
-      <p></p>
-      <fieldset>
-        <legend>Readme</legend>
-        <h4>1. <a href="http://www.vllogic.com/index.html" target="_blank">下载固件</a></h4>
-        <h4>2. 先按住设备上的按键，再连接电脑</h4>
-        <h4>3. 选中弹框中的"Vllink xxx Update"，点击连接</h4>
-        <h4>4. 在"Hardware Info"栏目中会显示硬件序列号</h4>
-        <h4>5. 在"Software Version"栏目中会显示设备已有固件版本</h4>
-        <h4>6. 点击"选择文件"，打开需要刷入的固件</h4>
-        <h4>7. 点击"Update"，稍待片刻，固件更新完成</h4>
-        <h4>8. "Auto Reset"选项默认选中，在固件更新完成后，设备会自动重启，进入一般模式</h4>
-        <h4>9. 一般模式下，本升级固件无法与设备通讯</h4>
-      </fieldset>
-    </main>
-    <script src="src/index.js"></script>
-  </body>
-</html>
+<h1>在线工具<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
+<section id="id2">
+<h2>升级<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://vllogic.com/_static/tools/update/index.html">HID升级</a></p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>配置<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.iar.com/">通用配置</a></p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>京微齐力下载<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://vllogic.com/">在线下载</a></p></li>
+</ul>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../software/hercules.html" class="btn btn-neutral float-left" title="Hercules 命令详解" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="web_config.html" class="btn btn-neutral float-right" title="配置工具" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../update/vllink_hercules.html" class="btn btn-neutral float-left" title="Vllink Hercules 固件更新" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="windows7_driver.html" class="btn btn-neutral float-right" title="Windows7 驱动安装" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
