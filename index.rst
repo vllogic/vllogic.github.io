@@ -76,7 +76,10 @@ QQ群：791104674
 .. toctree::
    :maxdepth: 1
    :caption: 网页工具
-   tool/update.rst
+
+   tools/update.rst
+   tools/web_config.rst
+   tools/web_download_hercules.rst
 
 ===================================
 

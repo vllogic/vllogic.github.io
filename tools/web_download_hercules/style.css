@@ -1,0 +1,43 @@
+.block {
+  display: block;
+  margin: 10px;
+}
+.center {
+  text-align: center;
+}
+label.chipText {
+  display: inline-block;
+  width: 160px;
+  text-align: left;
+}
+button.probe {
+  position: relative;
+  left: 120px;
+}
+progress.probe {
+  position: relative;
+  left: 120px;
+  width: 170px;
+}
+button.update {
+  position: relative;
+  left: 108px;
+}
+progress.update {
+  position: relative;
+  left: 112px;
+  width: 170px;
+}
+input.fileSelect {
+  position: relative;
+  left: 103px;
+}
+input.versionShow {
+  width: 288px;
+}
+input.statusOut {
+  width: 750px;
+}
+textarea {
+  vertical-align: top;
+}
