@@ -2,7 +2,7 @@
 
 Vllink Hercules是为[京微齐力](http://www.hercules-micro.com/)定制的编程、调试工具
 
-## 调试接口定义
+## 一、调试接口定义
 ![](../_static/picture/hme_interface_desc_small.png)
 | 接口 | 介绍 |
 | :---- | :---- |
@@ -17,10 +17,13 @@ Vllink Hercules是为[京微齐力](http://www.hercules-micro.com/)定制的编�
 | EFUSE_CLK  | EFuse编程时钟输出口 |
 | GND  | 共地口 |
 
-## 模式介绍及切换
-### 模式切换
-* 可通过双击按键切换运行模式
-* 根据编程器上电时LED闪烁次数确定当前模式
+## 二、功能说明
+### Hercules标准下载
+* 此接口协议兼容旧款`68013方案`下载器，可对接原厂`Fuxi`开发工具使用
+### 在线快速下载
+* 此接口用于实现下载提速，支持Flash读写、Chip写等功能
+* [在线下载地址](https://vllogic.com/_static/tools/web_download_hercules/)，注意，此网页工具需要使用支持`WebUSB`的浏览器打开，如`Edge`
+### 离线编程器
 
 ## 离线编程功能
 ### 简易演示
@@ -72,4 +75,3 @@ Vllink Hercules是为[京微齐力](http://www.hercules-micro.com/)定制的编�
 * `Data1_Size=512`：指定上述bin文件的长度，此处为512KB
 
 ## 进阶资料
-* [Hercules命令详解](../software/hercules.md)

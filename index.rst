@@ -72,7 +72,8 @@ QQ群：791104674
    software/openocd.md
    software/pyocd.md
    software/freemaster.md
-   software/hercules.md
+   software/hercuels_online_programmer.md
+   software/hercules_offline_programmer.md
 
 ===================================
 
