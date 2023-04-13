@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hercules 命令详解 &mdash; Vllogic  文档</title>
+  <title>Hercules 离线编程 &mdash; Vllogic  文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="文档维护" href="../readme.html" />
-    <link rel="prev" title="FreeMASTER 使用说明" href="freemaster.html" /> 
+    <link rel="next" title="在线工具" href="tools.html" />
+    <link rel="prev" title="Hercules 在线下载" href="hercuels_online_programmer.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -59,7 +59,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="tools.html">在线工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="windows7_driver.html">Windows7 驱动安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="iar.html">IAR 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="keil_mdk.html">Keil MDK 使用说明</a></li>
@@ -67,9 +66,11 @@
 <li class="toctree-l1"><a class="reference internal" href="openocd.html">OpenOCD 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pyocd.html">PyOCD 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="freemaster.html">FreeMASTER 使用说明</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Hercules 命令详解</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">&#64;20230405 以下所有内容作废，待更新</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">注意</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hercuels_online_programmer.html">Hercules 在线下载</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Hercules 离线编程</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Hercules 命令详解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">&#64;20230405 以下所有内容作废，待更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">注意</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#help"><code class="docutils literal notranslate"><span class="pre">help</span></code> 子命令</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#test"><code class="docutils literal notranslate"><span class="pre">test</span></code> 子命令</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#chip"><code class="docutils literal notranslate"><span class="pre">chip</span></code> 子命令</a></li>
@@ -80,6 +81,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#efuseclk"><code class="docutils literal notranslate"><span class="pre">efuseclk</span></code> 子命令</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">在线工具</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">其他</span></p>
 <ul>
@@ -100,9 +102,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Hercules 命令详解</li>
+      <li>Hercules 离线编程</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/software/hercules.md.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/software/hercules_offline_programmer.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -111,12 +113,15 @@
            <div itemprop="articleBody">
              
   <section id="hercules">
-<h1>Hercules 命令详解<a class="headerlink" href="#hercules" title="Permalink to this heading"></a></h1>
+<h1>Hercules 离线编程<a class="headerlink" href="#hercules" title="Permalink to this heading"></a></h1>
 <section id="id1">
-<h2>&#64;20230405 以下所有内容作废，待更新<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<h2>Hercules 命令详解<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
 </section>
 <section id="id2">
-<h2>注意<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<h2>&#64;20230405 以下所有内容作废，待更新<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id3">
+<h2>注意<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>本章节所使用的命令可通过<code class="docutils literal notranslate"><span class="pre">Init_CMD=</span></code>自动执行，或通过<code class="docutils literal notranslate"><span class="pre">CDC_Shell</span></code>手动执行</p></li>
 <li><p>Hercules 系列命令尚处于开发后期，部分命令可能有所变动</p></li>
@@ -302,8 +307,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="freemaster.html" class="btn btn-neutral float-left" title="FreeMASTER 使用说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="../readme.html" class="btn btn-neutral float-right" title="文档维护" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hercuels_online_programmer.html" class="btn btn-neutral float-left" title="Hercules 在线下载" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="tools.html" class="btn btn-neutral float-right" title="在线工具" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

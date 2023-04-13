@@ -45,21 +45,48 @@
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic2.html">Vllink Basic2 快速上手</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_pro.html">Vllink Pro 快速上手</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Vllink Hercules 快速上手</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">调试接口定义</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">模式介绍及切换</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id3">模式切换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">一、调试接口定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">二、功能简述</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hercules">2.1 Hercules标准下载</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.2 快速在线下载</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2.3 离线编程器</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">离线编程功能</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id5">简易演示</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">配置文件说明</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id5">三、固件升级及恢复默认设置</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">3.1 固件升级</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">3.2 恢复默认设置</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">四、快速在线下载使用说明</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">4.1 说明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hme-m5">4.2 示例 HME-M5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hme-m7">4.3 示例 HME-M7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hme-h1c02">4.4 示例 HME-H1C02</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hme-hr2">4.5 示例 HME-HR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hme-h3">4.6 示例 HME-H3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.7 示例 HME-H3</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">五、离线编程器配置说明</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">5.1 说明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">5.2 示例 HME-M5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">5.3 示例 HME-M7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">5.4 示例 HME-H1C02</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">5.5 示例 HME-HR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">5.6 示例 HME-H3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">5.7 示例 HME-H3</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id19">离线编程功能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id20">简易演示</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">配置文件说明</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#basic-config-txt"><code class="docutils literal notranslate"><span class="pre">basic_config.txt</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mode4-config-txt"><code class="docutils literal notranslate"><span class="pre">mode4_config.txt</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id7">进阶资料</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id22">进阶资料</a></li>
 </ul>
 </li>
 </ul>
@@ -76,7 +103,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../software/tools.html">在线工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../software/windows7_driver.html">Windows7 驱动安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../software/iar.html">IAR 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../software/keil_mdk.html">Keil MDK 使用说明</a></li>
@@ -84,7 +110,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../software/openocd.html">OpenOCD 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../software/pyocd.html">PyOCD 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../software/freemaster.html">FreeMASTER 使用说明</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../software/hercules.html">Hercules 命令详解</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/hercuels_online_programmer.html">Hercules 在线下载</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/hercules_offline_programmer.html">Hercules 离线编程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/tools.html">在线工具</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">其他</span></p>
 <ul>
@@ -119,7 +147,7 @@
 <h1>Vllink Hercules 快速上手<a class="headerlink" href="#vllink-hercules" title="Permalink to this heading"></a></h1>
 <p>Vllink Hercules是为<a class="reference external" href="http://www.hercules-micro.com/">京微齐力</a>定制的编程、调试工具</p>
 <section id="id1">
-<h2>调试接口定义<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<h2>一、调试接口定义<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
 <p><img alt="" src="../_images/hme_interface_desc_small.png" /></p>
 <table class="colwidths-auto docutils align-default">
 <thead>
@@ -162,19 +190,154 @@
 </table>
 </section>
 <section id="id2">
-<h2>模式介绍及切换<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
-<section id="id3">
-<h3>模式切换<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<h2>二、功能简述<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<section id="hercules">
+<h3>2.1 Hercules标准下载<a class="headerlink" href="#hercules" title="Permalink to this heading"></a></h3>
 <ul class="simple">
-<li><p>可通过双击按键切换运行模式</p></li>
-<li><p>根据编程器上电时LED闪烁次数确定当前模式</p></li>
+<li><p>[开发中]此接口协议兼容旧款<code class="docutils literal notranslate"><span class="pre">68013方案</span></code>下载器，可对接原厂<code class="docutils literal notranslate"><span class="pre">Fuxi</span></code>开发工具使用</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>2.2 快速在线下载<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>此接口用于实现下载提速，支持Flash读写、Chip写等功能</p></li>
+<li><p><a class="reference external" href="https://vllogic.com/_static/tools/web_download_hercules/">在线下载</a>，注意，此网页工具需要使用支持<code class="docutils literal notranslate"><span class="pre">WebUSB</span></code>的浏览器打开，如<code class="docutils literal notranslate"><span class="pre">Edge</span></code></p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>2.3 离线编程器<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>此调试器可用于对Hercules芯片离线编程，包括Flash及Efuse</p></li>
+<li><p>离线编程通过<a class="reference external" href="https://vllogic.com/_static/tools/web_config/">通用配置</a>进行配置</p></li>
+<li><p>支持手动烧录、自动烧录、数量限制、配置数据保护等特性</p></li>
 </ul>
 </section>
 </section>
-<section id="id4">
-<h2>离线编程功能<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
 <section id="id5">
-<h3>简易演示<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<h2>三、固件升级及恢复默认设置<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<section id="id6">
+<h3>3.1 固件升级<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>请访问<a class="reference internal" href="../update/vllink_hercules.html"><span class="doc std std-doc">Vllink Hercules 固件更新</span></a></p></li>
+</ul>
+</section>
+<section id="id7">
+<h3>3.2 恢复默认设置<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<p>在调试器出现异常情况时，可通过以下操作恢复正常功能</p>
+<ol class="arabic">
+<li><p>参考<code class="docutils literal notranslate"><span class="pre">3.1</span></code>确认已升级至最新固件</p></li>
+<li><p>打开<a class="reference external" href="https://vllogic.com/_static/tools/web_config/">通用配置</a></p></li>
+<li><p>点击<code class="docutils literal notranslate"><span class="pre">Connect</span> <span class="pre">Vllink</span></code>，在对话框中选中设备并点击<code class="docutils literal notranslate"><span class="pre">连接</span></code></p></li>
+<li><p>将以下文本覆盖到<code class="docutils literal notranslate"><span class="pre">文本-&gt;常规设置</span></code>栏下</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MODE</span><span class="o">=</span>
+<span class="n">Mode_Quick_Switch</span><span class="o">=</span>
+<span class="n">Vout</span><span class="o">=</span>
+<span class="n">Vout_Key_Reset</span><span class="o">=</span>
+<span class="n">Vout_Voltage_mV</span><span class="o">=</span>
+<span class="n">CDC_Shell</span><span class="o">=</span>
+<span class="n">Dap_Resp_Overtime_Discard</span><span class="o">=</span>
+<span class="n">Srst_Clear_Attach_Write</span><span class="o">=</span>
+<span class="n">Mac_Addr</span><span class="o">=</span>
+<span class="n">Wireless_ATTR</span><span class="o">=</span>
+<span class="n">Wireless_Host_Channel</span><span class="o">=</span>
+<span class="n">Wireless_Host_SSID</span><span class="o">=</span>
+<span class="n">Wireless_Host_Password</span><span class="o">=</span>
+</pre></div>
+</div>
+</li>
+<li><p>将以下文本覆盖到<code class="docutils literal notranslate"><span class="pre">文本-&gt;自定义设置</span></code>栏下</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Customize_Wireless_Host</span><span class="o">=</span>
+<span class="n">Customize_Wireless_Device</span><span class="o">=</span>
+<span class="n">Customize_DATA_AREA_SIZE</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE1_NAME</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE1_ATTR</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE1_SIZE</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Customize_DATA_FILE2_NAME</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE2_ATTR</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE2_SIZE</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Customize_DATA_FILE3_NAME</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE3_ATTR</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE3_SIZE</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Customize_DATA_FILE4_NAME</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE4_ATTR</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE4_SIZE</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Customize_DATA_FILE5_NAME</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE5_ATTR</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE5_SIZE</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Customize_DATA_FILE6_NAME</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE6_ATTR</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE6_SIZE</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Customize_DATA_FILE7_NAME</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE7_ATTR</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE7_SIZE</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Customize_DATA_FILE8_NAME</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE8_ATTR</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE8_SIZE</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Customize_DATA_FILE9_NAME</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE9_ATTR</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE9_SIZE</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Customize_CMD_INIT</span><span class="o">=</span>
+<span class="n">Customize_CMD_POLL</span><span class="o">=</span>
+</pre></div>
+</div>
+</li>
+<li><p>点击<code class="docutils literal notranslate"><span class="pre">同步设置</span></code></p></li>
+<li><p>对调试器重新上电，恢复默认设置完成</p></li>
+</ol>
+</section>
+</section>
+<section id="id8">
+<h2>四、快速在线下载使用说明<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
+<section id="id9">
+<h3>4.1 说明<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+</section>
+<section id="hme-m5">
+<h3>4.2 示例 HME-M5<a class="headerlink" href="#hme-m5" title="Permalink to this heading"></a></h3>
+</section>
+<section id="hme-m7">
+<h3>4.3 示例 HME-M7<a class="headerlink" href="#hme-m7" title="Permalink to this heading"></a></h3>
+</section>
+<section id="hme-h1c02">
+<h3>4.4 示例 HME-H1C02<a class="headerlink" href="#hme-h1c02" title="Permalink to this heading"></a></h3>
+</section>
+<section id="hme-hr2">
+<h3>4.5 示例 HME-HR2<a class="headerlink" href="#hme-hr2" title="Permalink to this heading"></a></h3>
+</section>
+<section id="hme-h3">
+<h3>4.6 示例 HME-H3<a class="headerlink" href="#hme-h3" title="Permalink to this heading"></a></h3>
+</section>
+<section id="id10">
+<h3>4.7 示例 HME-H3<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="id11">
+<h2>五、离线编程器配置说明<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h2>
+<section id="id12">
+<h3>5.1 说明<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
+</section>
+<section id="id13">
+<h3>5.2 示例 HME-M5<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+</section>
+<section id="id14">
+<h3>5.3 示例 HME-M7<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h3>
+</section>
+<section id="id15">
+<h3>5.4 示例 HME-H1C02<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h3>
+</section>
+<section id="id16">
+<h3>5.5 示例 HME-HR2<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h3>
+</section>
+<section id="id17">
+<h3>5.6 示例 HME-H3<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h3>
+</section>
+<section id="id18">
+<h3>5.7 示例 HME-H3<a class="headerlink" href="#id18" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="id19">
+<h2>离线编程功能<a class="headerlink" href="#id19" title="Permalink to this heading"></a></h2>
+<section id="id20">
+<h3>简易演示<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h3>
 <ol class="arabic">
 <li><p>将编程器连接电脑，等待出现<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">CFG</span></code>磁盘，若无磁盘出现，则需双击按键进入模式1</p></li>
 <li><p>修改磁盘中的<code class="docutils literal notranslate"><span class="pre">basic_config.txt</span></code>文件，如下：</p>
@@ -216,8 +379,8 @@
 <li><p>将M7芯片的bin固件改名为<code class="docutils literal notranslate"><span class="pre">top_bin.acf.bin</span></code>，覆盖到<code class="docutils literal notranslate"><span class="pre">/data</span></code>路径下</p></li>
 </ol>
 </section>
-<section id="id6">
-<h3>配置文件说明<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<section id="id21">
+<h3>配置文件说明<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h3>
 <section id="basic-config-txt">
 <h4><code class="docutils literal notranslate"><span class="pre">basic_config.txt</span></code><a class="headerlink" href="#basic-config-txt" title="Permalink to this heading"></a></h4>
 <ul class="simple">
@@ -237,11 +400,8 @@
 </section>
 </section>
 </section>
-<section id="id7">
-<h2>进阶资料<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="../software/hercules.html"><span class="doc std std-doc">Hercules命令详解</span></a></p></li>
-</ul>
+<section id="id22">
+<h2>进阶资料<a class="headerlink" href="#id22" title="Permalink to this heading"></a></h2>
 </section>
 </section>
 
