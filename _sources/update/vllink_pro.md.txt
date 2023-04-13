@@ -1,2 +1,2 @@
-# Vllink Hercules 固件更新
+# Vllink Pro 固件更新
 暂无固件发布
