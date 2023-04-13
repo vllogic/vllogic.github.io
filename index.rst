@@ -64,7 +64,6 @@ QQ群：791104674
    :maxdepth: 1
    :caption: 开发工具使用说明
 
-   software/tools.md
    software/windows7_driver.md
    software/iar.md
    software/keil_mdk.md
@@ -74,6 +73,7 @@ QQ群：791104674
    software/freemaster.md
    software/hercuels_online_programmer.md
    software/hercules_offline_programmer.md
+   software/tools.md
 
 ===================================
 
