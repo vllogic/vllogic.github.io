@@ -96,8 +96,8 @@ Vllink Hercules是为[京微齐力](http://www.hercules-micro.com/)定制的编�
 2. 调试器连接电脑，调试器通过牛角排线连接开发板
 3. 开发板上电
 ### 4.2 说明
-配置网页界面如下：
-![](../_static/picture/web_download_hercules.png)
+* 在线下载界面如下：
+  ![](../_static/picture/web_download_hercules.png)
 * 连接调试器：点击`Connect Vllink Hercules`，在对话框中选中设备并点击`连接`
 * 连接后，`Chip Info`区域会显示当前开发板芯片类型，Flash容量
 * `Chip Info`区域中的`Auto Probe`默认勾选，此选项会使调试器持续与开发板通讯，检测开发板状态
@@ -143,6 +143,9 @@ Vllink Hercules是为[京微齐力](http://www.hercules-micro.com/)定制的编�
 ## 五、离线编程器配置说明
 ### 5.1 准备工作
 ### 5.2 说明
+* 配置网页界面如下：
+  ![](../_static/picture/web_config.png)
+* 更多命令细节，请访问[Hercules 命令说明](../software/hercuels_command.md)
 ### 5.3 示例 HME-H3
 ### 5.4 示例 HME-H1C02
 ### 5.5 示例 HME-HR2
