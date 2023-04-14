@@ -91,70 +91,61 @@ Vllink Hercules是为[京微齐力](http://www.hercules-micro.com/)定制的编�
 7. 对调试器重新上电，恢复默认设置完成
 
 ## 四、快速在线下载使用说明
-### 4.1 说明
-### 4.2 示例 HME-M5
-### 4.3 示例 HME-M7
+### 4.1 准备工作
+1. 使用支持`WebUSB`的浏览器打开[在线下载](https://vllogic.com/_static/tools/web_download_hercules/)
+2. 调试器连接电脑，调试器通过牛角排线连接开发板
+3. 开发板上电
+### 4.2 说明
+配置网页界面如下：
+![](../_static/picture/web_download_hercules.png)
+* 连接调试器：点击`Connect Vllink Hercules`，在对话框中选中设备并点击`连接`
+* 连接后，`Chip Info`区域会显示当前开发板芯片类型，Flash容量
+* `Chip Info`区域中的`Auto Probe`默认勾选，此选项会使调试器持续与开发板通讯，检测开发板状态
+* `Flash Download`区域用于Flash下载，支持`bin`及`acf`格式的文件
+* `Flash Read`区域用于Flash全片读取
+* `Chip Download`区域用于Chip下载，下载完成后会自动运行，一般用于开发阶段快速运行码流，重新上电后此码流丢弃
+### 4.3 示例 HME-H3
+1. 根据`4.1`完成准备工作，参考`4.2`完成连接，`Chip Info`区域出现H3芯片信息
+2. `Flash Download`：选择需要烧录的固件，再点击Update，进度条跑完后即完成下载
+3. `Flash Download`->`Auto Run`：勾选此项将在下载完成后，自动运行所下载的固件
+4. `Flash Read`：点击`Save`，会将芯片中的Flash数据下载出来
+5. `Chip Download`：
+6. 由于调试器连接目标芯片会导致芯片暂停，故在使能`Auto Run`的下载完成或`Chip Download`完成之后，调试器将停止自动探测开发板。如需再次执行操作，请勾选`Auto Probe`，或手动点击`Probe`按钮
 ### 4.4 示例 HME-H1C02
-### 4.5 示例 HME-HR2
-### 4.6 示例 HME-H3
-### 4.7 示例 HME-H3
+1. 根据`4.1`完成准备工作，参考`4.2`完成连接，`Chip Info`区域出现H1C02芯片信息
+2. `Flash Download`：选择需要烧录的固件，再点击Update，进度条跑完后即完成下载
+3. `Flash Download`->`Auto Run`：勾选此项将在下载完成后，自动运行所下载的固件
+4. `Flash Read`：点击`Save`，会将芯片中的Flash数据下载出来
+5. `Chip Download`：
+6. 由于调试器连接目标芯片会导致芯片暂停，故在使能`Auto Run`的下载完成或`Chip Download`完成之后，调试器将停止自动探测开发板。如需再次执行操作，请勾选`Auto Probe`，或手动点击`Probe`按钮
+### 4.5 示例 HME-HR02
+1. 根据`4.1`完成准备工作，参考`4.2`完成连接，`Chip Info`区域出现HR02芯片信息
+2. `Flash Download`：选择需要烧录的固件，再点击Update，进度条跑完后即完成下载
+3. `Flash Download`->`Auto Run`：勾选此项将在下载完成后，自动运行所下载的固件
+4. `Flash Read`：点击`Save`，会将芯片中的Flash数据下载出来
+5. `Chip Download`：
+6. 由于调试器连接目标芯片会导致芯片暂停，故在使能`Auto Run`的下载完成或`Chip Download`完成之后，调试器将停止自动探测开发板。如需再次执行操作，请勾选`Auto Probe`，或手动点击`Probe`按钮
+### 4.6 示例 HME-M5
+1. 根据`4.1`完成准备工作，参考`4.2`完成连接，`Chip Info`区域出现M5芯片信息
+2. `Flash Download`：选择需要烧录的固件，再点击Update，进度条跑完后即完成下载
+3. `Flash Download`->`Auto Run`：勾选此项将在下载完成后，自动运行所下载的固件
+4. `Flash Read`：点击`Save`，会将芯片中的Flash数据下载出来
+5. `Chip Download`：
+6. 由于调试器连接目标芯片会导致芯片暂停，故在使能`Auto Run`的下载完成或`Chip Download`完成之后，调试器将停止自动探测开发板。如需再次执行操作，请勾选`Auto Probe`，或手动点击`Probe`按钮
+### 4.7 示例 HME-M7
+1. 根据`4.1`完成准备工作，参考`4.2`完成连接，`Chip Info`区域出现M7芯片信息
+2. `Flash Download`：选择需要烧录的固件，再点击Update，进度条跑完后即完成下载
+3. `Flash Download`->`Auto Run`：勾选此项将在下载完成后，自动运行所下载的固件
+4. `Flash Read`：点击`Save`，会将芯片中的Flash数据下载出来
+5. `Chip Download`：
+6. 由于调试器连接目标芯片会导致芯片暂停，故在使能`Auto Run`的下载完成或`Chip Download`完成之后，调试器将停止自动探测开发板。如需再次执行操作，请勾选`Auto Probe`，或手动点击`Probe`按钮
 
 ## 五、离线编程器配置说明
-### 5.1 说明
-### 5.2 示例 HME-M5
-### 5.3 示例 HME-M7
+### 5.1 准备工作
+### 5.2 说明
+### 5.3 示例 HME-H3
 ### 5.4 示例 HME-H1C02
 ### 5.5 示例 HME-HR2
-### 5.6 示例 HME-H3
-### 5.7 示例 HME-H3
+### 5.6 示例 HME-M5
+### 5.7 示例 HME-M7
 
-## 离线编程功能
-### 简易演示
-1. 将编程器连接电脑，等待出现`Vllink CFG`磁盘，若无磁盘出现，则需双击按键进入模式1
-2. 修改磁盘中的`basic_config.txt`文件，如下：
-    ```
-    ### Vllink Basic Config ###
-
-    # Mode=1: USBD + IF; Mode=2: USBD + AP; Mode=3: STA + IF; Mode=4: User Define;
-    MODE=4
-
-    # END
-    ```
-3. 修改磁盘中的`mode4_config.txt`文件，如下：
-    ```
-    ### Vllink Basic Mode4 Config ###
-
-    # Mode4=disable; Mode4=enable;
-    Mode4=enable
-
-    # USBD=disable; USBD=enable;
-    USBD=enable
-
-    # CDC_Shell=disable; CDC_Shell=enable;
-    CDC_Shell=enable
-
-    # Init_CMD=<cmd>: 128bytes max;
-    Init_CMD=hercules auto M7 trig_vref flash autoreset /data/top_bin.acf.bin 0x0 0x80000
-
-    # Data1_Name=<name>: Path: /data/<name>, 32bytes max
-    Data1_Name=top_bin.acf.bin
-
-    # Data1_Size
-    Data1_Size=512
-
-    # END
-    ```
-4. 保存文件后，重新上电一次
-5. 将M7芯片的bin固件改名为`top_bin.acf.bin`，覆盖到`/data`路径下
-### 配置文件说明
-#### `basic_config.txt`
-* `MODE=4`：选定了模式4
-#### `mode4_config.txt`
-* `Mode4=enable`：启用模式4
-* `USBD=enable`：启用模式4下的USB Device
-* `CDC_Shell=enable`：启用模式4下的USB CDC Shell
-* `Init_CMD=...`：配置模式4的上电启动命令
-* `Data1_Name=top_bin.acf.bin`：在`/data`路径下生成一个bin文件，用于存储固件
-* `Data1_Size=512`：指定上述bin文件的长度，此处为512KB
-
-## 进阶资料

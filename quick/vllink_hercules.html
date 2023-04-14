@@ -58,35 +58,25 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#id8">四、快速在线下载使用说明</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id9">4.1 说明</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hme-m5">4.2 示例 HME-M5</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hme-m7">4.3 示例 HME-M7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">4.1 准备工作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.2 说明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hme-h3">4.3 示例 HME-H3</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hme-h1c02">4.4 示例 HME-H1C02</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hme-hr2">4.5 示例 HME-HR2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hme-h3">4.6 示例 HME-H3</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">4.7 示例 HME-H3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hme-hr02">4.5 示例 HME-HR02</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hme-m5">4.6 示例 HME-M5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hme-m7">4.7 示例 HME-M7</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#id11">五、离线编程器配置说明</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id12">5.1 说明</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">5.2 示例 HME-M5</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">5.3 示例 HME-M7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">5.1 准备工作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">5.2 说明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">5.3 示例 HME-H3</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id15">5.4 示例 HME-H1C02</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id16">5.5 示例 HME-HR2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id17">5.6 示例 HME-H3</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id18">5.7 示例 HME-H3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hme-hr2">5.5 示例 HME-HR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">5.6 示例 HME-M5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">5.7 示例 HME-M7</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id19">离线编程功能</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id20">简易演示</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id21">配置文件说明</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#basic-config-txt"><code class="docutils literal notranslate"><span class="pre">basic_config.txt</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#mode4-config-txt"><code class="docutils literal notranslate"><span class="pre">mode4_config.txt</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id22">进阶资料</a></li>
 </ul>
 </li>
 </ul>
@@ -289,119 +279,105 @@
 <section id="id8">
 <h2>四、快速在线下载使用说明<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
 <section id="id9">
-<h3>4.1 说明<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<h3>4.1 准备工作<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>使用支持<code class="docutils literal notranslate"><span class="pre">WebUSB</span></code>的浏览器打开<a class="reference external" href="https://vllogic.com/_static/tools/web_download_hercules/">在线下载</a></p></li>
+<li><p>调试器连接电脑，调试器通过牛角排线连接开发板</p></li>
+<li><p>开发板上电</p></li>
+</ol>
 </section>
-<section id="hme-m5">
-<h3>4.2 示例 HME-M5<a class="headerlink" href="#hme-m5" title="Permalink to this heading"></a></h3>
+<section id="id10">
+<h3>4.2 说明<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
+<p>配置网页界面如下：
+<img alt="" src="../_images/web_download_hercules.png" /></p>
+<ul class="simple">
+<li><p>连接调试器：点击<code class="docutils literal notranslate"><span class="pre">Connect</span> <span class="pre">Vllink</span> <span class="pre">Hercules</span></code>，在对话框中选中设备并点击<code class="docutils literal notranslate"><span class="pre">连接</span></code></p></li>
+<li><p>连接后，<code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Info</span></code>区域会显示当前开发板芯片类型，Flash容量</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Info</span></code>区域中的<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Probe</span></code>默认勾选，此选项会使调试器持续与开发板通讯，检测开发板状态</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Download</span></code>区域用于Flash下载，支持<code class="docutils literal notranslate"><span class="pre">bin</span></code>及<code class="docutils literal notranslate"><span class="pre">acf</span></code>格式的文件</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Read</span></code>区域用于Flash全片读取</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Download</span></code>区域用于Chip下载，下载完成后会自动运行，一般用于开发阶段快速运行码流，重新上电后此码流丢弃</p></li>
+</ul>
 </section>
-<section id="hme-m7">
-<h3>4.3 示例 HME-M7<a class="headerlink" href="#hme-m7" title="Permalink to this heading"></a></h3>
+<section id="hme-h3">
+<h3>4.3 示例 HME-H3<a class="headerlink" href="#hme-h3" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>根据<code class="docutils literal notranslate"><span class="pre">4.1</span></code>完成准备工作，参考<code class="docutils literal notranslate"><span class="pre">4.2</span></code>完成连接，<code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Info</span></code>区域出现H3芯片信息</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Download</span></code>：选择需要烧录的固件，再点击Update，进度条跑完后即完成下载</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Download</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Run</span></code>：勾选此项将在下载完成后，自动运行所下载的固件</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Read</span></code>：点击<code class="docutils literal notranslate"><span class="pre">Save</span></code>，会将芯片中的Flash数据下载出来</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Download</span></code>：</p></li>
+<li><p>由于调试器连接目标芯片会导致芯片暂停，故在使能<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Run</span></code>的下载完成或<code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Download</span></code>完成之后，调试器将停止自动探测开发板。如需再次执行操作，请勾选<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Probe</span></code>，或手动点击<code class="docutils literal notranslate"><span class="pre">Probe</span></code>按钮</p></li>
+</ol>
 </section>
 <section id="hme-h1c02">
 <h3>4.4 示例 HME-H1C02<a class="headerlink" href="#hme-h1c02" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>根据<code class="docutils literal notranslate"><span class="pre">4.1</span></code>完成准备工作，参考<code class="docutils literal notranslate"><span class="pre">4.2</span></code>完成连接，<code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Info</span></code>区域出现H1C02芯片信息</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Download</span></code>：选择需要烧录的固件，再点击Update，进度条跑完后即完成下载</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Download</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Run</span></code>：勾选此项将在下载完成后，自动运行所下载的固件</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Read</span></code>：点击<code class="docutils literal notranslate"><span class="pre">Save</span></code>，会将芯片中的Flash数据下载出来</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Download</span></code>：</p></li>
+<li><p>由于调试器连接目标芯片会导致芯片暂停，故在使能<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Run</span></code>的下载完成或<code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Download</span></code>完成之后，调试器将停止自动探测开发板。如需再次执行操作，请勾选<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Probe</span></code>，或手动点击<code class="docutils literal notranslate"><span class="pre">Probe</span></code>按钮</p></li>
+</ol>
 </section>
-<section id="hme-hr2">
-<h3>4.5 示例 HME-HR2<a class="headerlink" href="#hme-hr2" title="Permalink to this heading"></a></h3>
+<section id="hme-hr02">
+<h3>4.5 示例 HME-HR02<a class="headerlink" href="#hme-hr02" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>根据<code class="docutils literal notranslate"><span class="pre">4.1</span></code>完成准备工作，参考<code class="docutils literal notranslate"><span class="pre">4.2</span></code>完成连接，<code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Info</span></code>区域出现HR02芯片信息</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Download</span></code>：选择需要烧录的固件，再点击Update，进度条跑完后即完成下载</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Download</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Run</span></code>：勾选此项将在下载完成后，自动运行所下载的固件</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Read</span></code>：点击<code class="docutils literal notranslate"><span class="pre">Save</span></code>，会将芯片中的Flash数据下载出来</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Download</span></code>：</p></li>
+<li><p>由于调试器连接目标芯片会导致芯片暂停，故在使能<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Run</span></code>的下载完成或<code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Download</span></code>完成之后，调试器将停止自动探测开发板。如需再次执行操作，请勾选<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Probe</span></code>，或手动点击<code class="docutils literal notranslate"><span class="pre">Probe</span></code>按钮</p></li>
+</ol>
 </section>
-<section id="hme-h3">
-<h3>4.6 示例 HME-H3<a class="headerlink" href="#hme-h3" title="Permalink to this heading"></a></h3>
+<section id="hme-m5">
+<h3>4.6 示例 HME-M5<a class="headerlink" href="#hme-m5" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>根据<code class="docutils literal notranslate"><span class="pre">4.1</span></code>完成准备工作，参考<code class="docutils literal notranslate"><span class="pre">4.2</span></code>完成连接，<code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Info</span></code>区域出现M5芯片信息</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Download</span></code>：选择需要烧录的固件，再点击Update，进度条跑完后即完成下载</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Download</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Run</span></code>：勾选此项将在下载完成后，自动运行所下载的固件</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Read</span></code>：点击<code class="docutils literal notranslate"><span class="pre">Save</span></code>，会将芯片中的Flash数据下载出来</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Download</span></code>：</p></li>
+<li><p>由于调试器连接目标芯片会导致芯片暂停，故在使能<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Run</span></code>的下载完成或<code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Download</span></code>完成之后，调试器将停止自动探测开发板。如需再次执行操作，请勾选<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Probe</span></code>，或手动点击<code class="docutils literal notranslate"><span class="pre">Probe</span></code>按钮</p></li>
+</ol>
 </section>
-<section id="id10">
-<h3>4.7 示例 HME-H3<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
+<section id="hme-m7">
+<h3>4.7 示例 HME-M7<a class="headerlink" href="#hme-m7" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>根据<code class="docutils literal notranslate"><span class="pre">4.1</span></code>完成准备工作，参考<code class="docutils literal notranslate"><span class="pre">4.2</span></code>完成连接，<code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Info</span></code>区域出现M7芯片信息</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Download</span></code>：选择需要烧录的固件，再点击Update，进度条跑完后即完成下载</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Download</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Run</span></code>：勾选此项将在下载完成后，自动运行所下载的固件</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Flash</span> <span class="pre">Read</span></code>：点击<code class="docutils literal notranslate"><span class="pre">Save</span></code>，会将芯片中的Flash数据下载出来</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Download</span></code>：</p></li>
+<li><p>由于调试器连接目标芯片会导致芯片暂停，故在使能<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Run</span></code>的下载完成或<code class="docutils literal notranslate"><span class="pre">Chip</span> <span class="pre">Download</span></code>完成之后，调试器将停止自动探测开发板。如需再次执行操作，请勾选<code class="docutils literal notranslate"><span class="pre">Auto</span> <span class="pre">Probe</span></code>，或手动点击<code class="docutils literal notranslate"><span class="pre">Probe</span></code>按钮</p></li>
+</ol>
 </section>
 </section>
 <section id="id11">
 <h2>五、离线编程器配置说明<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h2>
 <section id="id12">
-<h3>5.1 说明<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
+<h3>5.1 准备工作<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
 </section>
 <section id="id13">
-<h3>5.2 示例 HME-M5<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<h3>5.2 说明<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
 </section>
 <section id="id14">
-<h3>5.3 示例 HME-M7<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h3>
+<h3>5.3 示例 HME-H3<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h3>
 </section>
 <section id="id15">
 <h3>5.4 示例 HME-H1C02<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h3>
 </section>
+<section id="hme-hr2">
+<h3>5.5 示例 HME-HR2<a class="headerlink" href="#hme-hr2" title="Permalink to this heading"></a></h3>
+</section>
 <section id="id16">
-<h3>5.5 示例 HME-HR2<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h3>
+<h3>5.6 示例 HME-M5<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h3>
 </section>
 <section id="id17">
-<h3>5.6 示例 HME-H3<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h3>
+<h3>5.7 示例 HME-M7<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h3>
 </section>
-<section id="id18">
-<h3>5.7 示例 HME-H3<a class="headerlink" href="#id18" title="Permalink to this heading"></a></h3>
-</section>
-</section>
-<section id="id19">
-<h2>离线编程功能<a class="headerlink" href="#id19" title="Permalink to this heading"></a></h2>
-<section id="id20">
-<h3>简易演示<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h3>
-<ol class="arabic">
-<li><p>将编程器连接电脑，等待出现<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">CFG</span></code>磁盘，若无磁盘出现，则需双击按键进入模式1</p></li>
-<li><p>修改磁盘中的<code class="docutils literal notranslate"><span class="pre">basic_config.txt</span></code>文件，如下：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">### Vllink Basic Config ###</span>
-
-<span class="c1"># Mode=1: USBD + IF; Mode=2: USBD + AP; Mode=3: STA + IF; Mode=4: User Define;</span>
-<span class="n">MODE</span><span class="o">=</span><span class="mi">4</span>
-
-<span class="c1"># END</span>
-</pre></div>
-</div>
-</li>
-<li><p>修改磁盘中的<code class="docutils literal notranslate"><span class="pre">mode4_config.txt</span></code>文件，如下：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">### Vllink Basic Mode4 Config ###</span>
-
-<span class="c1"># Mode4=disable; Mode4=enable;</span>
-<span class="n">Mode4</span><span class="o">=</span><span class="n">enable</span>
-
-<span class="c1"># USBD=disable; USBD=enable;</span>
-<span class="n">USBD</span><span class="o">=</span><span class="n">enable</span>
-
-<span class="c1"># CDC_Shell=disable; CDC_Shell=enable;</span>
-<span class="n">CDC_Shell</span><span class="o">=</span><span class="n">enable</span>
-
-<span class="c1"># Init_CMD=&lt;cmd&gt;: 128bytes max;</span>
-<span class="n">Init_CMD</span><span class="o">=</span><span class="n">hercules</span> <span class="n">auto</span> <span class="n">M7</span> <span class="n">trig_vref</span> <span class="n">flash</span> <span class="n">autoreset</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">top_bin</span><span class="o">.</span><span class="n">acf</span><span class="o">.</span><span class="n">bin</span> <span class="mh">0x0</span> <span class="mh">0x80000</span>
-
-<span class="c1"># Data1_Name=&lt;name&gt;: Path: /data/&lt;name&gt;, 32bytes max</span>
-<span class="n">Data1_Name</span><span class="o">=</span><span class="n">top_bin</span><span class="o">.</span><span class="n">acf</span><span class="o">.</span><span class="n">bin</span>
-
-<span class="c1"># Data1_Size</span>
-<span class="n">Data1_Size</span><span class="o">=</span><span class="mi">512</span>
-
-<span class="c1"># END</span>
-</pre></div>
-</div>
-</li>
-<li><p>保存文件后，重新上电一次</p></li>
-<li><p>将M7芯片的bin固件改名为<code class="docutils literal notranslate"><span class="pre">top_bin.acf.bin</span></code>，覆盖到<code class="docutils literal notranslate"><span class="pre">/data</span></code>路径下</p></li>
-</ol>
-</section>
-<section id="id21">
-<h3>配置文件说明<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h3>
-<section id="basic-config-txt">
-<h4><code class="docutils literal notranslate"><span class="pre">basic_config.txt</span></code><a class="headerlink" href="#basic-config-txt" title="Permalink to this heading"></a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">MODE=4</span></code>：选定了模式4</p></li>
-</ul>
-</section>
-<section id="mode4-config-txt">
-<h4><code class="docutils literal notranslate"><span class="pre">mode4_config.txt</span></code><a class="headerlink" href="#mode4-config-txt" title="Permalink to this heading"></a></h4>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Mode4=enable</span></code>：启用模式4</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">USBD=enable</span></code>：启用模式4下的USB Device</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CDC_Shell=enable</span></code>：启用模式4下的USB CDC Shell</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Init_CMD=...</span></code>：配置模式4的上电启动命令</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Data1_Name=top_bin.acf.bin</span></code>：在<code class="docutils literal notranslate"><span class="pre">/data</span></code>路径下生成一个bin文件，用于存储固件</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Data1_Size=512</span></code>：指定上述bin文件的长度，此处为512KB</p></li>
-</ul>
-</section>
-</section>
-</section>
-<section id="id22">
-<h2>进阶资料<a class="headerlink" href="#id22" title="Permalink to this heading"></a></h2>
 </section>
 </section>
 
