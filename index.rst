@@ -2,7 +2,7 @@ Vllogic 产品使用指南
 ===================================
 
 相关链接
---------
+----------------------------
 淘宝：https://vllogic.taobao.com/
 
 Github：https://github.com/vllogic
@@ -11,8 +11,20 @@ Discussions：https://github.com/vllogic/vllogic.github.io/discussions
 
 QQ群：791104674
 
+支持的开发平台
+----------------------------
+* IAR，任意版本，CMSIS-DAP V1接口
+* IAR，>=7.40.2，CMSIS-DAP V2接口
+* Keil，任意版本，CMSIS-DAP V1接口
+* Keil，>=5.36，CMSIS-DAP V2接口
+* Segger Embedded Studio，CMSIS-DAP V1接口
+* OpenOCD
+* PyOCD
+* Probe RS
+* FreeMASTER，CMSIS-DAP V1接口
+
 快速上手
---------
+----------------------------
 
 ======================  ======================  ======================
 |Vllink Basic|_         |Vllink Pro|_           |Vllink Hercules|_
