@@ -456,14 +456,14 @@
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Customize_CMD_POLL=hercules</span> <span class="pre">auto</span> <span class="pre">H3</span> <span class="pre">trig_button</span> <span class="pre">efuse</span> <span class="pre">0x00</span> <span class="pre">0xFF</span></code></p>
 <ul>
-<li><p>此命令为上一个命令的精简模式，精简规则：efuse十六进制值字符串中的<code class="docutils literal notranslate"><span class="pre">0x00</span></code>可用<code class="docutils literal notranslate"><span class="pre">0x</span></code>表达，直至最短剩下4个字符，示例：</p>
+<li><p>此命令为上一个命令的精简模式，精简规则：efuse十六进制值字符串中的<code class="docutils literal notranslate"><span class="pre">0x00</span></code>可用<code class="docutils literal notranslate"><span class="pre">0x</span></code>表达，迭代直至最少4个字符，示例：</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">0x00</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">0x01</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000201</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">0x0201</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003201</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">0x3201</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">0x000F0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003201</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">0x0F0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003201</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">0x00FF0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003201</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">0xFF00000000000000000000mei00000000000000000000000000000000000000000000000000000000000000000000000000003201</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0x00FF0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003201</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">0xFF0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003201</span></code></p></li>
 </ul>
 </li>
 </ul>
