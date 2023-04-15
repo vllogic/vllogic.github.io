@@ -95,7 +95,7 @@ Vllink Hercules是为[京微齐力](http://www.hercules-micro.com/)定制的编�
 1. 使用支持`WebUSB`的浏览器打开[在线下载](https://vllogic.com/_static/tools/web_download_hercules/)
 2. 调试器连接电脑，调试器通过牛角排线连接开发板
 3. 开发板上电
-### 4.2 说明
+### 4.2 软件说明
 * 在线下载界面如下：
   ![](../_static/picture/web_download_hercules.png)
 * 连接调试器：点击`Connect Vllink Hercules`，在对话框中选中设备并点击`连接`
@@ -141,14 +141,69 @@ Vllink Hercules是为[京微齐力](http://www.hercules-micro.com/)定制的编�
 6. 由于调试器连接目标芯片会导致芯片暂停，故在使能`Auto Run`的下载完成或`Chip Download`完成之后，调试器将停止自动探测开发板。如需再次执行操作，请勾选`Auto Probe`，或手动点击`Probe`按钮
 
 ## 五、离线编程器配置说明
-### 5.1 准备工作
-### 5.2 说明
+### 5.1 提示
+* **离线编程器的使用较为繁琐，请在充分阅读本说明后进行配置，如遇到异常问题，请联系上游工程师。**
+* 如果是第一次使用，请先参考`3.2`恢复出厂设置，然后按照下文中的示例进行一次测试，测试成功后再按照预想功能调整配置。
+### 5.2 准备工作-配置
+1. 使用支持`WebUSB`的浏览器打开[通用配置](https://vllogic.com/_static/tools/web_config/)
+2. 调试器连接电脑
+### 5.3 软件说明-总览
 * 配置网页界面如下：
   ![](../_static/picture/web_config.png)
-* 更多命令细节，请访问[Hercules 命令说明](../software/hercuels_command.md)
-### 5.3 示例 HME-H3
-### 5.4 示例 HME-H1C02
-### 5.5 示例 HME-HR2
-### 5.6 示例 HME-M5
-### 5.7 示例 HME-M7
+* `Status`：可以视为软件运行Log，用于排查异常情况
+* `安全配置`：用于限制配置功能的访问，在设置密码之后，只有掌握密码才能读取或修改离线编程器中的配置参数及数据
+* `记录器`：全局性的计数器，可限制命令的循环次数，一般用于限制烧录器次数
+* `文本-常规设置`：调试器的常规配置文本，当调试器作为离线编程器使用时，此项保持默认即可
+* `文本-自定义设置`：调试器的自定义配置文本，用于指定烧录文件的文件名、大小，以及配置循环执行的烧录命令
+### 5.4 软件说明-烧录文件的配置
+* 点击`Connect Vllink`，在对话框中选中设备并点击`连接`
+* 下滑网页至`自定义设置`栏
+* 配置项`Customize_DATA_AREA_SIZE=1280`，表明此离线编程器提供了**1280KB**空间，即用于上传的**bin**文件应当不大于**1280KB**
+* 默认配置下，自定义文件应当全部为空，如下所示：
+  ```
+  Customize_DATA_FILE1_NAME=
+  Customize_DATA_FILE1_ATTR=
+  Customize_DATA_FILE1_SIZE=0
+  ```
+* 在`自定义设置`栏里，最多可配置9个文件，所有文件的总大小不得超过上述提到的**1280KB**，配置时，需要填入文件名及大小，其中大小单位为**KB**且是**4的整数倍**，不满足条件的配置参数将被自动清除，示例如下：
+  ```
+  Customize_DATA_FILE1_NAME=file1.bin
+  Customize_DATA_FILE1_ATTR=
+  Customize_DATA_FILE1_SIZE=256
+  Customize_DATA_FILE2_NAME=file2.bin
+  Customize_DATA_FILE2_ATTR=
+  Customize_DATA_FILE2_SIZE=512
+  ```
+* 在绝大多数情况下，可直接将所有空间分配到第一个文件槽，示例如下：
+  ```
+  Customize_DATA_FILE1_NAME=update.bin
+  Customize_DATA_FILE1_ATTR=
+  Customize_DATA_FILE1_SIZE=1280
+  ```
+* **配置修改完成后，点击`同步设置`，点击后注意观察配置文本的变化，无效配置将被清除**。设置后，`自定义数据文件`会如下图所示：
+  ![](../_static/picture/customize_data_file1_example.png)
+* `数据文件1-写入：`右侧的`选择`键可选定任意需要使用的文件，但其总大小不得超出上文中填入的`Customize_DATA_FILE1_SIZE=1280`即**1280KB**
+* 至此，已成功将码流文件上传至离线编程器
+* `数据文件1-读取：`右侧的`Read`键可将已写入的文件读出，可用于核验上传的文件
+* 注意：离线编程器不支持**acf**格式，可用Fuxi软件将**acf**转换为**bin**
+### 5.5 软件说明-烧录命令的配置
+* 点击`Connect Vllink`，在对话框中选中设备并点击`连接`
+* 下滑网页至`自定义设置`栏
+* 配置项`Customize_CMD_POLL=`即为循环命令，默认为空，此命令修改后，需要先点击`同步设置`，再对编程器重新上电方可生效。
+* 配置项`Customize_CMD_POLL=`示例及简要说明
+  1. 
+  2. 1
+  3. 1
+  4. 1
+  5. 1
+  6. 1
+* `hercules`命令的完整资料请访问[Hercules 命令说明](../software/hercuels_command.md)
+### 5.6 软件说明-安全配置
+* 点击`Connect Vllink`，在对话框中选中设备并点击`连接`
+* 
+### 5.7 示例 HME-H3
+### 5.8 示例 HME-H1C02
+### 5.9 示例 HME-HR2
+### 5.10 示例 HME-M5
+### 5.11 示例 HME-M7
 
