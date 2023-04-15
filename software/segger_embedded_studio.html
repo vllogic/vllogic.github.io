@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Keil MDK 使用说明 &mdash; Vllogic  文档</title>
+  <title>Segger Embedded Studio 使用说明 &mdash; Vllogic  文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="Probe RS 使用说明" href="probe_rs.html" />
-    <link rel="prev" title="IAR 使用说明" href="iar.html" /> 
+    <link rel="next" title="Hercules 命令说明" href="hercuels_command.html" />
+    <link rel="prev" title="FreeMASTER 使用说明" href="freemaster.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -61,20 +61,20 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="windows7_driver.html">Windows7 驱动安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="iar.html">IAR 使用说明</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Keil MDK 使用说明</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#keil5-36">若所用Keil版本低于5.36，可通过以下三种方法解决：</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#dll">1. 替换新版DLL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cmsis-dap-v1">2. 使用带有CMSIS-DAP V1接口的固件</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#keil-5-36">3. 升级Keil版本，最低5.36</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="keil_mdk.html">Keil MDK 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probe_rs.html">Probe RS 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="openocd.html">OpenOCD 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pyocd.html">PyOCD 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="freemaster.html">FreeMASTER 使用说明</a></li>
-<li class="toctree-l1"><a class="reference internal" href="segger_embedded_studio.html">Segger Embedded Studio 使用说明</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Segger Embedded Studio 使用说明</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#jlink">Jlink兼容方式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cmsis-dap-v1cmsis-dap-v1">截止20230415，此软件仅支持CMSIS-DAP V1接口。需要使用带有CMSIS-DAP V1接口的固件：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">配置方式</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gdb">GDB方式</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="hercuels_command.html">Hercules 命令说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools.html">在线工具</a></li>
 </ul>
@@ -97,9 +97,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Keil MDK 使用说明</li>
+      <li>Segger Embedded Studio 使用说明</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/software/keil_mdk.md.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/software/segger_embedded_studio.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -107,31 +107,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="keil-mdk">
-<h1>Keil MDK 使用说明<a class="headerlink" href="#keil-mdk" title="Permalink to this heading"></a></h1>
-<section id="keil5-36">
-<h2>若所用Keil版本低于5.36，可通过以下三种方法解决：<a class="headerlink" href="#keil5-36" title="Permalink to this heading"></a></h2>
-<section id="dll">
-<h3>1. 替换新版DLL<a class="headerlink" href="#dll" title="Permalink to this heading"></a></h3>
+  <section id="segger-embedded-studio">
+<h1>Segger Embedded Studio 使用说明<a class="headerlink" href="#segger-embedded-studio" title="Permalink to this heading"></a></h1>
+<section id="jlink">
+<h2>Jlink兼容方式<a class="headerlink" href="#jlink" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference download internal" download="" href="../_downloads/aeeb18006390d3d512dbf040cd6bd8c4/cmsis-dapdll-keilcmsis-dap-v2.zip"><span class="xref download myst">下载新版本DLL</span></a></p></li>
-<li><p>解压后，替换到 Keil_v5\ARM\BIN</p></li>
-<li><p>此方法不一定对任意版本Keil有效，若无效请选择下面两种方法</p></li>
+<li><p>注意：此软件禁止在<code class="docutils literal notranslate"><span class="pre">商业用途</span></code>中使用CMSIS-DAP调试器，故此方式仅针对<code class="docutils literal notranslate"><span class="pre">教育及非商业用途</span></code>。</p></li>
 </ul>
-</section>
-<section id="cmsis-dap-v1">
-<h3>2. 使用带有CMSIS-DAP V1接口的固件<a class="headerlink" href="#cmsis-dap-v1" title="Permalink to this heading"></a></h3>
+<section id="cmsis-dap-v1cmsis-dap-v1">
+<h3>截止20230415，此软件仅支持CMSIS-DAP V1接口。需要使用带有CMSIS-DAP V1接口的固件：<a class="headerlink" href="#cmsis-dap-v1cmsis-dap-v1" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="../update/vllink_basic.html"><span class="doc std std-doc">下载页面</span></a></p></li>
 <li><p>可仅升级主机端硬件（即连接电脑的那个）</p></li>
 </ul>
 </section>
-<section id="keil-5-36">
-<h3>3. 升级Keil版本，最低5.36<a class="headerlink" href="#keil-5-36" title="Permalink to this heading"></a></h3>
-<ul class="simple">
-<li><p><a class="reference external" href="https://developer.arm.com/">Arm官网</a></p></li>
-</ul>
+<section id="id1">
+<h3>配置方式<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>打开<code class="docutils literal notranslate"><span class="pre">Project</span></code>的<code class="docutils literal notranslate"><span class="pre">Options</span></code>窗口</p></li>
+<li><p>在<code class="docutils literal notranslate"><span class="pre">Debug</span></code>的<code class="docutils literal notranslate"><span class="pre">Debugger</span></code>子页中，将<code class="docutils literal notranslate"><span class="pre">Target</span> <span class="pre">Connection</span></code>改成<code class="docutils literal notranslate"><span class="pre">J-Link</span></code></p></li>
+</ol>
 </section>
+</section>
+<section id="gdb">
+<h2>GDB方式<a class="headerlink" href="#gdb" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>此方式无使用限制</p></li>
+<li><p>参考上文，将<code class="docutils literal notranslate"><span class="pre">Target</span> <span class="pre">Connection</span></code>改成<code class="docutils literal notranslate"><span class="pre">GDB</span> <span class="pre">Server</span></code></p></li>
+<li><p>GDB Server可通过OpenOCD等开源软件实现</p></li>
+</ul>
 </section>
 </section>
 
@@ -139,8 +143,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="iar.html" class="btn btn-neutral float-left" title="IAR 使用说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="probe_rs.html" class="btn btn-neutral float-right" title="Probe RS 使用说明" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="freemaster.html" class="btn btn-neutral float-left" title="FreeMASTER 使用说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="hercuels_command.html" class="btn btn-neutral float-right" title="Hercules 命令说明" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
