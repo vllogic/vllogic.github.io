@@ -59,7 +59,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#id8">四、快速在线下载使用说明</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id9">4.1 准备工作</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">4.2 说明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.2 软件说明</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hme-h3">4.3 示例 HME-H3</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hme-h1c02">4.4 示例 HME-H1C02</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hme-hr02">4.5 示例 HME-HR02</a></li>
@@ -68,13 +68,17 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#id11">五、离线编程器配置说明</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id12">5.1 准备工作</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">5.2 说明</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">5.3 示例 HME-H3</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id15">5.4 示例 HME-H1C02</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hme-hr2">5.5 示例 HME-HR2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id16">5.6 示例 HME-M5</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id17">5.7 示例 HME-M7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">5.1 提示</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">5.2 准备工作-配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">5.3 软件说明-总览</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">5.4 软件说明-烧录文件的配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">5.5 软件说明-烧录命令的配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">5.6 软件说明-安全配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">5.7 示例 HME-H3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">5.8 示例 HME-H1C02</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hme-hr2">5.9 示例 HME-HR2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">5.10 示例 HME-M5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">5.11 示例 HME-M7</a></li>
 </ul>
 </li>
 </ul>
@@ -287,7 +291,7 @@
 </ol>
 </section>
 <section id="id10">
-<h3>4.2 说明<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
+<h3>4.2 软件说明<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>在线下载界面如下：
 <img alt="" src="../_images/web_download_hercules.png" /></p></li>
@@ -358,30 +362,106 @@
 <section id="id11">
 <h2>五、离线编程器配置说明<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h2>
 <section id="id12">
-<h3>5.1 准备工作<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
+<h3>5.1 提示<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>离线编程器的使用较为繁琐，请在充分阅读本说明后进行配置，如遇到异常问题，请联系上游工程师。</strong></p></li>
+<li><p>如果是第一次使用，请先参考<code class="docutils literal notranslate"><span class="pre">3.2</span></code>恢复出厂设置，然后按照下文中的示例进行一次测试，测试成功后再按照预想功能调整配置。</p></li>
+</ul>
 </section>
 <section id="id13">
-<h3>5.2 说明<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<h3>5.2 准备工作-配置<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>使用支持<code class="docutils literal notranslate"><span class="pre">WebUSB</span></code>的浏览器打开<a class="reference external" href="https://vllogic.com/_static/tools/web_config/">通用配置</a></p></li>
+<li><p>调试器连接电脑</p></li>
+</ol>
+</section>
+<section id="id14">
+<h3>5.3 软件说明-总览<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>配置网页界面如下：
 <img alt="" src="../_images/web_config.png" /></p></li>
-<li><p>更多命令细节，请访问<a class="reference internal" href="../software/hercuels_command.html"><span class="doc std std-doc">Hercules 命令说明</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Status</span></code>：可以视为软件运行Log，用于排查异常情况</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">安全配置</span></code>：用于限制配置功能的访问，在设置密码之后，只有掌握密码才能读取或修改离线编程器中的配置参数及数据</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">记录器</span></code>：全局性的计数器，可限制命令的循环次数，一般用于限制烧录器次数</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">文本-常规设置</span></code>：调试器的常规配置文本，当调试器作为离线编程器使用时，此项保持默认即可</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">文本-自定义设置</span></code>：调试器的自定义配置文本，用于指定烧录文件的文件名、大小，以及配置循环执行的烧录命令</p></li>
 </ul>
 </section>
-<section id="id14">
-<h3>5.3 示例 HME-H3<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h3>
-</section>
 <section id="id15">
-<h3>5.4 示例 HME-H1C02<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h3>
-</section>
-<section id="hme-hr2">
-<h3>5.5 示例 HME-HR2<a class="headerlink" href="#hme-hr2" title="Permalink to this heading"></a></h3>
+<h3>5.4 软件说明-烧录文件的配置<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p>点击<code class="docutils literal notranslate"><span class="pre">Connect</span> <span class="pre">Vllink</span></code>，在对话框中选中设备并点击<code class="docutils literal notranslate"><span class="pre">连接</span></code></p></li>
+<li><p>下滑网页至<code class="docutils literal notranslate"><span class="pre">自定义设置</span></code>栏</p></li>
+<li><p>配置项<code class="docutils literal notranslate"><span class="pre">Customize_DATA_AREA_SIZE=1280</span></code>，表明此离线编程器提供了<strong>1280KB</strong>空间，即用于上传的<strong>bin</strong>文件应当不大于<strong>1280KB</strong></p></li>
+<li><p>默认配置下，自定义文件应当全部为空，如下所示：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Customize_DATA_FILE1_NAME</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE1_ATTR</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE1_SIZE</span><span class="o">=</span><span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+<li><p>在<code class="docutils literal notranslate"><span class="pre">自定义设置</span></code>栏里，最多可配置9个文件，所有文件的总大小不得超过上述提到的<strong>1280KB</strong>，配置时，需要填入文件名及大小，其中大小单位为<strong>KB</strong>且是<strong>4的整数倍</strong>，不满足条件的配置参数将被自动清除，示例如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Customize_DATA_FILE1_NAME</span><span class="o">=</span><span class="n">file1</span><span class="o">.</span><span class="n">bin</span>
+<span class="n">Customize_DATA_FILE1_ATTR</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE1_SIZE</span><span class="o">=</span><span class="mi">256</span>
+<span class="n">Customize_DATA_FILE2_NAME</span><span class="o">=</span><span class="n">file2</span><span class="o">.</span><span class="n">bin</span>
+<span class="n">Customize_DATA_FILE2_ATTR</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE2_SIZE</span><span class="o">=</span><span class="mi">512</span>
+</pre></div>
+</div>
+</li>
+<li><p>在绝大多数情况下，可直接将所有空间分配到第一个文件槽，示例如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Customize_DATA_FILE1_NAME</span><span class="o">=</span><span class="n">update</span><span class="o">.</span><span class="n">bin</span>
+<span class="n">Customize_DATA_FILE1_ATTR</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE1_SIZE</span><span class="o">=</span><span class="mi">1280</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>配置修改完成后，点击<code class="docutils literal notranslate"><span class="pre">同步设置</span></code>，点击后注意观察配置文本的变化，无效配置将被清除</strong>。设置后，<code class="docutils literal notranslate"><span class="pre">自定义数据文件</span></code>会如下图所示：
+<img alt="" src="../_images/customize_data_file1_example.png" /></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">数据文件1-写入：</span></code>右侧的<code class="docutils literal notranslate"><span class="pre">选择</span></code>键可选定任意需要使用的文件，但其总大小不得超出上文中填入的<code class="docutils literal notranslate"><span class="pre">Customize_DATA_FILE1_SIZE=1280</span></code>即<strong>1280KB</strong></p></li>
+<li><p>至此，已成功将码流文件上传至离线编程器</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">数据文件1-读取：</span></code>右侧的<code class="docutils literal notranslate"><span class="pre">Read</span></code>键可将已写入的文件读出，可用于核验上传的文件</p></li>
+<li><p>注意：离线编程器不支持<strong>acf</strong>格式，可用Fuxi软件将<strong>acf</strong>转换为<strong>bin</strong></p></li>
+</ul>
 </section>
 <section id="id16">
-<h3>5.6 示例 HME-M5<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h3>
+<h3>5.5 软件说明-烧录命令的配置<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>点击<code class="docutils literal notranslate"><span class="pre">Connect</span> <span class="pre">Vllink</span></code>，在对话框中选中设备并点击<code class="docutils literal notranslate"><span class="pre">连接</span></code></p></li>
+<li><p>下滑网页至<code class="docutils literal notranslate"><span class="pre">自定义设置</span></code>栏</p></li>
+<li><p>配置项<code class="docutils literal notranslate"><span class="pre">Customize_CMD_POLL=</span></code>即为循环命令，默认为空，此命令修改后，需要先点击<code class="docutils literal notranslate"><span class="pre">同步设置</span></code>，再对编程器重新上电方可生效。</p></li>
+<li><p>配置项<code class="docutils literal notranslate"><span class="pre">Customize_CMD_POLL=</span></code>示例及简要说明
+1.
+2. 1
+3. 1
+4. 1
+5. 1
+6. 1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hercules</span></code>命令的完整资料请访问<a class="reference internal" href="../software/hercuels_command.html"><span class="doc std std-doc">Hercules 命令说明</span></a></p></li>
+</ul>
 </section>
 <section id="id17">
-<h3>5.7 示例 HME-M7<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h3>
+<h3>5.6 软件说明-安全配置<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>点击<code class="docutils literal notranslate"><span class="pre">Connect</span> <span class="pre">Vllink</span></code>，在对话框中选中设备并点击<code class="docutils literal notranslate"><span class="pre">连接</span></code></p></li>
+<li></li>
+</ul>
+</section>
+<section id="id18">
+<h3>5.7 示例 HME-H3<a class="headerlink" href="#id18" title="Permalink to this heading"></a></h3>
+</section>
+<section id="id19">
+<h3>5.8 示例 HME-H1C02<a class="headerlink" href="#id19" title="Permalink to this heading"></a></h3>
+</section>
+<section id="hme-hr2">
+<h3>5.9 示例 HME-HR2<a class="headerlink" href="#hme-hr2" title="Permalink to this heading"></a></h3>
+</section>
+<section id="id20">
+<h3>5.10 示例 HME-M5<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h3>
+</section>
+<section id="id21">
+<h3>5.11 示例 HME-M7<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h3>
 </section>
 </section>
 </section>
