@@ -18,6 +18,7 @@ QQ群：791104674
 * Keil，任意版本，CMSIS-DAP V1接口
 * Keil，>=5.36，CMSIS-DAP V2接口
 * Segger Embedded Studio，CMSIS-DAP V1接口
+* Segger J-Flash，==V7.22B，CMSIS-DAP V1接口
 * OpenOCD
 * PyOCD
 * Probe RS
@@ -83,6 +84,7 @@ QQ群：791104674
    software/openocd.md
    software/pyocd.md
    software/freemaster.md
+   software/segger_embedded_studio.md
    software/hercuels_command.md
    software/tools.md
 
