@@ -302,5 +302,25 @@ Vllink Hercules是为[京微齐力](http://www.hercules-micro.com/)定制的编�
 2. 将编程器重新上电
 3. 将编程器连上开发板，开发板上电，按一下编程器的按键，由于测试文件很小，基本是瞬间亮起绿灯，完成离线编程
 ### 5.10 示例 HME-M5
+#### 准备
+1. 构建码流，并转换为bin文件
+2. 将以下文本填入`自定义设置`中：
+  ```
+  Customize_DATA_FILE1_NAME=update.bin
+  Customize_DATA_FILE1_ATTR=
+  Customize_DATA_FILE1_SIZE=1280
+  ```
+1. 点击`同步设置`
+2. 点击`数据文件1-写入：`后面的`选择文件`，选中码流bin文件，点击`Write`
+3. 稍等片刻，待文本框及按键恢复可用状态
+#### Flash编程
+1. 测试用bin文件长度为0x2c3ac，将以下文本填入`自定义设置`中：
+  ```
+  Customize_CMD_POLL=hercules auto M5 trig_button limit 1000 flash autoreset /data/update.bin 0x0 0x2c3ac
+  ```
+  * `autoreset`参数，开发板会在编程后自动运行
+  * `limit 1000`参数，可编程1000次
+1. 点击`同步设置`
+2. 将编程器重新上电
+3. 将编程器连上开发板，开发板上电，按一下编程器的按键，由于测试文件很小，基本是瞬间亮起绿灯，完成离线编程
 ### 5.11 示例 HME-M7
-
