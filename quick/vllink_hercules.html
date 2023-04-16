@@ -90,8 +90,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#id25">Flash编程</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id26">5.10 示例 HME-M5</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id27">5.11 示例 HME-M7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">5.10 示例 HME-M5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id27">准备</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id28">Flash编程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id29">5.11 示例 HME-M7</a></li>
 </ul>
 </li>
 </ul>
@@ -643,9 +647,44 @@
 </section>
 <section id="id26">
 <h3>5.10 示例 HME-M5<a class="headerlink" href="#id26" title="Permalink to this heading"></a></h3>
-</section>
 <section id="id27">
-<h3>5.11 示例 HME-M7<a class="headerlink" href="#id27" title="Permalink to this heading"></a></h3>
+<h4>准备<a class="headerlink" href="#id27" title="Permalink to this heading"></a></h4>
+<ol class="arabic simple">
+<li><p>构建码流，并转换为bin文件</p></li>
+<li><p>将以下文本填入<code class="docutils literal notranslate"><span class="pre">自定义设置</span></code>中：</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Customize_DATA_FILE1_NAME</span><span class="o">=</span><span class="n">update</span><span class="o">.</span><span class="n">bin</span>
+<span class="n">Customize_DATA_FILE1_ATTR</span><span class="o">=</span>
+<span class="n">Customize_DATA_FILE1_SIZE</span><span class="o">=</span><span class="mi">1280</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>点击<code class="docutils literal notranslate"><span class="pre">同步设置</span></code></p></li>
+<li><p>点击<code class="docutils literal notranslate"><span class="pre">数据文件1-写入：</span></code>后面的<code class="docutils literal notranslate"><span class="pre">选择文件</span></code>，选中码流bin文件，点击<code class="docutils literal notranslate"><span class="pre">Write</span></code></p></li>
+<li><p>稍等片刻，待文本框及按键恢复可用状态</p></li>
+</ol>
+</section>
+<section id="id28">
+<h4>Flash编程<a class="headerlink" href="#id28" title="Permalink to this heading"></a></h4>
+<ol class="arabic simple">
+<li><p>测试用bin文件长度为0x2c3ac，将以下文本填入<code class="docutils literal notranslate"><span class="pre">自定义设置</span></code>中：</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Customize_CMD_POLL</span><span class="o">=</span><span class="n">hercules</span> <span class="n">auto</span> <span class="n">M5</span> <span class="n">trig_button</span> <span class="n">limit</span> <span class="mi">1000</span> <span class="n">flash</span> <span class="n">autoreset</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">update</span><span class="o">.</span><span class="n">bin</span> <span class="mh">0x0</span> <span class="mh">0x2c3ac</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">autoreset</span></code>参数，开发板会在编程后自动运行</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">limit</span> <span class="pre">1000</span></code>参数，可编程1000次</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>点击<code class="docutils literal notranslate"><span class="pre">同步设置</span></code></p></li>
+<li><p>将编程器重新上电</p></li>
+<li><p>将编程器连上开发板，开发板上电，按一下编程器的按键，由于测试文件很小，基本是瞬间亮起绿灯，完成离线编程</p></li>
+</ol>
+</section>
+</section>
+<section id="id29">
+<h3>5.11 示例 HME-M7<a class="headerlink" href="#id29" title="Permalink to this heading"></a></h3>
 </section>
 </section>
 </section>
