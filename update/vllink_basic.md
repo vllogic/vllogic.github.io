@@ -25,6 +25,8 @@
 * [V00.5B-202208141927](../_static/firmware/vllink_basic.SVCommon005b202208141927.zip)
 
 ### 其他接口固件 
+* [V00.29-202304081617](../_static/firmware/vllink_basic.SVCommon0029202305041045.zip)
+  1. 变更：基于`V00.28-202304081617`，修改VID、PID，支持`MCUXpressoIDE`
 * [V00.28-202304081617](../_static/firmware/vllink_basic.SVCommon0028202304081617.zip)
   1. 变更：基于`V00.27-202304081616`，移除MSC磁盘
   2. 变更：基于`V00.27-202304081616`，增加CMSIS-DAP V1接口
