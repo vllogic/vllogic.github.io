@@ -27,10 +27,11 @@
 * [V00.5B-202208141927](../_static/firmware/vllink_basic.SVCommon005b202208141927.zip)
 
 ### 其他接口固件 
-* [V00.31-202305102054](../_static/firmware/vllink_basic.SVCommon0031202305102054.zip)
+* [V00.33-202305261128](../_static/firmware/vllink_basic.SVCommon0033202305261128.zip)
   1. 修复：在`V00.27`-`V00.29`引入的SWD时序BUG，导致部分芯片SWD通讯失败，如`AT32F403`
   2. 变更：基于`V00.30-202305102053`，移除MSC磁盘
   3. 变更：基于`V00.30-202305102053`，增加CMSIS-DAP V1接口
+  4. 修复：支持`Segger`部分软件，如`J-Flash 7.22B`及`Segger Embedded Studio`
 * [V00.29-202304081617](../_static/firmware/vllink_basic.SVCommon0029202305041045.zip)
   1. 变更：基于`V00.28-202304081617`，修改VID、PID，支持`MCUXpressoIDE`
 * [V00.28-202304081617](../_static/firmware/vllink_basic.SVCommon0028202304081617.zip)
