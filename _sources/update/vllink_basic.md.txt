@@ -9,6 +9,8 @@
 
 ## 固件列表
 ### CMSIS-DAP V2、CDC、MSC接口固件 
+* [V00.34-202308051430](../_static/firmware/vllink_basic.SVCommon0034202308051430.zip)
+  1. 修复：在STA断开时，清理所有未完成的DAP请求
 * [V00.30-202305102053](../_static/firmware/vllink_basic.SVCommon0030202305102053.zip)
   1. 修复：在`V00.27`-`V00.29`引入的SWD时序BUG，导致部分芯片SWD通讯失败，如`AT32F403`
 * [V00.27-202304081616](../_static/firmware/vllink_basic.SVCommon0027202304081616.zip)
@@ -26,7 +28,10 @@
   7. 修复：CMSIS-DAP V2协议下对Keil的主动识别异常
 * [V00.5B-202208141927](../_static/firmware/vllink_basic.SVCommon005b202208141927.zip)
 
-### 其他接口固件 
+### CMSIS-DAP V1接口固件 
+* [V00.35-202308051434](../_static/firmware/vllink_basic.SVCommon0035202308051434.zip)
+  1. 变更：基于`V00.34-202308051430`，移除MSC磁盘
+  2. 变更：基于`V00.34-202308051430`，增加CMSIS-DAP V1接口
 * [V00.33-202305261128](../_static/firmware/vllink_basic.SVCommon0033202305261128.zip)
   1. 修复：在`V00.27`-`V00.29`引入的SWD时序BUG，导致部分芯片SWD通讯失败，如`AT32F403`
   2. 变更：基于`V00.30-202305102053`，移除MSC磁盘
@@ -42,3 +47,9 @@
   2. 优化：STA将自动记录第一次连接的AP信息，并在下次启动时，自动连接此AP，以加快连接速度
   3. 优化：将内核供电改为DCDC模式，大约能降低8mA@5V的工作电流
   4. 优化：修复配置文件字符串判定对'\r\n'依赖的兼容性问题
+
+### 其他接口固件
+* [V00.3A-202308051344](../_static/firmware/vllink_basic.SVCommon003a202308051344.zip)
+  1. 变更：移除DAP接口
+  2. 变更：在原有串口基础上增加了第二个串口，使用了TRST（TX），SRST（RX）
+  3. 说明：无法使用调试功能，但具有有线、无线双串口

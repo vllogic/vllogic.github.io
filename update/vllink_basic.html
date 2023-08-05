@@ -56,6 +56,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#id1">更新方法</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id2">固件列表</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#cmsis-dap-v2cdcmsc">CMSIS-DAP V2、CDC、MSC接口固件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmsis-dap-v1">CMSIS-DAP V1接口固件</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id3">其他接口固件</a></li>
 </ul>
 </li>
@@ -124,6 +125,11 @@
 <section id="cmsis-dap-v2cdcmsc">
 <h3>CMSIS-DAP V2、CDC、MSC接口固件<a class="headerlink" href="#cmsis-dap-v2cdcmsc" title="Permalink to this heading"></a></h3>
 <ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/a28d58d7c781a2049365fa4a3f283b6e/vllink_basic.SVCommon0034202308051430.zip"><span class="xref download myst">V00.34-202308051430</span></a></p>
+<ol class="arabic simple">
+<li><p>修复：在STA断开时，清理所有未完成的DAP请求</p></li>
+</ol>
+</li>
 <li><p><a class="reference download internal" download="" href="../_downloads/cfce021433ba4178c50e2dd8e2f0b776/vllink_basic.SVCommon0030202305102053.zip"><span class="xref download myst">V00.30-202305102053</span></a></p>
 <ol class="arabic simple">
 <li><p>修复：在<code class="docutils literal notranslate"><span class="pre">V00.27</span></code>-<code class="docutils literal notranslate"><span class="pre">V00.29</span></code>引入的SWD时序BUG，导致部分芯片SWD通讯失败，如<code class="docutils literal notranslate"><span class="pre">AT32F403</span></code></p></li>
@@ -154,9 +160,15 @@
 <li><p><a class="reference download internal" download="" href="../_downloads/c60ab2ce54a5336562146e843730a06e/vllink_basic.SVCommon005b202208141927.zip"><span class="xref download myst">V00.5B-202208141927</span></a></p></li>
 </ul>
 </section>
-<section id="id3">
-<h3>其他接口固件<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<section id="cmsis-dap-v1">
+<h3>CMSIS-DAP V1接口固件<a class="headerlink" href="#cmsis-dap-v1" title="Permalink to this heading"></a></h3>
 <ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/0b6e5d4896756777b47573afe60d740c/vllink_basic.SVCommon0035202308051434.zip"><span class="xref download myst">V00.35-202308051434</span></a></p>
+<ol class="arabic simple">
+<li><p>变更：基于<code class="docutils literal notranslate"><span class="pre">V00.34-202308051430</span></code>，移除MSC磁盘</p></li>
+<li><p>变更：基于<code class="docutils literal notranslate"><span class="pre">V00.34-202308051430</span></code>，增加CMSIS-DAP V1接口</p></li>
+</ol>
+</li>
 <li><p><a class="reference download internal" download="" href="../_downloads/78f50d7f0f9902ca350ed3c7c1bb2d7d/vllink_basic.SVCommon0033202305261128.zip"><span class="xref download myst">V00.33-202305261128</span></a></p>
 <ol class="arabic simple">
 <li><p>修复：在<code class="docutils literal notranslate"><span class="pre">V00.27</span></code>-<code class="docutils literal notranslate"><span class="pre">V00.29</span></code>引入的SWD时序BUG，导致部分芯片SWD通讯失败，如<code class="docutils literal notranslate"><span class="pre">AT32F403</span></code></p></li>
@@ -182,6 +194,18 @@
 <li><p>优化：STA将自动记录第一次连接的AP信息，并在下次启动时，自动连接此AP，以加快连接速度</p></li>
 <li><p>优化：将内核供电改为DCDC模式，大约能降低8mA&#64;5V的工作电流</p></li>
 <li><p>优化：修复配置文件字符串判定对’\r\n’依赖的兼容性问题</p></li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h3>其他接口固件<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/3acd0008a3323950f26ec97ebed4131e/vllink_basic.SVCommon003a202308051344.zip"><span class="xref download myst">V00.3A-202308051344</span></a></p>
+<ol class="arabic simple">
+<li><p>变更：移除DAP接口</p></li>
+<li><p>变更：在原有串口基础上增加了第二个串口，使用了TRST（TX），SRST（RX）</p></li>
+<li><p>说明：无法使用调试功能，但具有有线、无线双串口</p></li>
 </ol>
 </li>
 </ul>
