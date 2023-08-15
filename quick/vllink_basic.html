@@ -249,8 +249,34 @@
 </ul>
 </li>
 <li><ul class="simple">
+<li><p>问：调试不稳定，经常卡顿或报错</p></li>
+<li><p>答：一般是同频段Wifi干扰导致，可通过以下方式手动指定AP频段：</p>
+<ol class="arabic simple">
+<li><p>将AP接上电脑，用记事本打开磁盘中的<code class="docutils literal notranslate"><span class="pre">basic_config.txt</span></code></p></li>
+<li><p>修改<code class="docutils literal notranslate"><span class="pre">AP_2G4_CHANNEL=</span></code>后面的信道值，推荐13，若13信道干扰严重可调整为1或6</p></li>
+<li><p>保存文本，安全弹出磁盘后，重新上电使用</p></li>
+<li><p>若可行，应当对设施内无线路由器频段进行管理，合理使用信道资源</p></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><ul class="simple">
 <li><p>问：设备管理器内能发现<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">V2</span></code>设备，但是软件却无法访问</p></li>
 <li><p>答：在设备管理器内，右击<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">V2</span></code>设备，卸载设备，然后重新连接一次即可解决</p></li>
+</ul>
+</li>
+<li><ul class="simple">
+<li><p>问：STA如何与另一个AP配对</p></li>
+<li><p>答：因为AP与STA结对发货，出厂时已进行配对测试，故无法自动连接其他AP。可通过以下方式清除STA中的配对信息：</p>
+<ol class="arabic simple">
+<li><p>将STA接上电脑，双击按键切换至模式一，电脑中出现一个磁盘</p></li>
+<li><p>用记事本打开磁盘中的<code class="docutils literal notranslate"><span class="pre">basic_config.txt</span></code></p></li>
+<li><p>删除<code class="docutils literal notranslate"><span class="pre">STA_2G4_SSID=</span></code>后面的字符串</p></li>
+<li><p>删除<code class="docutils literal notranslate"><span class="pre">STA_2G4_PASS=</span></code>后面的字符串</p></li>
+<li><p>保存文本，安全弹出磁盘后，双击按键两次切换至模式三</p></li>
+<li><p>此时，STA会自动配对新AP，应当保证此时附近只有一个AP处于上电状态</p></li>
+</ol>
+</li>
 </ul>
 </li>
 </ol>
