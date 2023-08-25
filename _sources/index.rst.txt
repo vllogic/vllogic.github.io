@@ -27,36 +27,24 @@ QQ群：791104674
 快速上手
 ----------------------------
 
-======================  ======================  ======================
-|Vllink Basic|_         |Vllink Pro|_           |Vllink Hercules|_
-----------------------  ----------------------  ----------------------
-`Vllink Basic`_         `Vllink Pro`_           `Vllink Hercules`_
-======================  ======================  ======================
-|Vllink Basic2|_
-----------------------  ----------------------  ----------------------
-`Vllink Basic2`_
-======================  ======================  ======================
+======================  ======================
+|Vllink Basic|_         |Vllink FPGA|_
+----------------------  ----------------------
+`Vllink Basic`_         `Vllink FPGA`_
+======================  ======================
 
 .. |Vllink Basic| image:: _static/picture/vllink_basic_top_45.png
 .. _Vllink Basic: quick/vllink_basic.html
 
-.. |Vllink Basic2| image:: _static/picture/vllink_basic2_top_45.png
-.. _Vllink Basic2: quick/vllink_basic2.html
-
-.. |Vllink Pro| image:: _static/picture/vllink_pro_top_45.png
-.. _Vllink Pro: quick/vllink_pro.html
-
-.. |Vllink Hercules| image:: _static/picture/vllink_hercules_top_45.png
-.. _Vllink Hercules: quick/vllink_hercules.html
+.. |Vllink FPGA| image:: _static/picture/vllink_fpga_top_45.png
+.. _Vllink FPGA: quick/vllink_fpga.html
 
 .. toctree::
    :caption: 快速上手
    :hidden:
 
    quick/vllink_basic.md
-   quick/vllink_basic2.md
-   quick/vllink_pro.md
-   quick/vllink_hercules.md
+   quick/vllink_fpga.md
 
 .. toctree::
    :maxdepth: 1
@@ -69,9 +57,7 @@ QQ群：791104674
    :caption: 固件更新
 
    update/vllink_basic.md
-   update/vllink_basic2.md
-   update/vllink_pro.md
-   update/vllink_hercules.md
+   update/vllink_fpga.md
 
 .. toctree::
    :maxdepth: 1
