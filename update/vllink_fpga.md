@@ -1,4 +1,4 @@
-# Vllink Hercules 固件更新
+# Vllink FPGA 固件更新
 ## 更新方法
 1. 解压压缩包
 2. 按住按键连接Win10电脑，再使用Chrome浏览器打开更新页面 [Vllink HID Update](https://vllogic.com/_static/tools/update/)

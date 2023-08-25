@@ -1,8 +1,22 @@
-# Vllink Hercules 快速上手
+# Vllink FPGA 快速上手
 
 Vllink Hercules是为[京微齐力](http://www.hercules-micro.com/)定制的编程、调试工具
 
 ## 一、调试接口定义
+### 1.1 JTAG-HS3接口
+![](../_static/picture/fpga_interface_desc_small.png)
+| 接口 | 介绍 | 拓展功能 |
+| :---- | :---- | :---- |
+| SRST | 保留 | EFuse编程时钟输出口 |
+| NC | 保留 | EFuse编程电压输出口 |
+| TDI  | JTAG数据口 | - |
+| TDO  | JTAG数据口 | - |
+| TCK  | JTAG时钟口 | - |
+| TMS  | JTAG模式口 | - |
+| VRef  | 参考电压输入口 | - |
+| GND  | 共地口 | - |
+
+### 1.2 京微齐力接口
 ![](../_static/picture/hme_interface_desc_small.png)
 | 接口 | 介绍 |
 | :---- | :---- |
@@ -30,7 +44,7 @@ Vllink Hercules是为[京微齐力](http://www.hercules-micro.com/)定制的编�
 
 ## 三、固件升级及恢复默认设置
 ### 3.1 固件升级
-* 请访问[Vllink Hercules 固件更新](../update/vllink_hercules.md)
+* 请访问[Vllink FPGA 固件更新](../update/vllink_fpga.md)
 ### 3.2 恢复默认设置
 在调试器出现异常情况时，可通过以下操作恢复正常功能
 1. 参考`3.1`确认已升级至最新固件
