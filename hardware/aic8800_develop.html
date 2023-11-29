@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIC8800开发资料 &mdash; Vllogic  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Vllogic
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic.html">Vllink Basic 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_fpga.html">Vllink FPGA 快速上手</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vllink_basic_vout.html">Vout口使用说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic.html">Vllink Basic 固件更新</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_fpga.html">Vllink FPGA 固件更新</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software/windows7_driver.html">Windows7 驱动安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/iar.html">IAR 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/keil_mdk.html">Keil MDK 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/probe_rs.html">Probe RS 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/openocd.html">OpenOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/pyocd.html">PyOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/freemaster.html">FreeMASTER 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/segger_embedded_studio.html">Segger Embedded Studio 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/hercuels_command.html">Hercules 命令说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/tools.html">在线工具</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">文档维护</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Vllogic</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>AIC8800开发资料</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/hardware/aic8800_develop.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="aic8800">
+<h1>AIC8800开发资料<a class="headerlink" href="#aic8800" title="Permalink to this heading"></a></h1>
+<section id="io">
+<h2>IO复用<a class="headerlink" href="#io" title="Permalink to this heading"></a></h2>
+<section id="id1">
+<h3>AIC8800<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p>AIC8800M.Port.A</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-center head"><p>PAD</p></th>
+<th class="text-center head"><p>Function 0</p></th>
+<th class="text-center head"><p>Function 1</p></th>
+<th class="text-center head"><p>Function 2</p></th>
+<th class="text-center head"><p>Function 3</p></th>
+<th class="text-center head"><p>Function 4</p></th>
+<th class="text-center head"><p>Function 5</p></th>
+<th class="text-center head"><p>Function 6</p></th>
+<th class="text-center head"><p>Function 8</p></th>
+<th class="text-center head"><p>Function 9</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>GPIOA0</p></td>
+<td class="text-center"><p>SWCLK</p></td>
+<td class="text-center"><p>GPIOA0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>LNA_EN_5G</p></td>
+<td class="text-center"><p>PCM_FSYNC</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>I2S_LRCK_0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>SPI_SCK</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA1</p></td>
+<td class="text-center"><p>SWDIO</p></td>
+<td class="text-center"><p>GPIOA1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>PCM_CLK</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>I2S_BCK_0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>SPI_CSN</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA2</p></td>
+<td class="text-center"><p>GPIOA2</p></td>
+<td class="text-center"><p>UART0_RX</p></td>
+<td class="text-center"><p>UART1_RX</p></td>
+<td class="text-center"><p>TX_EN_5G</p></td>
+<td class="text-center"><p>PCM_DIN</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>I2S_DIN_0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>SPI_DI</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA3</p></td>
+<td class="text-center"><p>GPIOA3</p></td>
+<td class="text-center"><p>UART0_TX</p></td>
+<td class="text-center"><p>UART1_TX</p></td>
+<td class="text-center"><p>RX_EN_5G</p></td>
+<td class="text-center"><p>PCM_DOUT</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>I2S_DOUT_0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>SPI_DO</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA4</p></td>
+<td class="text-center"><p>GPIOA4</p></td>
+<td class="text-center"><p>UART0_CTS</p></td>
+<td class="text-center"><p>UART1_CTS</p></td>
+<td class="text-center"><p>UART1_RX</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>CODEC_MCLK</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA5</p></td>
+<td class="text-center"><p>GPIOA5</p></td>
+<td class="text-center"><p>UART0_RTS</p></td>
+<td class="text-center"><p>UART1_RTS</p></td>
+<td class="text-center"><p>UART1_TX</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA6</p></td>
+<td class="text-center"><p>GPIOA6</p></td>
+<td class="text-center"><p>I2CM_SCL</p></td>
+<td class="text-center"><p>UART2_RX</p></td>
+<td class="text-center"><p>UART1_CTS</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>PWM_A0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA7</p></td>
+<td class="text-center"><p>GPIOA7</p></td>
+<td class="text-center"><p>I2CM_SDA</p></td>
+<td class="text-center"><p>UART2_TX</p></td>
+<td class="text-center"><p>UART1_RTS</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>PWM_A1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>I2S_BCK_0</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA8</p></td>
+<td class="text-center"><p>UART0_RX</p></td>
+<td class="text-center"><p>GPIOA8</p></td>
+<td class="text-center"><p>UART2_CTS</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>PWM_A2</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>I2S_LRCK_0</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA9</p></td>
+<td class="text-center"><p>UART0_TX</p></td>
+<td class="text-center"><p>GPIOA9</p></td>
+<td class="text-center"><p>UART2_RTS</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>I2S_DOUT_0</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA10</p></td>
+<td class="text-center"><p>GPIOA10</p></td>
+<td class="text-center"><p>UART1_RX</p></td>
+<td class="text-center"><p>SD_S_D1</p></td>
+<td class="text-center"><p>SPI_SCK</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>SD_M_D2</p></td>
+<td class="text-center"><p>I2S_BCK_1</p></td>
+<td class="text-center"><p>UART2_RX</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA11</p></td>
+<td class="text-center"><p>GPIOA11</p></td>
+<td class="text-center"><p>UART1_TX</p></td>
+<td class="text-center"><p>SD_S_D0</p></td>
+<td class="text-center"><p>SPI_CSN</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>SD_M_D3</p></td>
+<td class="text-center"><p>I2S_LRCK_1</p></td>
+<td class="text-center"><p>UART2_TX</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA12</p></td>
+<td class="text-center"><p>GPIOA12</p></td>
+<td class="text-center"><p>UART1_CTS</p></td>
+<td class="text-center"><p>SD_S_CLK</p></td>
+<td class="text-center"><p>SPI_DI</p></td>
+<td class="text-center"><p>PWM_A0</p></td>
+<td class="text-center"><p>PCM_FSYNC</p></td>
+<td class="text-center"><p>SD_M_CMD</p></td>
+<td class="text-center"><p>I2S_DOUT_1</p></td>
+<td class="text-center"><p>UART2_CTS</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA13</p></td>
+<td class="text-center"><p>GPIOA13</p></td>
+<td class="text-center"><p>UART1_RTS</p></td>
+<td class="text-center"><p>SD_S_CMD</p></td>
+<td class="text-center"><p>SPI_DO</p></td>
+<td class="text-center"><p>PWM_A1</p></td>
+<td class="text-center"><p>PCM_CLK</p></td>
+<td class="text-center"><p>SD_M_CLK</p></td>
+<td class="text-center"><p>I2S_DIN_0</p></td>
+<td class="text-center"><p>UART2_RTS</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA14</p></td>
+<td class="text-center"><p>GPIOA14</p></td>
+<td class="text-center"><p>I2CM_SCL</p></td>
+<td class="text-center"><p>SD_S_D3</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>PWM_A2</p></td>
+<td class="text-center"><p>PCM_DIN</p></td>
+<td class="text-center"><p>SD_M_D0</p></td>
+<td class="text-center"><p>I2S_DIN_1</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA15</p></td>
+<td class="text-center"><p>GPIOA15</p></td>
+<td class="text-center"><p>I2CM_SDA</p></td>
+<td class="text-center"><p>SD_S_D2</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>PCM_DOUT</p></td>
+<td class="text-center"><p>SD_M_D1</p></td>
+<td class="text-center"><p>CODEC_MCLK</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>AIC8800M.Port.B</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-center head"><p>PAD</p></th>
+<th class="text-center head"><p>ANA Function0</p></th>
+<th class="text-center head"><p>ANA Function1</p></th>
+<th class="text-center head"><p>ANA Function2</p></th>
+<th class="text-center head"><p>Function 0</p></th>
+<th class="text-center head"><p>Function 1</p></th>
+<th class="text-center head"><p>Function 2</p></th>
+<th class="text-center head"><p>Function 3</p></th>
+<th class="text-center head"><p>Function 4</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>GPIOB0</p></td>
+<td class="text-center"><p>LED0</p></td>
+<td class="text-center"><p>ADC(0~1.1V)</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOB0(5V)</p></td>
+<td class="text-center"><p>UART1_RX</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOB1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>ADC(0~1.1V)</p></td>
+<td class="text-center"><p>TOUCH</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOB1</p></td>
+<td class="text-center"><p>UART1_TX</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOB2</p></td>
+<td class="text-center"><p>LED1</p></td>
+<td class="text-center"><p>ADC(0~1.1V)</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOB2</p></td>
+<td class="text-center"><p>UART1_RX</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOB3</p></td>
+<td class="text-center"><p>LED2</p></td>
+<td class="text-center"><p>ADC(0~1.1V)</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOB3</p></td>
+<td class="text-center"><p>UART1_TX</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>PWM_B0</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOB4</p></td>
+<td class="text-center"><p>XTAL1_32K</p></td>
+<td class="text-center"><p>ADC(0~1.1V)</p></td>
+<td class="text-center"><p>TOUCH</p></td>
+<td class="text-center"><p>GPIOB4(AON)</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>PWM_B1</p></td>
+<td class="text-center"><p>MCLK_OUT</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOB5</p></td>
+<td class="text-center"><p>XTAL2_32K</p></td>
+<td class="text-center"><p>ADC(0~1.1V)</p></td>
+<td class="text-center"><p>TOUCH</p></td>
+<td class="text-center"><p>GPIOB5(AON)</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>PWM_B2</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOB6</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>ADC(0~1.1V)</p></td>
+<td class="text-center"><p>TOUCH</p></td>
+<td class="text-center"><p>GPIOB6(AON)</p></td>
+<td class="text-center"><p>UART0_RX</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOB7</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>ADC(0~1.1V)</p></td>
+<td class="text-center"><p>TOUCH</p></td>
+<td class="text-center"><p>GPIOB7(AON)</p></td>
+<td class="text-center"><p>UART0_TX</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOB13</p></td>
+<td class="text-center"><p>USB_ID</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOB13</p></td>
+<td class="text-center"><p>PWM_B3</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOB14</p></td>
+<td class="text-center"><p>USB_DP</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOB14</p></td>
+<td class="text-center"><p>PWM_B4</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOB15</p></td>
+<td class="text-center"><p>USB_DM</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOB15</p></td>
+<td class="text-center"><p>PWM_B5</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</section>
+<section id="aic8800mc">
+<h3>AIC8800MC<a class="headerlink" href="#aic8800mc" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p>AIC8800MC/AIC8800FC</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-center head"><p>PAD</p></th>
+<th class="text-center head"><p>Ext. Func</p></th>
+<th class="text-center head"><p>Function 0</p></th>
+<th class="text-center head"><p>Function 1</p></th>
+<th class="text-center head"><p>Function 2</p></th>
+<th class="text-center head"><p>Function 3</p></th>
+<th class="text-center head"><p>Function 4</p></th>
+<th class="text-center head"><p>Function 5</p></th>
+<th class="text-center head"><p>Function 6</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>GPIOA0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>SWCLK</p></td>
+<td class="text-center"><p>GPIOA0</p></td>
+<td class="text-center"><p>I2C_SCL</p></td>
+<td class="text-center"><p>DEBUG_CLK</p></td>
+<td class="text-center"><p>I2S_LRCK_0</p></td>
+<td class="text-center"><p>PCM_FSYNC</p></td>
+<td class="text-center"><p>SPI_LCD_SCK</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>SWDIO</p></td>
+<td class="text-center"><p>GPIOA1</p></td>
+<td class="text-center"><p>I2C_SDA</p></td>
+<td class="text-center"><p>AON_UART_TX</p></td>
+<td class="text-center"><p>I2S_BCK_0</p></td>
+<td class="text-center"><p>PCM_CLK</p></td>
+<td class="text-center"><p>SPI_LCD_CSN_0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA2</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOA2</p></td>
+<td class="text-center"><p>UART0_RX</p></td>
+<td class="text-center"><p>UART1_RX</p></td>
+<td class="text-center"><p>I2C_SCL</p></td>
+<td class="text-center"><p>I2S_DIN_0</p></td>
+<td class="text-center"><p>PCM_DIN</p></td>
+<td class="text-center"><p>SPI_LCD_DI</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA3</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOA3</p></td>
+<td class="text-center"><p>UART0_TX</p></td>
+<td class="text-center"><p>UART1_TX</p></td>
+<td class="text-center"><p>I2C_SDA</p></td>
+<td class="text-center"><p>I2S_DOUT_0</p></td>
+<td class="text-center"><p>PCM_DOUT</p></td>
+<td class="text-center"><p>SPI_LCD_DO</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA4</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOA4</p></td>
+<td class="text-center"><p>UART0_CTS</p></td>
+<td class="text-center"><p>UART1_CTS</p></td>
+<td class="text-center"><p>UART1_RX</p></td>
+<td class="text-center"><p>CODEC_MCLK</p></td>
+<td class="text-center"><p>PWM_0</p></td>
+<td class="text-center"><p>SPI_LCD_CD</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA5</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOA5</p></td>
+<td class="text-center"><p>UART0_RTS</p></td>
+<td class="text-center"><p>UART1_RTS</p></td>
+<td class="text-center"><p>UART1_TX</p></td>
+<td class="text-center"><p>DEBUG_CLK</p></td>
+<td class="text-center"><p>PWM_1</p></td>
+<td class="text-center"><p>SPI_LCD_FMARK</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA6</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOA6</p></td>
+<td class="text-center"><p>I2C_SCL</p></td>
+<td class="text-center"><p>UART2_RX</p></td>
+<td class="text-center"><p>UART1_CTS</p></td>
+<td class="text-center"><p>AON_PWM_0</p></td>
+<td class="text-center"><p>I2S_BCK_0</p></td>
+<td class="text-center"><p>SPI_LCD_CSN_1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA7</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOA7</p></td>
+<td class="text-center"><p>I2C_SDA</p></td>
+<td class="text-center"><p>UART2_TX</p></td>
+<td class="text-center"><p>UART1_RTS</p></td>
+<td class="text-center"><p>AON_PWM_1</p></td>
+<td class="text-center"><p>I2S_LRCK_0</p></td>
+<td class="text-center"><p>SPI_LCD_CSN_2</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA8</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>UART0_RX</p></td>
+<td class="text-center"><p>GPIOA8</p></td>
+<td class="text-center"><p>UART2_CTS</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA9</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>UART0_TX</p></td>
+<td class="text-center"><p>GPIOA9</p></td>
+<td class="text-center"><p>UART2_RTS</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>AON_PWM_2</p></td>
+<td class="text-center"><p>I2S_DOUT_0</p></td>
+<td class="text-center"><p>SPI_LCD_CSN_3</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA10</p></td>
+<td class="text-center"><p>SD_S_D1</p></td>
+<td class="text-center"><p>GPIOA10</p></td>
+<td class="text-center"><p>UART1_RX</p></td>
+<td class="text-center"><p>SPI_LCD_SCK</p></td>
+<td class="text-center"><p>PSI_M_SCL</p></td>
+<td class="text-center"><p>SD_M_D2</p></td>
+<td class="text-center"><p>I2S_BCK_1</p></td>
+<td class="text-center"><p>UART2_RX</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA11</p></td>
+<td class="text-center"><p>SD_S_D0</p></td>
+<td class="text-center"><p>GPIOA11</p></td>
+<td class="text-center"><p>UART1_TX</p></td>
+<td class="text-center"><p>SPI_LCD_CSN_0</p></td>
+<td class="text-center"><p>PSI_M_SDA</p></td>
+<td class="text-center"><p>SD_M_D3</p></td>
+<td class="text-center"><p>I2S_LRCK_1</p></td>
+<td class="text-center"><p>UART2_TX</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA12</p></td>
+<td class="text-center"><p>SD_S_CLK</p></td>
+<td class="text-center"><p>GPIOA12</p></td>
+<td class="text-center"><p>UART1_CTS</p></td>
+<td class="text-center"><p>SPI_LCD_DI</p></td>
+<td class="text-center"><p>PCM_FSYNC</p></td>
+<td class="text-center"><p>SD_M_CMD</p></td>
+<td class="text-center"><p>I2S_DIN_1</p></td>
+<td class="text-center"><p>UART2_CTS</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA13</p></td>
+<td class="text-center"><p>SD_S_CMD</p></td>
+<td class="text-center"><p>GPIOA13</p></td>
+<td class="text-center"><p>UART1_RTS</p></td>
+<td class="text-center"><p>SPI_LCD_DO</p></td>
+<td class="text-center"><p>PCM_CLK</p></td>
+<td class="text-center"><p>SD_M_CLK</p></td>
+<td class="text-center"><p>CODEC_MCLK</p></td>
+<td class="text-center"><p>UART2_RTS</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA14</p></td>
+<td class="text-center"><p>SD_S_D3</p></td>
+<td class="text-center"><p>GPIOA14</p></td>
+<td class="text-center"><p>I2C_SCL</p></td>
+<td class="text-center"><p>SPI_LCD_CD</p></td>
+<td class="text-center"><p>PCM_DIN</p></td>
+<td class="text-center"><p>SD_M_D0</p></td>
+<td class="text-center"><p>I2S_DOUT_1</p></td>
+<td class="text-center"><p>PWM_2</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA15</p></td>
+<td class="text-center"><p>SD_S_D2</p></td>
+<td class="text-center"><p>GPIOA15</p></td>
+<td class="text-center"><p>I2C_SDA</p></td>
+<td class="text-center"><p>SPI_LCD_FMARK</p></td>
+<td class="text-center"><p>PCM_DOUT</p></td>
+<td class="text-center"><p>SD_M_D1</p></td>
+<td class="text-center"><p>I2S_DIN_0</p></td>
+<td class="text-center"><p>DEBUG_CLK</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOB0</p></td>
+<td class="text-center"><p>host_wake_wl</p></td>
+<td class="text-center"><p>GPIOA16</p></td>
+<td class="text-center"><p>PCM_FSYNC</p></td>
+<td class="text-center"><p>TPORTS0</p></td>
+<td class="text-center"><p>UART1_RX</p></td>
+<td class="text-center"><p>PWM_0</p></td>
+<td class="text-center"><p>SPI_LCD_CSN_1</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOB1</p></td>
+<td class="text-center"><p>wl_wake_host</p></td>
+<td class="text-center"><p>GPIOA17</p></td>
+<td class="text-center"><p>PCM_CLK</p></td>
+<td class="text-center"><p>TPORTS1</p></td>
+<td class="text-center"><p>UART1_TX</p></td>
+<td class="text-center"><p>PWM_1</p></td>
+<td class="text-center"><p>SPI_LCD_CSN_2</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOB2</p></td>
+<td class="text-center"><p>bt_wake_host</p></td>
+<td class="text-center"><p>GPIOA18</p></td>
+<td class="text-center"><p>PCM_DIN</p></td>
+<td class="text-center"><p>TPORTS2</p></td>
+<td class="text-center"><p>UART1_CTS</p></td>
+<td class="text-center"><p>PWM_2</p></td>
+<td class="text-center"><p>SPI_LCD_CSN_3</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOB3</p></td>
+<td class="text-center"><p>host_wake_bt</p></td>
+<td class="text-center"><p>GPIOA19</p></td>
+<td class="text-center"><p>PCM_DOUT</p></td>
+<td class="text-center"><p>TPORTS3</p></td>
+<td class="text-center"><p>UART1_RTS</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>USB_DP</p></td>
+<td class="text-center"><p>GPIOA20</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>USB_DM</p></td>
+<td class="text-center"><p>GPIOA21</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</section>
+<section id="aic8800m40">
+<h3>AIC8800M40<a class="headerlink" href="#aic8800m40" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p>AIC8800M40B/AIC8800M80</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-center head"><p>PAD</p></th>
+<th class="text-center head"><p>Ext. Func</p></th>
+<th class="text-center head"><p>Function 0</p></th>
+<th class="text-center head"><p>Function 1</p></th>
+<th class="text-center head"><p>Function 2</p></th>
+<th class="text-center head"><p>Function 3</p></th>
+<th class="text-center head"><p>Function 4</p></th>
+<th class="text-center head"><p>Function 5</p></th>
+<th class="text-center head"><p>Function 6</p></th>
+<th class="text-center head"><p>Function 8</p></th>
+<th class="text-center head"><p>Function 9</p></th>
+<th class="text-center head"><p>Function 10</p></th>
+<th class="text-center head"><p>Function 11</p></th>
+<th class="text-center head"><p>Function 12</p></th>
+<th class="text-center head"><p>Function 13</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>GPIOA0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>SWCLK</p></td>
+<td class="text-center"><p>GPIOA0</p></td>
+<td class="text-center"><p>I2C_SCL</p></td>
+<td class="text-center"><p>WF_EXT_PA_CTRL_0</p></td>
+<td class="text-center"><p>PCM_FSYNC</p></td>
+<td class="text-center"><p>PTA_ANT_SW_0</p></td>
+<td class="text-center"><p>I2S_LRCK_0</p></td>
+<td class="text-center"><p>SPDIF_IN</p></td>
+<td class="text-center"><p>SPI_LCD_SCK</p></td>
+<td class="text-center"><p>PWM_0</p></td>
+<td class="text-center"><p>PCM_DOUT</p></td>
+<td class="text-center"><p>PCM_CLK</p></td>
+<td class="text-center"><p>BT_UART_CTS</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>SWDIO</p></td>
+<td class="text-center"><p>GPIOA1</p></td>
+<td class="text-center"><p>I2C_SDA</p></td>
+<td class="text-center"><p>WF_EXT_PA_CTRL_1</p></td>
+<td class="text-center"><p>PCM_CLK</p></td>
+<td class="text-center"><p>PTA_ANT_SW_1</p></td>
+<td class="text-center"><p>I2S_BCK_0</p></td>
+<td class="text-center"><p>SPDIF_OUT</p></td>
+<td class="text-center"><p>SPI_LCD_CSN_0</p></td>
+<td class="text-center"><p>PWM_1</p></td>
+<td class="text-center"><p>PCM_DIN</p></td>
+<td class="text-center"><p>PCM_DOUT</p></td>
+<td class="text-center"><p>BT_UART_RTS</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA2</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOA2</p></td>
+<td class="text-center"><p>UART0_RX</p></td>
+<td class="text-center"><p>UART1_RX</p></td>
+<td class="text-center"><p>WF_EXT_PA_CTRL_2</p></td>
+<td class="text-center"><p>PCM_DIN</p></td>
+<td class="text-center"><p>DEBUG_CLK</p></td>
+<td class="text-center"><p>I2S_DIN_0</p></td>
+<td class="text-center"><p>PTA_ANT_SW_0</p></td>
+<td class="text-center"><p>SPI_LCD_DI</p></td>
+<td class="text-center"><p>PWM_2</p></td>
+<td class="text-center"><p>PCM_FSYNC</p></td>
+<td class="text-center"><p>PCM_DIN</p></td>
+<td class="text-center"><p>BT_UART_RX</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA3</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOA3</p></td>
+<td class="text-center"><p>UART0_TX</p></td>
+<td class="text-center"><p>UART1_TX</p></td>
+<td class="text-center"><p>WF_EXT_PA_CTRL_3</p></td>
+<td class="text-center"><p>PCM_DOUT</p></td>
+<td class="text-center"><p>AON_UART_TX</p></td>
+<td class="text-center"><p>I2S_DOUT_0</p></td>
+<td class="text-center"><p>PTA_ANT_SW_1</p></td>
+<td class="text-center"><p>SPI_LCD_DO</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>PCM_CLK</p></td>
+<td class="text-center"><p>PCM_FSYNC</p></td>
+<td class="text-center"><p>BT_UART_TX</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA4</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOA4</p></td>
+<td class="text-center"><p>UART0_CTS</p></td>
+<td class="text-center"><p>UART1_CTS</p></td>
+<td class="text-center"><p>UART1_RX</p></td>
+<td class="text-center"><p>BT_UART_RX</p></td>
+<td class="text-center"><p>AUD_DAC_SYNC</p></td>
+<td class="text-center"><p>CODEC_MCLK</p></td>
+<td class="text-center"><p>I2S_BCK_0</p></td>
+<td class="text-center"><p>SPI_LCD_CD</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>PCM_FSYNC</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA5</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOA5</p></td>
+<td class="text-center"><p>UART0_RTS</p></td>
+<td class="text-center"><p>UART1_RTS</p></td>
+<td class="text-center"><p>UART1_TX</p></td>
+<td class="text-center"><p>BT_UART_TX</p></td>
+<td class="text-center"><p>AON_UART_TX</p></td>
+<td class="text-center"><p>DEBUG_CLK</p></td>
+<td class="text-center"><p>I2S_LRCK_0</p></td>
+<td class="text-center"><p>SPI_LCD_FMARK</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>PCM_DIN</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA6</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOA6</p></td>
+<td class="text-center"><p>I2C_SCL</p></td>
+<td class="text-center"><p>UART2_RX</p></td>
+<td class="text-center"><p>UART1_CTS</p></td>
+<td class="text-center"><p>BT_UART_CTS</p></td>
+<td class="text-center"><p>PSI_S_SCL</p></td>
+<td class="text-center"><p>BT_UART_RX</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>SPI_LCD_CSN_1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>PCM_DOUT</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA7</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOA7</p></td>
+<td class="text-center"><p>I2C_SDA</p></td>
+<td class="text-center"><p>UART2_TX</p></td>
+<td class="text-center"><p>UART1_RTS</p></td>
+<td class="text-center"><p>BT_UART_RTS</p></td>
+<td class="text-center"><p>PSI_S_SDA</p></td>
+<td class="text-center"><p>BT_UART_TX</p></td>
+<td class="text-center"><p>AON_PWM_0</p></td>
+<td class="text-center"><p>SPI_LCD_CSN_2</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>PCM_CLK</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA8</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>UART0_RX</p></td>
+<td class="text-center"><p>GPIOA8</p></td>
+<td class="text-center"><p>UART2_CTS</p></td>
+<td class="text-center"><p>SPDIF_IN</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>BT_UART_CTS</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA9</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>UART0_TX</p></td>
+<td class="text-center"><p>GPIOA9</p></td>
+<td class="text-center"><p>UART2_RTS</p></td>
+<td class="text-center"><p>SPDIF_OUT</p></td>
+<td class="text-center"><p>AON_PWM_1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>BT_UART_RTS</p></td>
+<td class="text-center"><p>I2S_DOUT_0</p></td>
+<td class="text-center"><p>SPI_LCD_CSN_3</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA10</p></td>
+<td class="text-center"><p>SD_S_D1</p></td>
+<td class="text-center"><p>GPIOA10</p></td>
+<td class="text-center"><p>UART1_RX</p></td>
+<td class="text-center"><p>BT_UART_RX</p></td>
+<td class="text-center"><p>SPI_LCD_SCK</p></td>
+<td class="text-center"><p>BT_UART_CTS</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>SD_M_D2</p></td>
+<td class="text-center"><p>I2S_BCK_1</p></td>
+<td class="text-center"><p>UART2_RX</p></td>
+<td class="text-center"><p>BT_UART_CTS</p></td>
+<td class="text-center"><p>BT_UART_RTS</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA11</p></td>
+<td class="text-center"><p>SD_S_D0</p></td>
+<td class="text-center"><p>GPIOA11</p></td>
+<td class="text-center"><p>UART1_TX</p></td>
+<td class="text-center"><p>BT_UART_TX</p></td>
+<td class="text-center"><p>SPI_LCD_CSN_0</p></td>
+<td class="text-center"><p>BT_UART_RTS</p></td>
+<td class="text-center"><p>DEBUG_CLK</p></td>
+<td class="text-center"><p>SD_M_D3</p></td>
+<td class="text-center"><p>I2S_LRCK_1</p></td>
+<td class="text-center"><p>UART2_TX</p></td>
+<td class="text-center"><p>BT_UART_RTS</p></td>
+<td class="text-center"><p>BT_UART_RX</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA12</p></td>
+<td class="text-center"><p>SD_S_CLK</p></td>
+<td class="text-center"><p>GPIOA12</p></td>
+<td class="text-center"><p>UART1_CTS</p></td>
+<td class="text-center"><p>BT_UART_CTS</p></td>
+<td class="text-center"><p>SPI_LCD_DI</p></td>
+<td class="text-center"><p>AON_PWM_2</p></td>
+<td class="text-center"><p>PCM_FSYNC</p></td>
+<td class="text-center"><p>SD_M_CMD</p></td>
+<td class="text-center"><p>I2S_DIN_1</p></td>
+<td class="text-center"><p>UART2_CTS</p></td>
+<td class="text-center"><p>BT_UART_RX</p></td>
+<td class="text-center"><p>BT_UART_TX</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA13</p></td>
+<td class="text-center"><p>SD_S_CMD</p></td>
+<td class="text-center"><p>GPIOA13</p></td>
+<td class="text-center"><p>UART1_RTS</p></td>
+<td class="text-center"><p>BT_UART_RTS</p></td>
+<td class="text-center"><p>SPI_LCD_DO</p></td>
+<td class="text-center"><p>PWM_0</p></td>
+<td class="text-center"><p>PCM_CLK</p></td>
+<td class="text-center"><p>SD_M_CLK</p></td>
+<td class="text-center"><p>CODEC_MCLK</p></td>
+<td class="text-center"><p>UART2_RTS</p></td>
+<td class="text-center"><p>BT_UART_TX</p></td>
+<td class="text-center"><p>BT_UART_CTS</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOA14</p></td>
+<td class="text-center"><p>SD_S_D3</p></td>
+<td class="text-center"><p>GPIOA14</p></td>
+<td class="text-center"><p>I2C_SCL</p></td>
+<td class="text-center"><p>SPDIF_IN</p></td>
+<td class="text-center"><p>SPI_LCD_CD</p></td>
+<td class="text-center"><p>PWM_1</p></td>
+<td class="text-center"><p>PCM_DIN</p></td>
+<td class="text-center"><p>SD_M_D0</p></td>
+<td class="text-center"><p>I2S_DOUT_1</p></td>
+<td class="text-center"><p>PTA_ANT_SW_0</p></td>
+<td class="text-center"><p>UART0_RX</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOA15</p></td>
+<td class="text-center"><p>SD_S_D2</p></td>
+<td class="text-center"><p>GPIOA15</p></td>
+<td class="text-center"><p>I2C_SDA</p></td>
+<td class="text-center"><p>SPDIF_OUT</p></td>
+<td class="text-center"><p>SPI_LCD_FMARK</p></td>
+<td class="text-center"><p>PWM_2</p></td>
+<td class="text-center"><p>PCM_DOUT</p></td>
+<td class="text-center"><p>SD_M_D1</p></td>
+<td class="text-center"><p>I2S_DIN_0</p></td>
+<td class="text-center"><p>PTA_ANT_SW_1</p></td>
+<td class="text-center"><p>UART0_TX</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOB0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOB0</p></td>
+<td class="text-center"><p>PCM_FSYNC</p></td>
+<td class="text-center"><p>I2C_SCL</p></td>
+<td class="text-center"><p>SPI_LCD_SCK</p></td>
+<td class="text-center"><p>AON_PWM_0</p></td>
+<td class="text-center"><p>WF_EXT_PA_CTRL_0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOB1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOB1</p></td>
+<td class="text-center"><p>PCM_CLK</p></td>
+<td class="text-center"><p>I2C_SDA</p></td>
+<td class="text-center"><p>SPI_LCD_CSN_0</p></td>
+<td class="text-center"><p>AON_PWM_1</p></td>
+<td class="text-center"><p>WF_EXT_PA_CTRL_1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOB2</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOB2</p></td>
+<td class="text-center"><p>PCM_DIN</p></td>
+<td class="text-center"><p>PSI_M_SCL</p></td>
+<td class="text-center"><p>SPI_LCD_DI</p></td>
+<td class="text-center"><p>AON_PWM_2</p></td>
+<td class="text-center"><p>WF_EXT_PA_CTRL_2</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOB3</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOB3</p></td>
+<td class="text-center"><p>PCM_DOUT</p></td>
+<td class="text-center"><p>PSI_M_SDA</p></td>
+<td class="text-center"><p>SPI_LCD_DO</p></td>
+<td class="text-center"><p>SPDIF_IN</p></td>
+<td class="text-center"><p>WF_EXT_PA_CTRL_3</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOB4</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOB4</p></td>
+<td class="text-center"><p>PWM_0</p></td>
+<td class="text-center"><p>I2S_LRCK_0</p></td>
+<td class="text-center"><p>BT_UART_RX</p></td>
+<td class="text-center"><p>SPDIF_OUT</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOB5</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOB5</p></td>
+<td class="text-center"><p>PWM_1</p></td>
+<td class="text-center"><p>I2S_BCK_0</p></td>
+<td class="text-center"><p>BT_UART_TX</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>GPIOB6</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOB6</p></td>
+<td class="text-center"><p>PWM_2</p></td>
+<td class="text-center"><p>I2S_DIN_0</p></td>
+<td class="text-center"><p>BT_UART_CTS</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>GPIOB7</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p>GPIOB7</p></td>
+<td class="text-center"><p>AON_PWM_0</p></td>
+<td class="text-center"><p>I2S_DOUT_0</p></td>
+<td class="text-center"><p>BT_UART_RTS</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>USB_DP</p></td>
+<td class="text-center"><p>GPIOA16</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>USB_DM</p></td>
+<td class="text-center"><p>GPIOA17</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022, Vllogic.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
