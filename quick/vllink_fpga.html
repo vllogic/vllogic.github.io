@@ -19,9 +19,7 @@
         <script src="../_static/translations.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="Vout口使用说明" href="../hardware/vllink_basic_vout.html" />
-    <link rel="prev" title="Vllink Basic 快速上手" href="vllink_basic.html" /> 
+    <link rel="search" title="搜索" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,69 +38,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic.html">Vllink Basic 快速上手</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Vllink FPGA 快速上手</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">一、调试接口定义</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#jtag-hs3">1.1 JTAG-HS3接口</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">1.2 京微齐力接口</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">二、功能简述</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#hercules">2.1 Hercules标准下载</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">2.2 快速在线下载</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">2.3 离线编程器</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">三、固件升级及恢复默认设置</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id7">3.1 固件升级</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">3.2 恢复默认设置</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id9">四、快速在线下载使用说明</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id10">4.1 准备工作</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">4.2 软件说明</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hme-h3">4.3 示例 HME-H3</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hme-h1c02">4.4 示例 HME-H1C02</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hme-hr02">4.5 示例 HME-HR02</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hme-m5">4.6 示例 HME-M5</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hme-m7">4.7 示例 HME-M7</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id12">五、离线编程器配置说明</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id13">5.1 提示</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">5.2 准备工作-配置</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id15">5.3 软件说明-总览</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id16">5.4 软件说明-烧录文件的配置</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id17">5.5 软件说明-烧录命令的配置</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id18">5.6 软件说明-安全配置</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id19">5.7 示例 HME-H3</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id20">准备</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#flash">Flash编程</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#flashefuse">Flash编程及Efuse编程</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id21">5.8 示例 HME-H1C02</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id22">准备</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id23">Flash编程</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id24">5.9 示例 HME-HR02</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id25">准备</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id26">Flash编程</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id27">Flash编程及Efuse编程</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id28">5.10 示例 HME-M5</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id29">准备</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id30">Flash编程</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id31">5.11 示例 HME-M7</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="vllink_basic2.html">Vllink Basic2 快速上手</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
 <ul>
@@ -111,7 +49,7 @@
 <p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic.html">Vllink Basic 固件更新</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../update/vllink_fpga.html">Vllink FPGA 固件更新</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic2.html">Vllink Basic2 固件更新</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
 <ul>
@@ -761,10 +699,7 @@
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="vllink_basic.html" class="btn btn-neutral float-left" title="Vllink Basic 快速上手" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="../hardware/vllink_basic_vout.html" class="btn btn-neutral float-right" title="Vout口使用说明" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 
