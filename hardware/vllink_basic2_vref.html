@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; Vllogic  文档</title>
+  <title>VRef口使用说明 &mdash; Vllogic  文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -45,8 +45,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic2.html">Vllink Basic2 快速上手</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic_vout.html">Vout口使用说明</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">VRef口使用说明</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#vllink-basic2">Vllink Basic2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">电路</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">说明</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
 <ul>
@@ -85,7 +93,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>&lt;no title&gt;</li>
+      <li>VRef口使用说明</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/hardware/vllink_basic2_vref.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -95,7 +103,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
+  <section id="vref">
+<h1>VRef口使用说明<a class="headerlink" href="#vref" title="Permalink to this heading"></a></h1>
+<section id="vllink-basic2">
+<h2>Vllink Basic2<a class="headerlink" href="#vllink-basic2" title="Permalink to this heading"></a></h2>
+<section id="id1">
+<h3>电路<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p><img alt="" src="../_images/vllink_basic2_vref_sch.png" /></p>
+</section>
+<section id="id2">
+<h3>说明<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">VRef</span></code>作为电平转换芯片的B端参考电压，实现逻辑IO的电平转换，支持的输入参考电压范围为：<code class="docutils literal notranslate"><span class="pre">1.2V-5.5V</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRef</span></code>通过一自恢复保险丝连接简易可调电压源，限制电流200mA</p></li>
+<li><p>简易可调电压源的输出电压可配置为<code class="docutils literal notranslate"><span class="pre">0V</span></code>、<code class="docutils literal notranslate"><span class="pre">1.8V</span></code>、<code class="docutils literal notranslate"><span class="pre">2.5V</span></code>、<code class="docutils literal notranslate"><span class="pre">3.3V</span></code>以及<code class="docutils literal notranslate"><span class="pre">4.0V</span></code>，其中<code class="docutils literal notranslate"><span class="pre">0V</span></code>即输入模式，其他电压则处于输出模式</p></li>
+<li><p>简易可调电压源默认为<code class="docutils literal notranslate"><span class="pre">0V</span></code>模式，此时，若将<code class="docutils literal notranslate"><span class="pre">VRef</span></code>悬空，所有逻辑IO将处于高阻输入态，无法进行通讯</p></li>
+<li><p>在将简易可调电压源配置成非0V时，应当知悉目标板的耐受电压，谨防烧毁目标板</p></li>
+<li><p>配置方法：访问 https://vllogic.com/quick/vllink_basic2 获取</p></li>
+</ol>
+</section>
+</section>
+</section>
+
 
            </div>
           </div>
