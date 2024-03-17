@@ -28,36 +28,37 @@ QQ群：791104674
 ----------------------------
 
 ======================  ======================
-|Vllink Basic|_         |Vllink FPGA|_
+|Vllink Basic2|_         |Vllink Basic|_
 ----------------------  ----------------------
-`Vllink Basic`_         `Vllink FPGA`_
+`Vllink Basic2`_         `Vllink Basic`_
 ======================  ======================
+
+.. |Vllink Basic2| image:: _static/picture/vllink_basic2_top_45.png
+.. _Vllink Basic2: quick/vllink_basic2.html
 
 .. |Vllink Basic| image:: _static/picture/vllink_basic_top_45.png
 .. _Vllink Basic: quick/vllink_basic.html
-
-.. |Vllink FPGA| image:: _static/picture/vllink_fpga_top_45.png
-.. _Vllink FPGA: quick/vllink_fpga.html
 
 .. toctree::
    :caption: 快速上手
    :hidden:
 
    quick/vllink_basic.md
-   quick/vllink_fpga.md
+   quick/vllink_basic2.md
 
 .. toctree::
    :maxdepth: 1
    :caption: 硬件资料
 
    hardware/vllink_basic_vout.md
+   hardware/vllink_basic2_vref.md
 
 .. toctree::
    :maxdepth: 1
    :caption: 固件更新
 
    update/vllink_basic.md
-   update/vllink_fpga.md
+   update/vllink_basic2.md
 
 .. toctree::
    :maxdepth: 1
