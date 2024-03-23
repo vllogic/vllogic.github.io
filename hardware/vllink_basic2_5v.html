@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vout口使用说明 &mdash; Vllogic  文档</title>
+  <title>5V口使用说明 &mdash; Vllogic  文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,9 +19,7 @@
         <script src="../_static/translations.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="VRef口使用说明" href="vllink_basic2_vref.html" />
-    <link rel="prev" title="Vllink Basic2 快速上手" href="../quick/vllink_basic2.html" /> 
+    <link rel="search" title="搜索" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,16 +43,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic2.html">Vllink Basic2 快速上手</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Vout口使用说明</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#vllink-basic">Vllink Basic</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">外观</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">电路</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">总结</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vllink_basic_vout.html">Vout口使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic2_vref.html">VRef口使用说明</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
@@ -94,9 +84,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Vout口使用说明</li>
+      <li>5V口使用说明</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/hardware/vllink_basic_vout.md.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/hardware/vllink_basic2_5v.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -104,58 +94,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="vout">
-<h1>Vout口使用说明<a class="headerlink" href="#vout" title="Permalink to this heading"></a></h1>
-<section id="vllink-basic">
-<h2>Vllink Basic<a class="headerlink" href="#vllink-basic" title="Permalink to this heading"></a></h2>
-<section id="id1">
-<h3>外观<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
-<p><img alt="" src="../_images/vllink_basic_vout_fuse.png" /></p>
-</section>
-<section id="id2">
-<h3>电路<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
-<p><img alt="" src="../_images/vllink_basic_vout_fuse_sch.png" /></p>
+  <section id="v">
+<h1>5V口使用说明<a class="headerlink" href="#v" title="Permalink to this heading"></a></h1>
+<section id="vllink-basic2">
+<h2>Vllink Basic2<a class="headerlink" href="#vllink-basic2" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p>此版本<code class="docutils literal notranslate"><span class="pre">Vout</span></code>仅支持<code class="docutils literal notranslate"><span class="pre">3.3V</span></code>、<code class="docutils literal notranslate"><span class="pre">5V</span></code>二选一</p></li>
-<li><p>对于<code class="docutils literal notranslate"><span class="pre">3.3V</span></code>版本（贴F2，不贴F3），可通过PMOS管对外输出3.3V电源，此时输出持续电流不应大于100mA</p></li>
-<li><p>对于<code class="docutils literal notranslate"><span class="pre">5V</span></code>版本（贴F3，不贴F2），可通过PMOS管对外输出5V电源。并且，即使<code class="docutils literal notranslate"><span class="pre">GPIOB0</span></code>未拉低，未开启的PMOS也将等效一个二极管，调试器可从<code class="docutils literal notranslate"><span class="pre">Vout</span></code>脚获得电源输入</p></li>
+<li><p>在Basic2版本中，<code class="docutils literal notranslate"><span class="pre">5V</span></code>脚与<code class="docutils literal notranslate"><span class="pre">USB5V</span></code>直通，无输出保险丝、无PMOS控制</p></li>
+<li><p>调试器可从<code class="docutils literal notranslate"><span class="pre">5V</span></code>脚获得电源输入，推荐电压<code class="docutils literal notranslate"><span class="pre">3.7V-5.5V</span></code>；若只有更低电压如<code class="docutils literal notranslate"><span class="pre">3.3V</span></code>时，需保证电源输出能力及连接线的质量</p></li>
 </ul>
-</section>
-<section id="id3">
-<h3>总结<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
-<table class="colwidths-auto docutils align-default">
-<thead>
-<tr class="row-odd"><th class="text-center head"><p>功能</p></th>
-<th class="text-center head"><p>3.3V版本</p></th>
-<th class="text-center head"><p>5V版本</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-center"><p>输出3.3V</p></td>
-<td class="text-center"><p>支持</p></td>
-<td class="text-center"><p>不支持</p></td>
-</tr>
-<tr class="row-odd"><td class="text-center"><p>输出5V</p></td>
-<td class="text-center"><p>不支持</p></td>
-<td class="text-center"><p>支持</p></td>
-</tr>
-<tr class="row-even"><td class="text-center"><p>开发板5V反向供电</p></td>
-<td class="text-center"><p>不支持</p></td>
-<td class="text-center"><p>支持</p></td>
-</tr>
-</tbody>
-</table>
-</section>
 </section>
 </section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../quick/vllink_basic2.html" class="btn btn-neutral float-left" title="Vllink Basic2 快速上手" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="vllink_basic2_vref.html" class="btn btn-neutral float-right" title="VRef口使用说明" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

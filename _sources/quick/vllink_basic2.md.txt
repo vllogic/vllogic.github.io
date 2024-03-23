@@ -15,7 +15,7 @@
 | TXD  | 串口输出 |
 | RXD  | 串口输入 |
 
-  [1] [5V口详细说明](../hardware/vllink_basic_vout.md)
+  [1] [5V口详细说明](../hardware/vllink_basic2_5v.md)
   [2] [VRef口详细说明](../hardware/vllink_basic2_vref.md)
 
 ## 模式介绍及切换
