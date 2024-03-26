@@ -43,7 +43,7 @@
         </div>
       </fieldset>
       <p></p>
-      <fieldset>
+      <fieldset style="display:none">
         <legend>安全配置</legend>
         <input type="text" id="Config_Password-text" minlength="1" maxlength="32" size="32" disabled="disabled">
         <button class="buttonCommon" id="Config_Password-lockButton" disabled="disabled">
@@ -55,7 +55,7 @@
         <label id="Config_Password-tips" style="font-size:xx-small"></label>
       </fieldset>
       <p></p>
-      <fieldset>
+      <fieldset style="display:none">
         <legend>记录器</legend>
         <label id="Config_Password-tips" style="font-size:xx-small">提示：记录器理论寿命大于1000万次。总次数接近此次数时，请将硬件回收。</label>
         <div></div>
@@ -85,18 +85,29 @@
         <button class="buttonCommon" id="configSync" disabled="disabled">
           同步设置
         </button>
-        <label style="font-size:xx-small">说明：将常规设置与自定义设置中的参数同步到硬件中，无效配置参数将被清除</label>
+        <label style="font-size:xx-small">说明：将常规设置同步到硬件中，无效配置参数将被清除</label>
         <fieldset>
           <legend >常规设置</legend>
           <textarea id="normalConfig" rows="14" cols="99" disabled="disabled"></textarea>
+          <p>Basic2配置方法:</p>
+          <p>1. 点击“Connect Vllink”</p>
+          <p>2. 在小弹窗中选中DAP，点击连接</p>
+          <p>3. 连接后，上面的常规设置文本即可修改，修改后需要点击“同步设置”保存，注意无效的配置将在同步时被清除</p>
+          <p>配置文本说明：</p>
+          <p>1. Mode：指定调试器模式。其中，'wired'对应有线模式；'wirelesshost'对应AP即无线主机模式；'wirelessdevice'对应STA即无线设备模式</p>
+          <p>2. Mode_Quick_Switch：双击按键快速切换模式功能。其中，'enable'对应开启；'disable'对应关闭</p>
+          <p>3. Vref_Voltage_mV：指定VRef模式。其中，'0'对应输入模式；'1800'对应输出1.8V；'2500'对应输出2.5V；'3300'对应输出3.3V；'4000'对应输出4.0V</p>
+          <p>4. Wireless_Device_SSID：指定配对AP SSID。已配对的STA会显示对应AP的SSID，可通过删除'='之后的文本让STA重新配对AP</p>
+          <p>5. Wireless_Device_Password：指定配对AP Password。已配对的STA会显示对应AP的Password</p>
+          <p>6. Wireless_Host_Channel：指定AP信道。其中，'165'为推荐信道，其他可选信道有36, 40, 44, 48, 52, 56, 60, 64, 149, 153, 157, 161</p>
         </fieldset>
-        <fieldset>
+        <fieldset style="display:none">
           <legend>自定义设置</legend>
           <textarea id="customizeConfig" rows="33" cols="99" disabled="disabled"></textarea>
         </fieldset>
       </fieldset>
       <p></p>
-      <fieldset  class="fieldsetConfigDataFile">
+      <fieldset class="fieldsetConfigDataFile" style="display:none">
         <legend>自定义数据文件</legend>
         <p></p>
         <div class="block">
