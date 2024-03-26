@@ -57,15 +57,17 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id9">注意事项</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id10">常见问题</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id11">开发工具使用说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">配置工具</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">注意事项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">常见问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">开发工具使用说明</a></li>
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic_vout.html">Vout口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_5v.html">5V口使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_vref.html">VRef口使用说明</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
@@ -223,15 +225,41 @@
 </section>
 </section>
 <section id="id9">
-<h2>注意事项<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
+<h2>配置工具<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
+<ul>
+<li><p>链接：<a class="reference external" href="https://vllogic.com/_static/tools/web_config_basic2/">基础配置</a></p></li>
+<li><p>使用说明：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1. 使用Chrome内核浏览器打开上述链接
+2. 连接调试器
+3. 点击“Connect Vllink”
+4. 在小弹窗中选中DAP，点击连接
+5. 连接后，上面的常规设置文本即可修改，修改后需要点击“同步设置”保存，注意无效的配置将在同步时被清除
+</pre></div>
+</div>
+</li>
+<li><p>注意：当电脑端所连的调试器为AP模式，且已连接远端STA，则此工具将读写远端STA的配置。</p></li>
+<li><p>恢复出厂设置：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1. 使用Chrome内核浏览器打开上述链接
+2. 连接调试器
+3. 点击“Connect Vllink”
+4. 在小弹窗中选中DAP，点击连接
+5. 连接后，删除设置中每一行&#39;=&#39;后的文本
+6. 点击“同步设置”保存，重新上电
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="id10">
+<h2>注意事项<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>调试口逻辑电平由<code class="docutils literal notranslate"><span class="pre">VRef</span></code>决定，建议由开发板提供；若将<code class="docutils literal notranslate"><span class="pre">VRef</span></code>改为输出模式，应与目标板逻辑电平一致</p></li>
 <li><p>升级程序需要使用支持WebUSB的操作系统及浏览器，如Windows10及Chrome内核浏览器</p></li>
 <li><p>Windows7系统用户请参考下方链接安装驱动</p></li>
 </ol>
 </section>
-<section id="id10">
-<h2>常见问题<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h2>
+<section id="id11">
+<h2>常见问题<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
 <li><ul class="simple">
 <li><p>问：设备管理器内能发现<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">V2</span></code>设备，但是软件却无法访问</p></li>
@@ -240,8 +268,8 @@
 </li>
 </ol>
 </section>
-<section id="id11">
-<h2>开发工具使用说明<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h2>
+<section id="id12">
+<h2>开发工具使用说明<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../software/windows7_driver.html"><span class="doc std std-doc">Windows7 驱动安装</span></a></p></li>
 <li><p><a class="reference internal" href="../software/iar.html"><span class="doc std std-doc">IAR 使用说明</span></a></p></li>

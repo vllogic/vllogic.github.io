@@ -51,6 +51,7 @@ QQ群：791104674
    :caption: 硬件资料
 
    hardware/vllink_basic_vout.md
+   hardware/vllink_basic2_5v.md
    hardware/vllink_basic2_vref.md
 
 .. toctree::
