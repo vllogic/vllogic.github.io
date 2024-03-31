@@ -9,6 +9,9 @@
 
 ## 固件列表
 ### CMSIS-DAP V2、CDC、MSC接口固件 
+* [V01.00-202403310902](../_static/firmware/vllink_basic.SVCommon0100202403310902.zip)
+  1. 修复：在系统重启后，未掉电的调试器串口异常问题
+  2. 优化：优化CDC Notify端点的处理
 * [V00.34-202308051430](../_static/firmware/vllink_basic.SVCommon0034202308051430.zip)
   1. 修复：在STA断开时，清理所有未完成的DAP请求
 * [V00.30-202305102053](../_static/firmware/vllink_basic.SVCommon0030202305102053.zip)
@@ -29,6 +32,9 @@
 * [V00.5B-202208141927](../_static/firmware/vllink_basic.SVCommon005b202208141927.zip)
 
 ### CMSIS-DAP V1接口固件 
+* [V01.01-202403310903](../_static/firmware/vllink_basic.SVCommon0101202403310903.zip)
+  1. 变更：基于`V01.00-202403310902`，移除MSC磁盘
+  2. 变更：基于`V01.00-202403310902`，增加CMSIS-DAP V1接口
 * [V00.35-202308051434](../_static/firmware/vllink_basic.SVCommon0035202308051434.zip)
   1. 变更：基于`V00.34-202308051430`，移除MSC磁盘
   2. 变更：基于`V00.34-202308051430`，增加CMSIS-DAP V1接口
