@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5V口使用说明 &mdash; Vllogic  文档</title>
+  <title>Vllink Basic2配套FPGA接口转接板 &mdash; Vllogic  文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="VRef口使用说明" href="vllink_basic2_vref.html" />
-    <link rel="prev" title="Vout口使用说明" href="vllink_basic_vout.html" /> 
+    <link rel="next" title="Vllink Basic 固件更新" href="../update/vllink_basic.html" />
+    <link rel="prev" title="VRef口使用说明" href="vllink_basic2_vref.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,12 +47,14 @@
 <p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic_vout.html">Vout口使用说明</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">5V口使用说明</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#vllink-basic2">Vllink Basic2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllink_basic2_5v.html">5V口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllink_basic2_vref.html">VRef口使用说明</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Vllink Basic2配套FPGA接口转接板</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">示意图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">原理图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">全套设计文件</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="vllink_basic2_vref.html">VRef口使用说明</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vllink_basic2_to_fpga.html">Vllink Basic2配套FPGA接口转接板</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
 <ul>
@@ -91,9 +93,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>5V口使用说明</li>
+      <li>Vllink Basic2配套FPGA接口转接板</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/hardware/vllink_basic2_5v.md.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/hardware/vllink_basic2_to_fpga.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -101,13 +103,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="v">
-<h1>5V口使用说明<a class="headerlink" href="#v" title="Permalink to this heading"></a></h1>
-<section id="vllink-basic2">
-<h2>Vllink Basic2<a class="headerlink" href="#vllink-basic2" title="Permalink to this heading"></a></h2>
+  <section id="vllink-basic2fpga">
+<h1>Vllink Basic2配套FPGA接口转接板<a class="headerlink" href="#vllink-basic2fpga" title="Permalink to this heading"></a></h1>
+<section id="id1">
+<h2>示意图<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p><img alt="" src="../_images/interface_basic2_to_fpga.png" /></p>
 <ul class="simple">
-<li><p>在Basic2版本中，<code class="docutils literal notranslate"><span class="pre">5V</span></code>脚与<code class="docutils literal notranslate"><span class="pre">USB5V</span></code>直通，无输出保险丝、无PMOS控制</p></li>
-<li><p>调试器可从<code class="docutils literal notranslate"><span class="pre">5V</span></code>脚获得电源输入，推荐电压<code class="docutils literal notranslate"><span class="pre">3.7V-5.5V</span></code>；若只有更低电压如<code class="docutils literal notranslate"><span class="pre">3.3V</span></code>时，需保证电源输出能力及连接线的质量</p></li>
+<li><p>从左到右依次为：</p>
+<ol class="arabic simple">
+<li><p>DC3母座，接上Vllink Basic2调试器</p></li>
+<li><p>10P 2.00 JTAG牛角座</p></li>
+<li><p>10P 2.54 JTAG牛角座</p></li>
+<li><p>14P 2.54 JTAG牛角座</p></li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="id2">
+<h2>原理图<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p><img alt="" src="../_images/interface_basic2_to_fpga.sch.png" /></p>
+<ul class="simple">
+<li><p>原则上，在作为FPGA下载器使用时，务必先将VRef调整至<code class="docutils literal notranslate"><span class="pre">0V</span></code>即外部参考电压模式</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>全套设计文件<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/141cf642e5af5a218a1c58c8e4c35907/interface_basic2_to_fpga.zip"><span class="xref download myst">interface_basic2_to_fpga.zip</span></a></p></li>
 </ul>
 </section>
 </section>
@@ -116,8 +138,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="vllink_basic_vout.html" class="btn btn-neutral float-left" title="Vout口使用说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="vllink_basic2_vref.html" class="btn btn-neutral float-right" title="VRef口使用说明" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="vllink_basic2_vref.html" class="btn btn-neutral float-left" title="VRef口使用说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../update/vllink_basic.html" class="btn btn-neutral float-right" title="Vllink Basic 固件更新" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
