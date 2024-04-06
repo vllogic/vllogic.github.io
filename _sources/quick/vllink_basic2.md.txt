@@ -94,3 +94,6 @@
 ## 进阶使用
 ### FPGA下载器
 * [转接板资料](../hardware/vllink_basic2_to_fpga.md)
+
+## 其他
+* [A4上手指南](../_static/dosc/vllink_basic2.A4上手指南.pdf)
