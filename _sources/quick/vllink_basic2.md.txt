@@ -81,6 +81,8 @@
 ## 常见问题
 1. * 问：设备管理器内能发现`CMSIS-DAP V2`设备，但是软件却无法访问
    * 答：在设备管理器内，右击`CMSIS-DAP V2`设备，卸载设备，然后重新连接一次即可解决
+2. * 问：Keil内`Reset and Run`功能无效，即按`F8`下载程序后，程序未自动运行
+   * 答：在`Debug`-`CMSIS-DAP - JTAG/SW Adapter`中，选定`CMSIS-DAP v2`即可解决
 
 ## 开发工具使用说明
 * [Windows7 驱动安装](../software/windows7_driver.md)
