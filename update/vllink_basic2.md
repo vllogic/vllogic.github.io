@@ -11,5 +11,5 @@
 ## 固件列表
 * [V00.02-202404101533](../_static/firmware/vllink_basic2.SVCommon0002202404101533.zip)
   1. 修复：Keil下，V1接口的`Reset and Run`功能无效
-  2. 支持：京微齐力开发环境支持
+  2. 新增：京微齐力开发环境支持，需转接板以及目前尚未发布的内部版开发环境
 * [V00.01-202403261341](../_static/firmware/vllink_basic2.SVCommon0001202403261341.zip)
