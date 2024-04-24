@@ -17,8 +17,9 @@ QQ群：791104674
 * IAR，>=7.40.2，CMSIS-DAP V2接口
 * Keil，任意版本，CMSIS-DAP V1接口
 * Keil，>=5.36，CMSIS-DAP V2接口
+* Segger J-Flash，==V7.22B，CMSIS-DAP V1接口，擦写需License
 * Segger Embedded Studio，CMSIS-DAP V1接口
-* Segger J-Flash，==V7.22B，CMSIS-DAP V1接口
+* Segger Ozone，==V3.24 32Bit，CMSIS-DAP V1接口
 * OpenOCD
 * PyOCD
 * Probe RS
