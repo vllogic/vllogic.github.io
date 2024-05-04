@@ -65,7 +65,11 @@
 <li class="toctree-l1"><a class="reference internal" href="openocd.html">OpenOCD 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pyocd.html">PyOCD 使用说明</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">FreeMASTER 使用说明</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#cmsis-dap-v1cmsis-dap-v1">截止20230405，此软件仅支持CMSIS-DAP V1接口。需要使用带有CMSIS-DAP V1接口的固件：</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cmsis-dap-v1cmsis-dap-v1">截止20230405，此软件仅支持CMSIS-DAP V1接口。需要使用带有CMSIS-DAP V1接口的固件：</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vllink-basic">Vllink Basic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vllink-basic2">Vllink Basic2</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#id1">配置方式</a></li>
 </ul>
 </li>
@@ -106,11 +110,20 @@
 <h1>FreeMASTER 使用说明<a class="headerlink" href="#freemaster" title="Permalink to this heading"></a></h1>
 <section id="cmsis-dap-v1cmsis-dap-v1">
 <h2>截止20230405，此软件仅支持CMSIS-DAP V1接口。需要使用带有CMSIS-DAP V1接口的固件：<a class="headerlink" href="#cmsis-dap-v1cmsis-dap-v1" title="Permalink to this heading"></a></h2>
-<p><em>注：Basic2出厂固件自带V1接口，无需切换固件</em></p>
+<section id="vllink-basic">
+<h3>Vllink Basic<a class="headerlink" href="#vllink-basic" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="../update/vllink_basic.html"><span class="doc std std-doc">下载页面</span></a></p></li>
 <li><p>可仅升级主机端硬件（即连接电脑的那个）</p></li>
 </ul>
+</section>
+<section id="vllink-basic2">
+<h3>Vllink Basic2<a class="headerlink" href="#vllink-basic2" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>若固件版本小于V0.08，直接支持</p></li>
+<li><p>若固件版本不小于V0.08，需配置<code class="docutils literal notranslate"><span class="pre">AS_ARM_MBED=enable</span></code>并重新上电，<a class="reference external" href="https://vllogic.com/_static/tools/web_config_basic2/">配置工具</a></p></li>
+</ul>
+</section>
 </section>
 <section id="id1">
 <h2>配置方式<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
