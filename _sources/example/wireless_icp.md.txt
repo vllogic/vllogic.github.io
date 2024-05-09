@@ -36,7 +36,7 @@
 4. 目录下，Shift + 鼠标右键，打开PowerShell
 5. 执行命令：
    ```
-   ./openocd -f interface/cmsis-dap.cfg -s ../scripts -f target/at32f403xG.cfg -c "transport select swd; program test128k.bin verify exit 0x08000000"
+   ./openocd -s ../scripts -f interface/cmsis-dap.cfg -f target/at32f403xG.cfg -c "transport select swd; program test128k.bin verify exit 0x08000000"
    ```
 6. 输出如下：
    ```
