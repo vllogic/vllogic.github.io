@@ -78,6 +78,12 @@ QQ群：791104674
    software/hercuels_command.md
    software/tools.md
 
+.. toctree::
+   :maxdepth: 1
+   :caption: 应用实例
+   
+   example/wireless_icp.md
+
 ===================================
 
 .. toctree::

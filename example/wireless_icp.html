@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>无线ICP（在电路编程） &mdash; Vllogic  文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="文档维护" href="../readme.html" />
+    <link rel="prev" title="在线工具" href="../software/tools.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Vllogic
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic.html">Vllink Basic 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic2.html">Vllink Basic2 快速上手</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic_vout.html">Vout口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_5v.html">5V口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_vref.html">VRef口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_to_fpga.html">Vllink Basic2配套FPGA接口转接板</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic.html">Vllink Basic 固件更新</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic2.html">Vllink Basic2 固件更新</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software/windows7_driver.html">Windows7 驱动安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/iar.html">IAR 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/keil_mdk.html">Keil MDK 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/probe_rs.html">Probe RS 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/openocd.html">OpenOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/pyocd.html">PyOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/freemaster.html">FreeMASTER 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/segger_embedded_studio.html">Segger Embedded Studio 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/hercuels_command.html">Hercules 命令说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/tools.html">在线工具</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">应用实例</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">无线ICP（在电路编程）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">引言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">硬件连接</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">编程软件准备</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">无线ICP过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">补充</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">文档维护</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Vllogic</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>无线ICP（在电路编程）</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/example/wireless_icp.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="icp">
+<h1>无线ICP（在电路编程）<a class="headerlink" href="#icp" title="Permalink to this heading"></a></h1>
+<p><strong><code class="docutils literal notranslate"><span class="pre">版权声明：转载需注明来自于</span> <span class="pre">vllogic.com</span> </code></strong></p>
+<section id="id1">
+<h2>引言<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>在工业现场维护工作中，可能出现固件更新需求，如果没有在开发阶段准备<code class="docutils literal notranslate"><span class="pre">IAP</span></code>/<code class="docutils literal notranslate"><span class="pre">OTA</span></code>接口，就只能通过芯片厂预留的<code class="docutils literal notranslate"><span class="pre">ICP</span></code>/<code class="docutils literal notranslate"><span class="pre">ISP</span></code>接口进行更新。</p></li>
+<li><p>考虑到工业现场常常空间受限，环境不佳，通过<code class="docutils literal notranslate"><span class="pre">Vllink</span></code>系列无线调试器可降低维护工作强度，在预留接口的情况下，仅需接上远端调试器即可完成目标板与计算机的连接。</p></li>
+<li><p>本文将以<code class="docutils literal notranslate"><span class="pre">AT32F403AxG</span></code>为例，阐述无线ICP过程。</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>硬件连接<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<ul>
+<li><p>推荐使用<code class="docutils literal notranslate"><span class="pre">3.7V-5.2V</span></code>为远端调试器供电</p></li>
+<li><p>若仅有<code class="docutils literal notranslate"><span class="pre">3.3V</span></code>，其来源务必为DCDC或输出能力大于500mA的大电流大封装LDO，且<code class="docutils literal notranslate"><span class="pre">5V</span></code>及<code class="docutils literal notranslate"><span class="pre">GND</span></code>需用高质量连接线</p></li>
+<li><p>目标板接线
+<img alt="" src="../_images/wireless_icp_at32f403a.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>如上图所示，进行了如下连接：
+远端 ---  AT32F403A
+5V   ---  5V
+GND  ---  GND
+TMS  ---  SWDIO
+TCK  ---  SWCLK
+VRef ---  3V3
+</pre></div>
+</div>
+</li>
+<li><p>计算机端，将另一个黑尾调试器通过USB接上即可</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>编程软件准备<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>通过搜索发现雅特力提供了<a class="reference external" href="https://github.com/ArteryTek/openocd">定制OpenOCD</a></p></li>
+<li><p>但其最新<a class="reference external" href="https://github.com/ArteryTek/openocd/actions/runs/7520365309">Actions</a>中的Artifacts已无法下载</p></li>
+<li><p>这种情况可以通过Fork，手动触发一次构建</p></li>
+<li><p>本人Fork后构建的<a class="reference external" href="https://github.com/vllogic/ArteryTek_openocd/releases/tag/20240509">二进制 xpack.zip</a></p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>无线ICP过程<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<ol class="arabic">
+<li><p>下载上文中的二进制包，解压后，进入<code class="docutils literal notranslate"><span class="pre">xpack\bin-windows_amd64</span></code>目录</p></li>
+<li><p>本人无AT32F403A工程，故通过HxD工具生成了一份128KB的随机数据Bin文件测试</p></li>
+<li><p>将测试文件<code class="docutils literal notranslate"><span class="pre">test128k.bin</span></code>拷贝至<code class="docutils literal notranslate"><span class="pre">xpack\bin-windows_amd64</span></code>目录</p></li>
+<li><p>目录下，Shift + 鼠标右键，打开PowerShell</p></li>
+<li><p>执行命令：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">openocd</span> <span class="o">-</span><span class="n">f</span> <span class="n">interface</span><span class="o">/</span><span class="n">cmsis</span><span class="o">-</span><span class="n">dap</span><span class="o">.</span><span class="n">cfg</span> <span class="o">-</span><span class="n">s</span> <span class="o">../</span><span class="n">scripts</span> <span class="o">-</span><span class="n">f</span> <span class="n">target</span><span class="o">/</span><span class="n">at32f403xG</span><span class="o">.</span><span class="n">cfg</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;transport select swd; program test128k.bin verify exit 0x08000000&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>输出如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Open</span> <span class="n">On</span><span class="o">-</span><span class="n">Chip</span> <span class="n">Debugger</span> <span class="mf">0.11.0</span><span class="o">+</span><span class="n">dev</span><span class="o">-</span><span class="n">g03c994a</span><span class="o">-</span><span class="n">dirty</span> <span class="p">(</span><span class="mi">2024</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">02</span><span class="p">:</span><span class="mi">56</span><span class="p">)</span>
+<span class="n">Licensed</span> <span class="n">under</span> <span class="n">GNU</span> <span class="n">GPL</span> <span class="n">v2</span>
+<span class="n">For</span> <span class="n">bug</span> <span class="n">reports</span><span class="p">,</span> <span class="n">read</span>
+      <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">openocd</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">doc</span><span class="o">/</span><span class="n">doxygen</span><span class="o">/</span><span class="n">bugs</span><span class="o">.</span><span class="n">html</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">auto</span><span class="o">-</span><span class="n">selecting</span> <span class="n">first</span> <span class="n">available</span> <span class="n">session</span> <span class="n">transport</span> <span class="s2">&quot;swd&quot;</span><span class="o">.</span> <span class="n">To</span> <span class="n">override</span> <span class="n">use</span> <span class="s1">&#39;transport select &lt;transport&gt;&#39;</span><span class="o">.</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">flash</span> <span class="n">reg</span> <span class="n">address</span><span class="p">:</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">usd</span> <span class="n">addr</span><span class="p">:</span>  <span class="mh">0x0</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">flash</span> <span class="n">reg</span> <span class="n">address</span><span class="p">:</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">usd</span> <span class="n">addr</span><span class="p">:</span>  <span class="mh">0x0</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">DEPRECATED</span> <span class="n">target</span> <span class="n">event</span> <span class="n">trace</span><span class="o">-</span><span class="n">config</span><span class="p">;</span> <span class="n">use</span> <span class="n">TPIU</span> <span class="n">events</span> <span class="p">{</span><span class="n">pre</span><span class="p">,</span><span class="n">post</span><span class="p">}</span><span class="o">-</span><span class="p">{</span><span class="n">enable</span><span class="p">,</span><span class="n">disable</span><span class="p">}</span>
+<span class="n">Warn</span> <span class="p">:</span> <span class="n">Transport</span> <span class="s2">&quot;swd&quot;</span> <span class="n">was</span> <span class="n">already</span> <span class="n">selected</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">Using</span> <span class="n">CMSIS</span><span class="o">-</span><span class="n">DAPv2</span> <span class="n">interface</span> <span class="k">with</span> <span class="n">VID</span><span class="p">:</span><span class="n">PID</span><span class="o">=</span><span class="mh">0x1209</span><span class="p">:</span><span class="mh">0x6666</span><span class="p">,</span> <span class="n">serial</span><span class="o">=</span><span class="n">Vllink</span><span class="o">.</span><span class="n">Basic2</span><span class="mf">.5</span><span class="n">DEA1FD276</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">CMSIS</span><span class="o">-</span><span class="n">DAP</span><span class="p">:</span> <span class="n">SWD</span> <span class="n">supported</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">CMSIS</span><span class="o">-</span><span class="n">DAP</span><span class="p">:</span> <span class="n">JTAG</span> <span class="n">supported</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">CMSIS</span><span class="o">-</span><span class="n">DAP</span><span class="p">:</span> <span class="n">SWO</span><span class="o">-</span><span class="n">UART</span> <span class="n">supported</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">CMSIS</span><span class="o">-</span><span class="n">DAP</span><span class="p">:</span> <span class="n">Atomic</span> <span class="n">commands</span> <span class="n">supported</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">CMSIS</span><span class="o">-</span><span class="n">DAP</span><span class="p">:</span> <span class="n">Test</span> <span class="n">domain</span> <span class="n">timer</span> <span class="n">supported</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">CMSIS</span><span class="o">-</span><span class="n">DAP</span><span class="p">:</span> <span class="n">FW</span> <span class="n">Version</span> <span class="o">=</span> <span class="mi">0254</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">CMSIS</span><span class="o">-</span><span class="n">DAP</span><span class="p">:</span> <span class="n">Serial</span><span class="c1"># = Vllink.Basic2.B2B0A8AF76</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">CMSIS</span><span class="o">-</span><span class="n">DAP</span><span class="p">:</span> <span class="n">Interface</span> <span class="n">Initialised</span> <span class="p">(</span><span class="n">SWD</span><span class="p">)</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">SWCLK</span><span class="o">/</span><span class="n">TCK</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">SWDIO</span><span class="o">/</span><span class="n">TMS</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">TDI</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">TDO</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">nTRST</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">nRESET</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">CMSIS</span><span class="o">-</span><span class="n">DAP</span><span class="p">:</span> <span class="n">Interface</span> <span class="n">ready</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">clock</span> <span class="n">speed</span> <span class="mi">5000</span> <span class="n">kHz</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">SWD</span> <span class="n">DPIDR</span> <span class="mh">0x2ba01477</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="p">[</span><span class="n">at32f403xx</span><span class="o">.</span><span class="n">cpu</span><span class="p">]</span> <span class="n">Cortex</span><span class="o">-</span><span class="n">M4</span> <span class="n">r0p1</span> <span class="n">processor</span> <span class="n">detected</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="p">[</span><span class="n">at32f403xx</span><span class="o">.</span><span class="n">cpu</span><span class="p">]</span> <span class="n">target</span> <span class="n">has</span> <span class="mi">6</span> <span class="n">breakpoints</span><span class="p">,</span> <span class="mi">4</span> <span class="n">watchpoints</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">starting</span> <span class="n">gdb</span> <span class="n">server</span> <span class="k">for</span> <span class="n">at32f403xx</span><span class="o">.</span><span class="n">cpu</span> <span class="n">on</span> <span class="mi">3333</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">Listening</span> <span class="n">on</span> <span class="n">port</span> <span class="mi">3333</span> <span class="k">for</span> <span class="n">gdb</span> <span class="n">connections</span>
+<span class="n">target</span> <span class="n">halted</span> <span class="n">due</span> <span class="n">to</span> <span class="n">debug</span><span class="o">-</span><span class="n">request</span><span class="p">,</span> <span class="n">current</span> <span class="n">mode</span><span class="p">:</span> <span class="n">Thread</span>
+<span class="n">xPSR</span><span class="p">:</span> <span class="mh">0x01000000</span> <span class="n">pc</span><span class="p">:</span> <span class="mh">0xf6440d32</span> <span class="n">msp</span><span class="p">:</span> <span class="mh">0xabefe7b0</span>
+<span class="o">**</span> <span class="n">Programming</span> <span class="n">Started</span> <span class="o">**</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">target</span> <span class="n">at32f403axx</span> <span class="n">algorithm</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">main</span> <span class="n">flash</span> <span class="n">size</span><span class="p">:</span> <span class="mh">0x100000</span><span class="p">,</span> <span class="n">sector</span> <span class="n">num</span><span class="p">:</span>  <span class="mh">0x100</span><span class="p">,</span> <span class="n">sector</span> <span class="n">size</span><span class="p">:</span> <span class="mh">0x800</span><span class="p">,</span>  <span class="n">bank</span> <span class="n">size</span><span class="p">:</span> <span class="mh">0x80000</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">target</span> <span class="n">at32f403axx</span> <span class="n">algorithm</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">main</span> <span class="n">flash</span> <span class="n">size</span><span class="p">:</span> <span class="mh">0x100000</span><span class="p">,</span> <span class="n">sector</span> <span class="n">num</span><span class="p">:</span>  <span class="mh">0x100</span><span class="p">,</span> <span class="n">sector</span> <span class="n">size</span><span class="p">:</span> <span class="mh">0x800</span><span class="p">,</span>  <span class="n">bank</span> <span class="n">size</span><span class="p">:</span> <span class="mh">0x80000</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">target</span> <span class="n">at32f403axx</span> <span class="n">algorithm</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">main</span> <span class="n">flash</span> <span class="n">size</span><span class="p">:</span> <span class="mh">0x100000</span><span class="p">,</span> <span class="n">sector</span> <span class="n">num</span><span class="p">:</span>  <span class="mh">0x100</span><span class="p">,</span> <span class="n">sector</span> <span class="n">size</span><span class="p">:</span> <span class="mh">0x800</span><span class="p">,</span>  <span class="n">bank</span> <span class="n">size</span><span class="p">:</span> <span class="mh">0x80000</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">Earse</span> <span class="n">first</span> <span class="n">sector</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">last</span> <span class="n">sector</span> <span class="o">=</span> <span class="mh">0x3f</span>
+<span class="n">Info</span> <span class="p">:</span> <span class="n">Write</span> <span class="n">address</span> <span class="o">=</span> <span class="mh">0x8000000</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="mh">0x20000</span>
+<span class="o">**</span> <span class="n">Programming</span> <span class="n">Finished</span> <span class="o">**</span>
+<span class="o">**</span> <span class="n">Verify</span> <span class="n">Started</span> <span class="o">**</span>
+<span class="o">**</span> <span class="n">Verified</span> <span class="n">OK</span> <span class="o">**</span>
+<span class="n">shutdown</span> <span class="n">command</span> <span class="n">invoked</span>
+</pre></div>
+</div>
+</li>
+<li><p>擦除、写入、校验耗时12.7秒，观察到<code class="docutils literal notranslate"><span class="pre">Verified</span> <span class="pre">OK</span></code>，ICP更新成功</p></li>
+<li><p>OpenOCD更多信息可参看<a class="reference external" href="https://openocd.org/doc/html/index.html">OpenOCD User’s Guide</a>及<a class="reference external" href="https://openocd.org/doc/html/Flash-Commands.html#program">Flash-Commands.html#program</a>。</p></li>
+</ol>
+</section>
+<section id="id5">
+<h2>补充<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>对于批量ICP操作，可通过脚本周期性探测目标芯片，在探测成功后执行ICP命令，实现自动化</p></li>
+<li><p>此方案亦可用于现场调试，配合任何支持<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">V1/V2</span></code>协议的调试软件</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../software/tools.html" class="btn btn-neutral float-left" title="在线工具" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../readme.html" class="btn btn-neutral float-right" title="文档维护" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022, Vllogic.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
