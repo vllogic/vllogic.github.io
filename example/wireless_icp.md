@@ -27,20 +27,20 @@
 * 通过搜索发现雅特力提供了[定制OpenOCD](https://github.com/ArteryTek/openocd)
 * 但其最新[Actions](https://github.com/ArteryTek/openocd/actions/runs/7520365309)中的Artifacts已无法下载
 * 这种情况可以通过Fork，手动触发一次构建
-* 本人Fork后构建的[二进制](https://github.com/vllogic/ArteryTek_openocd/releases/tag/20240509)
+* 本人Fork后构建的[二进制 xpack.zip](https://github.com/vllogic/ArteryTek_openocd/releases/tag/20240509)
 
 ## 无线ICP过程
-1. 下载上文中的二进制包，解压后，进入`openocd-windows-x64\bin`目录
+1. 下载上文中的二进制包，解压后，进入`xpack\bin-windows_amd64`目录
 2. 本人无AT32F403A工程，故通过HxD工具生成了一份128KB的随机数据Bin文件测试
-3. 将测试文件`test128k.bin`拷贝至`openocd-windows-x64\bin`目录
+3. 将测试文件`test128k.bin`拷贝至`xpack\bin-windows_amd64`目录
 4. 目录下，Shift + 鼠标右键，打开PowerShell
 5. 执行命令：
    ```
-   ./openocd -f interface/cmsis-dap.cfg -f target/at32f403xG.cfg -c "transport select swd; program test128k.bin verify exit 0x08000000"
+   ./openocd -f interface/cmsis-dap.cfg -s ../scripts -f target/at32f403xG.cfg -c "transport select swd; program test128k.bin verify exit 0x08000000"
    ```
 6. 输出如下：
    ```
-   Open On-Chip Debugger 0.11.0+dev-g66740f9-dirty (2024-05-08-23:53)
+   Open On-Chip Debugger 0.11.0+dev-g03c994a-dirty (2024-05-09-02:56)
    Licensed under GNU GPL v2
    For bug reports, read
          http://openocd.org/doc/doxygen/bugs.html
@@ -64,14 +64,10 @@
    Info : SWD DPIDR 0x2ba01477
    Info : [at32f403xx.cpu] Cortex-M4 r0p1 processor detected
    Info : [at32f403xx.cpu] target has 6 breakpoints, 4 watchpoints
-   DEPRECATED! use 'read_memory' not 'mem2array'
-   Warn : DEPRECATED! (C:/Users/talpa/AppData/Roaming/OpenOCD/mem_helper.tcl:37) use 'expr { (0x307 & ~0) | 0x00000307 }' not 'expr (0x307 & ~0) | 0x00000307'
    Info : starting gdb server for at32f403xx.cpu on 3333
    Info : Listening on port 3333 for gdb connections
-   DEPRECATED! use 'read_memory' not 'mem2array'
-   Warn : DEPRECATED! (C:/Users/talpa/AppData/Roaming/OpenOCD/mem_helper.tcl:37) use 'expr { (0x307 & ~0) | 0x00000307 }' not 'expr (0x307 & ~0) | 0x00000307'
    target halted due to debug-request, current mode: Thread
-   xPSR: 0x01000000 pc: 0x080001f8 msp: 0x200006a0
+   xPSR: 0x01000000 pc: 0xf6440d32 msp: 0xabefe7b0
    ** Programming Started **
    Info : This is target at32f403axx algorithm
    Info : main flash size: 0x100000, sector num:  0x100, sector size: 0x800,  bank size: 0x80000
@@ -86,7 +82,7 @@
    ** Verified OK **
    shutdown command invoked
    ```
-7. 观察到`Verified OK`，ICP更新成功
+7. 擦除、写入、校验耗时12.7秒，观察到`Verified OK`，ICP更新成功
 8. OpenOCD更多信息可参看[OpenOCD User’s Guide](https://openocd.org/doc/html/index.html)及[Flash-Commands.html#program](https://openocd.org/doc/html/Flash-Commands.html#program)。
 
 ## 补充
