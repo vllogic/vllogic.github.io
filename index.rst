@@ -9,7 +9,7 @@ Github：https://github.com/vllogic
 
 Discussions：https://github.com/vllogic/vllogic.github.io/discussions
 
-QQ群：791104674
+客户支持QQ群：791104674
 
 支持的开发平台
 ----------------------------
@@ -23,7 +23,8 @@ QQ群：791104674
 * OpenOCD
 * PyOCD
 * Probe RS
-* FreeMASTER，CMSIS-DAP V1接口
+* FreeMASTER，CMSIS-DAP V1接口，Basic2需配置“AS_ARM_MBED=enable”
+* STM32CubeIDE，ST-LINK(OpenOCD)模式
 
 快速上手
 ----------------------------
