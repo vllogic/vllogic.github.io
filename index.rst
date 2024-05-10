@@ -13,16 +13,16 @@ Discussions：https://github.com/vllogic/vllogic.github.io/discussions
 
 支持的开发平台
 ----------------------------
+* OpenOCD
+* PyOCD
+* Probe RS
 * IAR，任意版本，CMSIS-DAP V1接口
 * IAR，>=7.40.2，CMSIS-DAP V2接口
 * Keil，任意版本，CMSIS-DAP V1接口
 * Keil，>=5.36，CMSIS-DAP V2接口
 * Segger J-Flash，==V7.22B，CMSIS-DAP V1接口，擦写需License
-* Segger Embedded Studio，CMSIS-DAP V1接口
+* Segger Embedded Studio，新版已支持V2，但仍推荐使用V1接口
 * Segger Ozone，==V3.24 32Bit，CMSIS-DAP V1接口
-* OpenOCD
-* PyOCD
-* Probe RS
 * FreeMASTER，CMSIS-DAP V1接口，Basic2需配置“AS_ARM_MBED=enable”
 * STM32CubeIDE，ST-LINK(OpenOCD)模式
 
