@@ -9,7 +9,7 @@
 
 
 ## 固件列表
-* [V00.08-202405042213](../_static/firmware/vllink_basic2.SVCommon0008202405042213.zip)
+* [V00.09-202405111212](../_static/firmware/vllink_basic2.SVCommon0009202405111212.zip)
   1. 优化：串口缓冲深度从1.5KB提高到8.5KB
   2. 新增：长按按键5秒，将强制切换至有线模式，此功能用于恢复配置能力
   3. 调整：默认不再作为`ARM MBED`设备，如需支持`FreeMASTER`，需配置`AS_ARM_MBED=enable`并重新上电
