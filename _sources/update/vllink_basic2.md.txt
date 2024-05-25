@@ -7,9 +7,8 @@
 4. 在`Firmware Update`栏目中选中解压得到.bin文件
 5. 点击`Update`，等待一段时间后，完成更新。
 
-
 ## 固件列表
-* [V00.10-202405181648](../_static/firmware/vllink_basic2.SVCommon0010202405181648.zip)
+* [V00.11-202405251256](../_static/firmware/vllink_basic2.SVCommon0011202405251256.zip)
   1. 优化：提升STA重连可靠性
   2. 调整：移除"36, 40, 44, 48, 149, 153, 157, 161, 165"之外的无效信道
 * [V00.09-202405111212](../_static/firmware/vllink_basic2.SVCommon0009202405111212.zip)
