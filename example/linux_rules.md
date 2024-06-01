@@ -1,7 +1,7 @@
 # Linux下非root用户授权
 
-## 未授权时
-### 1. 访问CMSIS-DAP接口
+## 一、未授权时
+#### 1. 访问CMSIS-DAP接口
 ```
 $ openocd -f interface/cmsis-dap.cfg
 Open On-Chip Debugger 0.12.0
@@ -15,16 +15,16 @@ Warn : To remove this warnings and achieve reasonable communication speed with t
 Error: unable to open CMSIS-DAP device 0x1209:0x6666
 Error: unable to find a matching CMSIS-DAP device
 ```
-### 2. 访问串口
+#### 2. 访问串口
 ```
 $ stty -F /dev/ttyACM0
 stty: /dev/ttyACM0: Permission denied
 ```
 
-## 授权步骤
-### 1. 导入rules文件
+## 二、授权步骤
+#### 1. 导入rules文件
 `sudo curl -o /etc/udev/rules.d/99-vllogic.rules https://vllogic.com/_downloads/b2561fe9dace99376b4ef5416880abc4/99-vllogic.rules`
-### 2. 查看其中规则
+#### 2. 查看其中规则
 ```
 cat /etc/udev/rules.d/99-vllogic.rules
 #
@@ -42,15 +42,15 @@ KERNEL=="ttyACM[0-9]*", MODE="666"
 
 LABEL="vllogic_rules_end"
 ```
-### 3. 重载规则
+#### 3. 重载规则
 * `sudo udevadm control --reload-rules`
 * `sudo udevadm trigger`
-### 4. 如果调试器已接入系统，需重插拔一次
-### 上述操作中用到的文件
+#### 4. 如果调试器已接入系统，需重插拔一次
+#### 上述操作中用到的文件
 * [99-vllogic.rules](../_static/docs/99-vllogic.rules)
 
-## 授权后
-### 1. 访问CMSIS-DAP接口
+## 三、授权后
+#### 1. 访问CMSIS-DAP接口
 ```
 $ openocd -f interface/cmsis-dap.cfg
 Open On-Chip Debugger 0.12.0
@@ -78,7 +78,7 @@ Error: Transports available:
 Error: swd
 Error: jtag
 ```
-### 2. 访问串口
+#### 2. 访问串口
 ```
 $ stty -F /dev/ttyACM0
 speed 9600 baud; line = 0;
