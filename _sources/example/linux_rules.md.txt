@@ -37,7 +37,7 @@ $ cat /etc/udev/rules.d/99-vllogic.rules
 ACTION!="add", SUBSYSTEM!="usb_device", GOTO="vllogic_rules_end"
 
 SUBSYSTEM=="usb", ATTR{idVendor}=="1209", ATTR{idProduct}=="6666", MODE="666"
-SUBSYSTEM=="usb", ATTR{idVendor}=="0D28", ATTR{idProduct}=="0204", MODE="666"
+SUBSYSTEM=="usb", ATTR{idVendor}=="0d28", ATTR{idProduct}=="0204", MODE="666"
 
 KERNEL=="ttyACM[0-9]*", MODE="666"
 
