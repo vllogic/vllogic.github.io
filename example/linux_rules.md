@@ -30,7 +30,8 @@ $ cat /etc/udev/rules.d/99-vllogic.rules
 #
 #   Step 1: copy to /etc/udev/rules.d/99-vlloigc.rules
 #   Step 2: "sudo udevadm control --reload-rules"
-#   Step 3: unplug your device and plug it back in
+#   Step 3: "sudo udevadm trigger"
+#   Step 4: unplug your device and plug it back in
 #
 
 ACTION!="add", SUBSYSTEM!="usb_device", GOTO="vllogic_rules_end"
