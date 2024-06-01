@@ -79,10 +79,18 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#id3">授权步骤</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id4">用到的文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rules">1. 导入rules文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2. 查看其中规则</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">3. 重载规则</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">4. 如果调试器已接入系统，需重插拔一次</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">上述操作中用到的文件</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id5">授权后</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">授权后</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">1. 访问CMSIS-DAP接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">2. 访问串口</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -145,15 +153,87 @@ stty: /dev/ttyACM0: Permission denied
 </section>
 <section id="id3">
 <h2>授权步骤<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<section id="rules">
+<h3>1. 导入rules文件<a class="headerlink" href="#rules" title="Permalink to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">curl</span> <span class="pre">-o</span> <span class="pre">/etc/udev/rules.d/99-vllogic.rules</span> <span class="pre">https://vllogic.com/_downloads/b2561fe9dace99376b4ef5416880abc4/99-vllogic.rules</span></code></p>
+</section>
 <section id="id4">
-<h3>用到的文件<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<h3>2. 查看其中规则<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">udev</span><span class="o">/</span><span class="n">rules</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">99</span><span class="o">-</span><span class="n">vllogic</span><span class="o">.</span><span class="n">rules</span>
+<span class="c1">#</span>
+<span class="c1">#   Step 1: copy to /etc/udev/rules.d/99-vlloigc.rules</span>
+<span class="c1">#   Step 2: &quot;sudo udevadm control --reload-rules&quot;</span>
+<span class="c1">#   Step 3: unplug your device and plug it back in</span>
+<span class="c1">#</span>
+
+<span class="n">ACTION</span><span class="o">!=</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">SUBSYSTEM</span><span class="o">!=</span><span class="s2">&quot;usb_device&quot;</span><span class="p">,</span> <span class="n">GOTO</span><span class="o">=</span><span class="s2">&quot;vllogic_rules_end&quot;</span>
+
+<span class="n">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;usb&quot;</span><span class="p">,</span> <span class="n">ATTR</span><span class="p">{</span><span class="n">idVendor</span><span class="p">}</span><span class="o">==</span><span class="s2">&quot;1209&quot;</span><span class="p">,</span> <span class="n">ATTR</span><span class="p">{</span><span class="n">idProduct</span><span class="p">}</span><span class="o">==</span><span class="s2">&quot;6666&quot;</span><span class="p">,</span> <span class="n">MODE</span><span class="o">=</span><span class="s2">&quot;666&quot;</span>
+<span class="n">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;usb&quot;</span><span class="p">,</span> <span class="n">ATTR</span><span class="p">{</span><span class="n">idVendor</span><span class="p">}</span><span class="o">==</span><span class="s2">&quot;0D28&quot;</span><span class="p">,</span> <span class="n">ATTR</span><span class="p">{</span><span class="n">idProduct</span><span class="p">}</span><span class="o">==</span><span class="s2">&quot;0204&quot;</span><span class="p">,</span> <span class="n">MODE</span><span class="o">=</span><span class="s2">&quot;666&quot;</span>
+
+<span class="n">KERNEL</span><span class="o">==</span><span class="s2">&quot;ttyACM[0-9]*&quot;</span><span class="p">,</span> <span class="n">MODE</span><span class="o">=</span><span class="s2">&quot;666&quot;</span>
+
+<span class="n">LABEL</span><span class="o">=</span><span class="s2">&quot;vllogic_rules_end&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3>3. 重载规则<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">udevadm</span> <span class="pre">control</span> <span class="pre">--reload-rules</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">udevadm</span> <span class="pre">trigger</span></code></p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>4. 如果调试器已接入系统，需重插拔一次<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+</section>
+<section id="id7">
+<h3>上述操作中用到的文件<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference download internal" download="" href="../_downloads/b2561fe9dace99376b4ef5416880abc4/99-vllogic.rules"><span class="xref download myst">99-vllogic.rules</span></a></p></li>
 </ul>
 </section>
 </section>
-<section id="id5">
-<h2>授权后<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<section id="id8">
+<h2>授权后<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
+<section id="id9">
+<h3>1. 访问CMSIS-DAP接口<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ openocd -f interface/cmsis-dap.cfg
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+Info : Listening on port 6666 for tcl connections
+Info : Listening on port 4444 for telnet connections
+Warn : An adapter speed is not selected in the init scripts. OpenOCD will try to run the adapter at the low speed (100 kHz)
+Warn : To remove this warnings and achieve reasonable communication speed with the target, set &quot;adapter speed&quot; or &quot;jtag_rclk&quot; in the init scripts.
+Info : Using CMSIS-DAPv2 interface with VID:PID=0x1209:0x6666, serial=Vllink.Basic2.B585361C76
+Info : CMSIS-DAP: SWD supported
+Info : CMSIS-DAP: JTAG supported
+Info : CMSIS-DAP: SWO-UART supported
+Info : CMSIS-DAP: Atomic commands supported
+Info : CMSIS-DAP: Test domain timer supported
+Info : CMSIS-DAP: FW Version = 0254
+Info : CMSIS-DAP: Serial# = Vllink.Basic2.B585361C76
+Info : CMSIS-DAP: Interface Initialised (JTAG)
+Info : SWCLK/TCK = 0 SWDIO/TMS = 0 TDI = 0 TDO = 0 nTRST = 1 nRESET = 1
+Info : CMSIS-DAP: Interface ready
+Info : clock speed 100 kHz
+Error: session transport was not selected. Use &#39;transport select &lt;transport&gt;&#39;
+Error: Transports available:
+Error: swd
+Error: jtag
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h3>2. 访问串口<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ stty -F /dev/ttyACM0
+speed 9600 baud; line = 0;
+-brkint -imaxbel
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
