@@ -84,6 +84,7 @@ Discussions：https://github.com/vllogic/vllogic.github.io/discussions
    :caption: 应用实例
    
    example/wireless_icp.md
+   example/linux_rulse.md
 
 ===================================
 
