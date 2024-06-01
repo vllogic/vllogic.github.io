@@ -163,7 +163,8 @@ stty: /dev/ttyACM0: Permission denied
 #
 #   Step 1: copy to /etc/udev/rules.d/99-vlloigc.rules
 #   Step 2: &quot;sudo udevadm control --reload-rules&quot;
-#   Step 3: unplug your device and plug it back in
+#   Step 3: &quot;sudo udevadm trigger&quot;
+#   Step 4: unplug your device and plug it back in
 #
 
 ACTION!=&quot;add&quot;, SUBSYSTEM!=&quot;usb_device&quot;, GOTO=&quot;vllogic_rules_end&quot;
