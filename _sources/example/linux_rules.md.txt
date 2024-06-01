@@ -26,7 +26,7 @@ stty: /dev/ttyACM0: Permission denied
 `sudo curl -o /etc/udev/rules.d/99-vllogic.rules https://vllogic.com/_downloads/b2561fe9dace99376b4ef5416880abc4/99-vllogic.rules`
 #### 2. 查看其中规则
 ```
-cat /etc/udev/rules.d/99-vllogic.rules
+$ cat /etc/udev/rules.d/99-vllogic.rules
 #
 #   Step 1: copy to /etc/udev/rules.d/99-vlloigc.rules
 #   Step 2: "sudo udevadm control --reload-rules"

@@ -159,21 +159,21 @@ stty: /dev/ttyACM0: Permission denied
 </section>
 <section id="id4">
 <h3>2. 查看其中规则<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">udev</span><span class="o">/</span><span class="n">rules</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">99</span><span class="o">-</span><span class="n">vllogic</span><span class="o">.</span><span class="n">rules</span>
-<span class="c1">#</span>
-<span class="c1">#   Step 1: copy to /etc/udev/rules.d/99-vlloigc.rules</span>
-<span class="c1">#   Step 2: &quot;sudo udevadm control --reload-rules&quot;</span>
-<span class="c1">#   Step 3: unplug your device and plug it back in</span>
-<span class="c1">#</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat /etc/udev/rules.d/99-vllogic.rules
+#
+#   Step 1: copy to /etc/udev/rules.d/99-vlloigc.rules
+#   Step 2: &quot;sudo udevadm control --reload-rules&quot;
+#   Step 3: unplug your device and plug it back in
+#
 
-<span class="n">ACTION</span><span class="o">!=</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">SUBSYSTEM</span><span class="o">!=</span><span class="s2">&quot;usb_device&quot;</span><span class="p">,</span> <span class="n">GOTO</span><span class="o">=</span><span class="s2">&quot;vllogic_rules_end&quot;</span>
+ACTION!=&quot;add&quot;, SUBSYSTEM!=&quot;usb_device&quot;, GOTO=&quot;vllogic_rules_end&quot;
 
-<span class="n">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;usb&quot;</span><span class="p">,</span> <span class="n">ATTR</span><span class="p">{</span><span class="n">idVendor</span><span class="p">}</span><span class="o">==</span><span class="s2">&quot;1209&quot;</span><span class="p">,</span> <span class="n">ATTR</span><span class="p">{</span><span class="n">idProduct</span><span class="p">}</span><span class="o">==</span><span class="s2">&quot;6666&quot;</span><span class="p">,</span> <span class="n">MODE</span><span class="o">=</span><span class="s2">&quot;666&quot;</span>
-<span class="n">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;usb&quot;</span><span class="p">,</span> <span class="n">ATTR</span><span class="p">{</span><span class="n">idVendor</span><span class="p">}</span><span class="o">==</span><span class="s2">&quot;0D28&quot;</span><span class="p">,</span> <span class="n">ATTR</span><span class="p">{</span><span class="n">idProduct</span><span class="p">}</span><span class="o">==</span><span class="s2">&quot;0204&quot;</span><span class="p">,</span> <span class="n">MODE</span><span class="o">=</span><span class="s2">&quot;666&quot;</span>
+SUBSYSTEM==&quot;usb&quot;, ATTR{idVendor}==&quot;1209&quot;, ATTR{idProduct}==&quot;6666&quot;, MODE=&quot;666&quot;
+SUBSYSTEM==&quot;usb&quot;, ATTR{idVendor}==&quot;0D28&quot;, ATTR{idProduct}==&quot;0204&quot;, MODE=&quot;666&quot;
 
-<span class="n">KERNEL</span><span class="o">==</span><span class="s2">&quot;ttyACM[0-9]*&quot;</span><span class="p">,</span> <span class="n">MODE</span><span class="o">=</span><span class="s2">&quot;666&quot;</span>
+KERNEL==&quot;ttyACM[0-9]*&quot;, MODE=&quot;666&quot;
 
-<span class="n">LABEL</span><span class="o">=</span><span class="s2">&quot;vllogic_rules_end&quot;</span>
+LABEL=&quot;vllogic_rules_end&quot;
 </pre></div>
 </div>
 </section>
