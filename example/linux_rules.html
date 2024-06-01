@@ -73,12 +73,12 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="wireless_icp.html">无线ICP（在电路编程）</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Linux下非root用户授权</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">未授权时</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">一、未授权时</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#cmsis-dap">1. 访问CMSIS-DAP接口</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">2. 访问串口</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">授权步骤</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id3">二、授权步骤</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#rules">1. 导入rules文件</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id4">2. 查看其中规则</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id5">3. 重载规则</a></li>
@@ -86,7 +86,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id7">上述操作中用到的文件</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id8">授权后</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id8">三、授权后</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id9">1. 访问CMSIS-DAP接口</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id10">2. 访问串口</a></li>
 </ul>
@@ -126,7 +126,7 @@
   <section id="linuxroot">
 <h1>Linux下非root用户授权<a class="headerlink" href="#linuxroot" title="Permalink to this heading"></a></h1>
 <section id="id1">
-<h2>未授权时<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<h2>一、未授权时<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
 <section id="cmsis-dap">
 <h3>1. 访问CMSIS-DAP接口<a class="headerlink" href="#cmsis-dap" title="Permalink to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ openocd -f interface/cmsis-dap.cfg
@@ -152,7 +152,7 @@ stty: /dev/ttyACM0: Permission denied
 </section>
 </section>
 <section id="id3">
-<h2>授权步骤<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<h2>二、授权步骤<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
 <section id="rules">
 <h3>1. 导入rules文件<a class="headerlink" href="#rules" title="Permalink to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">curl</span> <span class="pre">-o</span> <span class="pre">/etc/udev/rules.d/99-vllogic.rules</span> <span class="pre">https://vllogic.com/_downloads/b2561fe9dace99376b4ef5416880abc4/99-vllogic.rules</span></code></p>
@@ -195,7 +195,7 @@ stty: /dev/ttyACM0: Permission denied
 </section>
 </section>
 <section id="id8">
-<h2>授权后<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
+<h2>三、授权后<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
 <section id="id9">
 <h3>1. 访问CMSIS-DAP接口<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ openocd -f interface/cmsis-dap.cfg
