@@ -9,7 +9,8 @@
 
 ## 固件列表
 * [V00.12-202406211323](../_static/firmware/vllink_basic2.SVCommon0012202406211323.zip)
-  1. 调整：默认不启用`MFP特性`，如需启用，要配置：`Wireless_ATTR=[wifi][mfp]`并重新上电
+  1. 优化：提升长时间连接稳定性（48小时+）
+  2. 调整：默认不启用`MFP特性`，如需启用，要配置：`Wireless_ATTR=[wifi][mfp]`并重新上电
 * [V00.11-202405251256](../_static/firmware/vllink_basic2.SVCommon0011202405251256.zip)
   1. 优化：提升STA重连可靠性
   2. 调整：移除"36, 40, 44, 48, 149, 153, 157, 161, 165"之外的无效信道
