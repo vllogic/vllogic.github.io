@@ -1,4 +1,7 @@
 # Windows7 驱动安装
+## 提示
+* Vllink Basic2自带CMSIS-DAP V1接口，理论上在所有系统及绝大部分开发环境中免驱直接使用，如非必要，无需按以下步骤进行额外操作。
+
 ## 下载驱动
 1. [Vllink Windows7 Driver.zip](../_static/driver/Vllink_Windows7_Driver.zip)
 2. 解压，文件夹中有两个inf驱动文件，稍后会用到
