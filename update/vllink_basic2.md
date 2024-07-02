@@ -8,7 +8,7 @@
 5. 点击`Update`，等待一段时间后，完成更新。
 
 ## 固件列表
-* [V00.13-202407011056](../_static/firmware/vllink_basic2.SVCommon0013202407011056.zip)
+* [V00.14-202407021209](../_static/firmware/vllink_basic2.SVCommon0014202407021209.zip)
   1. 调整：`I/F`指示灯工作方式变动，常灭表示接口已关闭，闪烁表示`VRef`无电压，常亮表示接口及`VRef`正常
   2. 调整：`VRef`出厂模式调整为`输出3.3V`模式，升级此固件不会导致`VRef`模式变动
 * [V00.12-202406211323](../_static/firmware/vllink_basic2.SVCommon0012202406211323.zip)
