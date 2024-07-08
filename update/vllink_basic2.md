@@ -8,9 +8,10 @@
 5. 点击`Update`，等待一段时间后，完成更新。
 
 ## 固件列表
-* [V00.14-202407021209](../_static/firmware/vllink_basic2.SVCommon0014202407021209.zip)
+* [V00.15-202407052236](../_static/firmware/vllink_basic2.SVCommon0015202407052236.zip)
   1. 调整：`I/F`指示灯工作方式变动，常灭表示接口已关闭，闪烁表示`VRef`无电压，常亮表示接口及`VRef`正常
   2. 调整：`VRef`出厂模式调整为`输出3.3V`模式，升级此固件不会导致`VRef`模式变动
+  3. 调整：长按按键10秒，除了`VRef`模式外，所有配置将被清除
 * [V00.12-202406211323](../_static/firmware/vllink_basic2.SVCommon0012202406211323.zip)
   1. 优化：提升长时间连接稳定性（48小时+）
   2. 调整：默认不启用`MFP特性`，如需启用，要配置：`Wireless_ATTR=[wifi][mfp]`并重新上电
