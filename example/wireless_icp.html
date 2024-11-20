@@ -1,22 +1,22 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>无线ICP（在电路编程） &mdash; Vllogic  文档</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/translations.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7d86a446"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=beaddf03"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
@@ -29,16 +29,20 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Vllogic
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Vllogic
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic.html">Vllink Basic 快速上手</a></li>
@@ -50,6 +54,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_5v.html">5V口使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_vref.html">VRef口使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_to_fpga.html">Vllink Basic2配套FPGA接口转接板</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_battboard.html">Vllink锂电池充放一体供电模块</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
 <ul>
@@ -90,17 +95,17 @@
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Vllogic</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
+          <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>无线ICP（在电路编程）</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">无线ICP（在电路编程）</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/example/wireless_icp.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -111,10 +116,10 @@
            <div itemprop="articleBody">
              
   <section id="icp">
-<h1>无线ICP（在电路编程）<a class="headerlink" href="#icp" title="Permalink to this heading"></a></h1>
+<h1>无线ICP（在电路编程）<a class="headerlink" href="#icp" title="Link to this heading"></a></h1>
 <p><strong><code class="docutils literal notranslate"><span class="pre">版权声明：转载需注明来自于</span> <span class="pre">vllogic.com</span> </code></strong></p>
 <section id="id1">
-<h2>引言<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<h2>引言<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>在工业现场维护工作中，可能出现固件更新需求，如果没有在开发阶段准备<code class="docutils literal notranslate"><span class="pre">IAP</span></code>/<code class="docutils literal notranslate"><span class="pre">OTA</span></code>接口，就只能通过芯片厂预留的<code class="docutils literal notranslate"><span class="pre">ICP</span></code>/<code class="docutils literal notranslate"><span class="pre">ISP</span></code>接口进行更新。</p></li>
 <li><p>考虑到工业现场常常空间受限，环境不佳，通过<code class="docutils literal notranslate"><span class="pre">Vllink</span></code>系列无线调试器可降低维护工作强度，在预留接口的情况下，仅需接上远端调试器即可完成目标板与计算机的连接。</p></li>
@@ -122,7 +127,7 @@
 </ul>
 </section>
 <section id="id2">
-<h2>硬件连接<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<h2>硬件连接<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <ul>
 <li><p>推荐使用<code class="docutils literal notranslate"><span class="pre">3.7V-5.2V</span></code>为远端调试器供电</p></li>
 <li><p>若仅有<code class="docutils literal notranslate"><span class="pre">3.3V</span></code>，其来源务必为DCDC或输出能力大于500mA的大电流大封装LDO，且<code class="docutils literal notranslate"><span class="pre">5V</span></code>及<code class="docutils literal notranslate"><span class="pre">GND</span></code>需用高质量连接线</p></li>
@@ -142,7 +147,7 @@ VRef ---  3V3
 </ul>
 </section>
 <section id="id3">
-<h2>编程软件准备<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<h2>编程软件准备<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>通过搜索发现雅特力提供了<a class="reference external" href="https://github.com/ArteryTek/openocd">定制OpenOCD</a></p></li>
 <li><p>但其最新<a class="reference external" href="https://github.com/ArteryTek/openocd/actions/runs/7520365309">Actions</a>中的Artifacts已无法下载</p></li>
@@ -151,7 +156,7 @@ VRef ---  3V3
 </ul>
 </section>
 <section id="id4">
-<h2>无线ICP过程<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<h2>无线ICP过程<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
 <ol class="arabic">
 <li><p>下载上文中的二进制包，解压后，进入<code class="docutils literal notranslate"><span class="pre">xpack\bin-windows_amd64</span></code>目录</p></li>
 <li><p>本人无AT32F403A工程，故通过HxD工具生成了一份128KB的随机数据Bin文件测试</p></li>
@@ -212,7 +217,7 @@ VRef ---  3V3
 </ol>
 </section>
 <section id="id5">
-<h2>补充<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<h2>补充<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>对于批量ICP操作，可通过脚本周期性探测目标芯片，在探测成功后执行ICP命令，实现自动化</p></li>
 <li><p>此方案亦可用于现场调试，配合任何支持<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">V1/V2</span></code>协议的调试软件</p></li>
@@ -223,7 +228,7 @@ VRef ---  3V3
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
         <a href="../software/tools.html" class="btn btn-neutral float-left" title="在线工具" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
         <a href="linux_rules.html" class="btn btn-neutral float-right" title="Linux下非root用户授权" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
@@ -231,12 +236,12 @@ VRef ---  3V3
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2022, Vllogic.</p>
+    <p>&#169; 版权所有 2022, Vllogic。</p>
   </div>
 
-  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
    
 
 </footer>

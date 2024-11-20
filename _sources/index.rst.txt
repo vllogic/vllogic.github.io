@@ -56,6 +56,7 @@ Discussions：https://github.com/vllogic/vllogic.github.io/discussions
    hardware/vllink_basic2_5v.md
    hardware/vllink_basic2_vref.md
    hardware/vllink_basic2_to_fpga.md
+   hardware/vllink_battboard.md
 
 .. toctree::
    :maxdepth: 1

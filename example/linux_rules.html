@@ -1,22 +1,22 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Linux下非root用户授权 &mdash; Vllogic  文档</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/translations.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7d86a446"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=beaddf03"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
@@ -29,16 +29,20 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Vllogic
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Vllogic
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic.html">Vllink Basic 快速上手</a></li>
@@ -50,6 +54,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_5v.html">5V口使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_vref.html">VRef口使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_to_fpga.html">Vllink Basic2配套FPGA接口转接板</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_battboard.html">Vllink锂电池充放一体供电模块</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
 <ul>
@@ -103,17 +108,17 @@
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Vllogic</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
+          <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Linux下非root用户授权</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Linux下非root用户授权</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/example/linux_rules.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -124,11 +129,11 @@
            <div itemprop="articleBody">
              
   <section id="linuxroot">
-<h1>Linux下非root用户授权<a class="headerlink" href="#linuxroot" title="Permalink to this heading"></a></h1>
+<h1>Linux下非root用户授权<a class="headerlink" href="#linuxroot" title="Link to this heading"></a></h1>
 <section id="id1">
-<h2>一、未授权时<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<h2>一、未授权时<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
 <section id="cmsis-dap">
-<h3>1. 访问CMSIS-DAP接口<a class="headerlink" href="#cmsis-dap" title="Permalink to this heading"></a></h3>
+<h3>1. 访问CMSIS-DAP接口<a class="headerlink" href="#cmsis-dap" title="Link to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ openocd -f interface/cmsis-dap.cfg
 Open On-Chip Debugger 0.12.0
 Licensed under GNU GPL v2
@@ -144,7 +149,7 @@ Error: unable to find a matching CMSIS-DAP device
 </div>
 </section>
 <section id="id2">
-<h3>2. 访问串口<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<h3>2. 访问串口<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ stty -F /dev/ttyACM0
 stty: /dev/ttyACM0: Permission denied
 </pre></div>
@@ -152,13 +157,13 @@ stty: /dev/ttyACM0: Permission denied
 </section>
 </section>
 <section id="id3">
-<h2>二、授权步骤<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<h2>二、授权步骤<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
 <section id="rules">
-<h3>1. 导入rules文件<a class="headerlink" href="#rules" title="Permalink to this heading"></a></h3>
+<h3>1. 导入rules文件<a class="headerlink" href="#rules" title="Link to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">curl</span> <span class="pre">-o</span> <span class="pre">/etc/udev/rules.d/99-vllogic.rules</span> <span class="pre">https://vllogic.com/_downloads/b2561fe9dace99376b4ef5416880abc4/99-vllogic.rules</span></code></p>
 </section>
 <section id="id4">
-<h3>2. 查看其中规则<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<h3>2. 查看其中规则<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat /etc/udev/rules.d/99-vllogic.rules
 #
 #   Step 1: copy to /etc/udev/rules.d/99-vlloigc.rules
@@ -179,26 +184,26 @@ LABEL=&quot;vllogic_rules_end&quot;
 </div>
 </section>
 <section id="id5">
-<h3>3. 重载规则<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<h3>3. 重载规则<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">udevadm</span> <span class="pre">control</span> <span class="pre">--reload-rules</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">udevadm</span> <span class="pre">trigger</span></code></p></li>
 </ul>
 </section>
 <section id="id6">
-<h3>4. 如果调试器已接入系统，需重插拔一次<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<h3>4. 如果调试器已接入系统，需重插拔一次<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 </section>
 <section id="id7">
-<h3>上述操作中用到的文件<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<h3>上述操作中用到的文件<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference download internal" download="" href="../_downloads/b2561fe9dace99376b4ef5416880abc4/99-vllogic.rules"><span class="xref download myst">99-vllogic.rules</span></a></p></li>
 </ul>
 </section>
 </section>
 <section id="id8">
-<h2>三、授权后<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
+<h2>三、授权后<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
 <section id="id9">
-<h3>1. 访问CMSIS-DAP接口<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<h3>1. 访问CMSIS-DAP接口<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ openocd -f interface/cmsis-dap.cfg
 Open On-Chip Debugger 0.12.0
 Licensed under GNU GPL v2
@@ -228,7 +233,7 @@ Error: jtag
 </div>
 </section>
 <section id="id10">
-<h3>2. 访问串口<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
+<h3>2. 访问串口<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ stty -F /dev/ttyACM0
 speed 9600 baud; line = 0;
 -brkint -imaxbel
@@ -241,7 +246,7 @@ speed 9600 baud; line = 0;
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
         <a href="wireless_icp.html" class="btn btn-neutral float-left" title="无线ICP（在电路编程）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
         <a href="../readme.html" class="btn btn-neutral float-right" title="文档维护" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
@@ -249,12 +254,12 @@ speed 9600 baud; line = 0;
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2022, Vllogic.</p>
+    <p>&#169; 版权所有 2022, Vllogic。</p>
   </div>
 
-  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
    
 
 </footer>
