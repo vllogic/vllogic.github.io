@@ -22,4 +22,4 @@
 4. 此模块在断开USB供电时，5V会掉电几秒，故无法作为UPS使用
 
 ## 全套设计及生产文件
-* [interface_battboard.zip](../_static/pcbs/interface_battboard.20250107.zip)
+* [interface_battboard.zip](../_static/pcbs/interface_battboard.20250115.zip)
