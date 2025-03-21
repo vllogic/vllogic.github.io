@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      :root {
+        --primary-color: #2196F3;
+        --success-color: #4CAF50;
+        --background-color: #f5f5f5;
+        --card-bg: white;
+        --text-color: #333;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      main {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 2rem;
+        background: var(--card-bg);
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 2rem;
+        font-weight: 600;
+      }
+
+      fieldset {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+      }
+
+      legend {
+        font-weight: 600;
+        color: var(--primary-color);
+        padding: 0 0.5rem;
+      }
+
+      button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 1rem;
+      }
+
+      button:hover {
+        background-color: #1976D2;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      button:disabled {
+        background-color: #BBDEFB;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      input[type="text"], input[type="file"] {
+        padding: 0.6rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        width: 100%;
+        max-width: 400px;
+        transition: border-color 0.2s;
+      }
+
+      input[type="text"]:focus, input[type="file"]:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+      }
+
+      progress {
+        width: 100%;
+        height: 12px;
+        border-radius: 6px;
+        background: #eee;
+        overflow: hidden;
+      }
+
+      progress::-webkit-progress-bar {
+        background: #eee;
+        border-radius: 6px;
+      }
+
+      progress::-webkit-progress-value {
+        background: var(--primary-color);
+        border-radius: 6px;
+        transition: width 0.3s ease;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .config-row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .status-indicator {
+        padding: 0.8rem;
+        background: #f8f9fa;
+        border-radius: 4px;
+        border-left: 4px solid var(--primary-color);
+      }
+
+      .readme-section h4 {
+        margin: 0.8rem 0;
+        font-weight: 500;
+      }
+
+      .readme-section a {
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .readme-section a:hover {
+        text-decoration: underline;
+      }
+
+      .actions-container {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        margin: 1.5rem 0;
+      }
+
+      .file-input-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+      }
+
+      .file-input-wrapper input[type=file] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <title>MiLianKe Update</title>
+  <body>
+    <main style="max-width: 800px; margin: 0 auto;">
+      <h1>MiLianKe Update</h1>
+      <p></p>
+      <button id="connect-device">
+        Connect MiLianKe Downloader
+      </button>
+      <p></p>
+      <form action="">
+        <div>
+          <label>Hardware Code: </label>
+          <input
+            class="hwVersionShow"
+            type="text"
+            id="hwVersionShow"
+            disabled="disabled"
+            value="Unconnected"
+          />
+        </div>
+      </form>
+      <p></p>
+      <form action="">
+        <div>
+          <label>Software Code: </label>
+          <input
+            class="swVersionShow"
+            type="text"
+            id="swVersionShow"
+            disabled="disabled"
+            value="Unconnected"
+          />
+        </div>
+      </form>
+      <p></p>
+      <fieldset>
+        <legend>Status</legend>
+        <div>
+          <input
+            class="statusOut"
+            type="text"
+            id="statusOut"
+            disabled="disabled"
+            value=""
+          />
+        </div>
+      </fieldset>
+      <p></p>
+      <fieldset>
+        <legend>Firmware Update</legend>
+        <p></p>
+        <input class="fileSelect" type="file" id="select-file" name="file" />
+        <p></p>
+        <div class="block" id="block-auto-reset">
+          <label class="chipText">Auto Reset: </label>
+          <input type="checkbox" id="auto-reset" disabled="disabled" checked="true" />
+        </div>
+        <p></p>
+        <button class="update" id="download" disabled="disabled">
+          Update
+        </button>
+        <progress class="update" id="download-process" max="100" value="0">
+        </progress>
+      </fieldset>
+      <p></p>
+      <fieldset>
+        <legend>Readme</legend>
+        <h4>1. 获取升级所需的固件</a></h4>
+        <h4>2. 将下载器接上电脑</h4>
+        <h4>3. 安装<a href="https://visualgdb.com/UsbDriverTool/" target="_blank">UsbDriverTool</a>并运行，右击"USB Serial Converter A"，执行"Install WinUSB"</h4>
+        <h4>4. 点击"Connect MiLianKe Downloader"按钮，选择设备后，点击连接</h4>
+        <h4>5. 在"Hardware Code"栏目中会显示硬件版本号</h4>
+        <h4>6. 在"Software Code"栏目中会显示设备当前固件版本</h4>
+        <h4>7. 点击"选择文件"，打开需要刷入的固件，固件后缀为".bin"</h4>
+        <h4>8. 点击"Update"，稍待片刻，固件更新完成</h4>
+        <h4>9. "Auto Reset"选项默认选中，在固件更新完成后，设备会自动重启</h4>
+        <h4>10. 固件更新后的第一次重启，速度会稍慢</h4>
+        <h4>11. 打开"UsbDriverTool"工具，右击"USB Serial Converter A"，执行"Restore default driver"</h4>
+      </fieldset>
+    </main>
+
+    <script>
+      let text_StatusOut = document.getElementById("statusOut");
+
+      let buttonConnectDevice = document.getElementById("connect-device");
+      let inputHwVersion = document.getElementById("hwVersionShow");
+      let inputSwVersion = document.getElementById("swVersionShow");
+
+      let buttonSelectFile = document.getElementById("select-file");
+      let inputAutoReset = document.getElementById("auto-reset");
+      let buttonDownload = document.getElementById("download");
+      let processDownload = document.getElementById("download-process");
+
+
+      var simudevPort = null;
+      let selectFile = null;
+      var simudevTaskType = 0;
+      var simudevTaskPosTx = 0;
+      var simudevTaskPosRx = 0;
+
+      var app_const_character_0x20250124;
+      var app_hardware_version;
+      var app_firmware_version;
+
+      function uiStatusOut(str) {
+        text_StatusOut.value = str;
+        text_StatusOut.style.background = '';
+      }
+
+      function simudevConnect() {
+        console.log('Connecting to ' + simudevPort.device_.productName + '...');
+        simudevPort.connect().then(() => {
+          console.log('Connected.');
+          processDownload.value = 0;
+          
+          simudevPort.onReceive = data => {
+            simudevReceiveHandler(simudevPort, data);
+          }
+          simudevPort.onReceiveError = error => {
+            console.log('Receive error: ' + error);
+            simudevDisconnect();
+            
+            buttonConnectDevice.textContent = "Connect MiLianKe Downloader";
+            inputHwVersion.value = "Unconnected";
+            inputSwVersion.value = "Unconnected";
+          };
+
+          // get app info
+          simudevTaskGetAppInfo(simudevPort, 0);
+        }, error => {
+          console.log('Connection error: ' + error);
+        });
+      }
+
+      function simudevDisconnect() {
+        if (simudevPort) {
+          simudevPort.disconnect();
+          simudevPort = null;
+          buttonDownload.disabled = true;
+        }
+      }
+
+      (async () => {
+        buttonConnectDevice.addEventListener("click", async () => {
+          if (simudevPort) {
+            simudevDisconnect();
+          } else {
+            simudev.requestPort().then(selectedPort => {
+              simudevPort = selectedPort;
+              simudevConnect();
+              buttonConnectDevice.textContent = "Disconnect";
+            }).catch(error => {
+              console.log("Connection error: " + error);
+            });
+          }
+        });
+
+        buttonSelectFile.addEventListener("change", async () => {
+          selectFile = null;
+          buttonDownload.disabled = true;
+
+          if (buttonSelectFile.files.length > 0) {
+            let file = buttonSelectFile.files[0];
+            let reader = new FileReader();
+            reader.onload = function () {
+              selectFile = reader.result.slice(0);
+              if (simudevPort != null) {
+                buttonDownload.disabled = false;
+              }
+            };
+            reader.readAsArrayBuffer(file);
+          }
+        });
+
+        buttonDownload.addEventListener("click", async () => {
+          simudevTaskFirmwareWrite(simudevPort, selectFile);
+        });
+      })();
+
+      function simudevReceiveHandler(port, data) {
+        if (data.byteLength > 2) {
+          const respCmd = data.getUint8(2);
+          if ((respCmd == MPSSE_CMD_PRIVATE_FIRMWARE_INFO_GET) && (data.byteLength >= (2 + 258))) {
+            simudevTaskType = 0;
+            const respAppSelect = data.getUint8(2 + 1);
+            const const_character_0x20250124 = data.getUint32(2 + 1 + 1, true);
+            const info_valid_length = data.getUint32(2 + 1 + 1 + 4, true);
+            const hardware_version = data.getUint32(2 + 1 + 1 + 4 + 4, true);
+            const firmware_version = data.getUint32(2 + 1 + 1 + 4 + 4 + 4, true);
+            if (respAppSelect == 0) {
+              console.log("Cur App.const_character: " + const_character_0x20250124.toString(16).padStart(8, 0));
+              console.log("Cur App.info_valid_length: " + info_valid_length.toString(16));
+              console.log("Cur App.hardware_version: " + hardware_version.toString(16).padStart(8, 0));
+              inputHwVersion.value = hardware_version.toString(16).padStart(8, 0);
+              console.log("Cur App.firmware_version: " + firmware_version.toString(16).padStart(8, 0));
+              inputSwVersion.value = firmware_version.toString(16).padStart(8, 0);
+              uiStatusOut("Current Firmware Code: " + firmware_version.toString(16).padStart(8, 0));
+              app_const_character_0x20250124 = const_character_0x20250124;
+              app_hardware_version = hardware_version;
+              app_firmware_version = firmware_version;
+
+              if (selectFile != null) {
+                buttonDownload.disabled = false;
+              }
+            } else {
+              console.log("New App.const_character: " + const_character_0x20250124.toString(16).padStart(8, 0));
+              console.log("New App.info_valid_length: " + info_valid_length.toString(16));
+              console.log("New App.hardware_version: " + hardware_version.toString(16).padStart(8, 0));
+              console.log("New App.firmware_version: " + firmware_version.toString(16).padStart(8, 0));
+              
+              if ((app_const_character_0x20250124 == const_character_0x20250124) && (app_hardware_version == hardware_version)) {
+                uiStatusOut("Update Finish! New Firmware Code: " + firmware_version.toString(16).padStart(8, 0));
+                text_StatusOut.style.background = 'rgba(0, 128, 0, 0.5)';
+                if (inputAutoReset.checked == true) {
+                  simudevTaskReset(port);
+                }
+              } else {
+                uiStatusOut("Update Fail! Expect " + app_const_character_0x20250124.toString(16).padStart(8, 0) + "." + app_hardware_version.toString(16).padStart(8, 0) + ". Actual " + const_character_0x20250124.toString(16).padStart(8, 0) + "." + hardware_version.toString(16).padStart(8, 0));
+                text_StatusOut.style.background = 'rgba(128, 0, 0, 0.5)';
+              }
+            }
+          } else if ((respCmd == MPSSE_CMD_PRIVATE_FIRMWARE_WRITE) && (data.byteLength >= (2 + 6))) {
+            simudevTaskType = 0;
+            var write_pos = data.getUint32(2 + 1 + 1, true);
+
+            console.log('  Flash Write Down: ' + simudevTaskPosRx + '@' + selectFile.byteLength + ", Result: " + write_pos);
+
+            simudevTaskPosRx += 256;
+            if (write_pos != 0xffffffff) {
+              uiStatusOut('Flash Write : ' + simudevTaskPosRx + ' bytes has been written @ ' + write_pos);
+            } else {
+              uiStatusOut('Flash Write : ' + simudevTaskPosRx + ' bytes has been skiped');
+            }
+            simudevTaskPosTx += simudevTryFlashWrite(port, selectFile, simudevTaskPosTx, simudevTaskPosRx);
+          } else if ((respCmd == MPSSE_CMD_PRIVATE_RESET) && (data.byteLength >= (2 + 1))) {
+            simudevTaskType = 0;
+          }
+        }
+      }
+
+      function simudevTaskReset(port) {
+        if (simudevTaskType) {
+          return;
+        }
+
+        console.log('simudevTaskReset');
+        var array = simudev_cmd_private_reset();
+        simudevTaskType = array[0];
+
+        port.send(array);
+      }
+
+      function simudevTaskGetAppInfo(port, appSelect) {
+        if (simudevTaskType) {
+          return;
+        }
+
+        console.log('simudevTaskGetAppInfo');
+        var array = simudev_cmd_private_firmware_info_get(appSelect);
+        simudevTaskType = array[0];
+
+        port.send(array);
+      }
+
+      function simudevTryFlashWrite(port, fileData, posTx, posRx) {
+        if (fileData.byteLength <= posRx) {
+          uiStatusOut('Flash Write Finish.' + posRx + ' bytes has been written.');
+
+          processDownload.value = 100;
+
+          // get new app info
+          simudevTaskGetAppInfo(port, 1);
+        } else {
+          processDownload.value = Math.ceil(posRx * 100 / fileData.byteLength);
+
+          if (fileData.byteLength > posTx) {
+            var data_len = fileData.byteLength - posTx;
+            if (data_len > 256) {
+              data_len = 256;
+            }
+            //console.log('  Try Flash Write: ' + posTx + '@' + fileData.byteLength + ' : ' + data_len);
+        
+            var array = simudev_cmd_private_firmware_write(0, fileData, posTx, data_len);
+            port.send(array);
+            return data_len;
+          }
+        }
+        return 0;
+      }
+
+      function simudevTaskFirmwareWrite(port, fileData) {
+        if (simudevTaskType) {
+          return;
+        }
+
+        console.log('simudevTaskFirmwareWrite');
+        simudevTaskType = MPSSE_CMD_PRIVATE_FIRMWARE_WRITE;
+        simudevTaskPosTx = 0;
+        simudevTaskPosRx = simudevTaskPosTx;
+
+        simudevTaskPosTx += simudevTryFlashWrite(port, fileData, simudevTaskPosTx, simudevTaskPosRx);
+        //simudevTaskPosTx += simudevTryFlashWrite(port, fileData, simudevTaskPosTx, simudevTaskPosRx);
+      }
+    </script>
+    <script>
+      var simudev = {};
+
+      (function() {
+        'use strict';
+
+        simudev.getPorts = function() {
+          return navigator.usb.getDevices().then(devices => {
+            return devices.map(device => new simudev.Port(device));
+          });
+        };
+
+        simudev.requestPort = function() {
+          const filters = [
+            { 'vendorId': 0x0403, 'productId': 0x6014 },  // FT232H
+            { 'vendorId': 0x0403, 'productId': 0x6010 },  // FT2232H
+            { 'vendorId': 0x0403, 'productId': 0x6042 },  // FT2232H for ALogic
+            { 'vendorId': 0x0403, 'productId': 0x6011 },  // FT4232H
+          ];
+          return navigator.usb.requestDevice({ 'filters': filters }).then(
+            device => new simudev.Port(device)
+          );
+        }
+
+        simudev.Port = function(device) {
+          this.device_ = device;
+          this.interfaceNumber_ = 0;
+          this.endpointIn_ = 1;
+          this.endpointOut_ = 2;
+        };
+
+        simudev.Port.prototype.connect = function() {
+          console.log("Connect...");
+
+          let readLoop = () => {
+            this.device_.transferIn(this.endpointIn_, 512).then(result => {
+              if (this.device_.opened) {
+                this.onReceive(result.data);
+                readLoop();
+              }
+            }, error => {
+              this.onReceiveError(error);
+            });
+          };
+
+          return this.device_.open()
+              .then(() => {
+                if (this.device_.configuration === null) {
+                  console.log("selectConfiguration(1)");
+                  return this.device_.selectConfiguration(1);
+                }
+              })
+              .then(() => {
+              })
+              .then(() => this.device_.claimInterface(this.interfaceNumber_))
+              .then(() => this.device_.selectAlternateInterface(this.interfaceNumber_, 0))
+              .then(() => {
+                readLoop();
+              });
+        };
+
+        simudev.Port.prototype.disconnect = function() {
+          console.log("Disconnect...");
+          this.device_.close()
+        };
+
+        simudev.Port.prototype.send = function(data) {
+          return this.device_.transferOut(this.endpointOut_, data);
+        };
+      })();
+
+
+      const MPSSE_CMD_PRIVATE_FIRMWARE_INFO_GET = 0xE0    // req: 2, resp 258
+      const MPSSE_CMD_PRIVATE_FIRMWARE_WRITE = 0xE1    // req: 262, resp 6
+      const MPSSE_CMD_PRIVATE_RESET = 0xE2    // req: 1, resp 1
+
+      function simudev_cmd_private_firmware_info_get(select) {
+        var array = new Uint8Array(2);
+        array[0] = MPSSE_CMD_PRIVATE_FIRMWARE_INFO_GET;
+        array[1] = select;
+        return array;
+      }
+
+      function simudev_cmd_private_firmware_write(crypt_mode, target_bin, pos, data_len) {
+        var array = new Uint8Array(1 + 1 + 4 + data_len);
+        array[0] = MPSSE_CMD_PRIVATE_FIRMWARE_WRITE;
+        array[1] = crypt_mode;
+
+        var addr = new Uint32Array(1);
+        addr[0] = pos;
+        array.set(new Uint8Array(addr.buffer), 1 + 1);
+
+        var data = target_bin.slice(pos, pos + data_len);
+        array.set(new Uint8Array(data), 1 + 1 + 4);
+
+        return array;
+      }
+
+      function simudev_cmd_private_reset() {
+        var array = new Uint8Array(1);
+        array[0] = MPSSE_CMD_PRIVATE_RESET;
+        return array;
+      }
+    </script>
+  </body>
+</html>
