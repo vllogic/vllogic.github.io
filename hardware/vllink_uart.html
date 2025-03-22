@@ -1,0 +1,290 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TTL串口使用说明 &mdash; Vllogic  文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7d86a446"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Vllink Basic 固件更新" href="../update/vllink_basic.html" />
+    <link rel="prev" title="Vllink锂电池充放一体供电模块" href="vllink_battboard.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Vllogic
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic.html">Vllink Basic 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic2.html">Vllink Basic2 快速上手</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="vllink_basic_vout.html">Vout口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllink_basic2_5v.html">5V口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllink_basic2_vref.html">VRef口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllink_basic2_to_fpga.html">Vllink Basic2配套FPGA接口转接板</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllink_battboard.html">Vllink锂电池充放一体供电模块</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TTL串口使用说明</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">一、参数</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.1 波特率范围</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">1.2 数据位</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">1.3 奇偶校验</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">1.4 停止位</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">二、模式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usb-cdc">2.1 USB CDC串口-有线</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">2.2 USB CDC串口-无线</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">2.3 TTL串口-无线全双工</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic.html">Vllink Basic 固件更新</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic2.html">Vllink Basic2 固件更新</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software/windows7_driver.html">Windows7 驱动安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/iar.html">IAR 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/keil_mdk.html">Keil MDK 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/probe_rs.html">Probe RS 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/openocd.html">OpenOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/pyocd.html">PyOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/freemaster.html">FreeMASTER 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/segger_embedded_studio.html">Segger Embedded Studio 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/hercuels_command.html">Hercules 命令说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/tools.html">在线工具</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">应用实例</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../example/wireless_icp.html">无线ICP（在电路编程）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example/linux_rules.html">Linux下非root用户授权</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">文档维护</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Vllogic</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">TTL串口使用说明</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/hardware/vllink_uart.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ttl">
+<h1>TTL串口使用说明<a class="headerlink" href="#ttl" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>本文所述串口为<code class="docutils literal notranslate"><span class="pre">DC3</span></code>接口中的<code class="docutils literal notranslate"><span class="pre">TXD</span></code>及<code class="docutils literal notranslate"><span class="pre">RXD</span></code>脚</p></li>
+<li><p>本文所述功能适用于<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Box</span></code>及<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic2</span></code>，对于后者，固件版本应不小于<code class="docutils literal notranslate"><span class="pre">V00.17</span></code></p></li>
+</ul>
+<section id="id1">
+<h2>一、参数<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<section id="id2">
+<h3>1.1 波特率范围<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">1200</span></code>至<code class="docutils literal notranslate"><span class="pre">2600000</span></code>内的任意数值</p></li>
+<li><p>还支持一些较大的特定值：</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>-</p></th>
+<th class="head text-center"><p>波</p></th>
+<th class="head text-center"><p>特</p></th>
+<th class="head text-center"><p>率</p></th>
+<th class="head text-center"><p>特</p></th>
+<th class="head text-center"><p>定</p></th>
+<th class="head text-center"><p>值</p></th>
+<th class="head text-center"><p>-</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>6.50M</p></td>
+<td class="text-center"><p>6.12M</p></td>
+<td class="text-center"><p>5.78M</p></td>
+<td class="text-center"><p>5.47M</p></td>
+<td class="text-center"><p>5.20M</p></td>
+<td class="text-center"><p>4.95M</p></td>
+<td class="text-center"><p>4.73M</p></td>
+<td class="text-center"><p>4.52M</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>4.33M</p></td>
+<td class="text-center"><p>4.16M</p></td>
+<td class="text-center"><p>4.00M</p></td>
+<td class="text-center"><p>3.85M</p></td>
+<td class="text-center"><p>3.71M</p></td>
+<td class="text-center"><p>3.59M</p></td>
+<td class="text-center"><p>3.47M</p></td>
+<td class="text-center"><p>3.35M</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3.25M</p></td>
+<td class="text-center"><p>3.06M</p></td>
+<td class="text-center"><p>2.89M</p></td>
+<td class="text-center"><p>2.74M</p></td>
+<td class="text-center"><p>-</p></td>
+<td class="text-center"><p>-</p></td>
+<td class="text-center"><p>-</p></td>
+<td class="text-center"><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h3>1.2 数据位<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">8</span></code></p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>1.3 奇偶校验<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Odd</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Even</span></code></p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>1.4 停止位<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1.5</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h2>二、模式<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<section id="usb-cdc">
+<h3>2.1 USB CDC串口-有线<a class="headerlink" href="#usb-cdc" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>用于一端连接USB主机，一端连接TTL串口的场景，需配合主机端串口软件使用</p></li>
+<li><p>使用方法：</p>
+<ol class="arabic simple">
+<li><p>调试器切换到<code class="docutils literal notranslate"><span class="pre">有线</span></code>模式</p></li>
+<li><p>确认调试器的<code class="docutils literal notranslate"><span class="pre">VRef</span></code>与TTL串口电平所匹配</p></li>
+<li><p>调试器连接USB主机，<code class="docutils literal notranslate"><span class="pre">TXD</span></code>、<code class="docutils literal notranslate"><span class="pre">RXD</span></code>、<code class="docutils literal notranslate"><span class="pre">GND</span></code>连接TTL串口</p></li>
+<li><p>打开主机端串口软件</p></li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="id7">
+<h3>2.2 USB CDC串口-无线<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>用于一端连接USB主机，一端连接TTL串口的场景，需配合主机端串口软件使用</p></li>
+<li><p>使用方法：</p>
+<ol class="arabic simple">
+<li><p>两个调试器，分别切换到<code class="docutils literal notranslate"><span class="pre">AP</span></code>和<code class="docutils literal notranslate"><span class="pre">STA</span></code>模式，并确认可以完成无线连接</p></li>
+<li><p>确认<code class="docutils literal notranslate"><span class="pre">STA</span></code>端的<code class="docutils literal notranslate"><span class="pre">VRef</span></code>与TTL串口电平所匹配</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">STA</span></code>端的<code class="docutils literal notranslate"><span class="pre">TXD</span></code>、<code class="docutils literal notranslate"><span class="pre">RXD</span></code>、<code class="docutils literal notranslate"><span class="pre">GND</span></code>连接TTL串口</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AP</span></code>端连接USB主机，打开主机端串口软件</p></li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="id8">
+<h3>2.3 TTL串口-无线全双工<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>适用于需要无线对接两个TTL串口的场景</p></li>
+<li><p>支持电平错配：参考电平由调试器的<code class="docutils literal notranslate"><span class="pre">VRef</span></code>决定，<code class="docutils literal notranslate"><span class="pre">VRef</span></code>变化不影响软件行为</p></li>
+<li><p>支持波特率错配：波特率在调试器内部被转换成无线数据，需将两个调试器配置成不同的波特率。<em>此场景数据持续传输速度受限于波特率较小的一方</em></p></li>
+<li><p>使用方法：</p>
+<ol class="arabic simple">
+<li><p>两个调试器，分别切换到<code class="docutils literal notranslate"><span class="pre">AP</span></code>和<code class="docutils literal notranslate"><span class="pre">STA</span></code>模式，并确认可以完成无线连接</p></li>
+<li><p>确认两端的<code class="docutils literal notranslate"><span class="pre">VRef</span></code>与TTL串口电平所匹配</p></li>
+<li><p>确认<code class="docutils literal notranslate"><span class="pre">AP</span></code>端配置中的串口参数与TTL串口参数所匹配</p></li>
+<li><p>两端的<code class="docutils literal notranslate"><span class="pre">TXD</span></code>、<code class="docutils literal notranslate"><span class="pre">RXD</span></code>、<code class="docutils literal notranslate"><span class="pre">GND</span></code>连接对应的TTL串口</p></li>
+<li><p>上电后即可完成对接</p></li>
+<li><p><em>注：若需实现波特率错配，需额外修改<code class="docutils literal notranslate"><span class="pre">STA</span></code>端配置中的串口参数</em></p></li>
+</ol>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="vllink_battboard.html" class="btn btn-neutral float-left" title="Vllink锂电池充放一体供电模块" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../update/vllink_basic.html" class="btn btn-neutral float-right" title="Vllink Basic 固件更新" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022, Vllogic。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
