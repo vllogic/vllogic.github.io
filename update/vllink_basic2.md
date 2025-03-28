@@ -8,7 +8,7 @@
 5. 点击`Update`，等待一段时间后，完成更新。
 
 ## 固件列表
-* [xxxxxxx](../_static/firmware/xxxxx.zip)
+* [V00.17-202503281003](../_static/firmware/vllink_basic2.SVCommon0017202503281003.zip)
   1. 优化：UART换用DMA收发机制；波特率上下限扩展到`1200`-`6500000`
   2. 新增：增加无线TTL串口桥接功能，配合产品特性可实现`同、异电平`、`同、异波特率`的`全双工`无线对接。详见[TTL串口使用说明](../hardware/vllink_uart)
 * [V00.16-202408182040](../_static/firmware/vllink_basic2.SVCommon0016202408182040.zip)
