@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vllink Basic 快速上手 &mdash; Vllogic  文档</title>
+  <title>Vllink Box2 快速上手 &mdash; Vllogic  文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="Vllink Basic2 快速上手" href="vllink_basic2.html" />
-    <link rel="prev" title="Vllogic 产品使用指南" href="../index.html" /> 
+    <link rel="next" title="Vout口使用说明" href="../hardware/vllink_basic_vout.html" />
+    <link rel="prev" title="Vllink Box 快速上手" href="vllink_box.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,29 +45,37 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Vllink Basic 快速上手</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">调试接口定义</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">模式介绍及切换</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id3">模式切换</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">有线模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ap">无线接收模式（AP）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sta">无线发送模式（STA）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">有线模式连接示例</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">无线模式连接示例</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id7">1. STA为目标板供电</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id8">2. 目标板为STA供电</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id9">注意事项</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id10">常见问题</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id11">开发工具使用说明</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="vllink_basic.html">Vllink Basic 快速上手</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic2.html">Vllink Basic2 快速上手</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_box.html">Vllink Box 快速上手</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vllink_box2.html">Vllink Box2 快速上手</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Vllink Box2 快速上手</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">产品图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">功能简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">调试接口定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">模式介绍及切换</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">模式切换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">有线模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ap">无线接收模式（AP）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sta">无线发送模式（STA）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">有线模式连接示例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">无线模式连接示例</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">1. STA为目标板供电</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">2. 目标板为STA供电</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">配置工具</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">注意事项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">常见问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">开发工具使用说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">进阶使用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fpga">FPGA下载器</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id16">其他</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
 <ul>
@@ -120,9 +128,9 @@
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Vllink Basic 快速上手</li>
+      <li class="breadcrumb-item active">Vllink Box2 快速上手</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/quick/vllink_basic.md.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/quick/vllink_box2.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -130,11 +138,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="vllink-basic">
-<h1>Vllink Basic 快速上手<a class="headerlink" href="#vllink-basic" title="Link to this heading"></a></h1>
+  <section id="vllink-box2">
+<h1>Vllink Box2 快速上手<a class="headerlink" href="#vllink-box2" title="Link to this heading"></a></h1>
 <section id="id1">
-<h2>调试接口定义<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
-<p><img alt="" src="../_images/common_interface_desc_small.png" /></p>
+<h2>产品图<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p><img alt="" src="../_images/vllink_box2.20250330.png" /></p>
+</section>
+<section id="id2">
+<h2>功能简介<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>USB2.0 High Speed 480M，集成<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">V1</span></code>、<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">V2</span></code>、<code class="docutils literal notranslate"><span class="pre">CDC串口</span></code>接口</p></li>
+<li><p>具备一个<code class="docutils literal notranslate"><span class="pre">IDC</span> <span class="pre">10Pin</span> <span class="pre">2.54mm</span></code>接口，支持<code class="docutils literal notranslate"><span class="pre">内部3.3V</span></code>/<code class="docutils literal notranslate"><span class="pre">外部1.2V-5.5V</span></code>两种参考电压</p></li>
+<li><p>单个调试器可作为有线调试器使用</p></li>
+<li><p>两个调试器可配对作为无线调试器使用</p></li>
+<li><p>无线模式下，支持所有调试及串口功能</p></li>
+<li><p>无线模式下，两端的TTL串口可用于无线对传 <a class="reference internal" href="../hardware/vllink_uart.html"><span class="std std-doc">详见</span></a></p></li>
+</ol>
+</section>
+<section id="id3">
+<h2>调试接口定义<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p><img alt="" src="../_images/basic2_interface_desc_small.png" /></p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>接口</p></th>
@@ -157,14 +180,14 @@
 <tr class="row-even"><td class="text-left"><p>TDO</p></td>
 <td class="text-left"><p>JTAG数据口</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>Vout</p></td>
-<td class="text-left"><p>双向电源口<sup>1</sup></p></td>
+<tr class="row-odd"><td class="text-left"><p>5V</p></td>
+<td class="text-left"><p>双向5V电源口<sup>1</sup></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>GND</p></td>
 <td class="text-left"><p>共地口</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p>TRST</p></td>
-<td class="text-left"><p>JTAG复位口</p></td>
+<tr class="row-odd"><td class="text-left"><p>VRef</p></td>
+<td class="text-left"><p>参考电平及3.3V电压源<sup>2</sup></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>TXD</p></td>
 <td class="text-left"><p>串口输出</p></td>
@@ -174,22 +197,23 @@
 </tr>
 </tbody>
 </table>
-<p>[1] <a class="reference internal" href="../hardware/vllink_basic_vout.html"><span class="std std-doc">Vout口使用说明</span></a></p>
+<p>[1] <a class="reference internal" href="../hardware/vllink_basic2_5v.html"><span class="std std-doc">5V口详细说明</span></a>
+[2] <a class="reference internal" href="#../hardware/vllink_box2_vref.md"><span class="xref myst">VRef口详细说明</span></a></p>
 </section>
-<section id="id2">
-<h2>模式介绍及切换<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
-<section id="id3">
-<h3>模式切换<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<section id="id4">
+<h2>模式介绍及切换<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<section id="id5">
+<h3>模式切换<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>可通过双击按键切换运行模式</p></li>
 <li><p>基本模式有三种，分别是有线模式、无线接收模式（AP）以及无线发送模式（STA）</p></li>
 </ul>
 </section>
-<section id="id4">
-<h3>有线模式<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="id6">
+<h3>有线模式<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>板上红灯、黄灯亮起</p></li>
-<li><p>USB设备启用，可与USB主机通信</p></li>
+<li><p>USB设备启用，可与计算机通信</p></li>
 <li><p>调试口可连接目标板</p></li>
 </ul>
 </section>
@@ -197,7 +221,7 @@
 <h3>无线接收模式（AP）<a class="headerlink" href="#ap" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>板上红灯、黄灯亮起，板上蓝灯作为连接指示状态灯，未连接时闪烁、已连接后常亮</p></li>
-<li><p>USB设备启用，可与USB主机通信</p></li>
+<li><p>USB设备启用，可与计算机通信</p></li>
 <li><p>注意：若在蓝灯闪烁时，启动调试、CDC串口功能，将会启用板上调试口，而非远端调试口。</p></li>
 </ul>
 </section>
@@ -205,96 +229,88 @@
 <h3>无线发送模式（STA）<a class="headerlink" href="#sta" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>板上黄灯亮起，板上绿灯作为连接指示状态灯，未连接时闪烁、已连接后常亮</p></li>
-<li><p>USB设备关闭，不可与USB主机通信</p></li>
+<li><p>USB设备关闭，不可与计算机通信</p></li>
 </ul>
 </section>
-<section id="id5">
-<h3>有线模式连接示例<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="id7">
+<h3>有线模式连接示例<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <p><img alt="" src="../_images/vllink_basic_wired.png" /></p>
 <ul class="simple">
-<li><p>图中调试器为有线模式，硬件为5V版本，且配置文件中<code class="docutils literal notranslate"><span class="pre">Vout=enable</span></code>，故调试器可为目标板提供5V电源</p></li>
-</ul>
-</section>
-<section id="id6">
-<h3>无线模式连接示例<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
-<section id="id7">
-<h4>1. STA为目标板供电<a class="headerlink" href="#id7" title="Link to this heading"></a></h4>
-<p><img alt="" src="../_images/vllink_basic_wireless1.png" /></p>
-<ul class="simple">
-<li><p>图中调试器一个为AP模式，不接目标板；另一个为STA模式，USB接电源、调试口接目标板</p></li>
-<li><p>STA端硬件为5V版本，且配置文件中<code class="docutils literal notranslate"><span class="pre">Vout=enable</span></code>，故STA端可目标板提供5V电源</p></li>
-<li><p>注意：3.3V版本的调试器仅能提供3.3V电源，且目标板电流不应超过100mA</p></li>
+<li><p>图中调试器为第一代，<code class="docutils literal notranslate"><span class="pre">Basic2</span></code>版本连接方式相同</p></li>
+<li><p>图中调试器为有线模式，USB接计算机，调试口接目标板</p></li>
 </ul>
 </section>
 <section id="id8">
-<h4>2. 目标板为STA供电<a class="headerlink" href="#id8" title="Link to this heading"></a></h4>
+<h3>无线模式连接示例<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<section id="id9">
+<h4>1. STA为目标板供电<a class="headerlink" href="#id9" title="Link to this heading"></a></h4>
+<p><img alt="" src="../_images/vllink_basic_wireless1.png" /></p>
+<ul class="simple">
+<li><p>图中调试器为第一代，<code class="docutils literal notranslate"><span class="pre">Basic2</span></code>版本连接方式相同</p></li>
+<li><p>图中调试器一个为AP模式，不接目标板；另一个为STA模式，USB接电源、调试口接目标板</p></li>
+</ul>
+</section>
+<section id="id10">
+<h4>2. 目标板为STA供电<a class="headerlink" href="#id10" title="Link to this heading"></a></h4>
 <p><img alt="" src="../_images/vllink_basic_wireless2.png" /></p>
 <ul class="simple">
+<li><p>图中调试器为第一代，<code class="docutils literal notranslate"><span class="pre">Basic2</span></code>版本连接方式相同</p></li>
 <li><p>图中调试器一个为AP模式，不接目标板；另一个为STA模式，调试口接目标板</p></li>
-<li><p>STA端硬件为5V版本，目标板可通过Vout口为STA端供电</p></li>
-<li><p>因为调试器是通过PMOS管控制Vout，即使<code class="docutils literal notranslate"><span class="pre">Vout=disable</span></code>，未开启的PMOS也仅等效一个二极管，并不影响STA端的启动，所以此方式不不要求修改配置文件</p></li>
-<li><p>注意：3.3V版本的调试器不支持此种用法</p></li>
 </ul>
 </section>
 </section>
 </section>
-<section id="id9">
-<h2>注意事项<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<section id="id11">
+<h2>配置工具<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<ul>
+<li><p>链接：<a class="reference external" href="https://vllogic.com/_static/tools/web_config_basic2/">基础配置</a></p></li>
+<li><p>使用说明：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1. 使用Chrome内核浏览器打开上述链接
+2. 连接调试器
+3. 点击“Connect Vllink”
+4. 在小弹窗中选中DAP，点击连接
+5. 连接后，上面的常规设置文本即可修改，修改后需要点击“同步设置”保存，注意无效的配置将在同步时被清除
+</pre></div>
+</div>
+</li>
+<li><p>注意：当电脑端所连的调试器为AP模式，且已连接远端STA，则此工具将读写远端STA的配置。</p></li>
+<li><p>恢复出厂设置：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1. 使用Chrome内核浏览器打开上述链接
+2. 连接调试器
+3. 点击“Connect Vllink”
+4. 在小弹窗中选中DAP，点击连接
+5. 连接后，删除设置中每一行&#39;=&#39;后的文本
+6. 点击“同步设置”保存，重新上电
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="id12">
+<h2>注意事项<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
-<li><p>调试口信号线高电平为3.3V，已串接220欧电阻，一般可兼容IO电平2.4V至3.8V的芯片</p></li>
-<li><p>当前无线仅传输CMSIS-DAP协议及CDC协议的数据，不涉及调试器的自身配置参数</p></li>
+<li><p>调试口逻辑电平由<code class="docutils literal notranslate"><span class="pre">VRef</span></code>决定，建议由开发板提供；若将<code class="docutils literal notranslate"><span class="pre">VRef</span></code>改为输出模式，应与目标板逻辑电平一致</p></li>
 <li><p>升级程序需要使用支持WebUSB的操作系统及浏览器，如Windows10及Chrome内核浏览器</p></li>
 <li><p>Windows7系统用户请参考下方链接安装驱动</p></li>
 </ol>
 </section>
-<section id="id10">
-<h2>常见问题<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<section id="id13">
+<h2>常见问题<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
-<li><ul class="simple">
-<li><p>问：<code class="docutils literal notranslate"><span class="pre">WebDfu</span></code>网页升级时，出现红色警告信息</p></li>
-<li><p>答：只要升级进度条跑满，即完成升级</p></li>
-</ul>
-</li>
-<li><ul class="simple">
-<li><p>问：STA不稳定，灯光乱闪或者异常</p></li>
-<li><p>答：常见于客户使用3.3V通过<code class="docutils literal notranslate"><span class="pre">Vout</span></code>口给STA供电的情况，将供电改成5V即可，或者至少锂电池直供</p></li>
-</ul>
-</li>
-<li><ul class="simple">
-<li><p>问：调试不稳定，经常卡顿或报错</p></li>
-<li><p>答：一般是同频段Wifi干扰导致，可通过以下方式手动指定AP频段：</p>
-<ol class="arabic simple">
-<li><p>将AP接上电脑，用记事本打开磁盘中的<code class="docutils literal notranslate"><span class="pre">basic_config.txt</span></code></p></li>
-<li><p>修改<code class="docutils literal notranslate"><span class="pre">AP_2G4_CHANNEL=</span></code>后面的信道值，推荐13，若13信道干扰严重可调整为1或6</p></li>
-<li><p>保存文本，安全弹出磁盘后，重新上电使用</p></li>
-<li><p>若可行，应当对设施内无线路由器频段进行管理，合理使用信道资源</p></li>
-</ol>
-</li>
-</ul>
-</li>
 <li><ul class="simple">
 <li><p>问：设备管理器内能发现<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">V2</span></code>设备，但是软件却无法访问</p></li>
 <li><p>答：在设备管理器内，右击<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">V2</span></code>设备，卸载设备，然后重新连接一次即可解决</p></li>
 </ul>
 </li>
 <li><ul class="simple">
-<li><p>问：STA如何与另一个AP配对</p></li>
-<li><p>答：因为AP与STA结对发货，出厂时已进行配对测试，故无法自动连接其他AP。可通过以下方式清除STA中的配对信息：</p>
-<ol class="arabic simple">
-<li><p>将STA接上电脑，双击按键切换至模式一，电脑中出现一个磁盘</p></li>
-<li><p>用记事本打开磁盘中的<code class="docutils literal notranslate"><span class="pre">basic_config.txt</span></code></p></li>
-<li><p>删除<code class="docutils literal notranslate"><span class="pre">STA_2G4_SSID=</span></code>后面的字符串</p></li>
-<li><p>删除<code class="docutils literal notranslate"><span class="pre">STA_2G4_PASS=</span></code>后面的字符串</p></li>
-<li><p>保存文本，安全弹出磁盘后，双击按键两次切换至模式三</p></li>
-<li><p>此时，STA会自动配对新AP，应当保证此时附近只有一个AP处于上电状态</p></li>
-</ol>
-</li>
+<li><p>问：Keil内<code class="docutils literal notranslate"><span class="pre">Reset</span> <span class="pre">and</span> <span class="pre">Run</span></code>功能无效，即按<code class="docutils literal notranslate"><span class="pre">F8</span></code>下载程序后，程序未自动运行</p></li>
+<li><p>答：在<code class="docutils literal notranslate"><span class="pre">Debug</span></code>-<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">-</span> <span class="pre">JTAG/SW</span> <span class="pre">Adapter</span></code>中，选定<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">v2</span></code>即可解决</p></li>
 </ul>
 </li>
 </ol>
 </section>
-<section id="id11">
-<h2>开发工具使用说明<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<section id="id14">
+<h2>开发工具使用说明<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../software/windows7_driver.html"><span class="std std-doc">Windows7 驱动安装</span></a></p></li>
 <li><p><a class="reference internal" href="../software/iar.html"><span class="std std-doc">IAR 使用说明</span></a></p></li>
@@ -305,14 +321,29 @@
 <li><p><a class="reference internal" href="../software/freemaster.html"><span class="std std-doc">FreeMASTER 使用说明</span></a></p></li>
 </ul>
 </section>
+<section id="id15">
+<h2>进阶使用<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<section id="fpga">
+<h3>FPGA下载器<a class="headerlink" href="#fpga" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../hardware/vllink_basic2_to_fpga.html"><span class="std std-doc">转接板资料</span></a></p></li>
+</ul>
+</section>
+</section>
+<section id="id16">
+<h2>其他<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/f1d19fd4d88418bc49ab638336915001/vllink_basic2.A4%E4%B8%8A%E6%89%8B%E6%8C%87%E5%8D%97.pdf"><span class="xref download myst">A4上手指南</span></a></p></li>
+</ul>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="../index.html" class="btn btn-neutral float-left" title="Vllogic 产品使用指南" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="vllink_basic2.html" class="btn btn-neutral float-right" title="Vllink Basic2 快速上手" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="vllink_box.html" class="btn btn-neutral float-left" title="Vllink Box 快速上手" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../hardware/vllink_basic_vout.html" class="btn btn-neutral float-right" title="Vout口使用说明" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
