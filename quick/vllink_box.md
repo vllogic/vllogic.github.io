@@ -15,7 +15,7 @@
 ![](../_static/picture/box_interface.png)
 | 接口 | 介绍 |
 | :---- | :---- |
-| VRef  | 参考电平，支持跳线帽短接内部3.3V<sup>1</sup> |
+| VRef  | 参考电平，支持跳线帽短接JP_3V3<sup>1</sup> |
 | TRST  | JTAG复位口 |
 | TDI  | JTAG数据口 |
 | TMS / SWDIO  | JTAG模式口、SWD数据口 |
@@ -25,7 +25,7 @@
 | SRST / SWRST  | 芯片复位口 |
 | TXD  | 串口输出 |
 | JP_5V  | 跳线帽短接引出内部5V<sup>1</sup> |
-| VOut_3V3  | 跳线帽短接引出内部3.3V<sup>1</sup> |
+| JP_3V3  | 跳线帽短接引出内部3.3V<sup>1</sup> |
 | GND  | 共地口 |
 
   [1] 接法见下图
