@@ -27,7 +27,9 @@
 | JP_5V  | 跳线帽短接引出内部5V<sup>1</sup> |
 | VOut_3V3  | 跳线帽短接引出内部3.3V<sup>1</sup> |
 | GND  | 共地口 |
-[1] 接法见下图
+
+  [1] 接法见下图
+
 ![](../_static/picture/box_jumper.png)
 
 ## 模式介绍及切换
