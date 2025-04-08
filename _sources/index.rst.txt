@@ -81,6 +81,7 @@ Discussions：https://github.com/vllogic/vllogic.github.io/discussions
    software/freemaster.md
    software/segger_embedded_studio.md
    software/hercuels_command.md
+   software/speedtest.md
    software/tools.md
 
 .. toctree::
