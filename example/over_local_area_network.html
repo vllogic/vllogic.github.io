@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vllink FPGA 固件更新 &mdash; Vllogic  文档</title>
+  <title>局域网使用 &mdash; Vllogic  文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -19,7 +19,9 @@
       <script src="../_static/translations.js?v=beaddf03"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" /> 
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="互联网使用" href="over_internet.html" />
+    <link rel="prev" title="Linux下非root用户授权" href="linux_rules.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -59,8 +61,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="vllink_basic.html">Vllink Basic 固件更新</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vllink_basic2.html">Vllink Basic2 固件更新</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic.html">Vllink Basic 固件更新</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic2.html">Vllink Basic2 固件更新</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
 <ul>
@@ -77,11 +79,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../software/tools.html">在线工具</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">应用实例</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../example/wireless_icp.html">无线ICP（在电路编程）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../example/linux_rules.html">Linux下非root用户授权</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../example/over_local_area_network.html">局域网使用</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../example/over_internet.html">互联网使用</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="wireless_icp.html">无线ICP（在电路编程）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_rules.html">Linux下非root用户授权</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">局域网使用</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">一、准备工作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ap">二、配置AP端</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sta">三、配置STA端</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">四、速度测试</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4.1 单接入点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">4.2 双接入点</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="over_internet.html">互联网使用</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">其他</span></p>
 <ul>
@@ -102,9 +114,9 @@
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Vllink FPGA 固件更新</li>
+      <li class="breadcrumb-item active">局域网使用</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/update/vllink_fpga.md.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/example/over_local_area_network.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -112,36 +124,74 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="vllink-fpga">
-<h1>Vllink FPGA 固件更新<a class="headerlink" href="#vllink-fpga" title="Link to this heading"></a></h1>
-<section id="id1">
-<h2>更新方法<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
-<ol class="arabic simple">
-<li><p>解压压缩包</p></li>
-<li><p>按住按键连接Win10电脑，再使用Chrome浏览器打开更新页面 <a class="reference external" href="https://vllogic.com/_static/tools/update/">Vllink HID Update</a></p></li>
-<li><p>点击<code class="docutils literal notranslate"><span class="pre">Connect</span> <span class="pre">Vllink</span> <span class="pre">Device</span></code>，在对话框中选中<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">HME</span> <span class="pre">Update</span></code>再点击<code class="docutils literal notranslate"><span class="pre">连接</span></code></p></li>
-<li><p>在<code class="docutils literal notranslate"><span class="pre">Firmware</span> <span class="pre">Update</span></code>栏目中选中解压得到.bin文件</p></li>
-<li><p>点击<code class="docutils literal notranslate"><span class="pre">Update</span></code>，等待一段时间后，完成更新。</p></li>
-</ol>
-</section>
-<section id="id2">
-<h2>固件列表<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+  <section id="id1">
+<h1>局域网使用<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
 <ul class="simple">
-<li><p><a class="reference download internal" download="" href="../_downloads/ad253ac86de2bb0dce505360929a9617/vllink_hme.SVCommon0002202304171852.zip"><span class="xref download myst">V00.02-202304171852</span></a></p></li>
+<li><p>本文所述功能适用于<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic2</span></code>，固件版本不应小于<code class="docutils literal notranslate"><span class="pre">V00.19</span></code></p></li>
+</ul>
+<section id="id2">
+<h2>一、准备工作<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>准备一个或两个路由器作为调试器的接入点，推荐将其5GWifi配置成<code class="docutils literal notranslate"><span class="pre">Wifi6</span></code>、<code class="docutils literal notranslate"><span class="pre">20MHz</span></code>、<code class="docutils literal notranslate"><span class="pre">165信道</span></code>模式</p></li>
+<li><p>验证接入点接入的两个无线设备可获得局域网IP，并可建立TCP连接</p></li>
+</ul>
+</section>
+<section id="ap">
+<h2>二、配置AP端<a class="headerlink" href="#ap" title="Link to this heading"></a></h2>
+<ul>
+<li><p>将AP端接上电脑</p></li>
+<li><p>打开<a class="reference external" href="https://vllogic.com/_static/tools/web_config_basic2/">配置页</a>，在网页中连接</p></li>
+<li><p>作如下设置，无关项未列出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mode</span><span class="o">=</span><span class="n">wirelesshost</span>
+<span class="n">Mode2_STA</span><span class="o">=</span><span class="n">enable</span>
+<span class="n">Wireless_Device_SSID</span><span class="o">=</span><span class="n">接入点1_SSID</span>
+<span class="n">Wireless_Device_Password</span><span class="o">=</span><span class="n">接入点1_密码</span>
+</pre></div>
+</div>
+</li>
+<li><p>点击同步设置</p></li>
+<li><p>重新上电，等待连上接入点，连接完成后，蓝灯双闪</p></li>
+<li><p>从局域网DHCP路由获取AP端的局域网IP，例如<code class="docutils literal notranslate"><span class="pre">192.168.6.123</span></code></p></li>
+</ul>
+</section>
+<section id="sta">
+<h2>三、配置STA端<a class="headerlink" href="#sta" title="Link to this heading"></a></h2>
+<ul>
+<li><p>将STA端接上电脑并切换到有线模式</p></li>
+<li><p>打开<a class="reference external" href="https://vllogic.com/_static/tools/web_config_basic2/">配置页</a>，在网页中连接</p></li>
+<li><p>作如下设置，无关项未列出：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mode</span><span class="o">=</span><span class="n">wirelessdevice</span>
+<span class="n">Mode3_SERVER_IPV4</span><span class="o">=</span><span class="mf">192.168.6.123</span>
+<span class="n">Wireless_Device_SSID</span><span class="o">=</span><span class="n">接入点2_SSID</span>
+<span class="n">Wireless_Device_Password</span><span class="o">=</span><span class="n">接入点2_密码</span>
+</pre></div>
+</div>
+</li>
+<li><p>点击同步设置</p></li>
+<li><p>重新上电，等待连上接入点，连接完成后，绿灯双闪</p></li>
+<li><p>正常情况下，AP端蓝灯常亮、STA端绿灯常亮</p></li>
 </ul>
 </section>
 <section id="id3">
-<h2>内部测试页面<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>需配合接口测试板，<a class="reference external" href="https://vllogic.com/_static/tools/web_download_hercules_selftest/">内部测试</a></p></li>
-</ul>
+<h2>四、速度测试<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<section id="id4">
+<h3>4.1 单接入点<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">TODO</span></code></p>
+</section>
+<section id="id5">
+<h3>4.2 双接入点<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">TODO</span></code></p>
+</section>
 </section>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="linux_rules.html" class="btn btn-neutral float-left" title="Linux下非root用户授权" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="over_internet.html" class="btn btn-neutral float-right" title="互联网使用" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
