@@ -90,6 +90,8 @@ Discussions：https://github.com/vllogic/vllogic.github.io/discussions
    
    example/wireless_icp.md
    example/linux_rules.md
+   example/over_local_area_network.md
+   example/over_internet.md
 
 ===================================
 
