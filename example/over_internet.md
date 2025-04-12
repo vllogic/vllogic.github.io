@@ -13,16 +13,17 @@
     3. 修改STA端的配置：`Mode3_SERVER_IPV4=111.222.333.444`
     4. 重新上电等待连接完成
 
-## 三、代理模式
+## 三、FRP-STCP模式
 `TODO`
 
-## 四、安全代理模式
+## 四、FRP-P2P模式
 `TODO`
 
-## 四、速度测试
-### 4.1 公网IP直连
-`TODO`
-### 4.2 代理模式
-`TODO`
-### 4.3 安全代理模式
+## 五、速度测试
+### 5.1 FRP-STCP模式
+| IDE and Interface | Ram Write | Flash Write |
+| :----: | :----: | :----: |
+| OpenOCD V2-SWD 20M | 255KB/S | 50KB/S |
+| IAR-DAP V2-SWD 20M | 无法完成 | 无法完成 |
+### 5.2 FRP-P2P模式
 `TODO`
