@@ -21,9 +21,13 @@
 
 ## 五、速度测试
 ### 5.1 FRP-STCP模式
+* 测试网络环境：AP端与服务器ping延迟约14毫秒，STA端与服务器ping延迟约14毫秒
+
 | IDE and Interface | Ram Write | Flash Write |
 | :----: | :----: | :----: |
-| OpenOCD V2-SWD 20M | 255KB/S | 50KB/S |
-| IAR-DAP V2-SWD 20M | 无法完成 | 无法完成 |
+| OpenOCD V2-SWD 20M | 72KB/S | 25KB/S |
+| IAR-DAP V2-SWD 20M | 10KB/S | 4KB/S |
+
+* IAR调试，单步等待时间大约2.4秒
 ### 5.2 FRP-P2P模式
 `TODO`
