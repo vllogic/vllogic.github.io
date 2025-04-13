@@ -9,7 +9,7 @@
 
 ## 固件列表
 * [V00.20-202504130908](../_static/firmware/vllink_basic2.SVCommon0020202504130908.zip)
-  1. 新增：AP模式支持作为STA连接路由器；STA模式支持指定服务器IPv4。用法见[局域网使用](../example/over_local_area_network)及[互联网使用](../example/over_internet)
+  1. 修复：修复一个TCP粘包BUG
 * [V00.19-202504121251](../_static/firmware/vllink_basic2.SVCommon0019202504121251.zip)
   1. 新增：AP模式支持作为STA连接路由器；STA模式支持指定服务器IPv4。用法见[局域网使用](../example/over_local_area_network)及[互联网使用](../example/over_internet)
 * [V00.18-202503281003](../_static/firmware/vllink_basic2.SVCommon0018202504040905.zip)
