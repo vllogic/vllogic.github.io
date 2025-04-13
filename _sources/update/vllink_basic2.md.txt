@@ -10,7 +10,8 @@
 ## 固件列表
 * [V00.21-202504132000](../_static/firmware/vllink_basic2.SVCommon0021202504132000.zip)
   1. 新增：AP模式支持作为STA连接路由器；STA模式支持指定服务器IPv4。用法见[局域网使用](../example/over_local_area_network)及[互联网使用](../example/over_internet)
-  1. 修复：修复一个TCP粘包BUG
+  2. 修复：修复一个TCP粘包BUG
+  3. 新增：支持配置DAP和UART使用的TCP端口，默认为：`TCP_PORT_DAP=20000`，`TCP_PORT_UART=20010`
 * [V00.18-202503281003](../_static/firmware/vllink_basic2.SVCommon0018202504040905.zip)
   1. 优化：针对`OpenOCD`下`JTAG`接口进行优化，有线速度大致提升`67%`，无线速度几乎无变化
   2. 建议：强烈建议使用`OpenOCD`下`SWD`接口的用户升级`OpenOCD nightly`版本，有线速度可超`600KB`，无线速度可超`300KB`
