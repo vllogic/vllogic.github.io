@@ -35,6 +35,12 @@
 
 ## 四、速度测试
 ### 4.1 单接入点
-`TODO`
+| IDE and Interface | Ram Write | Flash Write |
+| :----: | :----: | :----: |
+| OpenOCD V2-SWD 20M | 292KB/S | 50KB/S |
+| IAR-DAP V2-SWD 20M| 78KB/S | 37KB/S |
 ### 4.2 双接入点
-`TODO`
+| IDE and Interface | Ram Write | Flash Write |
+| :----: | :----: | :----: |
+| OpenOCD V2-SWD 20M | 255KB/S | 50KB/S |
+| IAR-DAP V2-SWD 20M | 68KB/S | 34KB/S |

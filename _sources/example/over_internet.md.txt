@@ -13,16 +13,21 @@
     3. 修改STA端的配置：`Mode3_SERVER_IPV4=111.222.333.444`
     4. 重新上电等待连接完成
 
-## 三、代理模式
+## 三、FRP-STCP模式
 `TODO`
 
-## 四、安全代理模式
+## 四、FRP-P2P模式
 `TODO`
 
-## 四、速度测试
-### 4.1 公网IP直连
-`TODO`
-### 4.2 代理模式
-`TODO`
-### 4.3 安全代理模式
+## 五、速度测试
+### 5.1 FRP-STCP模式
+* 测试网络环境：AP端与服务器ping延迟约14毫秒，STA端与服务器ping延迟约14毫秒
+
+| IDE and Interface | Ram Write | Flash Write |
+| :----: | :----: | :----: |
+| OpenOCD V2-SWD 20M | 72KB/S | 25KB/S |
+| IAR-DAP V2-SWD 20M | 10KB/S | 4KB/S |
+
+* IAR调试，单步等待时间大约2.4秒
+### 5.2 FRP-P2P模式
 `TODO`
