@@ -1,5 +1,5 @@
 # 互联网使用
-* 本文所述功能适用于`Vllink Basic2`，固件版本不应小于`V00.20`
+* 本文所述功能适用于`Vllink Basic2`，固件版本不应小于`V00.21`
 
 ## 一、准备工作
 * 参看[局域网使用](../example/over_local_area_network)，完成局域网使用
