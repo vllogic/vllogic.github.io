@@ -127,7 +127,7 @@
 
 ## 六、FRP-P2P模式
 * 此模式需要两端都运行`frpc`命令
-* 此模式数据不经过FRP服务器；两端之间的通讯延迟会影响调试体验；
+* 此模式数据不经过FRP服务器；两端之间的通讯延迟会影响调试体验，在一些同城同网场景中可能具有最好的使用体验
 * 在一些网络场景下，P2P打洞会无法成功
 ### 6.1 AP端调试器
 * 配置：
@@ -179,7 +179,7 @@
 
     [[visitors]]
     type = "xtcp"
-    name = "sta_p2p.dap.visitor"
+    name = "p2p_sta.dap.visitor"
     bindAddr = "0.0.0.0"
     bindPort = 20000
     serverName = "ap_p2p.dap.test20250412"  # p2p_ap中的name
@@ -188,7 +188,7 @@
 
     [[visitors]]
     type = "xtcp"
-    name = "sta_p2p.uart.visitor"
+    name = "p2p_sta.uart.visitor"
     bindAddr = "0.0.0.0"
     bindPort = 20010
     serverName = "ap_p2p.uart.test20250412" # p2p_ap中的name
@@ -279,3 +279,5 @@
 
 * IAR调试，单步等待时间大约2.4秒
 
+## 九、相关资料打包
+* [上述配置文件及Windows下frpc程序](../_static/tools/vllink_test.frp_0.61.2_windows_amd64.zip)
