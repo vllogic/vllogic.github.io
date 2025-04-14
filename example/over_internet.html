@@ -85,14 +85,38 @@
 <li class="toctree-l1"><a class="reference internal" href="over_local_area_network.html">局域网使用</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">互联网使用</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#id2">一、准备工作</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#ip">二、公网IP直连</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#frp-stcp">三、FRP-STCP模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#frp-p2p">四、FRP-P2P模式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">五、速度测试</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id4">5.1 FRP-STCP模式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">5.2 FRP-P2P模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">二、安全性说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ip">三、公网IP直连</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#frp">四、FRP服务器</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4.1 测试服务器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">4.2 <code class="docutils literal notranslate"><span class="pre">可选</span></code>自行部署</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#frp-stcp">五、FRP-STCP模式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ap">5.1 AP端调试器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#apfrpc">5.2 AP端<code class="docutils literal notranslate"><span class="pre">frpc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stafrpc">5.3 STA端<code class="docutils literal notranslate"><span class="pre">frpc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sta">5.4 STA端调试器</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#frp-p2p">六、FRP-P2P模式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">6.1 AP端调试器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">6.2 AP端<code class="docutils literal notranslate"><span class="pre">frpc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">6.3 STA端<code class="docutils literal notranslate"><span class="pre">frpc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">6.4 STA端调试器</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#frp-tcp">七、FRP-TCP模式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">7.1 AP端调试器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">7.2 AP端<code class="docutils literal notranslate"><span class="pre">frpc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">7.3 STA端调试器</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">八、速度测试</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id14">8.1 FRP-STCP模式</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">九、相关资料打包</a></li>
 </ul>
 </li>
 </ul>
@@ -127,6 +151,7 @@
              
   <section id="id1">
 <h1>互联网使用<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p><strong><code class="docutils literal notranslate"><span class="pre">版权声明：转载需注明来自于</span> <span class="pre">vllogic.com</span> </code></strong></p>
 <ul class="simple">
 <li><p>本文所述功能适用于<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic2</span></code>，固件版本不应小于<code class="docutils literal notranslate"><span class="pre">V00.21</span></code></p></li>
 </ul>
@@ -134,12 +159,20 @@
 <h2>一、准备工作<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>参看<a class="reference internal" href="over_local_area_network.html"><span class="doc std std-doc">局域网使用</span></a>，完成局域网使用</p></li>
+<li><p>本文不考虑 <strong>防火墙问题</strong> ，请自行处理</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>二、安全性说明<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Basic2</span></code>无线模式下，<code class="docutils literal notranslate"><span class="pre">DAP</span></code>与<code class="docutils literal notranslate"><span class="pre">UART</span></code>的TCP数据流未加密。其数据安全性依赖于数据通路。直连使用时，具备WPA2加密机制；局域网使用时，数据通路可控；互联网使用时，TCP数据流应当认为是暴露的，需要做安全性处理。</p></li>
+<li><p>如对安全性有要求，可考虑<code class="docutils literal notranslate"><span class="pre">spiped</span></code>，此工具笔者未实测，请咨询AI或专业人员</p></li>
+<li><p>本文后续操作将不会考虑安全性</p></li>
 </ul>
 </section>
 <section id="ip">
-<h2>二、公网IP直连<a class="headerlink" href="#ip" title="Link to this heading"></a></h2>
+<h2>三、公网IP直连<a class="headerlink" href="#ip" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>适用于不要求调试数据安全性的场景</p></li>
 <li><p>适用于拥有公网IPv4，且可配置端口转发的用户</p></li>
 <li><p>操作</p>
 <ol class="arabic simple">
@@ -151,18 +184,334 @@
 </li>
 </ul>
 </section>
+<section id="frp">
+<h2>四、FRP服务器<a class="headerlink" href="#frp" title="Link to this heading"></a></h2>
+<section id="id4">
+<h3>4.1 测试服务器<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul>
+<li><p>此服务器仅用于<code class="docutils literal notranslate"><span class="pre">Basic2</span></code>产品的互联网测试，使用此服务器需进行合理配置，防止与其他用户冲突</p></li>
+<li><p>此服务器不保证<code class="docutils literal notranslate"><span class="pre">安全性</span></code>及<code class="docutils literal notranslate"><span class="pre">稳定性</span></code></p></li>
+<li><p>服务器信息：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;47.122.0.242&quot;</span>
+<span class="n">serverPort</span> <span class="o">=</span> <span class="mi">9999</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="id5">
+<h3>4.2 <code class="docutils literal notranslate"><span class="pre">可选</span></code>自行部署<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>基于一台具备公网IPv4的x86服务器</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">https://github.com/fatedier/frp/releases/download/v0.61.2/frp_0.61.2_linux_amd64.tar.gz</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">zxvf</span> <span class="pre">frp_0.61.2_linux_amd64.tar.gz</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">frp_0.61.2_linux_amd64</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&quot;bindPort</span> <span class="pre">=</span> <span class="pre">9999&quot;</span> <span class="pre">&gt;&gt;</span> <span class="pre">vllink_frps.toml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">./frps</span> <span class="pre">-c</span> <span class="pre">./vllink_frps.toml</span></code></p></li>
+</ol>
+</li>
+<li><p>合理配置防火墙，开放后续使用时所涉及的端口</p></li>
+<li><p>如需长期启动，请参考<a class="reference external" href="https://gofrp.org/zh-cn/docs/setup/systemd/">使用 systemd</a></p></li>
+</ul>
+</section>
+</section>
 <section id="frp-stcp">
-<h2>三、FRP-STCP模式<a class="headerlink" href="#frp-stcp" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">TODO</span></code></p>
+<h2>五、FRP-STCP模式<a class="headerlink" href="#frp-stcp" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>此模式需要两端都运行<code class="docutils literal notranslate"><span class="pre">frpc</span></code>命令</p></li>
+<li><p>此模式数据经过FRP服务器；两端与服务器的通讯延迟都会影响调试体验</p></li>
+<li><p>演示用程序：<a class="reference external" href="https://github.com/fatedier/frp/releases/tag/v0.61.2">v0.61.2</a></p></li>
+</ul>
+<section id="ap">
+<h3>5.1 AP端调试器<a class="headerlink" href="#ap" title="Link to this heading"></a></h3>
+<ul>
+<li><p>配置：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mode</span><span class="o">=</span><span class="n">wirelesshost</span>
+<span class="n">Mode2_STA</span><span class="o">=</span><span class="n">enable</span>
+<span class="n">TCP_PORT_DAP</span><span class="o">=</span><span class="mi">20000</span>
+<span class="n">TCP_PORT_UART</span><span class="o">=</span><span class="mi">20010</span>
+<span class="n">Wireless_Device_SSID</span><span class="o">=</span><span class="n">XXX_5G</span>
+<span class="n">Wireless_Device_Password</span><span class="o">=</span><span class="n">XXX_5G_PASS</span>
+<span class="n">Wireless_ATTR</span><span class="o">=</span><span class="p">[</span><span class="n">wifi</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>从路由器处，获取AP端调试器的局域网地址：<code class="docutils literal notranslate"><span class="pre">192.168.68.183</span></code></p></li>
+</ul>
+</section>
+<section id="apfrpc">
+<h3>5.2 AP端<code class="docutils literal notranslate"><span class="pre">frpc</span></code><a class="headerlink" href="#apfrpc" title="Link to this heading"></a></h3>
+<ul>
+<li><p>新建<code class="docutils literal notranslate"><span class="pre">stcp_ap.toml</span></code></p></li>
+<li><p>编辑内容：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 将`test20250412` 替换为随机字符串，建议12位-16位大小写字母+数字，必须具备随机性，如果与其他用户碰撞会造成错配</span>
+<span class="c1"># 修改localIP，填入AP端调试器的实际局域网IP</span>
+
+<span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;47.122.0.242&quot;</span>
+<span class="n">serverPort</span> <span class="o">=</span> <span class="mi">9999</span>
+
+<span class="p">[[</span><span class="n">proxies</span><span class="p">]]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;stcp&quot;</span>
+<span class="n">localPort</span> <span class="o">=</span> <span class="mi">20000</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ap_stcp.dap.test20250412&quot;</span>   
+<span class="n">secretKey</span> <span class="o">=</span> <span class="s2">&quot;seckey.test20250412&quot;</span>   <span class="c1"># secretKey，建议修改</span>
+<span class="n">localIP</span> <span class="o">=</span> <span class="s2">&quot;192.168.68.183&quot;</span>          <span class="c1"># 根据实际情况修改</span>
+
+<span class="p">[[</span><span class="n">proxies</span><span class="p">]]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;stcp&quot;</span>
+<span class="n">localPort</span> <span class="o">=</span> <span class="mi">20010</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ap_stcp.uart.test20250412&quot;</span>
+<span class="n">secretKey</span> <span class="o">=</span> <span class="s2">&quot;seckey.test20250412&quot;</span>   <span class="c1"># secretKey，建议修改</span>
+<span class="n">localIP</span> <span class="o">=</span> <span class="s2">&quot;192.168.68.183&quot;</span>          <span class="c1"># 根据实际情况修改</span>
+
+<span class="c1"># end</span>
+</pre></div>
+</div>
+</li>
+<li><p>运行：<code class="docutils literal notranslate"><span class="pre">.\frpc.exe</span> <span class="pre">-c</span> <span class="pre">.\stcp_ap.toml</span></code></p></li>
+</ul>
+</section>
+<section id="stafrpc">
+<h3>5.3 STA端<code class="docutils literal notranslate"><span class="pre">frpc</span></code><a class="headerlink" href="#stafrpc" title="Link to this heading"></a></h3>
+<ul>
+<li><p>新建<code class="docutils literal notranslate"><span class="pre">stcp_sta.toml</span></code></p></li>
+<li><p>编辑内容：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 将`test20250412` 替换为随机字符串，建议12位-16位大小写字母+数字，必须具备随机性，如果与其他用户碰撞会造成错配</span>
+
+<span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;47.122.0.242&quot;</span>
+<span class="n">serverPort</span> <span class="o">=</span> <span class="mi">9999</span>
+
+<span class="p">[[</span><span class="n">visitors</span><span class="p">]]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;stcp&quot;</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;sta_stcp.dap.visitor&quot;</span>
+<span class="n">bindAddr</span> <span class="o">=</span> <span class="s2">&quot;0.0.0.0&quot;</span>
+<span class="n">bindPort</span> <span class="o">=</span> <span class="mi">20000</span>
+<span class="n">serverName</span> <span class="o">=</span> <span class="s2">&quot;ap_stcp.dap.test20250412&quot;</span> <span class="c1"># stcp_ap中的name</span>
+<span class="n">secretKey</span> <span class="o">=</span> <span class="s2">&quot;seckey.test20250412&quot;</span>       <span class="c1"># secretKey，需与stcp_ap中一致，建议修改</span>
+
+<span class="p">[[</span><span class="n">visitors</span><span class="p">]]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;stcp&quot;</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;sta_stcp.uart.visitor&quot;</span>
+<span class="n">bindAddr</span> <span class="o">=</span> <span class="s2">&quot;0.0.0.0&quot;</span>
+<span class="n">bindPort</span> <span class="o">=</span> <span class="mi">20010</span>
+<span class="n">serverName</span> <span class="o">=</span> <span class="s2">&quot;ap_stcp.uart.test20250412&quot;</span><span class="c1"># stcp_ap中的name</span>
+<span class="n">secretKey</span> <span class="o">=</span> <span class="s2">&quot;seckey.test20250412&quot;</span>       <span class="c1"># secretKey，需与stcp_ap中一致，建议修改</span>
+
+<span class="c1"># end</span>
+</pre></div>
+</div>
+</li>
+<li><p>运行：<code class="docutils literal notranslate"><span class="pre">.\frpc.exe</span> <span class="pre">-c</span> <span class="pre">.\stcp_sta.toml</span></code></p></li>
+<li><p>从路由器或STA端网络管理工具内，获取STA端的局域网地址：<code class="docutils literal notranslate"><span class="pre">192.168.68.221</span></code></p></li>
+</ul>
+</section>
+<section id="sta">
+<h3>5.4 STA端调试器<a class="headerlink" href="#sta" title="Link to this heading"></a></h3>
+<ul>
+<li><p>配置：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mode</span><span class="o">=</span><span class="n">wirelessdevice</span>
+<span class="n">Mode3_SERVER_IPV4</span><span class="o">=</span><span class="mf">192.168.68.221</span>
+<span class="n">TCP_PORT_DAP</span><span class="o">=</span><span class="mi">20000</span>
+<span class="n">TCP_PORT_UART</span><span class="o">=</span><span class="mi">20010</span>
+<span class="n">Wireless_Device_SSID</span><span class="o">=</span><span class="n">XXX_5G</span>
+<span class="n">Wireless_Device_Password</span><span class="o">=</span><span class="n">XXX_5G_PASS</span>
+<span class="n">Wireless_ATTR</span><span class="o">=</span><span class="p">[</span><span class="n">wifi</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>同步配置后，重新上电，正常情况下，两端指示灯常亮</p></li>
+</ul>
+</section>
 </section>
 <section id="frp-p2p">
-<h2>四、FRP-P2P模式<a class="headerlink" href="#frp-p2p" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">TODO</span></code></p>
+<h2>六、FRP-P2P模式<a class="headerlink" href="#frp-p2p" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>此模式需要两端都运行<code class="docutils literal notranslate"><span class="pre">frpc</span></code>命令</p></li>
+<li><p>此模式数据不经过FRP服务器；两端之间的通讯延迟会影响调试体验，在一些同城同网场景中可能具有最好的使用体验</p></li>
+<li><p>在一些网络场景下，P2P打洞会无法成功</p></li>
+</ul>
+<section id="id6">
+<h3>6.1 AP端调试器<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<ul>
+<li><p>配置：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mode</span><span class="o">=</span><span class="n">wirelesshost</span>
+<span class="n">Mode2_STA</span><span class="o">=</span><span class="n">enable</span>
+<span class="n">TCP_PORT_DAP</span><span class="o">=</span><span class="mi">20000</span>
+<span class="n">TCP_PORT_UART</span><span class="o">=</span><span class="mi">20010</span>
+<span class="n">Wireless_Device_SSID</span><span class="o">=</span><span class="n">XXX_5G</span>
+<span class="n">Wireless_Device_Password</span><span class="o">=</span><span class="n">XXX_5G_PASS</span>
+<span class="n">Wireless_ATTR</span><span class="o">=</span><span class="p">[</span><span class="n">wifi</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>从路由器处，获取AP端调试器的局域网地址：<code class="docutils literal notranslate"><span class="pre">192.168.68.183</span></code></p></li>
+</ul>
 </section>
-<section id="id3">
-<h2>五、速度测试<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
-<section id="id4">
-<h3>5.1 FRP-STCP模式<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="id7">
+<h3>6.2 AP端<code class="docutils literal notranslate"><span class="pre">frpc</span></code><a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<ul>
+<li><p>新建<code class="docutils literal notranslate"><span class="pre">stcp_ap.toml</span></code></p></li>
+<li><p>编辑内容：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 将`test20250412` 替换为随机字符串，建议12位-16位大小写字母+数字，必须具备随机性，如果与其他用户碰撞会造成错配</span>
+<span class="c1"># 修改localIP，填入AP端调试器的实际局域网IP</span>
+
+<span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;47.122.0.242&quot;</span>
+<span class="n">serverPort</span> <span class="o">=</span> <span class="mi">9999</span>
+
+<span class="p">[[</span><span class="n">proxies</span><span class="p">]]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;xtcp&quot;</span>
+<span class="n">localPort</span> <span class="o">=</span> <span class="mi">20000</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ap_p2p.dap.test20250412&quot;</span>
+<span class="n">secretKey</span> <span class="o">=</span> <span class="s2">&quot;seckey.test20250412&quot;</span>   <span class="c1"># secretKey，建议修改</span>
+<span class="n">localIP</span> <span class="o">=</span> <span class="s2">&quot;192.168.68.183&quot;</span>          <span class="c1"># 根据实际情况修改</span>
+
+<span class="p">[[</span><span class="n">proxies</span><span class="p">]]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;xtcp&quot;</span>
+<span class="n">localPort</span> <span class="o">=</span> <span class="mi">20010</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ap_p2p.uart.test20250412&quot;</span>
+<span class="n">secretKey</span> <span class="o">=</span> <span class="s2">&quot;seckey.test20250412&quot;</span>   <span class="c1"># secretKey，建议修改</span>
+<span class="n">localIP</span> <span class="o">=</span> <span class="s2">&quot;192.168.68.183&quot;</span>          <span class="c1"># 根据实际情况修改</span>
+
+<span class="c1"># end</span>
+</pre></div>
+</div>
+</li>
+<li><p>运行：<code class="docutils literal notranslate"><span class="pre">.\frpc.exe</span> <span class="pre">-c</span> <span class="pre">.\stcp_ap.toml</span></code></p></li>
+</ul>
+</section>
+<section id="id8">
+<h3>6.3 STA端<code class="docutils literal notranslate"><span class="pre">frpc</span></code><a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<ul>
+<li><p>新建<code class="docutils literal notranslate"><span class="pre">stcp_sta.toml</span></code></p></li>
+<li><p>编辑内容：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 将`test20250412` 替换为随机字符串，建议12位-16位大小写字母+数字，必须具备随机性，如果与其他用户碰撞会造成错配</span>
+
+<span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;47.122.0.242&quot;</span>
+<span class="n">serverPort</span> <span class="o">=</span> <span class="mi">9999</span>
+
+<span class="p">[[</span><span class="n">visitors</span><span class="p">]]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;xtcp&quot;</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;p2p_sta.dap.visitor&quot;</span>
+<span class="n">bindAddr</span> <span class="o">=</span> <span class="s2">&quot;0.0.0.0&quot;</span>
+<span class="n">bindPort</span> <span class="o">=</span> <span class="mi">20000</span>
+<span class="n">serverName</span> <span class="o">=</span> <span class="s2">&quot;ap_p2p.dap.test20250412&quot;</span>  <span class="c1"># p2p_ap中的name</span>
+<span class="n">secretKey</span> <span class="o">=</span> <span class="s2">&quot;seckey.test20250412&quot;</span>       <span class="c1"># secretKey，需与p2p_ap中一致，建议修改</span>
+<span class="n">keepTunnelOpen</span> <span class="o">=</span> <span class="n">true</span>
+
+<span class="p">[[</span><span class="n">visitors</span><span class="p">]]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;xtcp&quot;</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;p2p_sta.uart.visitor&quot;</span>
+<span class="n">bindAddr</span> <span class="o">=</span> <span class="s2">&quot;0.0.0.0&quot;</span>
+<span class="n">bindPort</span> <span class="o">=</span> <span class="mi">20010</span>
+<span class="n">serverName</span> <span class="o">=</span> <span class="s2">&quot;ap_p2p.uart.test20250412&quot;</span> <span class="c1"># p2p_ap中的name</span>
+<span class="n">secretKey</span> <span class="o">=</span> <span class="s2">&quot;seckey.test20250412&quot;</span>       <span class="c1"># secretKey，需与p2p_ap中一致，建议修改</span>
+<span class="n">keepTunnelOpen</span> <span class="o">=</span> <span class="n">true</span>
+
+<span class="c1"># end</span>
+</pre></div>
+</div>
+</li>
+<li><p>运行：<code class="docutils literal notranslate"><span class="pre">.\frpc.exe</span> <span class="pre">-c</span> <span class="pre">.\stcp_sta.toml</span></code></p></li>
+<li><p>从路由器或STA端网络管理工具内，获取STA端的局域网地址：<code class="docutils literal notranslate"><span class="pre">192.168.68.221</span></code></p></li>
+</ul>
+</section>
+<section id="id9">
+<h3>6.4 STA端调试器<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<ul>
+<li><p>配置：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mode</span><span class="o">=</span><span class="n">wirelessdevice</span>
+<span class="n">Mode3_SERVER_IPV4</span><span class="o">=</span><span class="mf">192.168.68.221</span>
+<span class="n">TCP_PORT_DAP</span><span class="o">=</span><span class="mi">20000</span>
+<span class="n">TCP_PORT_UART</span><span class="o">=</span><span class="mi">20010</span>
+<span class="n">Wireless_Device_SSID</span><span class="o">=</span><span class="n">XXX_5G</span>
+<span class="n">Wireless_Device_Password</span><span class="o">=</span><span class="n">XXX_5G_PASS</span>
+<span class="n">Wireless_ATTR</span><span class="o">=</span><span class="p">[</span><span class="n">wifi</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>同步配置后，重新上电，正常情况下，两端指示灯常亮</p></li>
+</ul>
+</section>
+</section>
+<section id="frp-tcp">
+<h2>七、FRP-TCP模式<a class="headerlink" href="#frp-tcp" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>此模式只需要AP端运行<code class="docutils literal notranslate"><span class="pre">frpc</span></code>命令</p></li>
+<li><p>此模式数据经过FRP服务器，且需独占FRP服务器的两个端口，端口号若与其他用户碰撞，会无法正常使用</p></li>
+</ul>
+<section id="id10">
+<h3>7.1 AP端调试器<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<ul>
+<li><p>配置：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mode</span><span class="o">=</span><span class="n">wirelesshost</span>
+<span class="n">Mode2_STA</span><span class="o">=</span><span class="n">enable</span>
+<span class="n">TCP_PORT_DAP</span><span class="o">=</span><span class="mi">20000</span>
+<span class="n">TCP_PORT_UART</span><span class="o">=</span><span class="mi">20010</span>
+<span class="n">Wireless_Device_SSID</span><span class="o">=</span><span class="n">XXX_5G</span>
+<span class="n">Wireless_Device_Password</span><span class="o">=</span><span class="n">XXX_5G_PASS</span>
+<span class="n">Wireless_ATTR</span><span class="o">=</span><span class="p">[</span><span class="n">wifi</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>从路由器处，获取AP端调试器的局域网地址：<code class="docutils literal notranslate"><span class="pre">192.168.68.183</span></code></p></li>
+</ul>
+</section>
+<section id="id11">
+<h3>7.2 AP端<code class="docutils literal notranslate"><span class="pre">frpc</span></code><a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<ul>
+<li><p>新建<code class="docutils literal notranslate"><span class="pre">tcp_ap.toml</span></code></p></li>
+<li><p>编辑内容：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 此模式只需要AP端运行`frpc`命令</span>
+<span class="c1"># 此需独占FRP服务器的两个端口，端口号若与其他用户碰撞，会无法正常使用</span>
+<span class="c1"># 建议先随机取一个21000-65534的随机数作为DAP的remotePort，然后UART的remotePort加一</span>
+<span class="c1"># 比如：取DAP的remotePort = 34560，取UART的remotePort = 34561</span>
+
+<span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;47.122.0.242&quot;</span>
+<span class="n">serverPort</span> <span class="o">=</span> <span class="mi">9999</span>
+
+<span class="p">[[</span><span class="n">proxies</span><span class="p">]]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;tcp&quot;</span>
+<span class="n">localPort</span> <span class="o">=</span> <span class="mi">20000</span>
+<span class="n">localIP</span> <span class="o">=</span> <span class="s2">&quot;192.168.68.183&quot;</span>          <span class="c1"># AP调试器的局域网地址</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;tcp.34560&quot;</span>                  <span class="c1"># 约定在此项中填入选取的服务器转发端口</span>
+<span class="n">remotePort</span> <span class="o">=</span> <span class="mi">34560</span>                  <span class="c1"># 选取的服务器转发端口</span>
+
+<span class="p">[[</span><span class="n">proxies</span><span class="p">]]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;tcp&quot;</span>
+<span class="n">localPort</span> <span class="o">=</span> <span class="mi">20010</span>
+<span class="n">localIP</span> <span class="o">=</span> <span class="s2">&quot;192.168.68.183&quot;</span>          <span class="c1"># AP端调试器的局域网地址</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;tcp.34561&quot;</span>                  <span class="c1"># 约定在此项中填入选取的服务器转发端口</span>
+<span class="n">remotePort</span> <span class="o">=</span> <span class="mi">34561</span>                  <span class="c1"># 选取的服务器转发端口</span>
+<span class="c1"># end</span>
+</pre></div>
+</div>
+</li>
+<li><p>运行：<code class="docutils literal notranslate"><span class="pre">.\frpc.exe</span> <span class="pre">-c</span> <span class="pre">.\tcp_ap.toml</span></code></p></li>
+</ul>
+</section>
+<section id="id12">
+<h3>7.3 STA端调试器<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<ul>
+<li><p>配置：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mode</span><span class="o">=</span><span class="n">wirelessdevice</span>
+<span class="n">Mode3_SERVER_IPV4</span><span class="o">=</span><span class="mf">47.122.0.242</span>
+<span class="n">TCP_PORT_DAP</span><span class="o">=</span><span class="mi">34560</span>
+<span class="n">TCP_PORT_UART</span><span class="o">=</span><span class="mi">34561</span>
+<span class="n">Wireless_Device_SSID</span><span class="o">=</span><span class="n">XXX_5G</span>
+<span class="n">Wireless_Device_Password</span><span class="o">=</span><span class="n">XXX_5G_PASS</span>
+<span class="n">Wireless_ATTR</span><span class="o">=</span><span class="p">[</span><span class="n">wifi</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>同步配置后，重新上电，正常情况下，两端指示灯常亮</p></li>
+</ul>
+</section>
+</section>
+<section id="id13">
+<h2>八、速度测试<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<section id="id14">
+<h3>8.1 FRP-STCP模式<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>测试网络环境：AP端与服务器ping延迟约14毫秒，STA端与服务器ping延迟约14毫秒</p></li>
 </ul>
@@ -188,10 +537,12 @@
 <li><p>IAR调试，单步等待时间大约2.4秒</p></li>
 </ul>
 </section>
-<section id="id5">
-<h3>5.2 FRP-P2P模式<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">TODO</span></code></p>
 </section>
+<section id="id15">
+<h2>九、相关资料打包<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/85d71eac70006d0bac1388dbf4e1f27e/vllink_test.frp_0.61.2_windows_amd64.zip"><span class="xref download myst">上述配置文件及Windows下frpc程序</span></a></p></li>
+</ul>
 </section>
 </section>
 
