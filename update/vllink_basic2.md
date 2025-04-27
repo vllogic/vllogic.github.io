@@ -10,7 +10,7 @@
 ## 固件列表
 * [V00.23-202504272353](../_static/firmware/vllink_basic2.SVCommon0023202504272353.zip)
   1. 优化：提升配对速度
-  2. 修复：修复几个在特定场景下无线串口会耗尽TCP缓冲的问题
+  2. 修复：修复无线串口在几种特定操作下耗尽TCP缓冲的问题
 * [V00.21-202504132000](../_static/firmware/vllink_basic2.SVCommon0021202504132000.zip)
   1. 新增：AP模式支持作为STA连接路由器；STA模式支持指定服务器IPv4。用法见[局域网使用](../example/over_local_area_network)及[互联网使用](../example/over_internet)
   2. 修复：修复一个TCP粘包BUG
