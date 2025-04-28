@@ -20,10 +20,10 @@
 | TDI  | JTAG数据口 |
 | TMS / SWDIO  | JTAG模式口、SWD数据口 |
 | TCK / SWCLK  | JTAG时钟口、SWD时钟口 |
-| RXD  | 串口输入 |
+| TXD  | 串口输出 |
 | TDO  | JTAG数据口 |
 | SRST / SWRST  | 芯片复位口 |
-| TXD  | 串口输出 |
+| RXD  | 串口输入 |
 | JP_5V  | 跳线帽短接引出内部5V<sup>1</sup> |
 | JP_3V3  | 跳线帽短接引出内部3.3V<sup>1</sup> |
 | GND  | 共地口 |

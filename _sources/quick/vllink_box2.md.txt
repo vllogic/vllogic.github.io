@@ -50,18 +50,18 @@
 
 ### 有线模式连接示例
 ![](../_static/picture/vllink_basic_wired.png)
-* 图中调试器为第一代，`Basic2`版本连接方式相同
+* 图中调试器为第一代，`Box`版本连接方式相同
 * 图中调试器为有线模式，USB接计算机，调试口接目标板
 
 ### 无线模式连接示例
 #### 1. STA为目标板供电
 ![](../_static/picture/vllink_basic_wireless1.png)
-* 图中调试器为第一代，`Basic2`版本连接方式相同
+* 图中调试器为第一代，`Box`版本连接方式相同
 * 图中调试器一个为AP模式，不接目标板；另一个为STA模式，USB接电源、调试口接目标板
 
 #### 2. 目标板为STA供电
 ![](../_static/picture/vllink_basic_wireless2.png)
-* 图中调试器为第一代，`Basic2`版本连接方式相同
+* 图中调试器为第一代，`Box`版本连接方式相同
 * 图中调试器一个为AP模式，不接目标板；另一个为STA模式，调试口接目标板
 
 ## 配置工具
