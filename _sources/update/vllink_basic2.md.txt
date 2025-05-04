@@ -8,7 +8,7 @@
 5. 点击`Update`，等待一段时间后，完成更新。
 
 ## 固件列表
-* [V00.23-202504272353](../_static/firmware/vllink_basic2.SVCommon0023202504272353.zip)
+* [V00.24-202505041230](../_static/firmware/vllink_basic2.SVCommon0024202505041230.zip)
   1. 优化：提升配对速度
   2. 修复：修复无线串口在几种特定操作下耗尽TCP缓冲的问题
 * [V00.21-202504132000](../_static/firmware/vllink_basic2.SVCommon0021202504132000.zip)
