@@ -96,6 +96,8 @@
 ## 进阶使用
 ### FPGA下载器
 * [转接板资料](../hardware/vllink_basic2_to_fpga.md)
+### MIPI-10及JTAG-20P转接板
+* [转接板资料](../hardware/vllink_basic2_to_mipi10p_jtag20p.md)
 
 ## 其他
 * [A4上手指南](../_static/docs/vllink_basic2.A4上手指南.pdf)
