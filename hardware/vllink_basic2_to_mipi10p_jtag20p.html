@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vout口使用说明 &mdash; Vllogic  文档</title>
+  <title>Vllink Basic2配套MIPI-10P及JTAG-20P转接板 &mdash; Vllogic  文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="5V口使用说明" href="vllink_basic2_5v.html" />
-    <link rel="prev" title="Vllink Box2 快速上手" href="../quick/vllink_box2.html" /> 
+    <link rel="next" title="Vllink锂电池充放一体供电模块" href="vllink_battboard.html" />
+    <link rel="prev" title="Vllink Basic2配套FPGA接口转接板" href="vllink_basic2_to_fpga.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,19 +52,16 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Vout口使用说明</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#vllink-basic">Vllink Basic</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">外观</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">电路</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">总结</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="vllink_basic_vout.html">Vout口使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic2_5v.html">5V口使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic2_vref.html">VRef口使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic2_to_fpga.html">Vllink Basic2配套FPGA接口转接板</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vllink_basic2_to_mipi10p_jtag20p.html">Vllink Basic2配套MIPI-10P及JTAG-20P转接板</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Vllink Basic2配套MIPI-10P及JTAG-20P转接板</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">示意图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">原理图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">全套设计文件</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_battboard.html">Vllink锂电池充放一体供电模块</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_uart.html">TTL串口使用说明</a></li>
 </ul>
@@ -113,9 +110,9 @@
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Vout口使用说明</li>
+      <li class="breadcrumb-item active">Vllink Basic2配套MIPI-10P及JTAG-20P转接板</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/hardware/vllink_basic_vout.md.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/hardware/vllink_basic2_to_mipi10p_jtag20p.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -123,48 +120,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="vout">
-<h1>Vout口使用说明<a class="headerlink" href="#vout" title="Link to this heading"></a></h1>
-<section id="vllink-basic">
-<h2>Vllink Basic<a class="headerlink" href="#vllink-basic" title="Link to this heading"></a></h2>
+  <section id="vllink-basic2mipi-10pjtag-20p">
+<h1>Vllink Basic2配套MIPI-10P及JTAG-20P转接板<a class="headerlink" href="#vllink-basic2mipi-10pjtag-20p" title="Link to this heading"></a></h1>
 <section id="id1">
-<h3>外观<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
-<p><img alt="" src="../_images/vllink_basic_vout_fuse.png" /></p>
-</section>
-<section id="id2">
-<h3>电路<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
-<p><img alt="" src="../_images/vllink_basic_vout_fuse_sch.png" /></p>
+<h2>示意图<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p><img alt="" src="../_images/interface_mipi10p_jtag20p.png" /></p>
 <ul class="simple">
-<li><p>此版本<code class="docutils literal notranslate"><span class="pre">Vout</span></code>仅支持<code class="docutils literal notranslate"><span class="pre">3.3V</span></code>、<code class="docutils literal notranslate"><span class="pre">5V</span></code>二选一</p></li>
-<li><p>对于<code class="docutils literal notranslate"><span class="pre">3.3V</span></code>版本（贴F2，不贴F3），可通过PMOS管对外输出3.3V电源，此时输出持续电流不应大于100mA</p></li>
-<li><p>对于<code class="docutils literal notranslate"><span class="pre">5V</span></code>版本（贴F3，不贴F2），可通过PMOS管对外输出5V电源。并且，即使<code class="docutils literal notranslate"><span class="pre">GPIOB0</span></code>未拉低，未开启的PMOS也将等效一个二极管，调试器可从<code class="docutils literal notranslate"><span class="pre">Vout</span></code>脚获得电源输入</p></li>
+<li><p>从左到右依次为：</p>
+<ol class="arabic simple">
+<li><p>DC3母座，接上Vllink Basic2调试器</p></li>
+<li><p>MIPI-10P 1.27mm 牛角座</p></li>
+<li><p>[预留]11P 2.54mm 排针</p></li>
+<li><p>JTAG-20P 2.54mm 牛角座，其<code class="docutils literal notranslate"><span class="pre">PIN2</span></code>与<code class="docutils literal notranslate"><span class="pre">PIN19</span></code>默认悬空，可通过短接点连接对应电源</p></li>
+</ol>
+</li>
 </ul>
 </section>
-<section id="id3">
-<h3>总结<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head text-center"><p>功能</p></th>
-<th class="head text-center"><p>3.3V版本</p></th>
-<th class="head text-center"><p>5V版本</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-center"><p>输出3.3V</p></td>
-<td class="text-center"><p>支持</p></td>
-<td class="text-center"><p>不支持</p></td>
-</tr>
-<tr class="row-odd"><td class="text-center"><p>输出5V</p></td>
-<td class="text-center"><p>不支持</p></td>
-<td class="text-center"><p>支持</p></td>
-</tr>
-<tr class="row-even"><td class="text-center"><p>开发板5V反向供电</p></td>
-<td class="text-center"><p>不支持</p></td>
-<td class="text-center"><p>支持</p></td>
-</tr>
-</tbody>
-</table>
+<section id="id2">
+<h2>原理图<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p><img alt="" src="../_images/interface_mipi10p_jtag20p.sch.png" /></p>
 </section>
+<section id="id3">
+<h2>全套设计文件<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/4703d0112b1ce5da1b98bdf0c5114a91/interface_basic2_mipi10p_jtag20p.zip"><span class="xref download myst">interface_basic2_mipi10p_jtag20p.zip</span></a></p></li>
+</ul>
 </section>
 </section>
 
@@ -172,8 +152,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="../quick/vllink_box2.html" class="btn btn-neutral float-left" title="Vllink Box2 快速上手" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="vllink_basic2_5v.html" class="btn btn-neutral float-right" title="5V口使用说明" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="vllink_basic2_to_fpga.html" class="btn btn-neutral float-left" title="Vllink Basic2配套FPGA接口转接板" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="vllink_battboard.html" class="btn btn-neutral float-right" title="Vllink锂电池充放一体供电模块" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
