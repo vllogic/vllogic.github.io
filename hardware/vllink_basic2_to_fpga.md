@@ -1,4 +1,4 @@
-# Vllink Basic2配套FPGA接口转接板
+# Basic2配套FPGA接口转接板
 
 ## 示意图
 ![](../_static/picture/interface_basic2_to_fpga.png)
