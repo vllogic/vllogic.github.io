@@ -68,6 +68,7 @@ Discussions：https://github.com/vllogic/vllogic.github.io/discussions
 
    update/vllink_basic.md
    update/vllink_basic2.md
+   update/vllink_box.md
 
 .. toctree::
    :maxdepth: 1
