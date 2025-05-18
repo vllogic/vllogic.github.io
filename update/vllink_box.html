@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Basic2配套MIPI-10P及JTAG-20P转接板 &mdash; Vllogic  文档</title>
+  <title>Vllink Box &amp; Vllink Box2 固件更新 &mdash; Vllogic  文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="Vllink锂电池充放一体供电模块" href="vllink_battboard.html" />
-    <link rel="prev" title="Basic2配套FPGA接口转接板" href="vllink_basic2_to_fpga.html" /> 
+    <link rel="next" title="Windows7 驱动安装" href="../software/windows7_driver.html" />
+    <link rel="prev" title="Vllink Basic2 固件更新" href="vllink_basic2.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -51,25 +51,24 @@
 <li class="toctree-l1"><a class="reference internal" href="../quick/vllink_box2.html">Vllink Box2 快速上手</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="vllink_basic_vout.html">Vout口使用说明</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vllink_basic2_5v.html">5V口使用说明</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vllink_basic2_vref.html">VRef口使用说明</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vllink_basic2_to_fpga.html">Basic2配套FPGA接口转接板</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Basic2配套MIPI-10P及JTAG-20P转接板</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">示意图</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">原理图</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">全套设计文件</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="vllink_battboard.html">Vllink锂电池充放一体供电模块</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vllink_uart.html">TTL串口使用说明</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic_vout.html">Vout口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_5v.html">5V口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_vref.html">VRef口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_to_fpga.html">Basic2配套FPGA接口转接板</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_to_mipi10p_jtag20p.html">Basic2配套MIPI-10P及JTAG-20P转接板</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_battboard.html">Vllink锂电池充放一体供电模块</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_uart.html">TTL串口使用说明</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic.html">Vllink Basic 固件更新</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic2.html">Vllink Basic2 固件更新</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../update/vllink_box.html">Vllink Box &amp; Vllink Box2 固件更新</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="vllink_basic.html">Vllink Basic 固件更新</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vllink_basic2.html">Vllink Basic2 固件更新</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Vllink Box &amp; Vllink Box2 固件更新</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">更新方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">固件列表</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
 <ul>
@@ -111,9 +110,9 @@
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Basic2配套MIPI-10P及JTAG-20P转接板</li>
+      <li class="breadcrumb-item active">Vllink Box &amp; Vllink Box2 固件更新</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/hardware/vllink_basic2_to_mipi10p_jtag20p.md.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/update/vllink_box.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -121,30 +120,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="basic2mipi-10pjtag-20p">
-<h1>Basic2配套MIPI-10P及JTAG-20P转接板<a class="headerlink" href="#basic2mipi-10pjtag-20p" title="Link to this heading"></a></h1>
+  <section id="vllink-box-vllink-box2">
+<h1>Vllink Box &amp; Vllink Box2 固件更新<a class="headerlink" href="#vllink-box-vllink-box2" title="Link to this heading"></a></h1>
 <section id="id1">
-<h2>示意图<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
-<p><img alt="" src="../_images/interface_mipi10p_jtag20p.png" /></p>
-<ul class="simple">
-<li><p>从左到右依次为：</p>
+<h2>更新方法<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
-<li><p>DC3母座，接上Vllink Basic2调试器</p></li>
-<li><p>MIPI-10P 1.27mm 牛角座</p></li>
-<li><p>[预留]11P 2.54mm 排针</p></li>
-<li><p>JTAG-20P 2.54mm 牛角座，其<code class="docutils literal notranslate"><span class="pre">PIN2</span></code>与<code class="docutils literal notranslate"><span class="pre">PIN19</span></code>默认悬空，可通过短接点连接对应电源</p></li>
+<li><p>解压压缩包</p></li>
+<li><p>按住按键连接Win10电脑，再使用Chrome浏览器打开更新页面 <a class="reference external" href="https://vllogic.com/_static/tools/update/">Vllink HID Update</a></p></li>
+<li><p>点击<code class="docutils literal notranslate"><span class="pre">Connect</span> <span class="pre">Vllink</span> <span class="pre">Device</span></code>，在对话框中选中<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Box</span> <span class="pre">Update</span></code>再点击<code class="docutils literal notranslate"><span class="pre">连接</span></code></p></li>
+<li><p>在<code class="docutils literal notranslate"><span class="pre">Firmware</span> <span class="pre">Update</span></code>栏目中选中解压得到.bin文件</p></li>
+<li><p>点击<code class="docutils literal notranslate"><span class="pre">Update</span></code>，等待一段时间后，完成更新。</p></li>
 </ol>
-</li>
-</ul>
 </section>
 <section id="id2">
-<h2>原理图<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
-<p><img alt="" src="../_images/interface_mipi10p_jtag20p.sch.png" /></p>
-</section>
-<section id="id3">
-<h2>全套设计文件<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<h2>固件列表<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference download internal" download="" href="../_downloads/4703d0112b1ce5da1b98bdf0c5114a91/interface_basic2_mipi10p_jtag20p.zip"><span class="xref download myst">interface_basic2_mipi10p_jtag20p.zip</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/b6b12202a55dcfe6d64a3d42b5a26ce4/vllink_box.SVCommon0005202505181511.zip"><span class="xref download myst">V00.05-202505181511</span></a></p></li>
 </ul>
 </section>
 </section>
@@ -153,8 +144,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="vllink_basic2_to_fpga.html" class="btn btn-neutral float-left" title="Basic2配套FPGA接口转接板" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="vllink_battboard.html" class="btn btn-neutral float-right" title="Vllink锂电池充放一体供电模块" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="vllink_basic2.html" class="btn btn-neutral float-left" title="Vllink Basic2 固件更新" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../software/windows7_driver.html" class="btn btn-neutral float-right" title="Windows7 驱动安装" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
