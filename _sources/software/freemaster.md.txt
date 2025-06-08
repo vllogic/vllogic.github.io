@@ -1,4 +1,6 @@
 # FreeMASTER 使用说明
+## 截止20250608，此软件已支持CMSIS-DAP V2接口。`Vllink Basic2`在最新版本`3.2.5`下可直接使用。
+
 ## 截止20230405，此软件仅支持CMSIS-DAP V1接口。需要使用带有CMSIS-DAP V1接口的固件：
 ### Vllink Basic
   * [下载页面](../update/vllink_basic.md)
