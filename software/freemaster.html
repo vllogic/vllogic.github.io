@@ -20,7 +20,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="Segger Embedded Studio 使用说明" href="segger_embedded_studio.html" />
+    <link rel="next" title="Hercules 命令说明" href="hercuels_command.html" />
     <link rel="prev" title="PyOCD 使用说明" href="pyocd.html" /> 
 </head>
 
@@ -77,16 +77,12 @@
 <li class="toctree-l1"><a class="reference internal" href="openocd.html">OpenOCD 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pyocd.html">PyOCD 使用说明</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">FreeMASTER 使用说明</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#cmsis-dap-v2vllink-basic23-2-5">截止20250608，此软件已支持CMSIS-DAP V2接口。<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic2</span></code>在最新版本<code class="docutils literal notranslate"><span class="pre">3.2.5</span></code>下可直接使用。</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cmsis-dap-v1cmsis-dap-v1">截止20230405，此软件仅支持CMSIS-DAP V1接口。需要使用带有CMSIS-DAP V1接口的固件：</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#vllink-basic">Vllink Basic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#vllink-basic2">Vllink Basic2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cmsis-dap-v2vllink-basic23-2-5">截止20250608，此软件已支持CMSIS-DAP V2接口。<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic2</span></code>在最新版本<code class="docutils literal notranslate"><span class="pre">3.2.5</span></code>下可直接使用。</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">配置方式</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">配置方式</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="segger_embedded_studio.html">Segger Embedded Studio 使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hercuels_command.html">Hercules 命令说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="speedtest.html">速度测试</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools.html">在线工具</a></li>
@@ -131,28 +127,10 @@
 <h1>FreeMASTER 使用说明<a class="headerlink" href="#freemaster" title="Link to this heading"></a></h1>
 <section id="cmsis-dap-v2vllink-basic23-2-5">
 <h2>截止20250608，此软件已支持CMSIS-DAP V2接口。<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic2</span></code>在最新版本<code class="docutils literal notranslate"><span class="pre">3.2.5</span></code>下可直接使用。<a class="headerlink" href="#cmsis-dap-v2vllink-basic23-2-5" title="Link to this heading"></a></h2>
-</section>
-<section id="cmsis-dap-v1cmsis-dap-v1">
-<h2>截止20230405，此软件仅支持CMSIS-DAP V1接口。需要使用带有CMSIS-DAP V1接口的固件：<a class="headerlink" href="#cmsis-dap-v1cmsis-dap-v1" title="Link to this heading"></a></h2>
-<section id="vllink-basic">
-<h3>Vllink Basic<a class="headerlink" href="#vllink-basic" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p><a class="reference internal" href="../update/vllink_basic.html"><span class="std std-doc">下载页面</span></a></p></li>
-<li><p>可仅升级主机端硬件（即连接电脑的那个）</p></li>
-</ul>
-</section>
-<section id="vllink-basic2">
-<h3>Vllink Basic2<a class="headerlink" href="#vllink-basic2" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>若固件版本小于V0.08，直接支持</p></li>
-<li><p>若固件版本为V0.08，请升级至更高版本固件</p></li>
-<li><p>若固件版本不小于V0.09，需配置<code class="docutils literal notranslate"><span class="pre">AS_ARM_MBED=enable</span></code>并重新上电，<a class="reference external" href="https://vllogic.com/_static/tools/web_config_basic2/">配置工具</a></p></li>
-</ul>
-</section>
-</section>
 <section id="id1">
-<h2>配置方式<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<h3>配置方式<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <p><img alt="" src="../_images/freemaster_config.png" /></p>
+</section>
 </section>
 </section>
 
@@ -161,7 +139,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
         <a href="pyocd.html" class="btn btn-neutral float-left" title="PyOCD 使用说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="segger_embedded_studio.html" class="btn btn-neutral float-right" title="Segger Embedded Studio 使用说明" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hercuels_command.html" class="btn btn-neutral float-right" title="Hercules 命令说明" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
