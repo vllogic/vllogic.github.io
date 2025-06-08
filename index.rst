@@ -16,7 +16,6 @@ Discussions：https://github.com/vllogic/vllogic.github.io/discussions
 * OpenOCD
 * PyOCD
 * Probe RS
-* Segger Embedded Studio
 * IAR，任意版本，CMSIS-DAP V1接口
 * IAR，版本>=7.40.2，CMSIS-DAP V2接口
 * Keil，任意版本，CMSIS-DAP V1接口
