@@ -8,6 +8,8 @@
 5. 点击`Update`，等待一段时间后，完成更新。
 
 ## 固件列表
+* [V00.26-202506082312](../_static/firmware/vllink_basic2.SVCommon0026202506082312.zip)
+  1. 修复：`V00.18`-`V00.25`无法支持`Ozone V3.24 32Bit`的问题
 * [V00.25-202505192331](../_static/firmware/vllink_basic2.SVCommon0025202505192331.zip)
   1. 优化：提升配对速度
   2. 修复：修复无线串口在几种特定操作下耗尽TCP缓冲的问题
