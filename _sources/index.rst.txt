@@ -20,8 +20,8 @@ Discussions：https://github.com/vllogic/vllogic.github.io/discussions
 * IAR，版本>=7.40.2，CMSIS-DAP V2接口
 * Keil，任意版本，CMSIS-DAP V1接口
 * Keil，版本>=5.36，CMSIS-DAP V2接口
-* Segger J-Flash，版本限V7.22B，CMSIS-DAP V1接口，擦写需License
-* Segger Ozone，版本限V3.24 32Bit，CMSIS-DAP V1接口
+* Segger J-Flash，版本限V7.22B，CMSIS-DAP V1接口，Basic2需配置“AS_ARM_MBED=enable”，擦写需License
+* Segger Ozone，版本限V3.24 32Bit，CMSIS-DAP V1接口，Basic2需配置“AS_ARM_MBED=enable”
 * FreeMASTER，版本>=3.2.2
 * STM32CubeIDE，ST-LINK(OpenOCD)模式
 
