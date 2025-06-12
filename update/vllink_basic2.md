@@ -8,7 +8,7 @@
 5. 点击`Update`，等待一段时间后，完成更新。
 
 ## 固件列表
-* [V00.27-202506082312](../_static/firmware/vllink_basic2.SVCommon0027202506121744.zip)
+* [V00.27-202506121744](../_static/firmware/vllink_basic2.SVCommon0027202506121744.zip)
   1. 修复：`V00.18`-`V00.25`无法支持`Ozone V3.24 32Bit`的问题
   2. 修复：Keil环境中，`N32G455`无法在高速率SWD接口下执行flash写入操作
 * [V00.25-202505192331](../_static/firmware/vllink_basic2.SVCommon0025202505192331.zip)
