@@ -9,10 +9,10 @@
 ## 二、快速上手
 1. 从 [Wireshark官网](https://www.wireshark.org/) 下载Wireshark并安装
 2. 下载 [驱动及插件](../_static/driver/vllogic.usb_sniffer.zip) 并解压，此插件亦可通过 [源码](https://github.com/vllogic/ataradov.usb-sniffer/tree/main/software) 自行构建
-3. 将硬件的`单TYPE-C口`接入电脑，在设备管理中找到设备并更新文件夹中驱动程序
+3. 将硬件的`单TYPE-C口`接入电脑，在设备管理中找到设备并更新文件夹中驱动
 4. 启动`Wireshark`，点击`帮助`-`关于Wireshark`-`文件夹`，打开`Global Extcap path`文件夹，将`usb_sniffer_win.exe`拷贝至此路径中
-5. 重启`Wireshark`，在`捕获`中会出现一个`USB Sniffer`，点击其齿轮，根据目标设备速度选择`采集速度`，一般可以勾选`Fold empty frames(折叠空帧)`，点击开始
-6. 此时，硬件的另一端，`TYPE-C口`用于连接USB主机，`A母`用于连接USB设备，当然也可以反过来
+5. 重启`Wireshark`，在`捕获`中会出现一个`USB Sniffer`，点击其齿轮，根据目标设备速度选择`采集速度`，推荐勾选`Fold empty frames(折叠空帧)`，点击开始
+6. 硬件的另一端，`TYPE-C口`用于连接USB主机，`A母`用于连接USB设备，当然也可以反过来
 7. 在目标USB通讯开始后，Wireshark中会显示通讯数据
 
 ## 三、二次开发
@@ -24,5 +24,5 @@
 * [源码](https://github.com/vllogic/dalishen_pi_h7p20/tree/main/examples/usb_sniffer_h7p20.ataradov.usb_sniffer)
 * 更多开发资料请参考 [大力神派](./dalishen_pi_h7p20.md)
 
-## 四、FPGA闲聊群
+## 四、交流群
 * QQ群：635683631
