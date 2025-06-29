@@ -27,20 +27,20 @@
 * 通过搜索发现雅特力提供了[定制OpenOCD](https://github.com/ArteryTek/openocd)
 * 但其最新[Actions](https://github.com/ArteryTek/openocd/actions/runs/7520365309)中的Artifacts已无法下载
 * 这种情况可以通过Fork，手动触发一次构建
-* 本人Fork后构建的[二进制 xpack.zip](https://github.com/vllogic/ArteryTek_openocd/releases/tag/20240509)
+* 笔者合并构建的[二进制包](https://github.com/vllogic/openocd_cmsis-dap_v2/releases/tag/20250629)
 
 ## 无线ICP过程
-1. 下载上文中的二进制包，解压后，进入`xpack\bin-windows_amd64`目录
-2. 本人无AT32F403A工程，故通过HxD工具生成了一份128KB的随机数据Bin文件测试
-3. 将测试文件`test128k.bin`拷贝至`xpack\bin-windows_amd64`目录
+1. 下载上文中的二进制包，解压后，进入`openocd-20250629-i686-w64-mingw32\bin`目录
+2. 笔者无AT32F403A工程，故通过HxD工具生成了一份128KB的随机数据Bin文件测试
+3. 将测试文件`test128k.bin`拷贝至`openocd-20250629-i686-w64-mingw32\bin`目录
 4. 目录下，Shift + 鼠标右键，打开PowerShell
 5. 执行命令：
    ```
-   ./openocd -s ../scripts -f interface/cmsis-dap.cfg -f target/at32f403xG.cfg -c "transport select swd; program test128k.bin verify exit 0x08000000"
+   ./openocd -s ../scripts -f interface/cmsis-dap.cfg -f target/at32f403xG.cfg -c "adapter speed 8000; transport select swd; program test128k.bin verify exit 0x08000000"
    ```
 6. 输出如下：
    ```
-   Open On-Chip Debugger 0.11.0+dev-g03c994a-dirty (2024-05-09-02:56)
+   Open On-Chip Debugger 0.12.0+dev-gcffb946 (2025-06-29-05:17)
    Licensed under GNU GPL v2
    For bug reports, read
          http://openocd.org/doc/doxygen/bugs.html

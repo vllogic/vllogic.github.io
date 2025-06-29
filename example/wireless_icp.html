@@ -160,23 +160,23 @@ VRef ---  3V3
 <li><p>通过搜索发现雅特力提供了<a class="reference external" href="https://github.com/ArteryTek/openocd">定制OpenOCD</a></p></li>
 <li><p>但其最新<a class="reference external" href="https://github.com/ArteryTek/openocd/actions/runs/7520365309">Actions</a>中的Artifacts已无法下载</p></li>
 <li><p>这种情况可以通过Fork，手动触发一次构建</p></li>
-<li><p>本人Fork后构建的<a class="reference external" href="https://github.com/vllogic/ArteryTek_openocd/releases/tag/20240509">二进制 xpack.zip</a></p></li>
+<li><p>笔者合并构建的<a class="reference external" href="https://github.com/vllogic/openocd_cmsis-dap_v2/releases/tag/20250629">二进制包</a></p></li>
 </ul>
 </section>
 <section id="id4">
 <h2>无线ICP过程<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
 <ol class="arabic">
-<li><p>下载上文中的二进制包，解压后，进入<code class="docutils literal notranslate"><span class="pre">xpack\bin-windows_amd64</span></code>目录</p></li>
-<li><p>本人无AT32F403A工程，故通过HxD工具生成了一份128KB的随机数据Bin文件测试</p></li>
-<li><p>将测试文件<code class="docutils literal notranslate"><span class="pre">test128k.bin</span></code>拷贝至<code class="docutils literal notranslate"><span class="pre">xpack\bin-windows_amd64</span></code>目录</p></li>
+<li><p>下载上文中的二进制包，解压后，进入<code class="docutils literal notranslate"><span class="pre">openocd-20250629-i686-w64-mingw32\bin</span></code>目录</p></li>
+<li><p>笔者无AT32F403A工程，故通过HxD工具生成了一份128KB的随机数据Bin文件测试</p></li>
+<li><p>将测试文件<code class="docutils literal notranslate"><span class="pre">test128k.bin</span></code>拷贝至<code class="docutils literal notranslate"><span class="pre">openocd-20250629-i686-w64-mingw32\bin</span></code>目录</p></li>
 <li><p>目录下，Shift + 鼠标右键，打开PowerShell</p></li>
 <li><p>执行命令：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">openocd</span> <span class="o">-</span><span class="n">s</span> <span class="o">../</span><span class="n">scripts</span> <span class="o">-</span><span class="n">f</span> <span class="n">interface</span><span class="o">/</span><span class="n">cmsis</span><span class="o">-</span><span class="n">dap</span><span class="o">.</span><span class="n">cfg</span> <span class="o">-</span><span class="n">f</span> <span class="n">target</span><span class="o">/</span><span class="n">at32f403xG</span><span class="o">.</span><span class="n">cfg</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;transport select swd; program test128k.bin verify exit 0x08000000&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">openocd</span> <span class="o">-</span><span class="n">s</span> <span class="o">../</span><span class="n">scripts</span> <span class="o">-</span><span class="n">f</span> <span class="n">interface</span><span class="o">/</span><span class="n">cmsis</span><span class="o">-</span><span class="n">dap</span><span class="o">.</span><span class="n">cfg</span> <span class="o">-</span><span class="n">f</span> <span class="n">target</span><span class="o">/</span><span class="n">at32f403xG</span><span class="o">.</span><span class="n">cfg</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;adapter speed 8000; transport select swd; program test128k.bin verify exit 0x08000000&quot;</span>
 </pre></div>
 </div>
 </li>
 <li><p>输出如下：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Open</span> <span class="n">On</span><span class="o">-</span><span class="n">Chip</span> <span class="n">Debugger</span> <span class="mf">0.11.0</span><span class="o">+</span><span class="n">dev</span><span class="o">-</span><span class="n">g03c994a</span><span class="o">-</span><span class="n">dirty</span> <span class="p">(</span><span class="mi">2024</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">02</span><span class="p">:</span><span class="mi">56</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Open</span> <span class="n">On</span><span class="o">-</span><span class="n">Chip</span> <span class="n">Debugger</span> <span class="mf">0.12.0</span><span class="o">+</span><span class="n">dev</span><span class="o">-</span><span class="n">gcffb946</span> <span class="p">(</span><span class="mi">2025</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">29</span><span class="o">-</span><span class="mi">05</span><span class="p">:</span><span class="mi">17</span><span class="p">)</span>
 <span class="n">Licensed</span> <span class="n">under</span> <span class="n">GNU</span> <span class="n">GPL</span> <span class="n">v2</span>
 <span class="n">For</span> <span class="n">bug</span> <span class="n">reports</span><span class="p">,</span> <span class="n">read</span>
       <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">openocd</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">doc</span><span class="o">/</span><span class="n">doxygen</span><span class="o">/</span><span class="n">bugs</span><span class="o">.</span><span class="n">html</span>
