@@ -76,6 +76,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">OpenOCD 使用说明</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#cmsis-dap-v2">0.11及以上版本支持CMSIS-DAP V2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#latest-v0-1212">推荐使用最新latest版本，无线速度相比<code class="docutils literal notranslate"><span class="pre">v0.12</span></code>提升12倍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">测试例程</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pyocd.html">PyOCD 使用说明</a></li>
@@ -130,6 +131,18 @@
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/vllogic/openocd_cmsis-dap_v2/releases/tag/20250629">合并一些国产支持的版本</a></p></li>
 <li><p><a class="reference external" href="https://github.com/openocd-org/openocd/releases/tag/latest">官方latest源码</a></p></li>
+</ul>
+</section>
+<section id="id1">
+<h2>测试例程<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>下载xxx.tar.gz解压后，进入bin目录，启动powershell：</p>
+<ol class="arabic simple">
+<li><p>测试对象AIC8800M，测试命令：<code class="docutils literal notranslate"><span class="pre">./openocd</span> <span class="pre">-s</span> <span class="pre">../scripts</span> <span class="pre">-f</span> <span class="pre">interface/cmsis-dap.cfg</span> <span class="pre">-f</span> <span class="pre">target/aic8800.cfg</span> <span class="pre">-c</span> <span class="pre">&quot;adapter</span> <span class="pre">speed</span> <span class="pre">15000;</span> <span class="pre">transport</span> <span class="pre">select</span> <span class="pre">swd;</span> <span class="pre">init;</span> <span class="pre">halt;</span> <span class="pre">dump_image</span> <span class="pre">flash_128KB.bin</span> <span class="pre">0x8000000</span> <span class="pre">0x20000;</span> <span class="pre">program</span> <span class="pre">flash_128KB.bin</span> <span class="pre">verify</span> <span class="pre">exit</span> <span class="pre">0x08020000&quot;</span></code></p></li>
+<li><p>测试对象AT32F405，测试命令：<code class="docutils literal notranslate"><span class="pre">./openocd</span> <span class="pre">-s</span> <span class="pre">../scripts</span> <span class="pre">-f</span> <span class="pre">interface/cmsis-dap.cfg</span> <span class="pre">-f</span> <span class="pre">target/at32f405xx.cfg</span> <span class="pre">-c</span> <span class="pre">&quot;adapter</span> <span class="pre">speed</span> <span class="pre">15000;</span> <span class="pre">transport</span> <span class="pre">select</span> <span class="pre">swd;</span> <span class="pre">init;</span> <span class="pre">halt;</span> <span class="pre">dump_image</span> <span class="pre">flash_128KB.bin</span> <span class="pre">0x8000000</span> <span class="pre">0x20000;</span> <span class="pre">program</span> <span class="pre">flash_128KB.bin</span> <span class="pre">verify</span> <span class="pre">exit</span> <span class="pre">0x08020000&quot;</span></code></p></li>
+</ol>
+</li>
+<li><p>​例程功能：复位、将flash前128KB复制到其第二个128KB空间内</p></li>
 </ul>
 </section>
 </section>
