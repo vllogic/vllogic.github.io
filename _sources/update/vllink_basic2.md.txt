@@ -8,6 +8,9 @@
 5. 点击`Update`，等待一段时间后，完成更新。
 
 ## 固件列表
+* [V00.30-202507181043](../_static/firmware/vllink_basic2.SVCommon0030202507181043.zip)
+  1. 修复：`V00.17`-`V00.27`STA端串口在无线未连接时会被串口接收数据卡死的问题
+  2. 优化：优化STA在无线直连和无线连路由器两种模式下的省电策略
 * [V00.29-202506252233](../_static/firmware/vllink_basic2.SVCommon0029202506252233.zip)
   1. 修复：`V00.17`-`V00.27`无线串口会在部分场景出错的问题
 * [V00.27-202506121744](../_static/firmware/vllink_basic2.SVCommon0027202506121744.zip)
