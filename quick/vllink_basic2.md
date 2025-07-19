@@ -79,10 +79,13 @@
 3. Windows7系统用户请参考下方链接安装驱动
 
 ## 常见问题
-1. * 问：设备管理器内能发现`CMSIS-DAP V2`设备，但是软件却无法访问
-   * 答：在设备管理器内，右击`CMSIS-DAP V2`设备，卸载设备，然后重新连接一次即可解决
-2. * 问：Keil内`Reset and Run`功能无效，即按`F8`下载程序后，程序未自动运行
-   * 答：在`Debug`-`CMSIS-DAP - JTAG/SW Adapter`中，选定`CMSIS-DAP v2`即可解决
+1. * 问：能识别`CMSIS-DAP V1`，但`CMSIS-DAP V2`接口消失
+   * 答：下载修复工具：[UsbDriverTool](../_static/tools/UsbDriverTool-2.1.zip)，解压运行`UsbDriverTool.exe`，参照下图修复
+   ![](../_static/picture/UsbDriverTool_fix.png)
+2. * 问：设备管理器内能发现`CMSIS-DAP V2`设备，但是软件却无法访问
+   * 答：在设备管理器内，右击`CMSIS-DAP V2`设备，卸载设备，然后重新连接一次
+3. * 问：Keil内`Reset and Run`功能无效，即按`F8`下载程序后，程序未自动运行
+   * 答：在`Debug`-`CMSIS-DAP - JTAG/SW Adapter`中，选定`CMSIS-DAP v2`即可
 
 ## 开发工具使用说明
 * [Windows7 驱动安装](../software/windows7_driver.md)
