@@ -7,7 +7,18 @@
 4. 在`Firmware Update`栏目中选择第一步中的`.bin`固件
 5. 点击`Update`，等待一段时间后，完成更新
 
-## 固件列表
+## 固件列表-正式版
+* [V00.31-202507261219](../_static/firmware/vllink_basic2.SVCommon0031202507261219.zip)
+  1. UART启用DMA支持，波特率上下限扩展到`1200`-`6500000`，高波特率测试中暂未发现速度瓶颈
+  2. 新增无线TTL串口桥接功能，详见[TTL串口使用说明](../hardware/vllink_uart)
+  3. 新增网络模式，支持`局域网`及`互联网`，详见[局域网使用](../example/over_local_area_network)及[互联网使用](../example/over_internet)
+* [V00.16-202408182040](../_static/firmware/vllink_basic2.SVCommon0016202408182040.zip)
+  1. 此版本为2024年正式版固件
+  2. 支持有线模式、无线直连模式，UART波特率不建议超过`1000000`
+
+## 固件列表-预览版
+* [V00.32-202508022039](../_static/firmware/vllink_basic2.SVCommon0032202508022039.zip)
+  1. 优化：新增多DAP接口占用锁，自动上锁，空闲解锁，空闲时间可调，默认50毫秒。参数为：`Idle_Interval_mS`
 * [V00.31-202507261219](../_static/firmware/vllink_basic2.SVCommon0031202507261219.zip)
   1. 修复：`V00.17`-`V00.27`STA端串口在无线未连接时会被串口接收数据卡死的问题
   2. 优化：优化STA在无线直连和无线连路由器两种模式下的省电策略
