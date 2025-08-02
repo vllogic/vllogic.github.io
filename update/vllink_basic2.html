@@ -66,7 +66,8 @@
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic.html">Vllink Basic 固件更新</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Vllink Basic2 固件更新</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#id1">更新方法</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">固件列表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">固件列表-正式版</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">固件列表-预览版</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_box.html">Vllink Box &amp; Vllink Box2 固件更新</a></li>
@@ -133,8 +134,31 @@
 </ol>
 </section>
 <section id="id2">
-<h2>固件列表<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<h2>固件列表-正式版<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/a01d8c87c191a446bf7c7082c15958ed/vllink_basic2.SVCommon0031202507261219.zip"><span class="xref download myst">V00.31-202507261219</span></a></p>
+<ol class="arabic simple">
+<li><p>UART启用DMA支持，波特率上下限扩展到<code class="docutils literal notranslate"><span class="pre">1200</span></code>-<code class="docutils literal notranslate"><span class="pre">6500000</span></code>，高波特率测试中暂未发现速度瓶颈</p></li>
+<li><p>新增无线TTL串口桥接功能，详见<a class="reference internal" href="../hardware/vllink_uart.html"><span class="doc std std-doc">TTL串口使用说明</span></a></p></li>
+<li><p>新增网络模式，支持<code class="docutils literal notranslate"><span class="pre">局域网</span></code>及<code class="docutils literal notranslate"><span class="pre">互联网</span></code>，详见<a class="reference internal" href="../example/over_local_area_network.html"><span class="doc std std-doc">局域网使用</span></a>及<a class="reference internal" href="../example/over_internet.html"><span class="doc std std-doc">互联网使用</span></a></p></li>
+</ol>
+</li>
+<li><p><a class="reference download internal" download="" href="../_downloads/275df90e7f187472d829d72fee49e410/vllink_basic2.SVCommon0016202408182040.zip"><span class="xref download myst">V00.16-202408182040</span></a></p>
+<ol class="arabic simple">
+<li><p>此版本为2024年正式版固件</p></li>
+<li><p>支持有线模式、无线直连模式，UART波特率不建议超过<code class="docutils literal notranslate"><span class="pre">1000000</span></code></p></li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h2>固件列表-预览版<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/a39a8ef742dd97d2261c137c43a0653a/vllink_basic2.SVCommon0032202508022039.zip"><span class="xref download myst">V00.32-202508022039</span></a></p>
+<ol class="arabic simple">
+<li><p>优化：新增多DAP接口占用锁，自动上锁，空闲解锁，空闲时间可调，默认50毫秒。参数为：<code class="docutils literal notranslate"><span class="pre">Idle_Interval_mS</span></code></p></li>
+</ol>
+</li>
 <li><p><a class="reference download internal" download="" href="../_downloads/a01d8c87c191a446bf7c7082c15958ed/vllink_basic2.SVCommon0031202507261219.zip"><span class="xref download myst">V00.31-202507261219</span></a></p>
 <ol class="arabic simple">
 <li><p>修复：<code class="docutils literal notranslate"><span class="pre">V00.17</span></code>-<code class="docutils literal notranslate"><span class="pre">V00.27</span></code>STA端串口在无线未连接时会被串口接收数据卡死的问题</p></li>
