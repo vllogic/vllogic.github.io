@@ -90,6 +90,7 @@ Discussions：https://github.com/vllogic/vllogic.github.io/discussions
    :caption: 应用实例
    
    example/wireless_icp.md
+   example/vscode_cortex_debug.md
    example/linux_rules.md
    example/over_local_area_network.md
    example/over_internet.md
