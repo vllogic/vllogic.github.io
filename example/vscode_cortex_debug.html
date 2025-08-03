@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>使用VSCode的Cortex Debug调试任意固件 &mdash; Vllogic  文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7d86a446"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Linux下非root用户授权" href="linux_rules.html" />
+    <link rel="prev" title="无线ICP（在电路编程）" href="wireless_icp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Vllogic
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic.html">Vllink Basic 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic2.html">Vllink Basic2 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_box.html">Vllink Box 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_box2.html">Vllink Box2 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/usb_sniffer_h7p20.html">USB Sniffer H7P20 快速上手</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic_vout.html">Vout口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_5v.html">5V口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_vref.html">VRef口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_to_fpga.html">Basic2配套FPGA接口转接板</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_to_mipi10p_jtag20p.html">Basic2配套MIPI-10P及JTAG-20P转接板</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_battboard.html">Vllink锂电池充放一体供电模块</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_uart.html">TTL串口使用说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic.html">Vllink Basic 固件更新</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic2.html">Vllink Basic2 固件更新</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_box.html">Vllink Box &amp; Vllink Box2 固件更新</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software/windows7_driver.html">Windows7 驱动安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/iar.html">IAR 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/keil_mdk.html">Keil MDK 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/probe_rs.html">Probe RS 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/openocd.html">OpenOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/pyocd.html">PyOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/freemaster.html">FreeMASTER 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/hercuels_command.html">Hercules 命令说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/speedtest.html">速度测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/tools.html">在线工具</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">应用实例</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="wireless_icp.html">无线ICP（在电路编程）</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">使用VSCode的Cortex Debug调试任意固件</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">标准配置方法 <code class="docutils literal notranslate"><span class="pre">可跳过</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">解包即用版本</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linux_rules.html">Linux下非root用户授权</a></li>
+<li class="toctree-l1"><a class="reference internal" href="over_local_area_network.html">局域网使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="over_internet.html">互联网使用</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">文档维护</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Vllogic</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">使用VSCode的Cortex Debug调试任意固件</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/example/vscode_cortex_debug.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vscodecortex-debug">
+<h1>使用VSCode的Cortex Debug调试任意固件<a class="headerlink" href="#vscodecortex-debug" title="Link to this heading"></a></h1>
+<p><strong><code class="docutils literal notranslate"><span class="pre">版权声明：转载需注明来自于</span> <span class="pre">vllogic.com</span> </code></strong></p>
+<blockquote>
+<div><p>前言：除了常见调试外，这个方法还适用于多个软件通过单个<code class="docutils literal notranslate"><span class="pre">Vllink</span></code>同时访问<code class="docutils literal notranslate"><span class="pre">SOC</span></code>上的多个JTAG设备</p>
+</div></blockquote>
+<section id="id1">
+<h2>标准配置方法 <code class="docutils literal notranslate"><span class="pre">可跳过</span></code><a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>安装<code class="docutils literal notranslate"><span class="pre">VSCode</span></code></p></li>
+<li><p>在<code class="docutils literal notranslate"><span class="pre">VSCode</span></code>中安装<code class="docutils literal notranslate"><span class="pre">Cortex-Debug</span></code>插件，安装完成后关闭<code class="docutils literal notranslate"><span class="pre">VSCode</span></code></p></li>
+<li><p>安装<a class="reference external" href="https://developer.arm.com/downloads/-/gnu-rm">gcc-arm-none-eabi-10.3-2021.10</a></p></li>
+<li><p>下载并解包<a class="reference external" href="https://github.com/vllogic/openocd_cmsis-dap_v2/releases/tag/20250629">OpenOCD</a></p></li>
+<li><p>在系统<code class="docutils literal notranslate"><span class="pre">PATH</span></code>中增加：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">{GCC的绝对路径}\gcc-arm-none-eabi_10-2021-10\bin</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{OpenOCD的绝对路径}\openocd\bin</span></code></p></li>
+</ul>
+</li>
+<li><p>进入需要调试的工程目录，执行构建，生成<code class="docutils literal notranslate"><span class="pre">.out</span></code>或<code class="docutils literal notranslate"><span class="pre">.axf</span></code>可调试文件</p></li>
+<li><p>新建<code class="docutils literal notranslate"><span class="pre">vscode_cortex_debug</span></code>文件夹</p></li>
+<li><p>进入<code class="docutils literal notranslate"><span class="pre">vscode_cortex_debug</span></code>文件夹，新建<code class="docutils literal notranslate"><span class="pre">.vscode</span></code>文件夹</p></li>
+<li><p>新建<code class="docutils literal notranslate"><span class="pre">vscode_cortex_debug.code-workspace</span></code>文本，填入以下内容</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;folders&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;.&quot;</span><span class="p">}],</span>
+    <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;cortex-debug.variableUseNaturalFormat&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>进入<code class="docutils literal notranslate"><span class="pre">.vscode</span></code>文件夹，新建<code class="docutils literal notranslate"><span class="pre">launch.json</span></code>文本，此处提供几个模板，合理修改后保存</p>
+<ul class="simple">
+<li><p>模板一：雅特力 AT32F405</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.2.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;configurations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Cortex Debug&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;cwd&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{workspaceFolder}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;executable&quot;</span><span class="p">:</span> <span class="s2">&quot;../objects/flash_write_read.axf&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="s2">&quot;launch&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;cortex-debug&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;runToEntryPoint&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">,</span>
+            <span class="o">//</span><span class="s2">&quot;gdbPath&quot;</span><span class="p">:</span> <span class="s2">&quot;../vscode_cortex_debug.tools/arm-none-eabi-gdb.exe&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;servertype&quot;</span><span class="p">:</span> <span class="s2">&quot;openocd&quot;</span><span class="p">,</span>
+            <span class="o">//</span><span class="s2">&quot;serverpath&quot;</span><span class="p">:</span> <span class="s2">&quot;../vscode_cortex_debug.tools/openocd/bin/openocd.exe&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;device&quot;</span><span class="p">:</span> <span class="s2">&quot;AT32F405&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;configFiles&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;interface/cmsis-dap.cfg&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;target/at32f405xx.cfg&quot;</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>模板二：爱科微 AIC8800M</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;0.2.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;configurations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Cortex Debug&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;cwd&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{workspaceFolder}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;executable&quot;</span><span class="p">:</span> <span class="s2">&quot;../project/Exe/project.out&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="s2">&quot;launch&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;cortex-debug&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;runToEntryPoint&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">,</span>
+            <span class="o">//</span><span class="s2">&quot;gdbPath&quot;</span><span class="p">:</span> <span class="s2">&quot;../vscode_cortex_debug.tools/arm-none-eabi-gdb.exe&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;servertype&quot;</span><span class="p">:</span> <span class="s2">&quot;openocd&quot;</span><span class="p">,</span>
+            <span class="o">//</span><span class="s2">&quot;serverpath&quot;</span><span class="p">:</span> <span class="s2">&quot;../vscode_cortex_debug.tools/openocd/bin/openocd.exe&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;device&quot;</span><span class="p">:</span> <span class="s2">&quot;AIC8800M&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;configFiles&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;interface/cmsis-dap.cfg&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;target/aic8800.cfg&quot;</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>双击<code class="docutils literal notranslate"><span class="pre">vscode_cortex_debug.code-workspace</span></code>打开工程，按<code class="docutils literal notranslate"><span class="pre">F5</span></code>即启动调试</p></li>
+</ol>
+</section>
+<section id="id2">
+<h2>解包即用版本<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>安装<code class="docutils literal notranslate"><span class="pre">VSCode</span></code></p></li>
+<li><p>在<code class="docutils literal notranslate"><span class="pre">VSCode</span></code>中安装<code class="docutils literal notranslate"><span class="pre">Cortex-Debug</span></code>插件，安装完成后关闭<code class="docutils literal notranslate"><span class="pre">VSCode</span></code></p></li>
+<li><p>进入需要调试的工程目录，执行构建，生成<code class="docutils literal notranslate"><span class="pre">.out</span></code>或<code class="docutils literal notranslate"><span class="pre">.axf</span></code>可调试文件</p></li>
+<li><p>下载<a class="reference download internal" download="" href="../_downloads/6e77f1bb574138ee4aa9159c79ae9a18/vscode_cortex_debug_example.zip"><span class="xref download myst">整合包</span></a>，此包集成<code class="docutils literal notranslate"><span class="pre">AT32F405</span></code>、<code class="docutils literal notranslate"><span class="pre">AIC8800M</span></code>、<code class="docutils literal notranslate"><span class="pre">H7P20</span></code>调试工程以及必要的GDB、OpenOCD二进制文件</p></li>
+<li><p>解压整合包，根据目标芯片打开对应的调试工程，如：<code class="docutils literal notranslate"><span class="pre">vscode_cortex_debug.H7P20/vscode_cortex_debug.code-workspace</span></code>。</p></li>
+<li><p>把<code class="docutils literal notranslate"><span class="pre">launch.json</span></code>中的<code class="docutils literal notranslate"><span class="pre">&quot;executable&quot;</span></code>路径修改为可调试文件的相对路径，如是其他芯片，还需要修改<code class="docutils literal notranslate"><span class="pre">&quot;device&quot;</span></code>项及
+<code class="docutils literal notranslate"><span class="pre">&quot;configFiles&quot;</span></code>项</p></li>
+<li><p>按<code class="docutils literal notranslate"><span class="pre">F5</span></code>即启动调试</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="wireless_icp.html" class="btn btn-neutral float-left" title="无线ICP（在电路编程）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="linux_rules.html" class="btn btn-neutral float-right" title="Linux下非root用户授权" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022, Vllogic。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
