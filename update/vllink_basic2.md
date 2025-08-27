@@ -18,7 +18,7 @@
 
 ## 固件列表-预览版
 * [V00.33-202508271309](../_static/firmware/vllink_basic2.SVCommon0033202508271309.zip)
-  1. 修复：波特率超3.25M时，寄存器配置错误的问题
+  1. 修复：波特率超3.25M时，寄存器配置错误的问题，此固件最高波特率为`6500000`
 * [V00.32-202508022039](../_static/firmware/vllink_basic2.SVCommon0032202508022039.zip)
   1. 优化：新增多DAP接口占用锁，自动上锁，空闲解锁，空闲时间可调，默认50毫秒。参数为：`Idle_Interval_mS`
 * [V00.31-202507261219](../_static/firmware/vllink_basic2.SVCommon0031202507261219.zip)
