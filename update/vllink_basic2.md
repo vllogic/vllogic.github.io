@@ -9,7 +9,7 @@
 
 ## 固件列表-正式版
 * [V00.31-202507261219](../_static/firmware/vllink_basic2.SVCommon0031202507261219.zip)
-  1. UART启用DMA支持，波特率上下限扩展到`1200`-`6500000`，高波特率测试中暂未发现速度瓶颈
+  1. UART启用DMA支持，波特率上下限扩展到`1200`-`3250000`，高波特率测试中暂未发现速度瓶颈
   2. 新增无线TTL串口桥接功能，详见[TTL串口使用说明](../hardware/vllink_uart)
   3. 新增网络模式，支持`局域网`及`互联网`，详见[局域网使用](../example/over_local_area_network)及[互联网使用](../example/over_internet)
 * [V00.16-202408182040](../_static/firmware/vllink_basic2.SVCommon0016202408182040.zip)
@@ -17,6 +17,8 @@
   2. 支持有线模式、无线直连模式，UART波特率不建议超过`1000000`
 
 ## 固件列表-预览版
+* [V00.33-202508271309](../_static/firmware/vllink_basic2.SVCommon0033202508271309.zip)
+  1. 修复：波特率超3.25M时，寄存器配置错误的问题
 * [V00.32-202508022039](../_static/firmware/vllink_basic2.SVCommon0032202508022039.zip)
   1. 优化：新增多DAP接口占用锁，自动上锁，空闲解锁，空闲时间可调，默认50毫秒。参数为：`Idle_Interval_mS`
 * [V00.31-202507261219](../_static/firmware/vllink_basic2.SVCommon0031202507261219.zip)
