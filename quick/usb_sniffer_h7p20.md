@@ -1,7 +1,5 @@
 # USB Sniffer H7P20 快速上手
 
-施工中。。。
-
 ## 一、简介
 |铝合金外壳|PCBA 3D|
 |:--:|:--:|
@@ -18,33 +16,37 @@
 * [铝合金外壳](TODO)
 
 ## 二、快速上手
-### 2.1 预下载单一整合包
-* [下载源一：百度网盘](TODO)
-* [下载源二：Github Release](TODO)
+### 2.1 资源整合包
+* [下载源一：百度网盘](https://pan.baidu.com/s/556fYdWR6jrxaBPkiDgI36w)
+* [下载源二：Github Release](https://github.com/vllogic/ataradov.usb-sniffer/releases)
 ### 2.2 软件安装
 * **方法一：解包即用**
     1. 解压整合包中的`WiresharkPortable64_4.4.9.paf.zip`
+    2. 文件夹`WiresharkPortable64_4.4.9.paf`下的`WiresharkPortable64.exe`即为捕获软件
 * **方法二：逐步安装**
     1. 安装整合包中的`Wireshark-4.4.9-x64.exe`，或从 [Wireshark官网](https://www.wireshark.org/) 下载最新版安装
     2. 启动`Wireshark`，点击`帮助`-`关于Wireshark`-`文件夹`，打开`Global Extcap path`文件夹，将整合包中的`usb_sniffer_win.exe`拷贝至此文件夹中，该插件亦可通过 [源码](https://github.com/vllogic/ataradov.usb-sniffer/tree/main/software) 自行构建
     3. 重启`Wireshark`，确保插件被载入
-### 2.3 驱动安装
-1. 将硬件的`单TYPE-C口`接入电脑，在设备管理中找到设备并更新文件夹中驱动
-### 2.4 Wireshark捕获
-1. 启动`Wireshark`，在`捕获`中会出现一个`USB Sniffer`，点击其齿轮，根据目标设备速度选择`采集速度`，推荐勾选`Fold empty frames(折叠空帧)`，点击开始
-2. 硬件的另一端，`TYPE-C口`常用于连接USB主机，`A母`常用于连接USB设备，二者也可以反过来连接
-3. 在目标USB通讯开始后，Wireshark中会显示捕获到的数据
-### 2.5 Wireshark分析
+### 2.3 Wireshark捕获
+|接线示例，图中黑线接`Wireshark`主机，白线接`采集对象母口`，蓝牙狗为`采集对象设备`|
+|:--:|
+|![](../_static/picture/usb_sniffer_example.png)|
+1. 使用附件中的较长的编织线连接`Wireshark`主机`推荐主板上的USB3.0母口`与`分析仪带灯一侧TYPE-C口`
+2. 使用附件中较短的屏蔽线连接`采集对象母口`与`分析仪无灯一侧TYPE-C口`
+2. 启动`Wireshark`，在`捕获`中会出现一个`USB Sniffer`，点击其齿轮，根据目标设备速度选择`采集速度`，推荐勾选`Fold empty frames(折叠空帧)`，点击开始
+3. 硬件的另一端，`TYPE-C口`常用于连接USB主机，`A母`常用于连接USB设备，二者也可以反过来连接
+4. 在目标USB通讯开始后，Wireshark中会显示捕获到的数据
+### 2.4 Wireshark分析
 
 ### 2.6 Wireshark分析示例
 1. `高速`U盘
-    * TODO
+    * [sniffer_hs_USBFlashDisk.pcapng](../_static/docs/sniffer_hs_USBFlashDisk.pcapng.zip)
 2. `高速`Vllink Basic2调试器
-    * TODO
+    * [sniffer_hs_VllinkBasic2.pcapng](../_static/docs/sniffer_hs_VllinkBasic2.pcapng.zip)
 3. `全速`CSR 4.0 蓝牙狗
-    * TODO
+    * [sniffer_fs_csr4.0.pcapng](../_static/docs/sniffer_fs_csr4.0.pcapng.zip)
 4. `全速`游戏手柄
-    * TODO
+    * [sniffer_fs_gamepad.pcapng](../_static/docs/sniffer_fs_gamepad.pcapng.zip)
 
 ## 三、常见问题
 1. * 问：推荐连接方法
