@@ -10,6 +10,7 @@ Github：https://github.com/vllogic
 Discussions：https://github.com/vllogic/vllogic.github.io/discussions
 
 客户支持QQ群（调试器方向）：791104674
+
 客户支持QQ群（FPGA、逻辑分析方向）：635683631
 
 支持的开发平台
