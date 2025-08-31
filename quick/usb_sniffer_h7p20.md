@@ -40,13 +40,13 @@
 
 ### 2.6 Wireshark分析示例
 1. `高速`U盘
-    * [sniffer_hs_USBFlashDisk.pcapng](../_static/docs/sniffer_hs_USBFlashDisk.pcapng.zip)
+    * [sniffer_hs_USBFlashDisk.pcapng](../_static/docs/sniffer_hs_USBFlashDisk.zip)
 2. `高速`Vllink Basic2调试器
-    * [sniffer_hs_VllinkBasic2.pcapng](../_static/docs/sniffer_hs_VllinkBasic2.pcapng.zip)
+    * [sniffer_hs_VllinkBasic2.pcapng](../_static/docs/sniffer_hs_VllinkBasic2.zip)
 3. `全速`CSR 4.0 蓝牙狗
     * [sniffer_fs_csr4.0.pcapng](../_static/docs/sniffer_fs_csr4.0.pcapng.zip)
 4. `全速`游戏手柄
-    * [sniffer_fs_gamepad.pcapng](../_static/docs/sniffer_fs_gamepad.pcapng.zip)
+    * [sniffer_fs_gamepad.pcapng](../_static/docs/sniffer_fs_gamepad.zip)
 
 ## 三、常见问题
 1. * 问：推荐连接方法
