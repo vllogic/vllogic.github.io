@@ -9,7 +9,8 @@ Github：https://github.com/vllogic
 
 Discussions：https://github.com/vllogic/vllogic.github.io/discussions
 
-客户支持QQ群：791104674
+客户支持QQ群（调试器方向）：791104674
+客户支持QQ群（FPGA、逻辑分析方向）：635683631
 
 支持的开发平台
 ----------------------------
@@ -29,16 +30,16 @@ Discussions：https://github.com/vllogic/vllogic.github.io/discussions
 ----------------------------
 
 ======================  ======================
-|Vllink Basic2|_         |Vllink Basic|_
+|Vllink Basic2|_         |Vllink USB Sniffer|_
 ----------------------  ----------------------
-`Vllink Basic2`_         `Vllink Basic`_
+`Vllink Basic2`_         `Vllink USB Sniffer`_
 ======================  ======================
 
 .. |Vllink Basic2| image:: _static/picture/vllink_basic2_top_45.png
 .. _Vllink Basic2: quick/vllink_basic2.html
 
-.. |Vllink Basic| image:: _static/picture/vllink_basic_top_45.png
-.. _Vllink Basic: quick/vllink_basic.html
+.. |Vllink USB Sniffer| image:: _static/picture/usb_sniffer_45_small.png
+.. _Vllink USB Sniffer: quick/usb_sniffer_h7p20.html
 
 .. toctree::
    :caption: 快速上手

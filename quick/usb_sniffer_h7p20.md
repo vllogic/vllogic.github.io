@@ -13,7 +13,7 @@
 * [PCB图纸](https://github.com/vllogic/dalishen_pi_h7p20/tree/main/hardware/usb_sniffer_h7p20)
 * [FPGA代码](https://github.com/vllogic/dalishen_pi_h7p20/tree/main/examples/usb_sniffer_h7p20.ataradov.usb_sniffer)
 * [上位机代码](https://github.com/vllogic/ataradov.usb-sniffer)
-* [铝合金外壳](TODO)
+* [铝合金外壳-试产中，稍待](TODO)
 
 ## 二、快速上手
 ### 2.1 资源整合包
@@ -36,9 +36,7 @@
 2. 启动`Wireshark`，在`捕获`中会出现一个`USB Sniffer`，点击其齿轮，根据目标设备速度选择`采集速度`，推荐勾选`Fold empty frames(折叠空帧)`，点击开始
 3. 硬件的另一端，`TYPE-C口`常用于连接USB主机，`A母`常用于连接USB设备，二者也可以反过来连接
 4. 在目标USB通讯开始后，Wireshark中会显示捕获到的数据
-### 2.4 Wireshark分析
-
-### 2.6 Wireshark分析示例
+### 2.4 Wireshark分析示例
 1. `高速`U盘
     * [sniffer_hs_USBFlashDisk.pcapng](../_static/docs/sniffer_hs_USBFlashDisk.zip)
 2. `高速`Vllink Basic2调试器
@@ -47,13 +45,18 @@
     * [sniffer_fs_csr4.0.pcapng](../_static/docs/sniffer_fs_csr4.0.pcapng.zip)
 4. `全速`游戏手柄
     * [sniffer_fs_gamepad.pcapng](../_static/docs/sniffer_fs_gamepad.zip)
+### 2.5 Wireshark分析-以`高速`U盘为例
+* 默认会显示从底层到高层所有数据，可通过过滤规则更直观的观察所需数据
+
+|过滤规则`syslog`|过滤规则`usbll`|过滤规则`usb`|过滤规则`usbms`|
+|:--:|:--:|:--:|:--:|
+|![](../_static/picture/sniffer_hs_USBFlashDisk_f_syslog.png)|![](../_static/picture/sniffer_hs_USBFlashDisk_f_usbll.png)|![](../_static/picture/sniffer_hs_USBFlashDisk_f_usb.png)|![](../_static/picture/sniffer_hs_USBFlashDisk_f_usbms.png)|
+
 
 ## 三、常见问题
-1. * 问：推荐连接方法
-   * 答：推荐使用附件中较长的编织线连接电脑`主板上3.0母口`与`分析仪单TYPE-C口`；使用附件中较短的屏蔽线连接`采集对象母口`与`分析仪`
-2. * 问：捕获时能否自动识别速度，无需提前选定速度模式
+1. * 问：捕获时能否自动识别速度，无需提前选定速度模式
    * 答：原作者未实现此项功能，本产品也不支持
-3. * 问：能否支持[USB PACKET VIEW](https://www.usbpacketviewer.com/download/)
+2. * 问：能否支持[USB PACKET VIEW](https://www.usbpacketviewer.com/download/)
    * 答：不支持实时捕获，但可以导入分析，详见此网站第九章[hellofpga.com_usb-sniffer](http://www.hellofpga.com/index.php/2025/04/03/usb-sniffer/)
 
 ## 四、二次开发
@@ -62,6 +65,7 @@
 * 如何进入Boot：短接PCB上CY7A68013A芯片旁的`Boot`与`VCC`，再连接电脑，即可进行二次编程
 
 ### 4.2 H7P20部分
+* 此部分待完善，可入群交流
 * [源码](https://github.com/vllogic/dalishen_pi_h7p20/tree/main/examples/usb_sniffer_h7p20.ataradov.usb_sniffer)
 * 更多开发资料请参考 [大力神派](./dalishen_pi_h7p20.md)
 
