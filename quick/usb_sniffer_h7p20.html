@@ -152,13 +152,13 @@
 </tbody>
 </table>
 <p>  本产品为USB协议分析工具，可配合 <a class="reference external" href="https://www.wireshark.org/">Wireshark</a> 进行实时协议解析，支持<code class="docutils literal notranslate"><span class="pre">USB低速</span></code>、<code class="docutils literal notranslate"><span class="pre">USB全速</span></code>及<code class="docutils literal notranslate"><span class="pre">USB高速</span></code>。</p>
-<p>  软硬件基于 <a class="reference external" href="https://github.com/ataradov/usb-sniffer">ataradov.usb-sniffer</a> 复刻，并继续以<code class="docutils literal notranslate"><span class="pre">BSD-3-Clause</span> <span class="pre">license</span></code>协议开源。核心变动是将其<code class="docutils literal notranslate"><span class="pre">Lattice</span> <span class="pre">LCMXO2</span></code>替换为<code class="docutils literal notranslate"><span class="pre">HME</span> <span class="pre">H7P20</span></code>。</p>
+<p>  软硬件基于 <a class="reference external" href="https://github.com/ataradov/usb-sniffer">ataradov.usb-sniffer</a> 复刻，并继续以<code class="docutils literal notranslate"><span class="pre">BSD-3-Clause</span> <span class="pre">license</span></code>协议开源。核心变动是将其<code class="docutils literal notranslate"><span class="pre">Lattice</span> <span class="pre">LCMXO2</span></code>替换为<code class="docutils literal notranslate"><span class="pre">京微齐力</span> <span class="pre">H7P20</span></code>，高速比较器替换为<code class="docutils literal notranslate"><span class="pre">GSV332-MR</span></code>。</p>
 <p>  所有生产设计料全部开源，如下：</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/vllogic/dalishen_pi_h7p20/tree/main/hardware/usb_sniffer_h7p20">PCB图纸</a></p></li>
 <li><p><a class="reference external" href="https://github.com/vllogic/dalishen_pi_h7p20/tree/main/examples/usb_sniffer_h7p20.ataradov.usb_sniffer">FPGA代码</a></p></li>
 <li><p><a class="reference external" href="https://github.com/vllogic/ataradov.usb-sniffer">上位机代码</a></p></li>
-<li><p><a class="reference internal" href="#TODO"><span class="xref myst">铝合金外壳-试产中，稍待</span></a></p></li>
+<li><p><a class="reference external" href="https://gf.jlcfa.com/machine-detail/">铝合金外壳</a></p></li>
 </ul>
 </section>
 <section id="id2">
@@ -204,8 +204,7 @@
 <li><p>使用附件中的较长的编织线连接<code class="docutils literal notranslate"><span class="pre">Wireshark</span></code>主机<code class="docutils literal notranslate"><span class="pre">推荐主板上的USB3.0母口</span></code>与<code class="docutils literal notranslate"><span class="pre">分析仪带灯一侧TYPE-C口</span></code></p></li>
 <li><p>使用附件中较短的屏蔽线连接<code class="docutils literal notranslate"><span class="pre">采集对象母口</span></code>与<code class="docutils literal notranslate"><span class="pre">分析仪无灯一侧TYPE-C口</span></code></p></li>
 <li><p>启动<code class="docutils literal notranslate"><span class="pre">Wireshark</span></code>，在<code class="docutils literal notranslate"><span class="pre">捕获</span></code>中会出现一个<code class="docutils literal notranslate"><span class="pre">USB</span> <span class="pre">Sniffer</span></code>，点击其齿轮，根据目标设备速度选择<code class="docutils literal notranslate"><span class="pre">采集速度</span></code>，推荐勾选<code class="docutils literal notranslate"><span class="pre">Fold</span> <span class="pre">empty</span> <span class="pre">frames(折叠空帧)</span></code>，点击开始</p></li>
-<li><p>硬件的另一端，<code class="docutils literal notranslate"><span class="pre">TYPE-C口</span></code>常用于连接USB主机，<code class="docutils literal notranslate"><span class="pre">A母</span></code>常用于连接USB设备，二者也可以反过来连接</p></li>
-<li><p>在目标USB通讯开始后，Wireshark中会显示捕获到的数据</p></li>
+<li><p>连接<code class="docutils literal notranslate"><span class="pre">采集对象设备</span></code>与<code class="docutils literal notranslate"><span class="pre">A母</span></code>。正常情况下，USB通讯立即开始，Wireshark中会显示捕获到的数据</p></li>
 </ol>
 </section>
 <section id="id5">
@@ -236,7 +235,9 @@
 <section id="wireshark-u">
 <h3>2.5 Wireshark分析-以<code class="docutils literal notranslate"><span class="pre">高速</span></code>U盘为例<a class="headerlink" href="#wireshark-u" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>默认会显示从底层到高层所有数据，可通过过滤规则更直观的观察所需数据</p></li>
+<li><p>默认会显示从底层到高层所有数据</p></li>
+<li><p>在<code class="docutils literal notranslate"><span class="pre">应用显示过滤器...</span></code>或快捷键<code class="docutils literal notranslate"><span class="pre">Ctrl-/</span></code>中，输入如下表规则，可以更直观的观察所需数据</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Wireshark</span></code>支持非常多的高层次协议解析，如<code class="docutils literal notranslate"><span class="pre">usbhid</span></code>、<code class="docutils literal notranslate"><span class="pre">bluetooth</span></code>等，在某些场景极具优势</p></li>
 </ul>
 <table class="docutils align-default">
 <thead>
@@ -273,6 +274,7 @@
 </section>
 <section id="id7">
 <h2>四、二次开发<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>  <strong><code class="docutils literal notranslate"><span class="pre">重要提示：</span></code></strong> <strong>二次开发不提供技术支持，且开发过程中的焊接、烧录等行为会使得产品无法享受质保服务。</strong></p>
 <section id="cy7a68013a">
 <h3>4.1 CY7A68013A部分<a class="headerlink" href="#cy7a68013a" title="Link to this heading"></a></h3>
 <ul class="simple">
@@ -283,7 +285,6 @@
 <section id="h7p20">
 <h3>4.2 H7P20部分<a class="headerlink" href="#h7p20" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>此部分待完善，可入群交流</p></li>
 <li><p><a class="reference external" href="https://github.com/vllogic/dalishen_pi_h7p20/tree/main/examples/usb_sniffer_h7p20.ataradov.usb_sniffer">源码</a></p></li>
 <li><p>更多开发资料请参考 <a class="reference internal" href="dalishen_pi_h7p20.html"><span class="std std-doc">大力神派</span></a></p></li>
 </ul>
