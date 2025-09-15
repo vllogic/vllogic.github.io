@@ -62,9 +62,9 @@
 
 ## 四、二次开发
 &emsp;&emsp;**`重要提示：`** **二次开发不提供技术支持，且开发过程中的焊接、烧录等行为会使得产品无法享受质保服务。**
-### 4.1 CY7A68013A部分
+### 4.1 CY7C68013A部分
 * [源码](https://github.com/vllogic/ataradov.usb-sniffer/tree/main/firmware)
-* 如何进入Boot：短接PCB上CY7A68013A芯片旁的`Boot`与`VCC`，再连接电脑，即可进行二次编程
+* 如何进入Boot：短接PCB上CY7C68013A芯片旁的`Boot`与`VCC`，再连接电脑，即可进行二次编程
 
 ### 4.2 H7P20部分
 * [源码](https://github.com/vllogic/dalishen_pi_h7p20/tree/main/examples/usb_sniffer_h7p20.ataradov.usb_sniffer)
