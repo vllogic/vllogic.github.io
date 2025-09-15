@@ -13,7 +13,7 @@
 * [PCB图纸](https://github.com/vllogic/dalishen_pi_h7p20/tree/main/hardware/usb_sniffer_h7p20)
 * [FPGA代码](https://github.com/vllogic/dalishen_pi_h7p20/tree/main/examples/usb_sniffer_h7p20.ataradov.usb_sniffer)
 * [上位机代码](https://github.com/vllogic/ataradov.usb-sniffer)
-* [铝合金外壳](https://gf.jlcfa.com/machine-detail/)
+* [铝合金外壳](https://gf.jlcfa.com/machine-detail/489931339134050307)
 
 ## 二、快速上手
 ### 2.1 资源整合包
