@@ -1,9 +1,9 @@
 # USB Sniffer H7P20 快速上手
 
 ## 一、简介
-|铝合金外壳|PCBA 3D|
+|铝合金外壳|PCBA|
 |:--:|:--:|
-|![](../_static/picture/usb_sniffer_45.png)|![](../_static/picture/usb_sniffer_brd3d_45.png)|
+|![](../_static/picture/usb_sniffer_45.png)|![](../_static/picture/usb_sniffer_h7p20.pcba_text.640x640.png)|
 
 &emsp;&emsp;本产品为USB协议分析工具，可配合 [Wireshark](https://www.wireshark.org/) 进行实时协议解析，支持`USB低速`、`USB全速`及`USB高速`。
 
