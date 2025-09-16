@@ -9,7 +9,7 @@
 
 &emsp;&emsp;软硬件基于 [ataradov.usb-sniffer](https://github.com/ataradov/usb-sniffer) 复刻，并继续以`BSD-3-Clause license`协议开源。核心变动是将其`Lattice LCMXO2`替换为`京微齐力 H7P20`，高速比较器替换为`GSV332-MR`。
 
-&emsp;&emsp;所有生产设计料全部开源，如下：
+&emsp;&emsp;所有生产设计资料全部开源，如下：
 * [PCB图纸](https://github.com/vllogic/dalishen_pi_h7p20/tree/main/hardware/usb_sniffer_h7p20)
 * [FPGA代码](https://github.com/vllogic/dalishen_pi_h7p20/tree/main/examples/usb_sniffer_h7p20.ataradov.usb_sniffer)
 * [上位机代码](https://github.com/vllogic/ataradov.usb-sniffer)
