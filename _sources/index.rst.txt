@@ -1,6 +1,14 @@
 Vllogic 产品使用指南
 ===================================
 
+本站域名
+----------------------------
+1. `vllogic.com <https://vllogic.com>`_
+
+2. `vllogic.github.io <https://vllogic.github.io>`_
+
+3. `vllogic.eu.org <https://vllogic.eu.org>`_
+
 相关链接
 ----------------------------
 淘宝：https://vllogic.taobao.com/
@@ -57,7 +65,6 @@ Discussions：https://github.com/vllogic/vllogic.github.io/discussions
    :caption: 硬件资料
 
    hardware/vllink_basic_vout.md
-   hardware/vllink_basic2_5v.md
    hardware/vllink_basic2_vref.md
    hardware/vllink_basic2_to_fpga.md
    hardware/vllink_basic2_to_mipi10p_jtag20p.md
