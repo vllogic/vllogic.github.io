@@ -17,6 +17,8 @@
   2. 支持有线模式、无线直连模式，UART波特率不建议超过`1000000`
 
 ## 固件列表-预览版
+* [V00.35-202510041451](../_static/firmware/vllink_basic2.SVCommon0035202510041451.zip)
+  1. 优化：支持自动信道，一般用于连接未知信道的路由器。使用方法：修改STA端的配置：`Wireless_Host_Channel=0`
 * [V00.33-202508271309](../_static/firmware/vllink_basic2.SVCommon0033202508271309.zip)
   1. 修复：波特率超3.25M时，寄存器配置错误的问题，此固件最高波特率为`6500000`
 * [V00.32-202508022039](../_static/firmware/vllink_basic2.SVCommon0032202508022039.zip)
