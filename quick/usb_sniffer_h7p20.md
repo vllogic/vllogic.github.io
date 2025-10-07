@@ -55,9 +55,11 @@
 
 
 ## 三、常见问题
-1. * 问：捕获时能否自动识别速度，无需提前选定速度模式
+1. * 问：捕获时，`Time`栏时间戳比现实时间慢，或者在使用过滤器后，不能实时观察到期望数据
+   * 答：这是因为Wireshark显示层无法实时显示大量数据，可通过勾选`Fold empty frames`和`Exclude Line State`解决
+2. * 问：捕获时能否自动识别速度，无需提前选定速度模式
    * 答：原作者未实现此项功能，本产品也不支持
-2. * 问：能否支持[USB PACKET VIEW](https://www.usbpacketviewer.com/download/)
+3. * 问：能否支持[USB PACKET VIEW](https://www.usbpacketviewer.com/download/)
    * 答：不支持实时捕获，但可以导入分析，详见此网站第九章[hellofpga.com_usb-sniffer](http://www.hellofpga.com/index.php/2025/04/03/usb-sniffer/)
 
 ## 四、二次开发
