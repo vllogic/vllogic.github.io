@@ -260,6 +260,11 @@
 <h2>三、常见问题<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
 <li><ul class="simple">
+<li><p>问：捕获时，<code class="docutils literal notranslate"><span class="pre">Time</span></code>栏时间戳比现实时间慢，或者在使用过滤器后，不能实时观察到期望数据</p></li>
+<li><p>答：这是因为Wireshark显示层无法实时显示大量数据，可通过勾选<code class="docutils literal notranslate"><span class="pre">Fold</span> <span class="pre">empty</span> <span class="pre">frames</span></code>和<code class="docutils literal notranslate"><span class="pre">Exclude</span> <span class="pre">Line</span> <span class="pre">State</span></code>解决</p></li>
+</ul>
+</li>
+<li><ul class="simple">
 <li><p>问：捕获时能否自动识别速度，无需提前选定速度模式</p></li>
 <li><p>答：原作者未实现此项功能，本产品也不支持</p></li>
 </ul>
