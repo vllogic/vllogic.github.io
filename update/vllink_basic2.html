@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vllink Basic2 固件更新 &mdash; Vllogic  文档</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
@@ -136,6 +136,14 @@
 <section id="id2">
 <h2>固件列表-正式版<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/9465e22b8a99642f475d0807a64b153e/vllink_basic2.SVCommon0036202511091142.zip"><span class="xref download myst">V00.36-202511091142</span></a></p>
+<ol class="arabic simple">
+<li><p>优化：<strong>大幅提升单步调试响应速度；大幅降低无线串口中突发包的传输延迟</strong></p></li>
+<li><p>优化：波特率上下限扩展到<code class="docutils literal notranslate"><span class="pre">1200</span></code>-<code class="docutils literal notranslate"><span class="pre">6500000</span></code></p></li>
+<li><p>优化：新增多DAP接口占用锁，自动上锁，空闲解锁，空闲时间可调，默认50毫秒。参数为：<code class="docutils literal notranslate"><span class="pre">Idle_Interval_mS</span></code></p></li>
+<li><p>优化：支持自动信道，一般用于连接未知信道的路由器。使用方法：修改STA端的配置<code class="docutils literal notranslate"><span class="pre">Wireless_Host_Channel=0</span></code></p></li>
+</ol>
+</li>
 <li><p><a class="reference download internal" download="" href="../_downloads/a01d8c87c191a446bf7c7082c15958ed/vllink_basic2.SVCommon0031202507261219.zip"><span class="xref download myst">V00.31-202507261219</span></a></p>
 <ol class="arabic simple">
 <li><p>UART启用DMA支持，波特率上下限扩展到<code class="docutils literal notranslate"><span class="pre">1200</span></code>-<code class="docutils literal notranslate"><span class="pre">3250000</span></code>，高波特率测试中暂未发现速度瓶颈</p></li>
