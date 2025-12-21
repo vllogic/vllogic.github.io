@@ -175,7 +175,8 @@ stty: /dev/ttyACM0: Permission denied
 <h3>2. 查看其中规则<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat /etc/udev/rules.d/99-vllogic.rules
 #
-#   Step 1: copy to /etc/udev/rules.d/99-vlloigc.rules
+#   Step 1: copy to /etc/udev/rules.d/99-vllogic.rules
+#           sudo cp ./99-vllogic.rules /etc/udev/rules.d/
 #   Step 2: &quot;sudo udevadm control --reload-rules&quot;
 #   Step 3: &quot;sudo udevadm trigger&quot;
 #   Step 4: unplug your device and plug it back in
@@ -184,6 +185,7 @@ stty: /dev/ttyACM0: Permission denied
 ACTION!=&quot;add&quot;, SUBSYSTEM!=&quot;usb_device&quot;, GOTO=&quot;vllogic_rules_end&quot;
 
 SUBSYSTEM==&quot;usb&quot;, ATTR{idVendor}==&quot;1209&quot;, ATTR{idProduct}==&quot;6666&quot;, MODE=&quot;666&quot;
+SUBSYSTEM==&quot;usb&quot;, ATTR{idVendor}==&quot;1209&quot;, ATTR{idProduct}==&quot;2312&quot;, MODE=&quot;666&quot;
 SUBSYSTEM==&quot;usb&quot;, ATTR{idVendor}==&quot;0d28&quot;, ATTR{idProduct}==&quot;0204&quot;, MODE=&quot;666&quot;
 
 KERNEL==&quot;ttyACM[0-9]*&quot;, MODE=&quot;666&quot;
