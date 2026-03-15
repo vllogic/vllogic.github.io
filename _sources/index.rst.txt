@@ -111,5 +111,6 @@ Discussions：https://github.com/vllogic/vllogic.github.io/discussions
    :caption: 其他
    :hidden:
    
+   software/webusb_protocol.md
    readme.md
 
