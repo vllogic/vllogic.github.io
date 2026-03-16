@@ -84,6 +84,8 @@
    * 答：在设备管理器内，右击`CMSIS-DAP V2`设备，卸载设备，然后重新连接一次
 3. * 问：Keil内`Reset and Run`功能无效，即按`F8`下载程序后，程序未自动运行
    * 答：在`Debug`-`CMSIS-DAP - JTAG/SW Adapter`中，选定`CMSIS-DAP v2`即可
+4. * 问：在紫光的`Memory tool`工具中，调试器被识别成`ULINK`且无法成功连接
+   * 答：本调试器为免驱硬件，可能被其他驱动污染，进而识别错误。临时解决方案：通过上文中的[基础配置](https://vllogic.com/_static/tools/web_config_basic2/)，修改`AS_ARM MBED=enable`后同步，然后重连一次解决。
 
 ## 六、开发工具使用说明
 * [Windows7 驱动安装](../software/windows7_driver.md)

@@ -303,6 +303,11 @@
 <li><p>答：在<code class="docutils literal notranslate"><span class="pre">Debug</span></code>-<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">-</span> <span class="pre">JTAG/SW</span> <span class="pre">Adapter</span></code>中，选定<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">v2</span></code>即可</p></li>
 </ul>
 </li>
+<li><ul class="simple">
+<li><p>问：在紫光的<code class="docutils literal notranslate"><span class="pre">Memory</span> <span class="pre">tool</span></code>工具中，调试器被识别成<code class="docutils literal notranslate"><span class="pre">ULINK</span></code>且无法成功连接</p></li>
+<li><p>答：本调试器为免驱硬件，可能被其他驱动污染，进而识别错误。临时解决方案：通过上文中的<a class="reference external" href="https://vllogic.com/_static/tools/web_config_basic2/">基础配置</a>，修改<code class="docutils literal notranslate"><span class="pre">AS_ARM</span> <span class="pre">MBED=enable</span></code>后同步，然后重连一次解决。</p></li>
+</ul>
+</li>
 </ol>
 </section>
 <section id="id13">
