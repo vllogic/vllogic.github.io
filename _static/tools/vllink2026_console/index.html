@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vllink WebUSB Console</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { primary: '#00d4ff', darkBg: '#0b1120' } } }
+        }
+    </script>
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); }
+        .dark .glass { background: rgba(15, 23, 42, 0.6); }
+
+        .device-card { 
+            background: rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            transition: all 0.2s ease;
+        }
+        .dark .device-card { 
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-active { 
+            border: 2px solid #00d4ff !important; 
+            background: rgba(0, 212, 255, 0.12) !important;
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.15);
+            opacity: 1 !important; 
+        }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .tab-active { border-bottom: 3px solid #00d4ff; color: #00d4ff; font-weight: 900; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-darkBg text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-500 overflow-hidden">
+    <!-- 顶部栏 -->
+    <header class="h-16 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 sticky top-0 z-50 glass">
+        <div class="flex items-center gap-3">
+            <div class="w-2.5 h-2.5 bg-primary rounded-full animate-pulse shadow-[0_0_10px_#00d4ff]"></div>
+            <h1 class="font-bold tracking-tighter text-xl italic text-slate-800 dark:text-slate-100">VLLINK <span class="text-primary font-black">CONSOLE</span></h1>
+        </div>
+
+        <!-- 三模态主题切换 -->
+        <div class="flex items-center bg-slate-200 dark:bg-slate-800 rounded-full p-1 border border-slate-300 dark:border-slate-700 w-48 relative">
+            <button data-theme="dark" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">深色</button>
+            <button data-theme="auto" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">AUTO</button>
+            <button data-theme="light" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">浅色</button>
+            <div id="themeSlider" class="absolute h-7 w-[31%] bg-primary rounded-full transition-all duration-300 shadow-lg"></div>
+        </div>
+
+        <div id="connectionStatus" class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Disconnected</div>
+    </header>
+
+    <main class="flex h-[calc(100vh-4rem)]">
+        <!-- 左侧面板 (25%): 负责设备连接与列表显示 -->
+        <aside class="w-1/4 border-r border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-6 overflow-y-auto no-scrollbar">
+            <button id="connectBtn" class="w-full py-4 bg-primary text-white rounded-2xl font-black text-sm hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20">
+                CONNECT DEVICE
+            </button>
+
+            <div class="space-y-4">
+                <h2 class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Debugger List</h2>
+                <div id="deviceList" class="space-y-3">
+                    <div class="text-center py-10 text-slate-500 text-xs italic">Waiting for connection...</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 右侧功能区 (75%) -->
+        <section class="w-3/4 p-8 overflow-y-auto">
+            <!-- 两个选项卡导航 -->
+            <div class="flex gap-10 border-b border-slate-200 dark:border-slate-800 mb-8">
+                <button id="tab-btn-config" class="pb-4 text-sm tracking-widest transition-all tab-active">配置</button>
+                <button id="tab-btn-tbd" class="pb-4 text-sm tracking-widest transition-all text-slate-400">待定</button>
+            </div>
+
+            <!-- 选项卡内容 1: 配置 (已移除旧卡片，后续指定) -->
+            <div id="tab-content-config">
+                <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-20 flex flex-col items-center justify-center italic text-slate-500">
+                    <span class="text-4xl mb-4">⚙️</span>
+                    配置功能内容待指定...
+                </div>
+            </div>
+
+            <!-- 选项卡内容 2: 待定 -->
+            <div id="tab-content-tbd" class="hidden">
+                <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-20 flex flex-col items-center justify-center italic text-slate-500">
+                    <span class="text-4xl mb-4">🚧</span>
+                    功能开发中...
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="vllink.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

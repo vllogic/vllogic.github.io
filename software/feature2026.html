@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vllink Basic2 2026年新特性 &mdash; Vllogic  文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7d86a446"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Vllogic
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic.html">Vllink Basic 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic2.html">Vllink Basic2 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_box.html">Vllink Box 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_box2.html">Vllink Box2 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/usb_sniffer_h7p20.html">USB Sniffer H7P20 快速上手</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic_vout.html">Vout口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_vref.html">VRef口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_to_fpga.html">Basic2配套FPGA接口转接板</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_to_mipi10p_jtag20p.html">Basic2配套MIPI-10P及JTAG-20P转接板</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_battboard.html">Vllink锂电池充放一体供电模块</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_uart.html">TTL串口使用说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic.html">Vllink Basic 固件更新</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic2.html">Vllink Basic2 固件更新</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_box.html">Vllink Box &amp; Vllink Box2 固件更新</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="windows7_driver.html">Windows7 驱动安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iar.html">IAR 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keil_mdk.html">Keil MDK 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probe_rs.html">Probe RS 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openocd.html">OpenOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyocd.html">PyOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="freemaster.html">FreeMASTER 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hercuels_command.html">Hercules 命令说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="speedtest.html">速度测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">在线工具</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">应用实例</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../example/wireless_icp.html">无线ICP（在电路编程）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example/vscode_cortex_debug.html">使用VSCode的Cortex Debug调试任意固件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example/linux_rules.html">Linux下非root用户授权</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example/over_local_area_network.html">局域网使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example/over_internet.html">互联网使用</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="webusb_protocol.html">WebUSB通讯协议</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">文档维护</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Vllogic</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Vllink Basic2 2026年新特性</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/software/feature2026.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vllink-basic2-2026">
+<h1>Vllink Basic2 2026年新特性<a class="headerlink" href="#vllink-basic2-2026" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>前言：这次新特性开发非常顺利，但由于代码变动较大，交互机制也有改动，目前是以独立教程的形式发布，待稳定后再合并至主站。</p></li>
+<li><p>固件：</p></li>
+</ul>
+<section id="id1">
+<h2>一、综述<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>优化Wifi及TCP机制，通讯管理更为合理，无线速率提升12%左右</p></li>
+<li><p>支持一对多，单AP最多可同时连接八个STA，最多可控制<strong>九个目标板</strong>（含AP所连目标板）</p></li>
+<li><p>完善<code class="docutils literal notranslate"><span class="pre">WebUSB</span></code>接口，开放 <a class="reference internal" href="webusb_protocol.html"><span class="doc std std-doc">通讯协议</span></a> ，提供开源上位机网页工具</p></li>
+<li><p>在STA模式下增加<code class="docutils literal notranslate"><span class="pre">TCP-UART</span></code>功能，可独立作为无线TCP串口工具使用，对接任意标准TCP客户端</p></li>
+<li><p>在STA模式下增加<code class="docutils literal notranslate"><span class="pre">TCP-DAP</span></code>功能，可独立作为无线调试工具使用，对接最新版本OpenOCD</p></li>
+</ol>
+</section>
+<section id="id2">
+<h2>二、灯光机制<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>红灯：指示是否启用USB功能</p>
+<ul class="simple">
+<li><p>常灭：关闭USB</p></li>
+<li><p>常亮：启用USB</p></li>
+</ul>
+</li>
+<li><p>蓝灯：指示是否启用无线AP功能及无线状态</p>
+<ul class="simple">
+<li><p>常灭：关闭无线AP</p></li>
+<li><p>闪烁：启用无线AP，且未接入STA</p></li>
+<li><p>常亮：启用无线AP，且已接入STA</p></li>
+</ul>
+</li>
+<li><p>绿灯：指示是否启用无线STA功能及无线状态</p>
+<ul class="simple">
+<li><p>常灭：关闭无线STA</p></li>
+<li><p>闪烁：启用无线STA，且未连接AP</p></li>
+<li><p>常亮：启用无线STA，且已连接AP</p></li>
+</ul>
+</li>
+<li><p>黄灯：</p>
+<ul class="simple">
+<li><p>常灭：DC3接口未被选定</p></li>
+<li><p>闪烁：DC3接口已被选定，且VRef电压低</p></li>
+<li><p>常亮：DC3接口已被选定，且VRef电压正常</p></li>
+</ul>
+</li>
+<li><p>蓝绿灯：</p>
+<ul class="simple">
+<li><p>注意：仅在AP模式且<code class="docutils literal notranslate"><span class="pre">Mode2_STA</span></code>被启用时出现</p></li>
+<li><p>同步闪烁：未连接AP</p></li>
+<li><p>同步常亮：已连接AP</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="id3">
+<h2>三、按键机制<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>双击：循环切换模式，有线模式 -&gt; 无线AP模式（接电脑） -&gt; 无线STA模式（接芯片）-&gt; 有线模式 -&gt; ...</p></li>
+<li><p>长按10秒：重置所有配置，但<code class="docutils literal notranslate"><span class="pre">VOut</span></code>以及<code class="docutils literal notranslate"><span class="pre">Vref_Voltage_mV</span></code>除外，避免误改动输出电压</p></li>
+</ol>
+</section>
+<section id="id4">
+<h2>四、一对多<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>配置工具：<a class="reference external" href="https://vllogic.com/_static/tools/vllink2026_console/">Vllink 2026 Console</a></p></li>
+</ul>
+<section id="id5">
+<h3>4.1 直连一对多<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>TODO</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>4.2 局域网/广域网一对多<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>TODO</p></li>
+</ul>
+</section>
+</section>
+<section id="webusb">
+<h2>五、<code class="docutils literal notranslate"><span class="pre">WebUSB</span></code>接口<a class="headerlink" href="#webusb" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>TODO</p></li>
+</ul>
+</section>
+<section id="tcp-uart">
+<h2>六、<code class="docutils literal notranslate"><span class="pre">TCP-UART</span></code><a class="headerlink" href="#tcp-uart" title="Link to this heading"></a></h2>
+<p>简述：配置<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器SSID</span></code>、<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器密码</span></code>以及<code class="docutils literal notranslate"><span class="pre">Mode3_TCP_UART=enable</span></code>，切换到模式3，OpenOCD在STA连上路由器后，查看STA的IP。即可通过TCP客户端连接：STA_IPv4:20010。串口参数可通过<code class="docutils literal notranslate"><span class="pre">Mode3_TCP_UART_PARAM</span></code>修改。</p>
+</section>
+<section id="tcp-dap">
+<h2>七、<code class="docutils literal notranslate"><span class="pre">TCP-DAP</span></code><a class="headerlink" href="#tcp-dap" title="Link to this heading"></a></h2>
+<p>简述：配置<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器SSID</span></code>、<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器密码</span></code>，切换到模式3，OpenOCD在STA连上路由器后，查看STA的IP。即可通过最新版OpenOCD连接。</p>
+</section>
+<section id="id7">
+<h2>八、后续<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>计划增加 <strong>旁路总线访问</strong> 特性。简单来讲就是网页直接读取或者写入任意地址，且不影响正在进行的调试功能。这个特性是<strong>高性能旁路RTT</strong>的基础。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022, Vllogic。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
