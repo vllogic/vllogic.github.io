@@ -46,10 +46,10 @@
 * TODO
 
 ## 六、`TCP-UART`
-简述：配置`Wireless_Device_SSID=路由器SSID`、`Wireless_Device_SSID=路由器密码`以及`Mode3_TCP_UART=enable`，切换到模式3，OpenOCD在STA连上路由器后，查看STA的IP。即可通过TCP客户端连接：STA_IPv4:20010。串口参数可通过`Mode3_TCP_UART_PARAM`修改。
+简述：配置`Wireless_Device_SSID=路由器SSID`、`Wireless_Device_SSID=路由器密码`以及`Mode3_TCP_UART=enable`，切换到模式3，在STA连上路由器后，查看STA的IP。即可通过TCP客户端连接：STA_IPv4:20010。串口参数可通过`Mode3_TCP_UART_PARAM`修改。
 
 ## 七、`TCP-DAP`
-简述：配置`Wireless_Device_SSID=路由器SSID`、`Wireless_Device_SSID=路由器密码`，切换到模式3，OpenOCD在STA连上路由器后，查看STA的IP。即可通过最新版OpenOCD连接。
+简述：配置`Wireless_Device_SSID=路由器SSID`、`Wireless_Device_SSID=路由器密码`，切换到模式3，在STA连上路由器后，查看STA的IP。即可通过最新版OpenOCD连接。
 
 ## 八、后续
 计划增加 **旁路总线访问** 特性。简单来讲就是网页直接读取或者写入任意地址，且不影响正在进行的调试功能。这个特性是**高性能旁路RTT**的基础。
