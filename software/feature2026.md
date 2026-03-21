@@ -1,11 +1,12 @@
 # Vllink Basic2 2026年新特性
 
 * 前言：这次新特性开发非常顺利，但由于代码变动较大，交互机制也有改动，目前是以独立教程的形式发布，待稳定后再合并至主站。
+* 固件：
 
 ## 一、综述
 1. 优化Wifi及TCP机制，通讯管理更为合理，无线速率提升12%左右
 2. 支持一对多，单AP最多可同时连接八个STA，最多可控制**九个目标板**（含AP所连目标板）
-3. 完善`WebUSB`接口，开放通讯协议，提供开源上位机网页工具
+3. 完善`WebUSB`接口，开放 [通讯协议](../software/webusb_protocol) ，提供开源上位机网页工具
 4. 在STA模式下增加`TCP-UART`功能，可独立作为无线TCP串口工具使用，对接任意标准TCP客户端
 5. 在STA模式下增加`TCP-DAP`功能，可独立作为无线调试工具使用，对接最新版本OpenOCD
 
@@ -32,17 +33,23 @@
 
 ## 三、按键机制
 1. 双击：循环切换模式，有线模式 -> 无线AP模式（接电脑） -> 无线STA模式（接芯片）-> 有线模式 -> ...
-2. 长按10秒：重置所有配置，但`VOut`或者`Vref_Voltage_mV`除外，避免误改动输出电压
+2. 长按10秒：重置所有配置，但`VOut`以及`Vref_Voltage_mV`除外，避免误改动输出电压
 
 ## 四、一对多
+* 配置工具：[Vllink 2026 Console](https://vllogic.com/_static/tools/vllink2026_console/)
 #### 4.1 直连一对多
+* TODO
 #### 4.2 局域网/广域网一对多
+* TODO
 
 ## 五、`WebUSB`接口
+* TODO
 
 ## 六、`TCP-UART`
+简述：配置`Wireless_Device_SSID=路由器SSID`、`Wireless_Device_SSID=路由器密码`以及`Mode3_TCP_UART=enable`，切换到模式3，OpenOCD在STA连上路由器后，查看STA的IP。即可通过TCP客户端连接：STA_IPv4:20010。串口参数可通过`Mode3_TCP_UART_PARAM`修改。
 
 ## 七、`TCP-DAP`
+简述：配置`Wireless_Device_SSID=路由器SSID`、`Wireless_Device_SSID=路由器密码`，切换到模式3，OpenOCD在STA连上路由器后，查看STA的IP。即可通过最新版OpenOCD连接。
 
 ## 八、后续
 计划增加 **旁路总线访问** 特性。简单来讲就是网页直接读取或者写入任意地址，且不影响正在进行的调试功能。这个特性是**高性能旁路RTT**的基础。
