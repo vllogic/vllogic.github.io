@@ -54,11 +54,13 @@
 * 命令：`./openocd.exe -f interface/cmsis-dap.cfg -f target/stm32f4x.cfg -c "cmsis-dap backend tcp; cmsis-dap tcp host 192.168.1.183; cmsis-dap tcp port 4441; transport select swd; adapter speed 8000"` 注意：执行命令前修改IP。
 * 测试：
     ```
-    > dump_image ram.bin 0x20000000 0x8000
-    dumped 32768 bytes in 0.096958s (330.040 KiB/s)
-    > load_image ram.bin 0x20008000       
-    32768 bytes written at address 0x20008000
-    downloaded 32768 bytes in 0.081320s (393.507 KiB/s)
+    > adapter speed 30000
+    adapter speed: 30000 kHz
+    > dump_image ram.bin 0x20000000 0x10000
+    dumped 65536 bytes in 0.168065s (380.805 KiB/s)
+    > load_image ram.bin 0x20000000        
+    65536 bytes written at address 0x20000000
+    downloaded 65536 bytes in 0.134932s (474.313 KiB/s)
     ```
 
 ## 八、后续
