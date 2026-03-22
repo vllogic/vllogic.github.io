@@ -23,7 +23,7 @@
   2. 支持有线模式、无线直连模式，UART波特率不建议超过`1000000`
 
 ## 固件列表-预览版
-* [V00.40-202603211557](../_static/firmware/vllink_basic2.SVCommon0040202603211557.zip)
+* [V00.41-202603222246](../_static/firmware/vllink_basic2.SVCommon0041202603222246.zip)
   * 参看：[Vllink Basic2 2026年新特性](../software/feature2026)
 * [V00.36-202511091142](../_static/firmware/vllink_basic2.SVCommon0036202511091142.zip)
   1. 优化：**大幅提升无线调试时单步响应速度；大幅降低无线串口中突发包的传输延迟**
