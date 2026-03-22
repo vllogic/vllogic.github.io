@@ -50,7 +50,7 @@
 
 ## 七、`TCP-DAP`
 * 简述：配置`Wireless_Device_SSID=路由器SSID`、`Wireless_Device_SSID=路由器密码`，切换到模式3，在STA连上路由器后，查看STA的IP。即可通过最新版OpenOCD连接。
-* [最新版OpenOCD，Windows](https://github.com/vllogic/openocd_cmsis-dap_v2/releases/tag/20260321)
+* [最新版OpenOCD，Windows](https://github.com/vllogic/openocd_cmsis-dap_v2/releases/tag/20260322)
 * 命令：`./openocd.exe -f interface/cmsis-dap.cfg -f target/stm32f4x.cfg -c "cmsis-dap backend tcp; cmsis-dap tcp host 192.168.1.183; cmsis-dap tcp port 4441; transport select swd; adapter speed 8000"` 注意：执行命令前修改IP。
 * 测试：
     ```
