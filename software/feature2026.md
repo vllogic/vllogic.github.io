@@ -1,7 +1,8 @@
 # Vllink Basic2 2026年新特性
 
 * 前言：这次新特性开发非常顺利，但由于代码变动较大，交互机制也有改动，目前是以独立教程的形式发布，待稳定后再合并至主站。
-* 固件：[V00.40-202603211557](../_static/firmware/vllink_basic2.SVCommon0040202603211557.zip)
+* 固件：[V00.41-202603222246](../_static/firmware/vllink_basic2.SVCommon0041202603222246.zip)
+* 全新配置工具：[Vllink 2026 Console](https://vllogic.com/_static/tools/vllink2026_console/)
 
 ## 一、综述
 1. 优化Wifi及TCP机制，通讯管理更为合理，无线速率提升12%左右
