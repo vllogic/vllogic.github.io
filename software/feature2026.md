@@ -7,7 +7,7 @@
 ## 一、综述
 1. 优化Wifi及TCP机制，通讯管理更为合理，无线速率提升12%左右
 2. 支持一对多，单AP最多可同时连接八个STA，最多可控制**九个目标板**（含AP所连目标板）
-3. 完善`WebUSB`接口，开放 [通讯协议](../software/webusb_protocol) ，提供开源上位机网页工具
+3. 完善`WebUSB`接口，开放 [通讯协议](../software/webusb_protocol) ，提供上位机网页工具，并 [开源](https://github.com/vllogic/vllink_console)
 4. 在STA模式下增加`TCP-UART`功能，可独立作为无线TCP串口工具使用，对接任意标准TCP客户端
 5. 在STA模式下增加`TCP-DAP`功能，可独立作为无线调试工具使用，对接最新版本OpenOCD
 
