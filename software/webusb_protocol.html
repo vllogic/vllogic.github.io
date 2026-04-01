@@ -215,14 +215,16 @@
 <ul>
 <li><p>获取调试器及其已连接的无线调试器信息，数据结构如下：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">struct</span> <span class="p">{</span>
-    <span class="n">uint8_t</span> <span class="n">select_idx</span><span class="p">;</span>
-    <span class="n">uint8_t</span> <span class="n">reserved</span><span class="p">[</span><span class="mi">27</span><span class="p">];</span>
+    <span class="n">uint8_t</span> <span class="n">select_idx</span><span class="p">;</span>     <span class="o">//</span> <span class="mi">0</span><span class="p">:</span> <span class="n">local</span><span class="p">;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]:</span> <span class="n">remote</span> <span class="n">client</span>
+    <span class="n">uint8_t</span> <span class="n">reserved</span><span class="p">[</span><span class="mi">31</span><span class="p">];</span>
 
     <span class="n">struct</span> <span class="p">{</span>
         <span class="n">uint64_t</span> <span class="n">us</span><span class="p">;</span>
         <span class="n">uint32_t</span> <span class="n">delay_us</span><span class="p">;</span>
-        <span class="n">uint8_t</span> <span class="n">alias</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
-    <span class="p">}</span> <span class="n">local</span><span class="p">,</span> <span class="n">remote</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+        <span class="n">uint32_t</span> <span class="n">reserved</span><span class="p">;</span>
+        <span class="n">uint8_t</span> <span class="n">mac</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+        <span class="n">uint8_t</span> <span class="n">alias</span><span class="p">[</span><span class="mi">26</span><span class="p">];</span>
+    <span class="p">}</span> <span class="n">local</span><span class="p">,</span> <span class="n">remote</span><span class="p">[</span><span class="mi">9</span><span class="p">];</span>
 <span class="p">}</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">debugger_info</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -240,7 +242,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">wValue</span></code>无意义</p></li>
 <li><p>获取DAP应答，应答数据在<code class="docutils literal notranslate"><span class="pre">DAP请求</span></code>完成后更新</p></li>
 <li><p>此命令需配合<strong>DAP查询</strong>使用</p></li>
-<li><p>数据格式遵循DAP协议</p></li>
+<li><p>数据格式-遵循DAP协议</p></li>
 </ul>
 </section>
 <section id="dap-brequest-0x11">
