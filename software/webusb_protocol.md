@@ -40,14 +40,16 @@
 * 获取调试器及其已连接的无线调试器信息，数据结构如下：
     ```
     struct {
-        uint8_t select_idx;
-        uint8_t reserved[27];
+        uint8_t select_idx;     // 0: local; [1, 10]: remote client
+        uint8_t reserved[31];
 
         struct {
             uint64_t us;
             uint32_t delay_us;
-            uint8_t alias[32];
-        } local, remote[10];
+            uint32_t reserved;
+            uint8_t mac[6];
+            uint8_t alias[26];
+        } local, remote[9];
     } __attribute__((packed)) debugger_info;
     ```
 * `debugger_info.select_idx`表示选定的调试器
@@ -59,7 +61,7 @@
 * `wValue`无意义
 * 获取DAP应答，应答数据在`DAP请求`完成后更新
 * 此命令需配合**DAP查询**使用
-* 数据格式遵循DAP协议
+* 数据格式-遵循DAP协议
 #### 3.1.3 DAP查询 `bRequest == 0x11`
 * `wValue`无意义
 * 获取DAP请求的结果，数据结构如下：
