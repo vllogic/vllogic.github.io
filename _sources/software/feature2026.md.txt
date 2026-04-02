@@ -66,7 +66,8 @@
 * 示例：
 ![](../_static/picture/Vllink_2026_Console.example.png)
 #### 4.4 局域网/广域网一对多
-* 参看[局域网使用](../example/over_local_area_network) 与 [互联网使用](../example/over_internet)
+* 此模式天然支持多设备，但TCP连接仍有最多八个的限制
+* 具体使用参看[局域网使用](../example/over_local_area_network) 与 [互联网使用](../example/over_internet)
 #### 4.5 安全性说明
 * 本调试器在 **有线模式** 下不会进行 **任何无线通信**
 * 本调试器在 **无线模式** 下不会尝试 **与非配置IP建立任何连接**
