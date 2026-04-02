@@ -29,8 +29,8 @@
     * 常亮：DC3接口已被选定，且VRef电压正常
 5. 蓝绿灯：
     * 注意：仅在AP模式且`Mode2_STA`被启用时出现
-    * 同步闪烁：未连接AP
-    * 同步常亮：已连接AP
+    * 同步闪烁：未连接路由器
+    * 同步常亮：已连接路由器
 
 ## 三、按键机制
 1. 双击：循环切换模式，有线模式 -> 无线AP模式（接电脑） -> 无线STA模式（接芯片）-> 有线模式 -> ...
@@ -38,10 +38,46 @@
 
 ## 四、一对多
 * 配置工具：[Vllink 2026 Console](https://vllogic.com/_static/tools/vllink2026_console/)
-#### 4.1 直连一对多
-* TODO
-#### 4.2 局域网/广域网一对多
-* TODO
+#### 4.1 准备工作
+* 准备多个调试器，其中一个用于连接电脑，作为AP，其余至多八个连接开发板，作为STA
+* 全部升级至 [V00.41-202603222246](../_static/firmware/vllink_basic2.SVCommon0041202603222246.zip) 或更高版本固件
+* 对于STA，需要通过长按重置或通过配置工具清除`Wireless_Device_SSID`与`Wireless_Device_Password`
+#### 4.2 直连一对多
+* 将AP连接电脑，通过双击切换到AP模式，蓝灯闪烁
+* 将所需的STA上电，并接好开发板，通过双击切换到STA模式，绿灯闪烁
+* 在AP与STA处于通讯距离内时，会自动完成自动配对或重连
+* 只有被选定的AP或STA上所连的开发板能被电脑上的调试软件访问
+* 选定方法请看 4.3 小节
+#### 4.3 配置工具
+* 使用浏览器打开 [Vllink 2026 Console](https://vllogic.com/_static/tools/vllink2026_console/)
+* 点击`CONNECT DEVICE`，选择`DAPLink CMSIS-DAP`并连接
+* 连接后，左侧是调试器卡片列表，当前选定的调试器卡片会高亮，单击卡片选定其他调试器
+* 调试器卡片中会显示调试器别名、已连接时长、实时延迟
+* 调试器卡片中有个`Reset`按钮，可以重启该调试器
+* 右侧是功能区，目前可修改选定调试器的配置
+* 一些配置说明：
+    1. 配置文本修改时会高亮，同步成功后是绿色高亮
+    2. `CREL + ENTER`或者光标离开编辑区会触发同步
+    3. `Alias`：调试器别名，重启后生效，会显示在卡片中
+    4. `Wireless_Host_SSID`：作为AP时，对外广播的`SSID`
+    5. `Wireless_Host_Password`：作为AP时，配置的连接密码，默认密码会根据MAC生成，用于实现自动配对，但不适合用于高安全场景
+    6. `Wireless_Device_SSID`：作为STA时，重连此`SSID`
+    7. `Wireless_Device_Password`：作为STA时，重连密码
+* 示例：
+![](../_static/picture/Vllink_2026_Console.example.png)
+#### 4.4 局域网/广域网一对多
+* 参看[局域网使用](../example/over_local_area_network) 与 [互联网使用](../example/over_internet)
+#### 4.5 安全性说明
+* 本调试器在 **有线模式** 下不会进行 **任何无线通信**
+* 本调试器在 **无线模式** 下不会尝试 **与非配置IP建立任何连接**
+* 本调试器在直连模式下会基于唯一MAC生成`SSID`与`PASSWORD`，此机制并非不可破解，若对安全性有要求，强烈建议统一修改`PASSWORD`后使用，修改方法如下：
+    1. AP端，修改`SSID`，此项可不改：`Wireless_Host_SSID=您的SSID`
+    2. AP端，修改`PASSWORD`：`Wireless_Host_Password=您的私有密码`
+    3. STA端，修改`SSID`：`Wireless_Device_SSID=您的SSID`
+    4. STA端，修改`PASSWORD`：`Wireless_Device_Password=您的私有密码`
+* 典型场景：
+    1. 研发办公室：一般视为信任区域，不需要修改，默认即可
+    2. 外场：建议修改`SSID`与`PASSWORD`，消除无线特征，并对调试器进行物理防护，防止通过USB连接修改配置，进而获得您开发板的访问权
 
 ## 五、`WebUSB`接口
 * TODO

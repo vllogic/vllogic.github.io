@@ -165,8 +165,8 @@
 <li><p>蓝绿灯：</p>
 <ul class="simple">
 <li><p>注意：仅在AP模式且<code class="docutils literal notranslate"><span class="pre">Mode2_STA</span></code>被启用时出现</p></li>
-<li><p>同步闪烁：未连接AP</p></li>
-<li><p>同步常亮：已连接AP</p></li>
+<li><p>同步闪烁：未连接路由器</p></li>
+<li><p>同步常亮：已连接路由器</p></li>
 </ul>
 </li>
 </ol>
@@ -184,15 +184,72 @@
 <li><p>配置工具：<a class="reference external" href="https://vllogic.com/_static/tools/vllink2026_console/">Vllink 2026 Console</a></p></li>
 </ul>
 <section id="id5">
-<h3>4.1 直连一对多<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<h3>4.1 准备工作<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>TODO</p></li>
+<li><p>准备多个调试器，其中一个用于连接电脑，作为AP，其余至多八个连接开发板，作为STA</p></li>
+<li><p>全部升级至 <a class="reference download internal" download="" href="../_downloads/15c2a7b1216a9acf2f80750935227ebd/vllink_basic2.SVCommon0041202603222246.zip"><span class="xref download myst">V00.41-202603222246</span></a> 或更高版本固件</p></li>
+<li><p>对于STA，需要通过长按重置或通过配置工具清除<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID</span></code>与<code class="docutils literal notranslate"><span class="pre">Wireless_Device_Password</span></code></p></li>
 </ul>
 </section>
 <section id="id6">
-<h3>4.2 局域网/广域网一对多<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<h3>4.2 直连一对多<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>TODO</p></li>
+<li><p>将AP连接电脑，通过双击切换到AP模式，蓝灯闪烁</p></li>
+<li><p>将所需的STA上电，并接好开发板，通过双击切换到STA模式，绿灯闪烁</p></li>
+<li><p>在AP与STA处于通讯距离内时，会自动完成自动配对或重连</p></li>
+<li><p>只有被选定的AP或STA上所连的开发板能被电脑上的调试软件访问</p></li>
+<li><p>选定方法请看 4.3 小节</p></li>
+</ul>
+</section>
+<section id="id7">
+<h3>4.3 配置工具<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>使用浏览器打开 <a class="reference external" href="https://vllogic.com/_static/tools/vllink2026_console/">Vllink 2026 Console</a></p></li>
+<li><p>点击<code class="docutils literal notranslate"><span class="pre">CONNECT</span> <span class="pre">DEVICE</span></code>，选择<code class="docutils literal notranslate"><span class="pre">DAPLink</span> <span class="pre">CMSIS-DAP</span></code>并连接</p></li>
+<li><p>连接后，左侧是调试器卡片列表，当前选定的调试器卡片会高亮，单击卡片选定其他调试器</p></li>
+<li><p>调试器卡片中会显示调试器别名、已连接时长、实时延迟</p></li>
+<li><p>调试器卡片中有个<code class="docutils literal notranslate"><span class="pre">Reset</span></code>按钮，可以重启该调试器</p></li>
+<li><p>右侧是功能区，目前可修改选定调试器的配置</p></li>
+<li><p>一些配置说明：</p>
+<ol class="arabic simple">
+<li><p>配置文本修改时会高亮，同步成功后是绿色高亮</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CREL</span> <span class="pre">+</span> <span class="pre">ENTER</span></code>或者光标离开编辑区会触发同步</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Alias</span></code>：调试器别名，重启后生效，会显示在卡片中</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Wireless_Host_SSID</span></code>：作为AP时，对外广播的<code class="docutils literal notranslate"><span class="pre">SSID</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Wireless_Host_Password</span></code>：作为AP时，配置的连接密码，默认密码会根据MAC生成，用于实现自动配对，但不适合用于高安全场景</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID</span></code>：作为STA时，重连此<code class="docutils literal notranslate"><span class="pre">SSID</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Wireless_Device_Password</span></code>：作为STA时，重连密码</p></li>
+</ol>
+</li>
+<li><p>示例：
+<img alt="" src="../_images/Vllink_2026_Console.example.png" /></p></li>
+</ul>
+</section>
+<section id="id8">
+<h3>4.4 局域网/广域网一对多<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>参看<a class="reference internal" href="../example/over_local_area_network.html"><span class="doc std std-doc">局域网使用</span></a> 与 <a class="reference internal" href="../example/over_internet.html"><span class="doc std std-doc">互联网使用</span></a></p></li>
+</ul>
+</section>
+<section id="id9">
+<h3>4.5 安全性说明<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>本调试器在 <strong>有线模式</strong> 下不会进行 <strong>任何无线通信</strong></p></li>
+<li><p>本调试器在 <strong>无线模式</strong> 下不会尝试 <strong>与非配置IP建立任何连接</strong></p></li>
+<li><p>本调试器在直连模式下会基于唯一MAC生成<code class="docutils literal notranslate"><span class="pre">SSID</span></code>与<code class="docutils literal notranslate"><span class="pre">PASSWORD</span></code>，此机制并非不可破解，若对安全性有要求，强烈建议统一修改<code class="docutils literal notranslate"><span class="pre">PASSWORD</span></code>后使用，修改方法如下：</p>
+<ol class="arabic simple">
+<li><p>AP端，修改<code class="docutils literal notranslate"><span class="pre">SSID</span></code>，此项可不改：<code class="docutils literal notranslate"><span class="pre">Wireless_Host_SSID=您的SSID</span></code></p></li>
+<li><p>AP端，修改<code class="docutils literal notranslate"><span class="pre">PASSWORD</span></code>：<code class="docutils literal notranslate"><span class="pre">Wireless_Host_Password=您的私有密码</span></code></p></li>
+<li><p>STA端，修改<code class="docutils literal notranslate"><span class="pre">SSID</span></code>：<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=您的SSID</span></code></p></li>
+<li><p>STA端，修改<code class="docutils literal notranslate"><span class="pre">PASSWORD</span></code>：<code class="docutils literal notranslate"><span class="pre">Wireless_Device_Password=您的私有密码</span></code></p></li>
+</ol>
+</li>
+<li><p>典型场景：</p>
+<ol class="arabic simple">
+<li><p>研发办公室：一般视为信任区域，不需要修改，默认即可</p></li>
+<li><p>外场：建议修改<code class="docutils literal notranslate"><span class="pre">SSID</span></code>与<code class="docutils literal notranslate"><span class="pre">PASSWORD</span></code>，消除无线特征，并对调试器进行物理防护，防止通过USB连接修改配置，进而获得您开发板的访问权</p></li>
+</ol>
+</li>
 </ul>
 </section>
 </section>
@@ -225,8 +282,8 @@
 </li>
 </ul>
 </section>
-<section id="id7">
-<h2>八、后续<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<section id="id10">
+<h2>八、后续<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
 <p>计划增加 <strong>旁路总线访问</strong> 特性。简单来讲就是网页直接读取或者写入任意地址，且不影响正在进行的调试功能。这个特性是<strong>高性能旁路RTT</strong>的基础。</p>
 </section>
 </section>
