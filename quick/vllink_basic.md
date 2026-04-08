@@ -83,7 +83,7 @@
       6. 此时，STA会自动配对新AP，应当保证此时附近只有一个AP处于上电状态
 
 ## 开发工具使用说明
-* [Windows7 驱动安装](../software/windows7_driver.md)
+* [Windows 驱动问题处理](../software/windows7_driver.md)
 * [IAR 使用说明](../software/iar.md)
 * [Keil MDK 使用说明](../software/keil_mdk.md)
 * [Probe RS 使用说明](../software/probe_rs.md)

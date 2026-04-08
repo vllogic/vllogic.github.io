@@ -88,7 +88,7 @@
    * 答：临时解决方案：通过上文中的[基础配置](https://vllogic.com/_static/tools/web_config_basic2/)，修改`AS_ARM MBED=enable`后同步，然后重连一次解决。
 
 ## 六、开发工具使用说明
-* [Windows7 驱动安装](../software/windows7_driver.md)
+* [Windows 驱动问题处理](../software/windows7_driver.md)
 * [IAR 使用说明](../software/iar.md)
 * [Keil MDK 使用说明](../software/keil_mdk.md)
 * [Probe RS 使用说明](../software/probe_rs.md)
