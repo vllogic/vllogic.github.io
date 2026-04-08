@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Windows7 驱动安装 &mdash; Vllogic  文档</title>
+  <title>Windows 驱动问题处理 &mdash; Vllogic  文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -68,12 +68,20 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Windows7 驱动安装</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">提示</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">下载驱动</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cmsis-dap-v2">安装CMSIS-DAP V2驱动</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cdc">安装CDC驱动</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">所有驱动安装完成</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Windows 驱动问题处理</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#windows-10">一、Windows 10或更高版本</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#zadig">1.1 下载Zadig及运行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vllink-basic2cmsis-dap-v2">1.2 示例：对Vllink Basic2安装CMSIS-DAP V2驱动</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1.3 设备、接口及驱动类型的对应关系</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#window-7cmsis-dap-v2cdc">二、Window 7下安装CMSIS-DAP V2及CDC驱动</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.1 下载驱动</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmsis-dap-v2">2.2 安装CMSIS-DAP V2驱动</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cdc">2.3 安装CDC驱动</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.4 安装完成</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="iar.html">IAR 使用说明</a></li>
@@ -114,7 +122,7 @@
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Windows7 驱动安装</li>
+      <li class="breadcrumb-item active">Windows 驱动问题处理</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/software/windows7_driver.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -124,24 +132,164 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="windows7">
-<h1>Windows7 驱动安装<a class="headerlink" href="#windows7" title="Link to this heading"></a></h1>
-<section id="id1">
-<h2>提示<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+  <section id="windows">
+<h1>Windows 驱动问题处理<a class="headerlink" href="#windows" title="Link to this heading"></a></h1>
 <ul class="simple">
-<li><p>Vllink Basic2自带CMSIS-DAP V1接口，理论上在所有系统及绝大部分开发环境中免驱直接使用，如非必要，无需按以下步骤进行额外操作。</p></li>
+<li><p>本文旨在解决Windows系统下的驱动问题</p></li>
+<li><p>典型的驱动问题有如下几种：</p>
+<ol class="arabic simple">
+<li><p>插入设备后，设备管理器里面出现带黄色惊叹号的接口</p></li>
+<li><p>插入设备后，设备管理器里面出现了非预期的接口</p></li>
+<li><p>插入设备后，设备管理器里面出现了预期的接口，当软件使用却不符合预期</p></li>
+</ol>
+</li>
+<li><p>前两种情况能通过本文解决，第三种可以尝试，但问题不一定出在驱动上</p></li>
+<li><p><strong>最简单明确驱动问题的方法就是找一台系统纯净的Windows 10电脑作对比判断</strong></p></li>
+</ul>
+<section id="windows-10">
+<h2>一、Windows 10或更高版本<a class="headerlink" href="#windows-10" title="Link to this heading"></a></h2>
+<section id="zadig">
+<h3>1.1 下载Zadig及运行<a class="headerlink" href="#zadig" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://zadig.akeo.ie/">Zadig官网</a></p></li>
+<li><p>双击打开并授权运行</p></li>
+<li><p>点击<code class="docutils literal notranslate"><span class="pre">Options</span></code>，勾选<code class="docutils literal notranslate"><span class="pre">List</span> <span class="pre">All</span> <span class="pre">Devices</span></code></p></li>
 </ul>
 </section>
+<section id="vllink-basic2cmsis-dap-v2">
+<h3>1.2 示例：对Vllink Basic2安装CMSIS-DAP V2驱动<a class="headerlink" href="#vllink-basic2cmsis-dap-v2" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>将调试器接入系统</p></li>
+<li><p>如下图，找到<code class="docutils literal notranslate"><span class="pre">USB</span> <span class="pre">ID</span></code>为<code class="docutils literal notranslate"><span class="pre">1209</span> <span class="pre">6666</span> <span class="pre">00</span></code>的接口，其中1209为VID，6666为PID，00为接口号。这个接口为<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">V2</span></code>，需选择<code class="docutils literal notranslate"><span class="pre">WinUSB</span></code>驱动，然后点击Replace Drvier，稍等片刻即完成安装。
+<img alt="" src="../_images/zadig_cmsis_dap_v2.png" /></p></li>
+<li><p>安装完成后，可以重插拔一次看看能否正常识别</p></li>
+</ul>
+</section>
+<section id="id1">
+<h3>1.3 设备、接口及驱动类型的对应关系<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ul>
+<li><p>根据下表所列对应关系，可以修复所有接口的驱动问题</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>设备</p></th>
+<th class="head text-center"><p>VID</p></th>
+<th class="head text-center"><p>PID</p></th>
+<th class="head text-center"><p>接口号</p></th>
+<th class="head text-center"><p>接口名</p></th>
+<th class="head text-center"><p>适用驱动</p></th>
+<th class="head text-center"><p>接口用途</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Vllink Basic2（含2X）</p></td>
+<td class="text-center"><p>1209</p></td>
+<td class="text-center"><p>6666</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>CMSIS-DAP V2</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">WinUSB</span></code></p></td>
+<td class="text-center"><p>调试</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Vllink Basic2（含2X）</p></td>
+<td class="text-center"><p>1209</p></td>
+<td class="text-center"><p>6666</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>WebUSB</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">WinUSB</span></code></p></td>
+<td class="text-center"><p>配置</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Vllink Basic2（含2X）</p></td>
+<td class="text-center"><p>1209</p></td>
+<td class="text-center"><p>6666</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>CDC</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">USB</span> <span class="pre">Serial(CDC)</span></code></p></td>
+<td class="text-center"><p>串口</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Vllink Basic2（含2X）</p></td>
+<td class="text-center"><p>1209</p></td>
+<td class="text-center"><p>6666</p></td>
+<td class="text-center"><p>4</p></td>
+<td class="text-center"><p>CMSIS-DAP V1</p></td>
+<td class="text-center"><p>不支持</p></td>
+<td class="text-center"><p>调试</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Vllink Box（含Box2）</p></td>
+<td class="text-center"><p>1209</p></td>
+<td class="text-center"><p>6666</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>CMSIS-DAP V2</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">WinUSB</span></code></p></td>
+<td class="text-center"><p>调试</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Vllink Box（含Box2）</p></td>
+<td class="text-center"><p>1209</p></td>
+<td class="text-center"><p>6666</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>WebUSB</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">WinUSB</span></code></p></td>
+<td class="text-center"><p>预留</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Vllink Box（含Box2）</p></td>
+<td class="text-center"><p>1209</p></td>
+<td class="text-center"><p>6666</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>CDC</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">USB</span> <span class="pre">Serial(CDC)</span></code></p></td>
+<td class="text-center"><p>串口</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Vllink Box（含Box2）</p></td>
+<td class="text-center"><p>1209</p></td>
+<td class="text-center"><p>6666</p></td>
+<td class="text-center"><p>4</p></td>
+<td class="text-center"><p>CMSIS-DAP V1</p></td>
+<td class="text-center"><p>不支持</p></td>
+<td class="text-center"><p>调试</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Vllink Basic</p></td>
+<td class="text-center"><p>1209</p></td>
+<td class="text-center"><p>6666</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>CMSIS-DAP V2</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">WinUSB</span></code></p></td>
+<td class="text-center"><p>调试</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Vllink Basic</p></td>
+<td class="text-center"><p>1209</p></td>
+<td class="text-center"><p>6666</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>CDC</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">USB</span> <span class="pre">Serial(CDC)</span></code></p></td>
+<td class="text-center"><p>串口</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Vllink Basic</p></td>
+<td class="text-center"><p>1209</p></td>
+<td class="text-center"><p>6666</p></td>
+<td class="text-center"><p>3</p></td>
+<td class="text-center"><p>MSC</p></td>
+<td class="text-center"><p>不支持</p></td>
+<td class="text-center"><p>配置用磁盘</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>若设备配置了<code class="docutils literal notranslate"><span class="pre">AS_ARM_MBED=enable</span></code>，VID / PID 将变成 <code class="docutils literal notranslate"><span class="pre">0D28</span> <span class="pre">/</span> <span class="pre">0204</span></code>，接口号及适用驱动不变</p></li>
+<li><p>表中<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">V1</span></code>与<code class="docutils literal notranslate"><span class="pre">MSC</span></code>都是系统默认驱动，不要用<code class="docutils literal notranslate"><span class="pre">Zadig</span></code>修改</p></li>
+<li><p>使用<code class="docutils literal notranslate"><span class="pre">Zadig</span></code>安装驱动<strong>务必慎重</strong>，错误安装驱动会浪费很多时间</p></li>
+</ul>
+</section>
+</section>
+<section id="window-7cmsis-dap-v2cdc">
+<h2>二、Window 7下安装CMSIS-DAP V2及CDC驱动<a class="headerlink" href="#window-7cmsis-dap-v2cdc" title="Link to this heading"></a></h2>
 <section id="id2">
-<h2>下载驱动<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
-<ol class="arabic simple">
+<h3>2.1 下载驱动<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul class="simple">
 <li><p><a class="reference download internal" download="" href="../_downloads/33750bd39ff56c4a57aaf557b791c047/Vllink_Windows7_Driver.zip"><span class="xref download myst">Vllink Windows7 Driver.zip</span></a></p></li>
 <li><p>解压，文件夹中有两个inf驱动文件，稍后会用到</p></li>
-</ol>
+</ul>
 </section>
 <section id="cmsis-dap-v2">
-<h2>安装CMSIS-DAP V2驱动<a class="headerlink" href="#cmsis-dap-v2" title="Link to this heading"></a></h2>
-<ol class="arabic simple">
+<h3>2.2 安装CMSIS-DAP V2驱动<a class="headerlink" href="#cmsis-dap-v2" title="Link to this heading"></a></h3>
+<ul class="simple">
 <li><p>将DAP接上电脑，在设备管理器中出现CMSIS-DAP v2设备，右击打开操作菜单，左击<code class="docutils literal notranslate"><span class="pre">更新驱动程序软件</span></code>
 <img alt="" src="../_images/win7_cmsisdapv2_update.png" /></p></li>
 <li><p>左击<code class="docutils literal notranslate"><span class="pre">浏览计算机以查找驱动程序软件</span></code>
@@ -158,22 +306,23 @@
 <img alt="" src="../_images/win7_cmsisdapv2_selectyes.png" /></p></li>
 <li><p>若出现警告，点击<code class="docutils literal notranslate"><span class="pre">始终..</span></code>
 <img alt="" src="../_images/win7_cmsisdapv2_warning.png" /></p></li>
-</ol>
+</ul>
 </section>
 <section id="cdc">
-<h2>安装CDC驱动<a class="headerlink" href="#cdc" title="Link to this heading"></a></h2>
-<ol class="arabic simple">
+<h3>2.3 安装CDC驱动<a class="headerlink" href="#cdc" title="Link to this heading"></a></h3>
+<ul class="simple">
 <li><p>参考安装CMSIS-DAP V2驱动过程，在设备管理器中选中设备<code class="docutils literal notranslate"><span class="pre">Vllink-CDCExt</span></code>
 <img alt="" src="../_images/win7_cmsisdapv2_update_cdc.png" /></p></li>
 <li><p>在第六步中，选中<code class="docutils literal notranslate"><span class="pre">ARM</span></code>，选中<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">CDC</span></code>
 <img alt="" src="../_images/win7_cmsisdapv2_selectcdc.png" /></p></li>
-</ol>
+</ul>
 </section>
 <section id="id3">
-<h2>所有驱动安装完成<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<h3>2.4 安装完成<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><img alt="" src="../_images/win7_cmsisdapv2_all.png" /></p></li>
 </ul>
+</section>
 </section>
 </section>
 
