@@ -37,7 +37,7 @@
    | 京微齐力下载器 | 1209 | 6666 | 4 | CMSIS-DAP V1 | 不支持 | 调试 |
    | Vllink Basic | 1209 | 6666 | 0 | CMSIS-DAP V2 | `WinUSB` | 调试 |
    | Vllink Basic | 1209 | 6666 | 2 | CDC | `USB Serial(CDC)` | 串口 |
-   | Vllink Basic | 1209 | 6666 | 3 | MSC | 不支持 | 配置用磁盘 |
+   | Vllink Basic | 1209 | 6666 | 4 | MSC | 不支持 | 配置用磁盘 |
 * 若设备配置了`AS_ARM_MBED=enable`，VID / PID 将变成 `0D28 / 0204`，接口号及适用驱动不变
 * 表中`CMSIS-DAP V1`与`MSC`都是系统默认驱动，不要用`Zadig`修改
 * 使用`Zadig`安装驱动**务必慎重**，错误安装驱动会浪费很多时间
