@@ -9,7 +9,7 @@
 
 ## 一、Windows 10或更高版本
 ### 1.1 下载Zadig及运行
-* [Zadig官网](https://zadig.akeo.ie/)
+* [Zadig官网](https://zadig.akeo.ie/)下载可执行文件
 * 双击打开并授权运行
 * 点击`Options`，勾选`List All Devices`
 
@@ -31,6 +31,10 @@
    | Vllink Box（含Box2） | 1209 | 6666 | 1 | WebUSB | `WinUSB` | 预留 |
    | Vllink Box（含Box2） | 1209 | 6666 | 2 | CDC | `USB Serial(CDC)` | 串口 |
    | Vllink Box（含Box2） | 1209 | 6666 | 4 | CMSIS-DAP V1 | 不支持 | 调试 |
+   | 京微齐力下载器 | 1209 | 6666 | 0 | CMSIS-DAP V2 | `WinUSB` | 调试 |
+   | 京微齐力下载器 | 1209 | 6666 | 1 | WebUSB | `WinUSB` | 预留 |
+   | 京微齐力下载器 | 1209 | 6666 | 2 | CDC | `USB Serial(CDC)` | 串口 |
+   | 京微齐力下载器 | 1209 | 6666 | 4 | CMSIS-DAP V1 | 不支持 | 调试 |
    | Vllink Basic | 1209 | 6666 | 0 | CMSIS-DAP V2 | `WinUSB` | 调试 |
    | Vllink Basic | 1209 | 6666 | 2 | CDC | `USB Serial(CDC)` | 串口 |
    | Vllink Basic | 1209 | 6666 | 3 | MSC | 不支持 | 配置用磁盘 |
