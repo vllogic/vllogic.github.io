@@ -19,7 +19,9 @@
       <script src="../_static/translations.js?v=beaddf03"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" /> 
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Vllink Box 快速上手" href="vllink_box.html" />
+    <link rel="prev" title="Vllink Basic2 快速上手" href="vllink_basic2.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,9 +44,15 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic.html">Vllink Basic 快速上手</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic2.html">Vllink Basic2 快速上手</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Vllink Basic 2X 快速上手</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">一、对比</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">二、调试接口定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#todo">三、TODO</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_box.html">Vllink Box 快速上手</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_box2.html">Vllink Box2 快速上手</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usb_sniffer_h7p20.html">USB Sniffer H7P20 快速上手</a></li>
@@ -117,12 +125,117 @@
              
   <section id="vllink-basic-2x">
 <h1>Vllink Basic 2X 快速上手<a class="headerlink" href="#vllink-basic-2x" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>一、对比<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic</span> <span class="pre">2X</span></code>固件与<code class="docutils literal notranslate"><span class="pre">Basic</span> <span class="pre">2</span></code>通用</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic</span> <span class="pre">2X</span></code>硬件部分做了如下优化：</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>硬件对比</p></th>
+<th class="head text-left"><p>Basic 2</p></th>
+<th class="head text-left"><p>Basic 2X</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>外壳</p></td>
+<td class="text-left"><p>热缩管</p></td>
+<td class="text-left"><p><strong>塑料外壳+PVC标签</strong></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>独立蓝牙天线</p></td>
+<td class="text-left"><p>预留</p></td>
+<td class="text-left"><p>无</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>2.4G Wifi天线</p></td>
+<td class="text-left"><p>无</p></td>
+<td class="text-left"><p><strong>支持2.4G信道</strong></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>5.8G Ipex4接口</p></td>
+<td class="text-left"><p>无</p></td>
+<td class="text-left"><p><strong>支持，可手工切换</strong></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>红色LED灯</p></td>
+<td class="text-left"><p><strong>有</strong></p></td>
+<td class="text-left"><p>无</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>USB电源输入单向二极管 (1N5817W)</p></td>
+<td class="text-left"><p>无</p></td>
+<td class="text-left"><p><strong>有</strong></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>DC3 5V输入理想二极管 (CH213K)</p></td>
+<td class="text-left"><p>无</p></td>
+<td class="text-left"><p><strong>有</strong></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>DC3 5V输出功率电子开关 (SY6280)</p></td>
+<td class="text-left"><p>无</p></td>
+<td class="text-left"><p><strong>有，软件控制</strong></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>DC3 5V脚TVS (SMF5.0A)</p></td>
+<td class="text-left"><p>无</p></td>
+<td class="text-left"><p><strong>有</strong></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</section>
+<section id="id2">
+<h2>二、调试接口定义<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p><img alt="" src="../_images/basic2_interface_desc_small.png" /></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>接口</p></th>
+<th class="head text-left"><p>介绍</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>TDI</p></td>
+<td class="text-left"><p>JTAG数据口</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>TMS / SWDIO</p></td>
+<td class="text-left"><p>JTAG模式口、SWD数据口</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>TCK / SWCLK</p></td>
+<td class="text-left"><p>JTAG时钟口、SWD时钟口</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>SRST / SWRST</p></td>
+<td class="text-left"><p>芯片复位口</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>TDO</p></td>
+<td class="text-left"><p>JTAG数据口</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>5V</p></td>
+<td class="text-left"><p>双向5V电源口<sup>1</sup></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>GND</p></td>
+<td class="text-left"><p>共地口</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>VRef</p></td>
+<td class="text-left"><p>参考电平及简易可调电压源<sup>2</sup></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>TXD</p></td>
+<td class="text-left"><p>串口输出</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>RXD</p></td>
+<td class="text-left"><p>串口输入</p></td>
+</tr>
+</tbody>
+</table>
+<p>[1] <code class="docutils literal notranslate"><span class="pre">5V</span></code>脚支持供电双向切换，默认经理想二极管（CH213K）单向输入，支持软件开启5V输出。详见<a class="reference internal" href="../hardware/vllink_basic2x_pwr.html"><span class="std std-doc">Vllink Basic 2X 电源部分详细说明</span></a></p>
+<p>[2] <code class="docutils literal notranslate"><span class="pre">VRef</span></code>默认输出3.3V，可配置为输入模式或输出其他电压。详见<a class="reference internal" href="../hardware/vllink_basic2x_pwr.html"><span class="std std-doc">Vllink Basic 2X 电源部分详细说明</span></a></p>
+</section>
+<section id="todo">
+<h2>三、TODO<a class="headerlink" href="#todo" title="Link to this heading"></a></h2>
+</section>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="vllink_basic2.html" class="btn btn-neutral float-left" title="Vllink Basic2 快速上手" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="vllink_box.html" class="btn btn-neutral float-right" title="Vllink Box 快速上手" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
