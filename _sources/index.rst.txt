@@ -38,14 +38,11 @@ Discussions：https://github.com/vllogic/vllogic.github.io/discussions
 快速上手
 ----------------------------
 
-======================  ======================  ======================
-|Vllink Basic 2X|_        |Vllink Basic2|_         |Vllogic USB Sniffer|_
-----------------------  ----------------------  ----------------------
-`Vllink Basic 2X`_        `Vllink Basic2`_         `Vllogic USB Sniffer`_
-======================  ======================  ======================
-
-.. |Vllink Basic 2X| image:: _static/picture/vllink_basic2_top_45.png
-.. _Vllink Basic 2X: quick/vllink_basic2x.html
+======================  ======================
+|Vllink Basic2|_         |Vllogic USB Sniffer|_
+----------------------  ----------------------
+`Vllink Basic2`_         `Vllogic USB Sniffer`_
+======================  ======================
 
 .. |Vllink Basic2| image:: _static/picture/vllink_basic2_top_45.png
 .. _Vllink Basic2: quick/vllink_basic2.html
