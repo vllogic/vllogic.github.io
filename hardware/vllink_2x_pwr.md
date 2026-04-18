@@ -1,4 +1,4 @@
-# Vllink Basic 2X 电源部分详细说明
+# Vllink 2X 电源部分详细说明
 
 ## 电路
 * 电路图

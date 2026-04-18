@@ -25,7 +25,7 @@
 ## 固件列表-预览版
 * [V00.42-202604052002](../_static/firmware/vllink_basic2.SVCommon0042202604052002.zip)
   * 参看：[Vllink Basic2 2026年新特性](../software/feature2026)
-  * 同时支持新版本硬件`Vllink Basic 2X`，包括：2.4G信道、Vout输出控制
+  * 同时支持新版本硬件`Vllink 2X`，包括：2.4G信道、Vout输出控制
 * [V00.36-202511091142](../_static/firmware/vllink_basic2.SVCommon0036202511091142.zip)
   1. 优化：**大幅提升无线调试时单步响应速度；大幅降低无线串口中突发包的传输延迟**
   2. 优化：波特率上下限扩展到`1200`-`6500000`
