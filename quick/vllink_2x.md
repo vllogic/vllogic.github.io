@@ -30,8 +30,8 @@
 | TXD  | 串口输出 |
 | RXD  | 串口输入 |
 
-  [1] `5V`脚支持供电双向切换，默认经理想二极管（CH213K）单向输入，支持软件开启5V输出。详见[Vllink Basic 2X 电源部分详细说明](../hardware/vllink_basic2x_pwr.md)
+  [1] `5V`脚支持供电双向切换，默认经理想二极管（CH213K）单向输入，支持软件开启5V输出。详见[Vllink Basic 2X 电源部分详细说明](../hardware/vllink_2x_pwr.md)
 
-  [2] `VRef`默认输出3.3V，可配置为输入模式或输出其他电压。详见[Vllink Basic 2X 电源部分详细说明](../hardware/vllink_basic2x_pwr.md)
+  [2] `VRef`默认输出3.3V，可配置为输入模式或输出其他电压。详见[Vllink Basic 2X 电源部分详细说明](../hardware/vllink_2x_pwr.md)
 
 ## 三、TODO

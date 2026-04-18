@@ -2,8 +2,8 @@
 
 ## 电路
 * 电路图
-   ![](../_static/picture/vllink_basic2x.pwr.png)
-* [PDF下载](../_static/docs/vllink_basic2x.pwr.pdf)
+   ![](../_static/picture/vllink_2x.pwr.png)
+* [PDF下载](../_static/docs/vllink_2x.pwr.pdf)
 
 ## 说明
 1. 调试器支持从USB口或DC3接口5V脚供电
