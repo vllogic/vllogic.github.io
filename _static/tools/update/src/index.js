@@ -379,7 +379,7 @@ function initButton() {
             taskReset(hidDevice);
           }
         }
-      }, 50);
+      }, 100);
     } catch (e) {
       console.log("buttonConnectDevice onClick error" + e);
     }
