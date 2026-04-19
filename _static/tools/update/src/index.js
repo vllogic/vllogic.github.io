@@ -25,6 +25,7 @@ var taskTypePending = 0;
 var taskPosTx = 0;
 var taskPosRx = 0;
 var waitReset = 0;
+var pkt_length = 1023;
 
 (async () => {
   initButton();
@@ -33,37 +34,33 @@ var waitReset = 0;
 function taskPingDo(dev)
 {
   const bootloader_cmd_ping = [0x00, 0x00, 0x01, 0x00, 0x00, 0x00];
-  dev.sendReport(0, new Uint8Array(bootloader_cmd_ping)).catch(error => {
-    console.log('Error Name:', error.name);
-    console.log('Error Message:', error.message);
-  });
+  var array = new Uint8Array(pkt_length);
+  array.set(bootloader_cmd_ping, 0);
+  dev.sendReport(0, array);
 }
 
 function taskResetDo(dev)
 {
   const bootloader_cmd_reset = [0x00, 0x00, 0x02, 0x00, 0x00, 0x00];
-  dev.sendReport(0, new Uint8Array(bootloader_cmd_reset)).catch(error => {
-    console.log('Error Name:', error.name);
-    console.log('Error Message:', error.message);
-  });
+  var array = new Uint8Array(pkt_length);
+  array.set(bootloader_cmd_reset, 0);
+  dev.sendReport(0, array);
 }
 
 function taskGetHwVersionDo(dev)
 {
   const bootloader_cmd_get_hw_version = [0x00, 0x00, 0x01, 0x02, 0x08, 0x00, 0x01, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00];
-  dev.sendReport(0, new Uint8Array(bootloader_cmd_get_hw_version)).catch(error => {
-    console.log('Error Name:', error.name);
-    console.log('Error Message:', error.message);
-  });
+  var array = new Uint8Array(pkt_length);
+  array.set(bootloader_cmd_get_hw_version, 0);
+  dev.sendReport(0, array);
 }
 
 function taskGetSwVersionDo(dev)
 {
   const bootloader_cmd_get_sw_version = [0x00, 0x00, 0x01, 0x02, 0x08, 0x00, 0x02, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00];
-  dev.sendReport(0, new Uint8Array(bootloader_cmd_get_sw_version)).catch(error => {
-    console.log('Error Name:', error.name);
-    console.log('Error Message:', error.message);
-  });
+  var array = new Uint8Array(pkt_length);
+  array.set(bootloader_cmd_get_sw_version, 0);
+  dev.sendReport(0, array);
 }
 
 function taskFirmwareUpdateDo(dev, data, posTx, posRx)
@@ -87,7 +84,8 @@ function taskFirmwareUpdateDo(dev, data, posTx, posRx)
       }
       console.log('  Try Download: ' + posTx + '@' + data.byteLength + ' : ' + data_len);
 
-      var array = new Uint8Array(8 + 2 + 4 + data_len);
+      //var array = new Uint8Array(8 + 2 + 4 + data_len);
+      var array = new Uint8Array(pkt_length);
 
       const const_head = [0x00, 0x00, 0x00, 0x01, 0x08, 0x02, 0x00, 0x00];
       array.set(new Uint8Array(const_head), 0);
@@ -102,10 +100,7 @@ function taskFirmwareUpdateDo(dev, data, posTx, posRx)
 
       array.set(new Uint8Array(data.slice(posTx, posTx + data_len)), 8 + 2 + 4);
 
-      dev.sendReport(0, array).catch(error => {
-        console.log('Error Name:', error.name);
-        console.log('Error Message:', error.message);
-      });
+      dev.sendReport(0, array);
       return data_len;
     }
   }
@@ -296,6 +291,13 @@ function initButton() {
             usage: 0x01,
             usagePage: 0x0002
           },
+          // Vllink 2X
+          {
+            vendorId: 0x1209,
+            productId: 0x2512,
+            usage: 0x01,
+            usagePage: 0xff00
+          },
           // Vllink HME
           {
             vendorId: 0x1209,
@@ -343,6 +345,10 @@ function initButton() {
         if (!hidDevice.opened) {
           hidDevice.open();
         }
+        if ((hidDevice.vendorId == 0x1209) && (hidDevice.productId >= 0x2512)) {
+          pkt_length = 1024;
+        }
+        console.log("pkt_length: " + pkt_length);
         hidDevice.oninputreport = (event) => inputReportHandler(event);
       } else {
         inputHwVersion.value = "Unconnected";
