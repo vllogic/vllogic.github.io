@@ -1,15 +1,23 @@
 # Vllink Basic2 固件更新
+* *支持硬件：`Vllink Basic2`*
+* *支持硬件：`Vllink 2X`，固件版本不小于`V00.50`*
 
-## 更新方法
+## 一、更新方法
 1. 从下方固件列表中下载压缩包并解压，文件夹中有`.bin`固件
 2. 按住按键连接电脑，使用Chrome或Edge浏览器打开更新页面 [Vllink HID Update](https://vllogic.com/_static/tools/update/)
 3. 点击`Connect Vllink Device`，在对话框中选中`Vllink Basic2 Update`再点击`连接`
 4. 在`Firmware Update`栏目中选择第一步中的`.bin`固件
 5. 点击`Update`，等待一段时间后，完成更新
 
-## 固件列表-正式版
+## 二、固件列表-正式版
 * [V00.50-202604242049](../_static/firmware/vllink_basic2.SVCommon0050202604242049.zip)
-  1. 
+  1. 支持新硬件`Vllink 2X`，此硬件细节详见 [Vllink 2X 快速上手](../quick/vllink_2x)
+  2. 优化：综合调整底层通讯架构，无线速率提升10%左右
+  3. 新增：完善`WebUSB`接口，开放 [通讯协议](../software/webusb_protocol) 
+  4. 新增：支持**一对多**，单AP最多可同时连接八个STA，提供 [配置工具](https://vllogic.com/_static/tools/vllink2026_console/) ，可自由选择调试器所连接的目标板（最多九个，含AP）
+  5. 新增：STA模式下增加`TCP-UART`功能，可独立作为无线TCP串口工具使用，对接任意标准TCP客户端
+  6. 新增：STA模式下增加`TCP-DAP`功能，可独立作为无线调试工具使用，对接最新版本 [OpenOCD](https://github.com/vllogic/openocd_cmsis-dap_v2/releases/tag/20260322)
+<br><br>
 * [V00.37-202512251034](../_static/firmware/vllink_basic2.SVCommon0037202512251034.zip)
   1. 此版本为2025年正式版固件
   2. 优化：**大幅提升无线调试时单步响应速度；大幅降低无线串口中突发包的传输延迟**
@@ -19,11 +27,12 @@
   6. 优化：提升在弱信号场景下的重连健壮性
   7. 新增无线TTL串口桥接功能，详见[TTL串口使用说明](../hardware/vllink_uart)
   8. 新增网络模式，支持`局域网`及`互联网`，详见[局域网使用](../example/over_local_area_network)及[互联网使用](../example/over_internet)
+<br><br>
 * [V00.16-202408182040](../_static/firmware/vllink_basic2.SVCommon0016202408182040.zip)
   1. 此版本为2024年正式版固件
   2. 支持有线模式、无线直连模式，UART波特率不建议超过`1000000`
 
-## 固件列表-预览版
+## 三、固件列表-预览版
 * [V00.42-202604052002](../_static/firmware/vllink_basic2.SVCommon0042202604052002.zip)
   * 参看：[Vllink Basic2 2026年新特性](../software/feature2026)
   * 同时支持新版本硬件`Vllink 2X`，包括：2.4G信道、Vout输出控制
