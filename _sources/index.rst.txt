@@ -3,19 +3,13 @@ Vllogic 产品使用指南
 
 本站域名
 ----------------------------
-1. `vllogic.com <https://vllogic.com>`_
-
-2. `vllogic.github.io <https://vllogic.github.io>`_
-
-3. `vllogic.eu.org <https://vllogic.eu.org>`_
+主：`vllogic.com <https://vllogic.com>`_ 备：`vllogic.github.io <https://vllogic.github.io>`_ 备：`vllogic.eu.org <https://vllogic.eu.org>`_
 
 相关链接
 ----------------------------
 淘宝：https://vllogic.taobao.com/
 
 Github：https://github.com/vllogic
-
-Discussions：https://github.com/vllogic/vllogic.github.io/discussions
 
 客户支持QQ群（调试器方向）：791104674
 
@@ -38,11 +32,14 @@ Discussions：https://github.com/vllogic/vllogic.github.io/discussions
 快速上手
 ----------------------------
 
-======================  ======================
-|Vllink Basic2|_         |Vllogic USB Sniffer|_
-----------------------  ----------------------
-`Vllink Basic2`_         `Vllogic USB Sniffer`_
-======================  ======================
+==================   ==================   ==================
+|Vllink 2X|_         |Vllink Basic2|_     |Vllogic USB Sniffer|_
+------------------   ------------------   ------------------
+`Vllink 2X`_         `Vllink Basic2`_     `Vllogic USB Sniffer`_
+==================   ==================   ==================
+
+.. |Vllink 2X| image:: _static/picture/vllink_2x_top_45.png
+.. _Vllink 2X: quick/vllink_2x.html
 
 .. |Vllink Basic2| image:: _static/picture/vllink_basic2_top_45.png
 .. _Vllink Basic2: quick/vllink_basic2.html

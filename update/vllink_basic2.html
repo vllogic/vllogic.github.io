@@ -65,9 +65,9 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic.html">Vllink Basic 固件更新</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Vllink Basic2 固件更新</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">更新方法</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">固件列表-正式版</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">固件列表-预览版</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">一、更新方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">二、固件列表-正式版</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">三、固件列表-预览版</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_box.html">Vllink Box &amp; Vllink Box2 固件更新</a></li>
@@ -125,8 +125,12 @@
              
   <section id="vllink-basic2">
 <h1>Vllink Basic2 固件更新<a class="headerlink" href="#vllink-basic2" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><em>支持硬件：<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic2</span></code></em></p></li>
+<li><p><em>支持硬件：<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">2X</span></code>，固件版本不小于<code class="docutils literal notranslate"><span class="pre">V00.50</span></code></em></p></li>
+</ul>
 <section id="id1">
-<h2>更新方法<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<h2>一、更新方法<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>从下方固件列表中下载压缩包并解压，文件夹中有<code class="docutils literal notranslate"><span class="pre">.bin</span></code>固件</p></li>
 <li><p>按住按键连接电脑，使用Chrome或Edge浏览器打开更新页面 <a class="reference external" href="https://vllogic.com/_static/tools/update/">Vllink HID Update</a></p></li>
@@ -136,22 +140,30 @@
 </ol>
 </section>
 <section id="id2">
-<h2>固件列表-正式版<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<h2>二、固件列表-正式版<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/ec3120d42d115acb4531bcaec21666bb/vllink_basic2.SVCommon0050202604242049.zip"><span class="xref download myst">V00.50-202604242049</span></a></p>
+<ol class="arabic simple">
+<li><p>支持新硬件<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">2X</span></code>，此硬件细节详见 <a class="reference internal" href="../quick/vllink_2x.html"><span class="doc std std-doc">Vllink 2X 快速上手</span></a></p></li>
+<li><p>优化：综合调整底层通讯架构，无线速率提升10%左右</p></li>
+<li><p>新增：完善<code class="docutils literal notranslate"><span class="pre">WebUSB</span></code>接口，开放 <a class="reference internal" href="../software/webusb_protocol.html"><span class="doc std std-doc">通讯协议</span></a></p></li>
+<li><p>新增：支持<strong>一对多</strong>，单AP最多可同时连接八个STA，提供 <a class="reference external" href="https://vllogic.com/_static/tools/vllink2026_console/">配置工具</a> ，可自由选择调试器所连接的目标板（最多九个，含AP）</p></li>
+<li><p>新增：STA模式下增加<code class="docutils literal notranslate"><span class="pre">TCP-UART</span></code>功能，可独立作为无线TCP串口工具使用，对接任意标准TCP客户端</p></li>
+<li><p>新增：STA模式下增加<code class="docutils literal notranslate"><span class="pre">TCP-DAP</span></code>功能，可独立作为无线调试工具使用，对接最新版本 <a class="reference external" href="https://github.com/vllogic/openocd_cmsis-dap_v2/releases/tag/20260322">OpenOCD</a>
+<br><br></p></li>
+</ol>
+</li>
 <li><p><a class="reference download internal" download="" href="../_downloads/8083e0e1d187dc1e4fc070f9166f8f70/vllink_basic2.SVCommon0037202512251034.zip"><span class="xref download myst">V00.37-202512251034</span></a></p>
 <ol class="arabic simple">
+<li><p>此版本为2025年正式版固件</p></li>
 <li><p>优化：<strong>大幅提升无线调试时单步响应速度；大幅降低无线串口中突发包的传输延迟</strong></p></li>
-<li><p>优化：波特率上下限扩展到<code class="docutils literal notranslate"><span class="pre">1200</span></code>-<code class="docutils literal notranslate"><span class="pre">6500000</span></code></p></li>
+<li><p>优化：UART启用DMA支持，波特率上下限扩展到<code class="docutils literal notranslate"><span class="pre">1200</span></code>-<code class="docutils literal notranslate"><span class="pre">6500000</span></code></p></li>
 <li><p>优化：新增多DAP接口占用锁，自动上锁，空闲解锁，空闲时间可调，默认50毫秒。参数为：<code class="docutils literal notranslate"><span class="pre">Idle_Interval_mS</span></code></p></li>
 <li><p>优化：支持自动信道，一般用于连接未知信道的路由器。使用方法：修改STA端的配置<code class="docutils literal notranslate"><span class="pre">Wireless_Host_Channel=0</span></code></p></li>
 <li><p>优化：提升在弱信号场景下的重连健壮性</p></li>
-</ol>
-</li>
-<li><p><a class="reference download internal" download="" href="../_downloads/a01d8c87c191a446bf7c7082c15958ed/vllink_basic2.SVCommon0031202507261219.zip"><span class="xref download myst">V00.31-202507261219</span></a></p>
-<ol class="arabic simple">
-<li><p>UART启用DMA支持，波特率上下限扩展到<code class="docutils literal notranslate"><span class="pre">1200</span></code>-<code class="docutils literal notranslate"><span class="pre">3250000</span></code>，高波特率测试中暂未发现速度瓶颈</p></li>
 <li><p>新增无线TTL串口桥接功能，详见<a class="reference internal" href="../hardware/vllink_uart.html"><span class="doc std std-doc">TTL串口使用说明</span></a></p></li>
-<li><p>新增网络模式，支持<code class="docutils literal notranslate"><span class="pre">局域网</span></code>及<code class="docutils literal notranslate"><span class="pre">互联网</span></code>，详见<a class="reference internal" href="../example/over_local_area_network.html"><span class="doc std std-doc">局域网使用</span></a>及<a class="reference internal" href="../example/over_internet.html"><span class="doc std std-doc">互联网使用</span></a></p></li>
+<li><p>新增网络模式，支持<code class="docutils literal notranslate"><span class="pre">局域网</span></code>及<code class="docutils literal notranslate"><span class="pre">互联网</span></code>，详见<a class="reference internal" href="../example/over_local_area_network.html"><span class="doc std std-doc">局域网使用</span></a>及<a class="reference internal" href="../example/over_internet.html"><span class="doc std std-doc">互联网使用</span></a>
+<br><br></p></li>
 </ol>
 </li>
 <li><p><a class="reference download internal" download="" href="../_downloads/275df90e7f187472d829d72fee49e410/vllink_basic2.SVCommon0016202408182040.zip"><span class="xref download myst">V00.16-202408182040</span></a></p>
@@ -163,7 +175,7 @@
 </ul>
 </section>
 <section id="id3">
-<h2>固件列表-预览版<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<h2>三、固件列表-预览版<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference download internal" download="" href="../_downloads/2f366df733d594822716a984fd43ce6d/vllink_basic2.SVCommon0042202604052002.zip"><span class="xref download myst">V00.42-202604052002</span></a></p>
 <ul>
