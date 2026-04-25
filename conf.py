@@ -48,6 +48,8 @@ language = 'zh_CN'
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 
+html_extra_path = ['_extra']
+
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
