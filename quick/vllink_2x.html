@@ -59,22 +59,21 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#id8">四、示例</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#v">4.1 有线模式：常见3.3V单片机</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id9">4.2 有线模式：1.8V单片机</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">4.3 有线模式：5V单片机</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">4.4 无线模式：直连，STA独立供电</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id12">4.5 无线模式：直连，STA从开发板取电</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">4.6 无线模式：无线串口桥</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">4.7 无线模式：局域网、广域网</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id15">4.8 无线模式：一对多</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tcp-dap">4.9 无线模式：TCP-DAP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tcp-uart">4.10 无线模式：TCP-UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">4.2 无线模式：直连，STA独立供电</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sta5v">4.3 无线模式：直连，STA给目标板提供5V，目标板给调试器提供参考电压</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#v-1-8v">4.4 无线模式：直连，目标板给调试器提供5V，调试器给目标板芯片提供1.8V</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.5 无线模式：局域网、广域网</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">4.6 无线模式：一对多</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcp-dap">4.7 无线模式：TCP-DAP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tcp-uart">4.8 无线模式：TCP-UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">4.9 无线模式：无线串口桥</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id16">五、常见问题</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id17">六、进阶使用</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id13">五、常见问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">六、进阶使用</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#fpga">6.1 FPGA下载器</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mipi-10jtag-20p">6.2 MIPI-10及JTAG-20P转接板</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id18">6.3 供电模块</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">6.3 供电模块</a></li>
 </ul>
 </li>
 </ul>
@@ -313,73 +312,106 @@
 <h2>四、示例<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
 <section id="v">
 <h3>4.1 有线模式：常见3.3V单片机<a class="headerlink" href="#v" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p><img alt="" src="../_images/v2x_usb_at32.png" /></p>
+</div></blockquote>
 <ul class="simple">
-<li><p>TODO</p></li>
+<li><p>调试器接电脑，目标板独立供电</p></li>
+<li><p>目标板带有LDO，电平3.3V，调试器<code class="docutils literal notranslate"><span class="pre">VRef</span></code>默认配置<code class="docutils literal notranslate"><span class="pre">Vref_Voltage_mV=3300</span></code>，故只需接3根线：<code class="docutils literal notranslate"><span class="pre">GND</span></code>、<code class="docutils literal notranslate"><span class="pre">DIO</span></code>及<code class="docutils literal notranslate"><span class="pre">CLK</span></code></p></li>
+<li><p>如需CDC-UART功能，需额外连接图中<code class="docutils literal notranslate"><span class="pre">TXD</span></code>，<code class="docutils literal notranslate"><span class="pre">RXD</span></code></p></li>
 </ul>
 </section>
 <section id="id9">
-<h3>4.2 有线模式：1.8V单片机<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<h3>4.2 无线模式：直连，STA独立供电<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p><img alt="" src="../_images/v2x_sta_at32.png" /></p>
+</div></blockquote>
 <ul class="simple">
-<li><p>TODO</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AP</span></code>在远端接电脑，图中未展示</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">STA</span></code>与目标板皆独立供电</p></li>
+<li><p>目标板带有LDO，电平3.3V，调试器<code class="docutils literal notranslate"><span class="pre">VRef</span></code>默认配置<code class="docutils literal notranslate"><span class="pre">Vref_Voltage_mV=3300</span></code>，故只需接3根线：<code class="docutils literal notranslate"><span class="pre">GND</span></code>、<code class="docutils literal notranslate"><span class="pre">DIO</span></code>及<code class="docutils literal notranslate"><span class="pre">CLK</span></code></p></li>
+<li><p>如需CDC-UART功能，需额外连接图中<code class="docutils literal notranslate"><span class="pre">TXD</span></code>，<code class="docutils literal notranslate"><span class="pre">RXD</span></code>，下同，不再赘述</p></li>
+</ul>
+</section>
+<section id="sta5v">
+<h3>4.3 无线模式：直连，STA给目标板提供5V，目标板给调试器提供参考电压<a class="headerlink" href="#sta5v" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p><img alt="" src="../_images/v2x_sta_py32.png" /></p>
+</div></blockquote>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AP</span></code>在远端接电脑，图中未展示</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">STA</span></code>通过USB获得供电</p></li>
+<li><p>目标板芯片为<code class="docutils literal notranslate"><span class="pre">PY32F002B</span></code>，支持5V电压</p></li>
+<li><p>调试器的5V脚连接目标板的VCC，配置中启用对外供电<code class="docutils literal notranslate"><span class="pre">Vout=enable</span></code></p></li>
+<li><p>配置中的<code class="docutils literal notranslate"><span class="pre">VRef</span></code>无需调整，可以将目标板的VCC再接到调试器的<code class="docutils literal notranslate"><span class="pre">VRef</span></code>脚上，给调试器提供5V参考电平</p></li>
+<li><p>故需接5根线：<code class="docutils literal notranslate"><span class="pre">GND</span></code>、<code class="docutils literal notranslate"><span class="pre">5V</span></code>、<code class="docutils literal notranslate"><span class="pre">VRef</span></code>、<code class="docutils literal notranslate"><span class="pre">DIO</span></code>及<code class="docutils literal notranslate"><span class="pre">CLK</span></code></p></li>
+</ul>
+</section>
+<section id="v-1-8v">
+<h3>4.4 无线模式：直连，目标板给调试器提供5V，调试器给目标板芯片提供1.8V<a class="headerlink" href="#v-1-8v" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p><img alt="" src="../_images/v2x_sta_stm32.png" /></p>
+</div></blockquote>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AP</span></code>在远端接电脑，图中未展示</p></li>
+<li><p>目标板通过USB获得5V，目标板上的LDO已被移除，目标板芯片为<code class="docutils literal notranslate"><span class="pre">STM32G0B1</span></code>，支持1.8V电压</p></li>
+<li><p>调试器的5V脚连接目标板的5V</p></li>
+<li><p>调试器<code class="docutils literal notranslate"><span class="pre">VRef</span></code>配置为<code class="docutils literal notranslate"><span class="pre">Vref_Voltage_mV=1800</span></code>，对外输出1.8V</p></li>
+<li><p>调试器的<code class="docutils literal notranslate"><span class="pre">VRef</span></code>脚连接目标板的VCC，给目标板芯片提供1.8V</p></li>
+<li><p>故需接5根线：<code class="docutils literal notranslate"><span class="pre">GND</span></code>、<code class="docutils literal notranslate"><span class="pre">5V</span></code>、<code class="docutils literal notranslate"><span class="pre">VRef</span></code>、<code class="docutils literal notranslate"><span class="pre">DIO</span></code>及<code class="docutils literal notranslate"><span class="pre">CLK</span></code></p></li>
 </ul>
 </section>
 <section id="id10">
-<h3>4.3 有线模式：5V单片机<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<h3>4.5 无线模式：局域网、广域网<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>TODO</p></li>
 </ul>
 </section>
 <section id="id11">
-<h3>4.4 无线模式：直连，STA独立供电<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>TODO</p></li>
-</ul>
-</section>
-<section id="id12">
-<h3>4.5 无线模式：直连，STA从开发板取电<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>TODO</p></li>
-</ul>
-</section>
-<section id="id13">
-<h3>4.6 无线模式：无线串口桥<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>TODO</p></li>
-</ul>
-</section>
-<section id="id14">
-<h3>4.7 无线模式：局域网、广域网<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>TODO</p></li>
-</ul>
-</section>
-<section id="id15">
-<h3>4.8 无线模式：一对多<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<h3>4.6 无线模式：一对多<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>TODO</p></li>
 </ul>
 </section>
 <section id="tcp-dap">
-<h3>4.9 无线模式：TCP-DAP<a class="headerlink" href="#tcp-dap" title="Link to this heading"></a></h3>
+<h3>4.7 无线模式：TCP-DAP<a class="headerlink" href="#tcp-dap" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>TODO</p></li>
 </ul>
 </section>
 <section id="tcp-uart">
-<h3>4.10 无线模式：TCP-UART<a class="headerlink" href="#tcp-uart" title="Link to this heading"></a></h3>
+<h3>4.8 无线模式：TCP-UART<a class="headerlink" href="#tcp-uart" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>TODO</p></li>
+</ul>
+</section>
+<section id="id12">
+<h3>4.9 无线模式：无线串口桥<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>TODO</p></li>
 </ul>
 </section>
 </section>
-<section id="id16">
-<h2>五、常见问题<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
+<section id="id13">
+<h2>五、常见问题<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>问：目标板只有3.3V，使用3.3V给<code class="docutils literal notranslate"><span class="pre">STA</span></code>的<code class="docutils literal notranslate"><span class="pre">5V</span></code>脚供电，使用过程中发现不稳定容易断线的情况</p></li>
+</ul>
+<blockquote>
+<div><p>答：调试器无线基于Wifi+PA实现，无线工作时平均电流不大，但瞬时峰值电流在3.3V供电时可达500mA，请合理优化供电机制。若无优化经验，请使用USB独立供电</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>问：用了目标板上的<code class="docutils literal notranslate"><span class="pre">5V</span></code>脚，使用过程中发现不稳定容易断线的情况</p></li>
+</ul>
+<blockquote>
+<div><p>答：如果您的目标板非自行设计，请评审目标板的原理图，如果在5V输出线路上发现限流器件，如自恢复保险丝，也可能出现掉电。若无优化经验，请使用USB独立供电</p>
+</div></blockquote>
 <ul class="simple">
 <li><p><a class="reference internal" href="../software/windows7_driver.html"><span class="std std-doc">Windows 驱动问题处理</span></a></p></li>
 </ul>
 </section>
-<section id="id17">
-<h2>六、进阶使用<a class="headerlink" href="#id17" title="Link to this heading"></a></h2>
+<section id="id14">
+<h2>六、进阶使用<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
 <section id="fpga">
 <h3>6.1 FPGA下载器<a class="headerlink" href="#fpga" title="Link to this heading"></a></h3>
 <ul class="simple">
@@ -392,8 +424,8 @@
 <li><p><a class="reference internal" href="../hardware/vllink_basic2_to_mipi10p_jtag20p.html"><span class="std std-doc">转接板资料</span></a></p></li>
 </ul>
 </section>
-<section id="id18">
-<h3>6.3 供电模块<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<section id="id15">
+<h3>6.3 供电模块<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="../hardware/vllink_battboard.html"><span class="std std-doc">锂电池充放一体供电模块</span></a></p></li>
 </ul>
