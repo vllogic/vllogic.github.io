@@ -1,7 +1,8 @@
 # Vllink Basic2 快速上手
 
 ## 一、调试接口定义
-![](../_static/picture/basic2_interface_desc_small.png)
+> ![](../_static/picture/basic2_interface_desc_small.png)
+
 | 接口 | 介绍 |
 | :---- | :---- |
 | TDI  | JTAG数据口 |
@@ -48,16 +49,16 @@
 * USB设备关闭，不可与计算机通信
 
 ### 2.6 有线模式连接示例
-![](../_static/picture/vllink_basic2_wired.png)
+> ![](../_static/picture/vllink_basic2_wired.png)
 * 图中调试器为有线模式，USB接计算机，调试口接目标板
 
 ### 2.7 无线模式连接示例
 #### 2.7.1 STA为目标板供电
-![](../_static/picture/vllink_basic2_wireless1.png)
+> ![](../_static/picture/vllink_basic2_wireless1.png)
 * 图中调试器一个为AP模式，不接目标板；另一个为STA模式，USB接电源、调试口接目标板
 
 #### 2.7.2 目标板为STA供电
-![](../_static/picture/vllink_basic2_wireless2.png)
+> ![](../_static/picture/vllink_basic2_wireless2.png)
 * 图中调试器一个为AP模式，不接目标板；另一个为STA模式，调试口接目标板
 
 ## 三、配置工具
