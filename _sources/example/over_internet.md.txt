@@ -3,6 +3,7 @@
 **`版权声明：转载需注明来自于 vllogic.com `**
 
 * 本文所述功能适用于`Vllink Basic2`，固件版本不应小于`V00.21`
+* 本文仅提供一些互联网互传方法，非傻瓜教程，请在与网络工程师综合评审后，再考虑实施！
 
 ## 一、准备工作
 * 参看[局域网使用](../example/over_local_area_network)，完成局域网使用
@@ -22,12 +23,12 @@
     4. 重新上电等待连接完成
 
 ## 四、FRP服务器
-### 4.1 测试服务器
+### 4.1 测试服务器【已停用，仅作记录】
 * 此服务器仅用于`Basic2`产品的互联网测试，使用此服务器需进行合理配置，防止与其他用户冲突
 * 此服务器不保证`安全性`及`稳定性`
 * 服务器信息：
     ```
-    serverAddr = "47.122.0.242"
+    serverAddr = "123.123.123.123"
     serverPort = 9999
     ```
 ### 4.2 `可选`自行部署
@@ -63,7 +64,7 @@
     # 将`test20250412` 替换为随机字符串，建议12位-16位大小写字母+数字，必须具备随机性，如果与其他用户碰撞会造成错配
     # 修改localIP，填入AP端调试器的实际局域网IP
 
-    serverAddr = "47.122.0.242"
+    serverAddr = "123.123.123.123"
     serverPort = 9999
 
     [[proxies]]
@@ -89,7 +90,7 @@
     ```
     # 将`test20250412` 替换为随机字符串，建议12位-16位大小写字母+数字，必须具备随机性，如果与其他用户碰撞会造成错配
 
-    serverAddr = "47.122.0.242"
+    serverAddr = "123.123.123.123"
     serverPort = 9999
 
     [[visitors]]
@@ -148,7 +149,7 @@
     # 将`test20250412` 替换为随机字符串，建议12位-16位大小写字母+数字，必须具备随机性，如果与其他用户碰撞会造成错配
     # 修改localIP，填入AP端调试器的实际局域网IP
 
-    serverAddr = "47.122.0.242"
+    serverAddr = "123.123.123.123"
     serverPort = 9999
 
     [[proxies]]
@@ -174,7 +175,7 @@
     ```
     # 将`test20250412` 替换为随机字符串，建议12位-16位大小写字母+数字，必须具备随机性，如果与其他用户碰撞会造成错配
 
-    serverAddr = "47.122.0.242"
+    serverAddr = "123.123.123.123"
     serverPort = 9999
 
     [[visitors]]
@@ -237,7 +238,7 @@
     # 建议先随机取一个21000-65534的随机数作为DAP的remotePort，然后UART的remotePort加一
     # 比如：取DAP的remotePort = 34560，取UART的remotePort = 34561
 
-    serverAddr = "47.122.0.242"
+    serverAddr = "123.123.123.123"
     serverPort = 9999
 
     [[proxies]]
@@ -260,7 +261,7 @@
 * 配置：
     ```
     Mode=wirelessdevice
-    Mode3_SERVER_IPV4=47.122.0.242
+    Mode3_SERVER_IPV4=123.123.123.123
     TCP_PORT_DAP=34560
     TCP_PORT_UART=34561
     Wireless_Device_SSID=XXX_5G

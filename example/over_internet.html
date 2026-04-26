@@ -91,7 +91,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#id3">二、安全性说明</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ip">三、公网IP直连</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#frp">四、FRP服务器</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id4">4.1 测试服务器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4.1 测试服务器【已停用，仅作记录】</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id5">4.2 <code class="docutils literal notranslate"><span class="pre">可选</span></code>自行部署</a></li>
 </ul>
 </li>
@@ -158,6 +158,7 @@
 <p><strong><code class="docutils literal notranslate"><span class="pre">版权声明：转载需注明来自于</span> <span class="pre">vllogic.com</span> </code></strong></p>
 <ul class="simple">
 <li><p>本文所述功能适用于<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic2</span></code>，固件版本不应小于<code class="docutils literal notranslate"><span class="pre">V00.21</span></code></p></li>
+<li><p>本文仅提供一些互联网互传方法，非傻瓜教程，请在与网络工程师综合评审后，再考虑实施！</p></li>
 </ul>
 <section id="id2">
 <h2>一、准备工作<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
@@ -191,12 +192,12 @@
 <section id="frp">
 <h2>四、FRP服务器<a class="headerlink" href="#frp" title="Link to this heading"></a></h2>
 <section id="id4">
-<h3>4.1 测试服务器<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<h3>4.1 测试服务器【已停用，仅作记录】<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <ul>
 <li><p>此服务器仅用于<code class="docutils literal notranslate"><span class="pre">Basic2</span></code>产品的互联网测试，使用此服务器需进行合理配置，防止与其他用户冲突</p></li>
 <li><p>此服务器不保证<code class="docutils literal notranslate"><span class="pre">安全性</span></code>及<code class="docutils literal notranslate"><span class="pre">稳定性</span></code></p></li>
 <li><p>服务器信息：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;47.122.0.242&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;123.123.123.123&quot;</span>
 <span class="n">serverPort</span> <span class="o">=</span> <span class="mi">9999</span>
 </pre></div>
 </div>
@@ -252,7 +253,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 将`test20250412` 替换为随机字符串，建议12位-16位大小写字母+数字，必须具备随机性，如果与其他用户碰撞会造成错配</span>
 <span class="c1"># 修改localIP，填入AP端调试器的实际局域网IP</span>
 
-<span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;47.122.0.242&quot;</span>
+<span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;123.123.123.123&quot;</span>
 <span class="n">serverPort</span> <span class="o">=</span> <span class="mi">9999</span>
 
 <span class="p">[[</span><span class="n">proxies</span><span class="p">]]</span>
@@ -283,7 +284,7 @@
 <li><p>编辑内容：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 将`test20250412` 替换为随机字符串，建议12位-16位大小写字母+数字，必须具备随机性，如果与其他用户碰撞会造成错配</span>
 
-<span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;47.122.0.242&quot;</span>
+<span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;123.123.123.123&quot;</span>
 <span class="n">serverPort</span> <span class="o">=</span> <span class="mi">9999</span>
 
 <span class="p">[[</span><span class="n">visitors</span><span class="p">]]</span>
@@ -360,7 +361,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 将`test20250412` 替换为随机字符串，建议12位-16位大小写字母+数字，必须具备随机性，如果与其他用户碰撞会造成错配</span>
 <span class="c1"># 修改localIP，填入AP端调试器的实际局域网IP</span>
 
-<span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;47.122.0.242&quot;</span>
+<span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;123.123.123.123&quot;</span>
 <span class="n">serverPort</span> <span class="o">=</span> <span class="mi">9999</span>
 
 <span class="p">[[</span><span class="n">proxies</span><span class="p">]]</span>
@@ -391,7 +392,7 @@
 <li><p>编辑内容：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 将`test20250412` 替换为随机字符串，建议12位-16位大小写字母+数字，必须具备随机性，如果与其他用户碰撞会造成错配</span>
 
-<span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;47.122.0.242&quot;</span>
+<span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;123.123.123.123&quot;</span>
 <span class="n">serverPort</span> <span class="o">=</span> <span class="mi">9999</span>
 
 <span class="p">[[</span><span class="n">visitors</span><span class="p">]]</span>
@@ -472,7 +473,7 @@
 <span class="c1"># 建议先随机取一个21000-65534的随机数作为DAP的remotePort，然后UART的remotePort加一</span>
 <span class="c1"># 比如：取DAP的remotePort = 34560，取UART的remotePort = 34561</span>
 
-<span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;47.122.0.242&quot;</span>
+<span class="n">serverAddr</span> <span class="o">=</span> <span class="s2">&quot;123.123.123.123&quot;</span>
 <span class="n">serverPort</span> <span class="o">=</span> <span class="mi">9999</span>
 
 <span class="p">[[</span><span class="n">proxies</span><span class="p">]]</span>
@@ -500,7 +501,7 @@
 <ul>
 <li><p>配置：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mode</span><span class="o">=</span><span class="n">wirelessdevice</span>
-<span class="n">Mode3_SERVER_IPV4</span><span class="o">=</span><span class="mf">47.122.0.242</span>
+<span class="n">Mode3_SERVER_IPV4</span><span class="o">=</span><span class="mf">123.123.123.123</span>
 <span class="n">TCP_PORT_DAP</span><span class="o">=</span><span class="mi">34560</span>
 <span class="n">TCP_PORT_UART</span><span class="o">=</span><span class="mi">34561</span>
 <span class="n">Wireless_Device_SSID</span><span class="o">=</span><span class="n">XXX_5G</span>
