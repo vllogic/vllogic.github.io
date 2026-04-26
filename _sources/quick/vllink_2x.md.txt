@@ -101,15 +101,42 @@
 * 调试器的`VRef`脚连接目标板的VCC，给目标板芯片提供1.8V
 * 故需接5根线：`GND`、`5V`、`VRef`、`DIO`及`CLK`
 ### 4.5 无线模式：局域网、广域网
-* TODO
+* 本调试器基于TCP通讯，天然支持局域网、广域网通讯，仅需少量配置调整即可
+* 受通讯延迟影响，在小型局域网内，调试速度会有些许影响；在互联网上，会严重劣化，仅推荐使用OpenOCD
+* 详见 [局域网使用](../example/over_local_area_network)
+* 详见 [互联网使用](../example/over_internet)
 ### 4.6 无线模式：一对多
-* TODO
+* 配置工具：[Vllink 2026 Console](https://vllogic.com/_static/tools/vllink2026_console/)
+* 准备一个`AP`，接电脑
+* 准备至多8个`STA`并供电。如果该`STA`曾经与其他`AP`配对过，需要长按重置或通过配置工具清除`Wireless_Device_SSID`与`Wireless_Device_Password`，然后切换到`STA`模式，会重新与当前`AP`重新配对
+* 在无线指示灯稳定后，即可通过电脑端的配置工具选定任意调试器。详见 [Vllink Basic2 2026年新特性](../software/feature2026.md)
 ### 4.7 无线模式：TCP-DAP
-* TODO
+* 此模式仅需一个调试器，无需`AP`配合
+* 修改调试器的配置：`Wireless_Device_SSID=路由器SSID`、`Wireless_Device_SSID=路由器密码`以及`Mode3_TCP_UART=enable`
+* 调整串口参数配置：默认`Mode3_TCP_UART_PARAM=115200.1p0.none`
+* 切换到`STA`模式，在STA连上路由器后，查看STA的IP
+* 通过TCP客户端连接：STA_IPv4:20010
+* 连接后，TCP客户端发送的数据将通过串口`TXD`输出，串口`RXD`输入的数据将发送给TCP客户端
 ### 4.8 无线模式：TCP-UART
-* TODO
+* 此模式仅需一个调试器，无需`AP`配合
+* 修改调试器的配置：`Wireless_Device_SSID=路由器SSID`、`Wireless_Device_SSID=路由器密码`
+* 切换到`STA`模式，在STA连上路由器后，查看STA的IP
+* 准备 [最新版OpenOCD，Windows](https://github.com/vllogic/openocd_cmsis-dap_v2/releases/tag/20260322)
+* 命令示例：`./openocd.exe -f interface/cmsis-dap.cfg -f target/stm32f4x.cfg -c "cmsis-dap backend tcp; cmsis-dap tcp host 192.168.1.183; cmsis-dap tcp port 4441; transport select swd; adapter speed 8000"` 注意：执行命令前修改IP
+* 测试：
+    ```
+    > adapter speed 30000
+    adapter speed: 30000 kHz
+    > dump_image ram.bin 0x20000000 0x10000
+    dumped 65536 bytes in 0.168065s (380.805 KiB/s)
+    > load_image ram.bin 0x20000000        
+    65536 bytes written at address 0x20000000
+    downloaded 65536 bytes in 0.134932s (474.313 KiB/s)
+    ```
 ### 4.9 无线模式：无线串口桥
-* TODO
+* 在`AP`与`STA`建立连接后，如果`AP`端没有打开CDC串口，两端的TTL串口将自动形成无线串口桥
+* 此状态下，一段的`RXD`接收的串口数据将通过另一端的`TXD`发出
+* 两端串口参数默认由`AP`的`UART_Bridge_Host`决定，`STA`也可以指定独立配置`UART_Bridge_Device`。详见 [TTL串口使用说明](../hardware/vllink_uart.md)
 
 ## 五、常见问题
 * 问：目标板只有3.3V，使用3.3V给`STA`的`5V`脚供电，使用过程中发现不稳定容易断线的情况

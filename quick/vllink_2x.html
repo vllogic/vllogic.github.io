@@ -364,31 +364,59 @@
 <section id="id10">
 <h3>4.5 无线模式：局域网、广域网<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>TODO</p></li>
+<li><p>本调试器基于TCP通讯，天然支持局域网、广域网通讯，仅需少量配置调整即可</p></li>
+<li><p>受通讯延迟影响，在小型局域网内，调试速度会有些许影响；在互联网上，会严重劣化，仅推荐使用OpenOCD</p></li>
+<li><p>详见 <a class="reference internal" href="../example/over_local_area_network.html"><span class="doc std std-doc">局域网使用</span></a></p></li>
+<li><p>详见 <a class="reference internal" href="../example/over_internet.html"><span class="doc std std-doc">互联网使用</span></a></p></li>
 </ul>
 </section>
 <section id="id11">
 <h3>4.6 无线模式：一对多<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>TODO</p></li>
+<li><p>配置工具：<a class="reference external" href="https://vllogic.com/_static/tools/vllink2026_console/">Vllink 2026 Console</a></p></li>
+<li><p>准备一个<code class="docutils literal notranslate"><span class="pre">AP</span></code>，接电脑</p></li>
+<li><p>准备至多8个<code class="docutils literal notranslate"><span class="pre">STA</span></code>并供电。如果该<code class="docutils literal notranslate"><span class="pre">STA</span></code>曾经与其他<code class="docutils literal notranslate"><span class="pre">AP</span></code>配对过，需要长按重置或通过配置工具清除<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID</span></code>与<code class="docutils literal notranslate"><span class="pre">Wireless_Device_Password</span></code>，然后切换到<code class="docutils literal notranslate"><span class="pre">STA</span></code>模式，会重新与当前<code class="docutils literal notranslate"><span class="pre">AP</span></code>重新配对</p></li>
+<li><p>在无线指示灯稳定后，即可通过电脑端的配置工具选定任意调试器。详见 <a class="reference internal" href="../software/feature2026.html"><span class="std std-doc">Vllink Basic2 2026年新特性</span></a></p></li>
 </ul>
 </section>
 <section id="tcp-dap">
 <h3>4.7 无线模式：TCP-DAP<a class="headerlink" href="#tcp-dap" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>TODO</p></li>
+<li><p>此模式仅需一个调试器，无需<code class="docutils literal notranslate"><span class="pre">AP</span></code>配合</p></li>
+<li><p>修改调试器的配置：<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器SSID</span></code>、<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器密码</span></code>以及<code class="docutils literal notranslate"><span class="pre">Mode3_TCP_UART=enable</span></code></p></li>
+<li><p>调整串口参数配置：默认<code class="docutils literal notranslate"><span class="pre">Mode3_TCP_UART_PARAM=115200.1p0.none</span></code></p></li>
+<li><p>切换到<code class="docutils literal notranslate"><span class="pre">STA</span></code>模式，在STA连上路由器后，查看STA的IP</p></li>
+<li><p>通过TCP客户端连接：STA_IPv4:20010</p></li>
+<li><p>连接后，TCP客户端发送的数据将通过串口<code class="docutils literal notranslate"><span class="pre">TXD</span></code>输出，串口<code class="docutils literal notranslate"><span class="pre">RXD</span></code>输入的数据将发送给TCP客户端</p></li>
 </ul>
 </section>
 <section id="tcp-uart">
 <h3>4.8 无线模式：TCP-UART<a class="headerlink" href="#tcp-uart" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>TODO</p></li>
+<ul>
+<li><p>此模式仅需一个调试器，无需<code class="docutils literal notranslate"><span class="pre">AP</span></code>配合</p></li>
+<li><p>修改调试器的配置：<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器SSID</span></code>、<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器密码</span></code></p></li>
+<li><p>切换到<code class="docutils literal notranslate"><span class="pre">STA</span></code>模式，在STA连上路由器后，查看STA的IP</p></li>
+<li><p>准备 <a class="reference external" href="https://github.com/vllogic/openocd_cmsis-dap_v2/releases/tag/20260322">最新版OpenOCD，Windows</a></p></li>
+<li><p>命令示例：<code class="docutils literal notranslate"><span class="pre">./openocd.exe</span> <span class="pre">-f</span> <span class="pre">interface/cmsis-dap.cfg</span> <span class="pre">-f</span> <span class="pre">target/stm32f4x.cfg</span> <span class="pre">-c</span> <span class="pre">&quot;cmsis-dap</span> <span class="pre">backend</span> <span class="pre">tcp;</span> <span class="pre">cmsis-dap</span> <span class="pre">tcp</span> <span class="pre">host</span> <span class="pre">192.168.1.183;</span> <span class="pre">cmsis-dap</span> <span class="pre">tcp</span> <span class="pre">port</span> <span class="pre">4441;</span> <span class="pre">transport</span> <span class="pre">select</span> <span class="pre">swd;</span> <span class="pre">adapter</span> <span class="pre">speed</span> <span class="pre">8000&quot;</span></code> 注意：执行命令前修改IP</p></li>
+<li><p>测试：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">adapter</span> <span class="n">speed</span> <span class="mi">30000</span>
+<span class="n">adapter</span> <span class="n">speed</span><span class="p">:</span> <span class="mi">30000</span> <span class="n">kHz</span>
+<span class="o">&gt;</span> <span class="n">dump_image</span> <span class="n">ram</span><span class="o">.</span><span class="n">bin</span> <span class="mh">0x20000000</span> <span class="mh">0x10000</span>
+<span class="n">dumped</span> <span class="mi">65536</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mf">0.168065</span><span class="n">s</span> <span class="p">(</span><span class="mf">380.805</span> <span class="n">KiB</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">load_image</span> <span class="n">ram</span><span class="o">.</span><span class="n">bin</span> <span class="mh">0x20000000</span>        
+<span class="mi">65536</span> <span class="nb">bytes</span> <span class="n">written</span> <span class="n">at</span> <span class="n">address</span> <span class="mh">0x20000000</span>
+<span class="n">downloaded</span> <span class="mi">65536</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mf">0.134932</span><span class="n">s</span> <span class="p">(</span><span class="mf">474.313</span> <span class="n">KiB</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </section>
 <section id="id12">
 <h3>4.9 无线模式：无线串口桥<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>TODO</p></li>
+<li><p>在<code class="docutils literal notranslate"><span class="pre">AP</span></code>与<code class="docutils literal notranslate"><span class="pre">STA</span></code>建立连接后，如果<code class="docutils literal notranslate"><span class="pre">AP</span></code>端没有打开CDC串口，两端的TTL串口将自动形成无线串口桥</p></li>
+<li><p>此状态下，一段的<code class="docutils literal notranslate"><span class="pre">RXD</span></code>接收的串口数据将通过另一端的<code class="docutils literal notranslate"><span class="pre">TXD</span></code>发出</p></li>
+<li><p>两端串口参数默认由<code class="docutils literal notranslate"><span class="pre">AP</span></code>的<code class="docutils literal notranslate"><span class="pre">UART_Bridge_Host</span></code>决定，<code class="docutils literal notranslate"><span class="pre">STA</span></code>也可以指定独立配置<code class="docutils literal notranslate"><span class="pre">UART_Bridge_Device</span></code>。详见 <a class="reference internal" href="../hardware/vllink_uart.html"><span class="std std-doc">TTL串口使用说明</span></a></p></li>
 </ul>
 </section>
 </section>
