@@ -89,7 +89,6 @@ Github：https://github.com/vllogic
    software/openocd.md
    software/pyocd.md
    software/freemaster.md
-   software/hercuels_command.md
    software/speedtest.md
    software/tools.md
 
