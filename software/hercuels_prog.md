@@ -1,16 +1,34 @@
-# 京微齐力（Hercules）离线编程使用说明
+# 京微齐力（Hercules）离线编程
 * *支持硬件：`Vllink 2X`*
 * *支持硬件：`Vllink Basic2`*
 
-## 一、主命令
-* `hercules_prog`：离线编程命令
-  
-## 二、子命令综述
+## 一、准备工作
+### 1.1 接口准备
+* `Vllink 2X`与`Vllink Basic2`的接口不兼容京微齐力标准接口，必须通过转接板转接！！！
+* 目前有两种转接板，分别是 [通用型转接板](../hardware/vllink_basic2_to_fpga.md) 与 [专用型转接板](../hardware/convbrd.md)
+### 1.2 固件准备
+* 在`Fuxi`中生成`.acf`格式的固件
+* 依次点击菜单栏中的`Tools`->`Command-Line Windows...`，打开`Fuxi Design Console`
+* 执行：`acftobin.exe ./outputs/your_project_name.acf`，就会在`./outputs`目录下生成`your_project_name.acf.bin`
+* 记录`your_project_name.acf.bin`的文件长度，当前尚未支持固件压缩，所以长度不得超过1MB
+  ```
+  $ ls -al ./outputs/*.bin
+  -rwxrwx---+ 1 xxx xxx 555020 May  1 14:02 ./outputs/your_project_name.acf.bin
+  ```
+* 十进制`555020`换算成十六进制，即：`0x8780C`，用例中会用到
+### 1.3 离线编程器准备
+* 将离线编程器固件升级到`V00.51`或更高
+* 通过 [Vllink 2026 Console](https://vllogic.com/_static/tools/vllink2026_console/) 将`your_project_name.acf.bin`载入`Data Block 0`
+* 修改运行模式`Mode=customize`，此模式会强制配置`Vref_Voltage_mV=0`与`Vout=disable`
+* 根据需要修改`Customize_CMD`，修改方法见下文
+
+## 二、命令
+* `hercules_prog`：京微齐力编程命令
+### 2.1 子命令综述
 | 子命令 | 功能 | 状态 |
 | :---: | :---: | :---: |
 | `auto` | 自动化执行离线编程功能 | 开发中 |
-
-### 2.1 子命令-`auto`
+### 2.2 子命令说明-`auto`
 * 命令格式：`hercules_prog auto [target_type] [trig_type] <lz4> <autoreset> <boost> <flash [data_select] [addr] [size]> <chip [data_select] [size]>`
 * `target_type`：芯片类型，必填
   | `target_type` | 芯片类型 |
@@ -19,8 +37,8 @@
   | `M7` | M7系列 |
   | `HR02` | HR02系列 |
   | `H1D03` | H1D03系列 |
-  | `P1` | M5系列 |
-  | `H3` | M5系列 |
+  | `P1` | P1系列 |
+  | `H3` | H3系列 |
   | `P0` | P0系列 |
   | `H7` | H7系列 |
 * `trig_type`：触发方式，必填
@@ -40,12 +58,10 @@
   1. `data_select`：当前仅支持`data0`，使用 [Vllink 2026 Console](https://vllogic.com/_static/tools/vllink2026_console/) 载入
   2. `size`：目标Flash的编程长度，建议使用所载入文件的长度，且必须是以`0x`开头的十六进制
 * 补充说明：`chip`与`flash`互斥，不能同时使用；`chip`也不要与`autoreset`同时使用
-* 例1：TODO
-  1. 
-  2. 
-* 例2：TODO
-  1. 
-  2. 
-* 例3：TODO
-  1. 
-  2. 
+### 2.3 子命令用例-`auto`
+* 例1：`Customize_CMD=hercules_prog auto H7 trig_vref autoreset flash data0 0x0 0x8780C`
+  1. 目标芯片是HME-M7；通过VRef脚探测目标板的IO电平触发编程；烧录完成后自动复位芯片
+  2. 烧录对象是Flash，对象Flash的烧录起始地址是0，长度是0x8780C
+* 例2：`Customize_CMD=hercules_prog auto H7 trig_button boost chip data0 0x8780C`
+  1. 目标芯片是HME-M7；通过烧录器的按键按下事件触发编程；使用最高可用档位时钟通讯
+  2. 烧录对象是Chip，长度是0x8780C

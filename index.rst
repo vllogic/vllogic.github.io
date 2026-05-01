@@ -91,6 +91,7 @@ Github：https://github.com/vllogic
    software/freemaster.md
    software/speedtest.md
    software/tools.md
+   software/hercuels_prog.md
 
 .. toctree::
    :maxdepth: 1
