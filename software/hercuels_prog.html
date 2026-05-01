@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>京微齐力（Hercules）离线编程 &mdash; Vllogic  文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7d86a446"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="无线ICP（在电路编程）" href="../example/wireless_icp.html" />
+    <link rel="prev" title="在线工具" href="tools.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Vllogic
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_2x.html">Vllink 2X 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic.html">Vllink Basic 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic2.html">Vllink Basic2 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_box.html">Vllink Box 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_box2.html">Vllink Box2 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/usb_sniffer_h7p20.html">USB Sniffer H7P20 快速上手</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_2x_pwr.html">Vllink 2X 电源部分详细说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic_vout.html">Vout口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_vref.html">VRef口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_to_fpga.html">Basic2配套FPGA接口转接板</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_to_mipi10p_jtag20p.html">Basic2配套MIPI-10P及JTAG-20P转接板</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_battboard.html">Vllink锂电池充放一体供电模块</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_uart.html">TTL串口使用说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic.html">Vllink Basic 固件更新</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic2.html">Vllink Basic2 固件更新</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_box.html">Vllink Box &amp; Vllink Box2 固件更新</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="windows7_driver.html">Windows 驱动问题处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iar.html">IAR 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keil_mdk.html">Keil MDK 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probe_rs.html">Probe RS 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openocd.html">OpenOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyocd.html">PyOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="freemaster.html">FreeMASTER 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="speedtest.html">速度测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">在线工具</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">京微齐力（Hercules）离线编程</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">一、准备工作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.1 接口准备</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">1.2 固件准备</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">1.3 离线编程器准备</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">二、命令</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">2.1 子命令综述</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#auto">2.2 子命令说明-<code class="docutils literal notranslate"><span class="pre">auto</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">2.3 子命令用例-<code class="docutils literal notranslate"><span class="pre">auto</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">应用实例</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../example/wireless_icp.html">无线ICP（在电路编程）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example/vscode_cortex_debug.html">使用VSCode的Cortex Debug调试任意固件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example/linux_rules.html">Linux下非root用户授权</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example/over_local_area_network.html">局域网使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example/over_internet.html">互联网使用</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="webusb_protocol.html">WebUSB通讯协议</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">文档维护</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Vllogic</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">京微齐力（Hercules）离线编程</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/software/hercuels_prog.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hercules">
+<h1>京微齐力（Hercules）离线编程<a class="headerlink" href="#hercules" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><em>支持硬件：<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">2X</span></code></em></p></li>
+<li><p><em>支持硬件：<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic2</span></code></em></p></li>
+</ul>
+<section id="id1">
+<h2>一、准备工作<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<section id="id2">
+<h3>1.1 接口准备<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">2X</span></code>与<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic2</span></code>的接口不兼容京微齐力标准接口，必须通过转接板转接！！！</p></li>
+<li><p>目前有两种转接板，分别是 <a class="reference internal" href="../hardware/vllink_basic2_to_fpga.html"><span class="std std-doc">通用型转接板</span></a> 与 <a class="reference internal" href="#../hardware/convbrd.md"><span class="xref myst">专用型转接板</span></a></p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>1.2 固件准备<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul>
+<li><p>在<code class="docutils literal notranslate"><span class="pre">Fuxi</span></code>中生成<code class="docutils literal notranslate"><span class="pre">.acf</span></code>格式的固件</p></li>
+<li><p>依次点击菜单栏中的<code class="docutils literal notranslate"><span class="pre">Tools</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">Command-Line</span> <span class="pre">Windows...</span></code>，打开<code class="docutils literal notranslate"><span class="pre">Fuxi</span> <span class="pre">Design</span> <span class="pre">Console</span></code></p></li>
+<li><p>执行：<code class="docutils literal notranslate"><span class="pre">acftobin.exe</span> <span class="pre">./outputs/your_project_name.acf</span></code>，就会在<code class="docutils literal notranslate"><span class="pre">./outputs</span></code>目录下生成<code class="docutils literal notranslate"><span class="pre">your_project_name.acf.bin</span></code></p></li>
+<li><p>记录<code class="docutils literal notranslate"><span class="pre">your_project_name.acf.bin</span></code>的文件长度，当前尚未支持固件压缩，所以长度不得超过1MB</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls -al ./outputs/*.bin
+-rwxrwx---+ 1 xxx xxx 555020 May  1 14:02 ./outputs/your_project_name.acf.bin
+</pre></div>
+</div>
+</li>
+<li><p>十进制<code class="docutils literal notranslate"><span class="pre">555020</span></code>换算成十六进制，即：<code class="docutils literal notranslate"><span class="pre">0x8780C</span></code>，用例中会用到</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>1.3 离线编程器准备<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>将离线编程器固件升级到<code class="docutils literal notranslate"><span class="pre">V00.51</span></code>或更高</p></li>
+<li><p>通过 <a class="reference external" href="https://vllogic.com/_static/tools/vllink2026_console/">Vllink 2026 Console</a> 将<code class="docutils literal notranslate"><span class="pre">your_project_name.acf.bin</span></code>载入<code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Block</span> <span class="pre">0</span></code></p></li>
+<li><p>修改运行模式<code class="docutils literal notranslate"><span class="pre">Mode=customize</span></code>，此模式会强制配置<code class="docutils literal notranslate"><span class="pre">Vref_Voltage_mV=0</span></code>与<code class="docutils literal notranslate"><span class="pre">Vout=disable</span></code></p></li>
+<li><p>根据需要修改<code class="docutils literal notranslate"><span class="pre">Customize_CMD</span></code>，修改方法见下文</p></li>
+</ul>
+</section>
+</section>
+<section id="id5">
+<h2>二、命令<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">hercules_prog</span></code>：京微齐力编程命令</p></li>
+</ul>
+<section id="id6">
+<h3>2.1 子命令综述<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>子命令</p></th>
+<th class="head text-center"><p>功能</p></th>
+<th class="head text-center"><p>状态</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">auto</span></code></p></td>
+<td class="text-center"><p>自动化执行离线编程功能</p></td>
+<td class="text-center"><p>开发中</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="auto">
+<h3>2.2 子命令说明-<code class="docutils literal notranslate"><span class="pre">auto</span></code><a class="headerlink" href="#auto" title="Link to this heading"></a></h3>
+<ul>
+<li><p>命令格式：<code class="docutils literal notranslate"><span class="pre">hercules_prog</span> <span class="pre">auto</span> <span class="pre">[target_type]</span> <span class="pre">[trig_type]</span> <span class="pre">&lt;lz4&gt;</span> <span class="pre">&lt;autoreset&gt;</span> <span class="pre">&lt;boost&gt;</span> <span class="pre">&lt;flash</span> <span class="pre">[data_select]</span> <span class="pre">[addr]</span> <span class="pre">[size]&gt;</span> <span class="pre">&lt;chip</span> <span class="pre">[data_select]</span> <span class="pre">[size]&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_type</span></code>：芯片类型，必填</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><code class="docutils literal notranslate"><span class="pre">target_type</span></code></p></th>
+<th class="head text-left"><p>芯片类型</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">M5</span></code></p></td>
+<td class="text-left"><p>M5系列</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">M7</span></code></p></td>
+<td class="text-left"><p>M7系列</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">HR02</span></code></p></td>
+<td class="text-left"><p>HR02系列</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">H1D03</span></code></p></td>
+<td class="text-left"><p>H1D03系列</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">P1</span></code></p></td>
+<td class="text-left"><p>P1系列</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">H3</span></code></p></td>
+<td class="text-left"><p>H3系列</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">P0</span></code></p></td>
+<td class="text-left"><p>P0系列</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">H7</span></code></p></td>
+<td class="text-left"><p>H7系列</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trig_type</span></code>：触发方式，必填</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><code class="docutils literal notranslate"><span class="pre">trig_type</span></code></p></th>
+<th class="head text-left"><p>触发方式</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">trig_vref</span></code></p></td>
+<td class="text-left"><p>VRef脚电平上升沿触发</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">trig_button</span></code></p></td>
+<td class="text-left"><p>按键按下事件触发</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">trig_once</span></code></p></td>
+<td class="text-left"><p>触发一次后退出</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>【暂未支持】~~<code class="docutils literal notranslate"><span class="pre">lz4</span></code>：声明载入编程器的数据文件是lz4压缩格式，选填~~</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">autoreset</span></code>：操作完毕后复位芯片，选填</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">boost</span></code>：以最高可探测档位时钟与目标芯片通讯，可获得最快编程速度，但不建议启用，选填</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flash</span> <span class="pre">[data_select]</span> <span class="pre">[addr]</span> <span class="pre">[size]</span></code>：对Flash编程</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data_select</span></code>：当前仅支持<code class="docutils literal notranslate"><span class="pre">data0</span></code>，使用 <a class="reference external" href="https://vllogic.com/_static/tools/vllink2026_console/">Vllink 2026 Console</a> 载入</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">addr</span></code>：目标Flash的编程起始地址，一般填入<code class="docutils literal notranslate"><span class="pre">0x0</span></code>，必须是以<code class="docutils literal notranslate"><span class="pre">0x</span></code>开头的十六进制</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>：目标Flash的编程长度，建议使用所载入文件的长度，且必须是以<code class="docutils literal notranslate"><span class="pre">0x</span></code>开头的十六进制</p></li>
+</ol>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chip</span> <span class="pre">[data_select]</span> <span class="pre">[size]</span></code>：对Chip编程</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data_select</span></code>：当前仅支持<code class="docutils literal notranslate"><span class="pre">data0</span></code>，使用 <a class="reference external" href="https://vllogic.com/_static/tools/vllink2026_console/">Vllink 2026 Console</a> 载入</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>：目标Flash的编程长度，建议使用所载入文件的长度，且必须是以<code class="docutils literal notranslate"><span class="pre">0x</span></code>开头的十六进制</p></li>
+</ol>
+</li>
+<li><p>补充说明：<code class="docutils literal notranslate"><span class="pre">chip</span></code>与<code class="docutils literal notranslate"><span class="pre">flash</span></code>互斥，不能同时使用；<code class="docutils literal notranslate"><span class="pre">chip</span></code>也不要与<code class="docutils literal notranslate"><span class="pre">autoreset</span></code>同时使用</p></li>
+</ul>
+</section>
+<section id="id7">
+<h3>2.3 子命令用例-<code class="docutils literal notranslate"><span class="pre">auto</span></code><a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>例1：<code class="docutils literal notranslate"><span class="pre">Customize_CMD=hercules_prog</span> <span class="pre">auto</span> <span class="pre">H7</span> <span class="pre">trig_vref</span> <span class="pre">autoreset</span> <span class="pre">flash</span> <span class="pre">data0</span> <span class="pre">0x0</span> <span class="pre">0x8780C</span></code></p>
+<ol class="arabic simple">
+<li><p>目标芯片是HME-M7；通过VRef脚探测目标板的IO电平触发编程；烧录完成后自动复位芯片</p></li>
+<li><p>烧录对象是Flash，对象Flash的烧录起始地址是0，长度是0x8780C</p></li>
+</ol>
+</li>
+<li><p>例2：<code class="docutils literal notranslate"><span class="pre">Customize_CMD=hercules_prog</span> <span class="pre">auto</span> <span class="pre">H7</span> <span class="pre">trig_button</span> <span class="pre">boost</span> <span class="pre">chip</span> <span class="pre">data0</span> <span class="pre">0x8780C</span></code></p>
+<ol class="arabic simple">
+<li><p>目标芯片是HME-M7；通过烧录器的按键按下事件触发编程；使用最高可用档位时钟通讯</p></li>
+<li><p>烧录对象是Chip，长度是0x8780C</p></li>
+</ol>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="tools.html" class="btn btn-neutral float-left" title="在线工具" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../example/wireless_icp.html" class="btn btn-neutral float-right" title="无线ICP（在电路编程）" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022, Vllogic。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
