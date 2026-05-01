@@ -33,6 +33,8 @@
   2. 支持有线模式、无线直连模式，UART波特率不建议超过`1000000`
 
 ## 三、固件列表-预览版
+* [V00.51-202605011439](../_static/firmware/vllink_basic2.SVCommon0051202605011439.zip)
+  * 支持京微齐力离线编程，详见 [京微齐力（Hercules）离线编程](../software/hercuels_prog)
 * [V00.42-202604052002](../_static/firmware/vllink_basic2.SVCommon0042202604052002.zip)
   * 参看：[Vllink Basic2 2026年新特性](../software/feature2026)
   * 同时支持新版本硬件`Vllink 2X`，包括：2.4G信道、Vout输出控制

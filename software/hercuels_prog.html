@@ -166,7 +166,7 @@
 <section id="id4">
 <h3>1.3 离线编程器准备<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>将离线编程器固件升级到<code class="docutils literal notranslate"><span class="pre">V00.51</span></code>或更高</p></li>
+<li><p>将离线编程器固件升级到 <a class="reference download internal" download="" href="../_downloads/7fa2329fd3d40d82cb2f89f8c56eff0a/vllink_basic2.SVCommon0051202605011439.zip"><span class="xref download myst">V00.51-202605011439</span></a> 或更高</p></li>
 <li><p>通过 <a class="reference external" href="https://vllogic.com/_static/tools/vllink2026_console/">Vllink 2026 Console</a> 将<code class="docutils literal notranslate"><span class="pre">your_project_name.acf.bin</span></code>载入<code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">Block</span> <span class="pre">0</span></code></p></li>
 <li><p>修改运行模式<code class="docutils literal notranslate"><span class="pre">Mode=customize</span></code>，此模式会强制配置<code class="docutils literal notranslate"><span class="pre">Vref_Voltage_mV=0</span></code>与<code class="docutils literal notranslate"><span class="pre">Vout=disable</span></code></p></li>
 <li><p>根据需要修改<code class="docutils literal notranslate"><span class="pre">Customize_CMD</span></code>，修改方法见下文</p></li>
@@ -267,7 +267,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">chip</span> <span class="pre">[data_select]</span> <span class="pre">[size]</span></code>：对Chip编程</p>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">data_select</span></code>：当前仅支持<code class="docutils literal notranslate"><span class="pre">data0</span></code>，使用 <a class="reference external" href="https://vllogic.com/_static/tools/vllink2026_console/">Vllink 2026 Console</a> 载入</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>：目标Flash的编程长度，建议使用所载入文件的长度，且必须是以<code class="docutils literal notranslate"><span class="pre">0x</span></code>开头的十六进制</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>：目标Chip（SRAM）的编程长度，建议使用所载入文件的长度，且必须是以<code class="docutils literal notranslate"><span class="pre">0x</span></code>开头的十六进制</p></li>
 </ol>
 </li>
 <li><p>补充说明：<code class="docutils literal notranslate"><span class="pre">chip</span></code>与<code class="docutils literal notranslate"><span class="pre">flash</span></code>互斥，不能同时使用；<code class="docutils literal notranslate"><span class="pre">chip</span></code>也不要与<code class="docutils literal notranslate"><span class="pre">autoreset</span></code>同时使用</p></li>
@@ -278,13 +278,13 @@
 <ul class="simple">
 <li><p>例1：<code class="docutils literal notranslate"><span class="pre">Customize_CMD=hercules_prog</span> <span class="pre">auto</span> <span class="pre">H7</span> <span class="pre">trig_vref</span> <span class="pre">autoreset</span> <span class="pre">flash</span> <span class="pre">data0</span> <span class="pre">0x0</span> <span class="pre">0x8780C</span></code></p>
 <ol class="arabic simple">
-<li><p>目标芯片是HME-M7；通过VRef脚探测目标板的IO电平触发编程；烧录完成后自动复位芯片</p></li>
+<li><p>目标芯片是HME-H7；通过VRef脚探测目标板的IO电平触发编程；烧录完成后自动复位芯片</p></li>
 <li><p>烧录对象是Flash，对象Flash的烧录起始地址是0，长度是0x8780C</p></li>
 </ol>
 </li>
 <li><p>例2：<code class="docutils literal notranslate"><span class="pre">Customize_CMD=hercules_prog</span> <span class="pre">auto</span> <span class="pre">H7</span> <span class="pre">trig_button</span> <span class="pre">boost</span> <span class="pre">chip</span> <span class="pre">data0</span> <span class="pre">0x8780C</span></code></p>
 <ol class="arabic simple">
-<li><p>目标芯片是HME-M7；通过烧录器的按键按下事件触发编程；使用最高可用档位时钟通讯</p></li>
+<li><p>目标芯片是HME-H7；通过烧录器的按键按下事件触发编程；使用最高可用档位时钟通讯</p></li>
 <li><p>烧录对象是Chip，长度是0x8780C</p></li>
 </ol>
 </li>

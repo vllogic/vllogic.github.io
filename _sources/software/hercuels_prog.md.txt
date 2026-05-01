@@ -17,7 +17,7 @@
   ```
 * 十进制`555020`换算成十六进制，即：`0x8780C`，用例中会用到
 ### 1.3 离线编程器准备
-* 将离线编程器固件升级到`V00.51`或更高
+* 将离线编程器固件升级到 [V00.51-202605011439](../_static/firmware/vllink_basic2.SVCommon0051202605011439.zip) 或更高
 * 通过 [Vllink 2026 Console](https://vllogic.com/_static/tools/vllink2026_console/) 将`your_project_name.acf.bin`载入`Data Block 0`
 * 修改运行模式`Mode=customize`，此模式会强制配置`Vref_Voltage_mV=0`与`Vout=disable`
 * 根据需要修改`Customize_CMD`，修改方法见下文
@@ -56,12 +56,12 @@
   3. `size`：目标Flash的编程长度，建议使用所载入文件的长度，且必须是以`0x`开头的十六进制
 * `chip [data_select] [size]`：对Chip编程
   1. `data_select`：当前仅支持`data0`，使用 [Vllink 2026 Console](https://vllogic.com/_static/tools/vllink2026_console/) 载入
-  2. `size`：目标Flash的编程长度，建议使用所载入文件的长度，且必须是以`0x`开头的十六进制
+  2. `size`：目标Chip（SRAM）的编程长度，建议使用所载入文件的长度，且必须是以`0x`开头的十六进制
 * 补充说明：`chip`与`flash`互斥，不能同时使用；`chip`也不要与`autoreset`同时使用
 ### 2.3 子命令用例-`auto`
 * 例1：`Customize_CMD=hercules_prog auto H7 trig_vref autoreset flash data0 0x0 0x8780C`
-  1. 目标芯片是HME-M7；通过VRef脚探测目标板的IO电平触发编程；烧录完成后自动复位芯片
+  1. 目标芯片是HME-H7；通过VRef脚探测目标板的IO电平触发编程；烧录完成后自动复位芯片
   2. 烧录对象是Flash，对象Flash的烧录起始地址是0，长度是0x8780C
 * 例2：`Customize_CMD=hercules_prog auto H7 trig_button boost chip data0 0x8780C`
-  1. 目标芯片是HME-M7；通过烧录器的按键按下事件触发编程；使用最高可用档位时钟通讯
+  1. 目标芯片是HME-H7；通过烧录器的按键按下事件触发编程；使用最高可用档位时钟通讯
   2. 烧录对象是Chip，长度是0x8780C
