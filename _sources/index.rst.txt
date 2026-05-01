@@ -62,6 +62,7 @@ Github：https://github.com/vllogic
    :maxdepth: 1
    :caption: 硬件资料
 
+   hardware/convbrd.md
    hardware/vllink_2x_pwr.md
    hardware/vllink_basic_vout.md
    hardware/vllink_basic2_vref.md

@@ -1,4 +1,4 @@
-# Basic2配套MIPI-10P及JTAG-20P转接板
+# Basic2配套MINI-10P及JTAG-20P转接板
 
 ## 示意图
 ![](../_static/picture/interface_mipi10p_jtag20p.png)

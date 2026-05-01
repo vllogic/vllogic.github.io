@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VRef口使用说明 &mdash; Vllogic  文档</title>
+  <title>转接板资料 &mdash; Vllogic  文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="Basic2配套FPGA接口转接板" href="vllink_basic2_to_fpga.html" />
-    <link rel="prev" title="Vout口使用说明" href="vllink_basic_vout.html" /> 
+    <link rel="next" title="Vllink 2X 电源部分详细说明" href="vllink_2x_pwr.html" />
+    <link rel="prev" title="USB Sniffer H7P20 快速上手" href="../quick/usb_sniffer_h7p20.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,17 +54,16 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="convbrd.html">转接板资料</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">转接板资料</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mini-10pjtag-20p">一、MINI-10P及JTAG-20P转接板</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fpga">二、FPGA通用转接板</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#btb90">三、BTB或90°转接板</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">四、京微齐力专用转接板</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_2x_pwr.html">Vllink 2X 电源部分详细说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic_vout.html">Vout口使用说明</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">VRef口使用说明</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#vllink-basic2">Vllink Basic2</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">电路</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">说明</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="vllink_basic2_vref.html">VRef口使用说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic2_to_fpga.html">Basic2配套FPGA接口转接板</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic2_to_mipi10p_jtag20p.html">Basic2配套MINI-10P及JTAG-20P转接板</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_battboard.html">Vllink锂电池充放一体供电模块</a></li>
@@ -117,9 +116,9 @@
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">VRef口使用说明</li>
+      <li class="breadcrumb-item active">转接板资料</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/hardware/vllink_basic2_vref.md.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/hardware/convbrd.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -127,25 +126,83 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="vref">
-<h1>VRef口使用说明<a class="headerlink" href="#vref" title="Link to this heading"></a></h1>
-<section id="vllink-basic2">
-<h2>Vllink Basic2<a class="headerlink" href="#vllink-basic2" title="Link to this heading"></a></h2>
-<section id="id1">
-<h3>电路<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
-<p><img alt="" src="../_images/vllink_basic2_vref_sch.png" /></p>
+  <section id="id1">
+<h1>转接板资料<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<section id="mini-10pjtag-20p">
+<h2>一、MINI-10P及JTAG-20P转接板<a class="headerlink" href="#mini-10pjtag-20p" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p><img alt="" src="../_images/interface_mipi10p_jtag20p.png" /></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>从左到右依次为：</p>
+<ol class="arabic simple">
+<li><p>DC3母座，支持<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">2X</span></code>、<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic2</span></code>、<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Box2</span></code>及、<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic</span></code></p></li>
+<li><p>MIPI-10P 1.27mm 牛角座</p></li>
+<li><p>[预留]11P 2.54mm 排针</p></li>
+<li><p>JTAG-20P 2.54mm 牛角座，其<code class="docutils literal notranslate"><span class="pre">PIN2</span></code>与<code class="docutils literal notranslate"><span class="pre">PIN19</span></code>默认悬空，可通过短接点连接对应电源</p></li>
+</ol>
+</li>
+<li><p>原理图：
+<img alt="" src="../_images/interface_mipi10p_jtag20p.sch.png" /></p></li>
+<li><p>全套设计文件：<a class="reference download internal" download="" href="../_downloads/4703d0112b1ce5da1b98bdf0c5114a91/interface_basic2_mipi10p_jtag20p.zip"><span class="xref download myst">interface_basic2_mipi10p_jtag20p.zip</span></a></p></li>
+</ul>
+</section>
+<section id="fpga">
+<h2>二、FPGA通用转接板<a class="headerlink" href="#fpga" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p><img alt="" src="../_images/interface_basic2_to_fpga.png" /></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>从左到右依次为：</p>
+<ol class="arabic simple">
+<li><p>DC3母座，支持<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">2X</span></code>、<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic2</span></code></p></li>
+<li><p>10P 2.00 JTAG牛角座</p></li>
+<li><p>10P 2.54 JTAG牛角座</p></li>
+<li><p>14P 2.54 JTAG牛角座</p></li>
+</ol>
+</li>
+<li><p>原理图：
+<img alt="" src="../_images/interface_basic2_to_fpga.sch.png" /></p></li>
+<li><p>全套设计文件：<a class="reference download internal" download="" href="../_downloads/141cf642e5af5a218a1c58c8e4c35907/interface_basic2_to_fpga.zip"><span class="xref download myst">interface_basic2_to_fpga.zip</span></a></p></li>
+<li><p>建议：对接FPGA使用前，配置<code class="docutils literal notranslate"><span class="pre">Vref_Voltage_mV=0</span></code>与<code class="docutils literal notranslate"><span class="pre">Vout=disable</span></code></p></li>
+</ul>
+</section>
+<section id="btb90">
+<h2>三、BTB或90°转接板<a class="headerlink" href="#btb90" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p><img alt="" src="_static/picture/interface_basic2_btb.png" /></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>从左到右依次为：</p>
+<ol class="arabic simple">
+<li><p>DC3母座，支持<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">2X</span></code>与<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic2</span></code></p></li>
+<li><p>FC3公头，对接底板DC3母座</p></li>
+<li><p>周边半孔，可实现底板与调试的极限扁平连接</p></li>
+</ol>
+</li>
+<li><p>原理图：
+<img alt="" src="_static/picture/interface_basic2_btb.sch.png" /></p></li>
+<li><p>全套设计文件：<a class="reference internal" href="#../_static/pcbs/interface_basic2_btb.zip"><span class="xref myst">interface_basic2_btb.zip</span></a></p></li>
+</ul>
 </section>
 <section id="id2">
-<h3>说明<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<h2>四、京微齐力专用转接板<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p><img alt="" src="_static/picture/interface_basic2_hme.png" /></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>从左到右依次为：</p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">VRef</span></code>作为电平转换芯片的B端参考电压，实现逻辑IO的电平转换，支持的输入参考电压范围为：<code class="docutils literal notranslate"><span class="pre">1.2V-5.5V</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRef</span></code>通过一自恢复保险丝连接简易可调电压源，限制电流200mA</p></li>
-<li><p>简易可调电压源的输出电压可配置为<code class="docutils literal notranslate"><span class="pre">0V</span></code>、<code class="docutils literal notranslate"><span class="pre">1.8V</span></code>、<code class="docutils literal notranslate"><span class="pre">2.5V</span></code>、<code class="docutils literal notranslate"><span class="pre">3.3V</span></code>以及<code class="docutils literal notranslate"><span class="pre">4.0V</span></code>，其中<code class="docutils literal notranslate"><span class="pre">0V</span></code>即输入模式，其他电压则处于输出模式</p></li>
-<li><p>简易可调电压源默认为<code class="docutils literal notranslate"><span class="pre">0V</span></code>模式，此时，若将<code class="docutils literal notranslate"><span class="pre">VRef</span></code>悬空，所有逻辑IO将处于高阻输入态，无法进行通讯</p></li>
-<li><p>在将简易可调电压源配置成非0V时，应当知悉目标板的耐受电压，谨防烧毁目标板</p></li>
-<li><p>配置工具：<a class="reference external" href="https://vllogic.com/_static/tools/web_config_basic2/">Vllink Web Configure</a></p></li>
+<li><p>DC3母座，支持<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">2X</span></code>与<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic2</span></code></p></li>
+<li><p>[预留]7P 2.54mm 排针</p></li>
+<li><p>DC3母座，兼容京微齐力标准接口</p></li>
 </ol>
-</section>
+</li>
+<li><p>原理图：
+<img alt="" src="_static/picture/interface_basic2_hme.sch.png" /></p></li>
+<li><p>全套设计文件：<a class="reference internal" href="#../_static/pcbs/interface_basic2_hme.zip"><span class="xref myst">interface_basic2_hme.zip</span></a></p></li>
+<li><p>支持通过补焊LDO生成固定电压的<code class="docutils literal notranslate"><span class="pre">EFUSE_VDDQ</span></code>，用于EFuse编程</p></li>
+</ul>
 </section>
 </section>
 
@@ -153,8 +210,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="vllink_basic_vout.html" class="btn btn-neutral float-left" title="Vout口使用说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="vllink_basic2_to_fpga.html" class="btn btn-neutral float-right" title="Basic2配套FPGA接口转接板" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../quick/usb_sniffer_h7p20.html" class="btn btn-neutral float-left" title="USB Sniffer H7P20 快速上手" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="vllink_2x_pwr.html" class="btn btn-neutral float-right" title="Vllink 2X 电源部分详细说明" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
