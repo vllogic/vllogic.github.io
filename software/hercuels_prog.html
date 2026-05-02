@@ -85,12 +85,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#id2">1.1 接口准备</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id3">1.2 固件准备</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id4">1.3 离线编程器准备</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">1.4 编程过程</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id5">二、命令</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id6">2.1 子命令综述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">二、命令</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">2.1 子命令综述</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#auto">2.2 子命令说明-<code class="docutils literal notranslate"><span class="pre">auto</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">2.3 子命令用例-<code class="docutils literal notranslate"><span class="pre">auto</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">2.3 子命令用例-<code class="docutils literal notranslate"><span class="pre">auto</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -173,14 +174,23 @@
 <li><p>根据需要修改<code class="docutils literal notranslate"><span class="pre">Customize_CMD</span></code>，修改方法见下文</p></li>
 </ul>
 </section>
-</section>
 <section id="id5">
-<h2>二、命令<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<h3>1.4 编程过程<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">trig_once</span></code>模式下，编程器立刻执行编程过程，若未连接目标芯片，失败退出</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trig_button</span></code>模式下，可以先给编程器上电，然后接上已上电的目标芯片，按按键触发编程</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trig_vref</span></code>模式下，可以先给编程器上电，然后接上已上电的目标芯片，<code class="docutils literal notranslate"><span class="pre">VRef</span></code>脚电压被目标芯片抬高即自动触发烧录</p></li>
+<li><p>烧录过程中蓝灯闪烁；烧录成功绿灯常亮；烧录失败黄灯常亮</p></li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h2>二、命令<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">hercules_prog</span></code>：京微齐力编程命令</p></li>
 </ul>
-<section id="id6">
-<h3>2.1 子命令综述<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<section id="id7">
+<h3>2.1 子命令综述<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-center"><p>子命令</p></th>
@@ -274,8 +284,8 @@
 <li><p>补充说明：<code class="docutils literal notranslate"><span class="pre">chip</span></code>与<code class="docutils literal notranslate"><span class="pre">flash</span></code>互斥，不能同时使用；<code class="docutils literal notranslate"><span class="pre">chip</span></code>也不要与<code class="docutils literal notranslate"><span class="pre">autoreset</span></code>同时使用</p></li>
 </ul>
 </section>
-<section id="id7">
-<h3>2.3 子命令用例-<code class="docutils literal notranslate"><span class="pre">auto</span></code><a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<section id="id8">
+<h3>2.3 子命令用例-<code class="docutils literal notranslate"><span class="pre">auto</span></code><a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>例1：<code class="docutils literal notranslate"><span class="pre">Customize_CMD=hercules_prog</span> <span class="pre">auto</span> <span class="pre">H7</span> <span class="pre">trig_vref</span> <span class="pre">autoreset</span> <span class="pre">flash</span> <span class="pre">data0</span> <span class="pre">0x0</span> <span class="pre">0x8780C</span></code></p>
 <ol class="arabic simple">
@@ -285,7 +295,7 @@
 </li>
 <li><p>例2：<code class="docutils literal notranslate"><span class="pre">Customize_CMD=hercules_prog</span> <span class="pre">auto</span> <span class="pre">H7</span> <span class="pre">trig_button</span> <span class="pre">boost</span> <span class="pre">chip</span> <span class="pre">data0</span> <span class="pre">0x8780C</span></code></p>
 <ol class="arabic simple">
-<li><p>目标芯片是HME-H7；通过烧录器的按键按下事件触发编程；使用最高可用档位时钟通讯</p></li>
+<li><p>目标芯片是HME-H7；通过编程器的按键按下事件触发编程；使用最高可用档位时钟通讯</p></li>
 <li><p>烧录对象是Chip，长度是0x8780C</p></li>
 </ol>
 </li>

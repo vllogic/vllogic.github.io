@@ -21,6 +21,11 @@
 * 通过 [Vllink 2026 Console](https://vllogic.com/_static/tools/vllink2026_console/) 将`your_project_name.acf.bin`载入`Data Block 0`
 * 修改运行模式`Mode=customize`，此模式会强制配置`Vref_Voltage_mV=0`与`Vout=disable`
 * 根据需要修改`Customize_CMD`，修改方法见下文
+### 1.4 编程过程
+* `trig_once`模式下，编程器立刻执行编程过程，若未连接目标芯片，失败退出
+* `trig_button`模式下，可以先给编程器上电，然后接上已上电的目标芯片，按按键触发编程
+* `trig_vref`模式下，可以先给编程器上电，然后接上已上电的目标芯片，`VRef`脚电压被目标芯片抬高即自动触发烧录
+* 烧录过程中蓝灯闪烁；烧录成功绿灯常亮；烧录失败黄灯常亮
 
 ## 二、命令
 * `hercules_prog`：京微齐力编程命令
@@ -63,5 +68,5 @@
   1. 目标芯片是HME-H7；通过VRef脚探测目标板的IO电平触发编程；烧录完成后自动复位芯片
   2. 烧录对象是Flash，对象Flash的烧录起始地址是0，长度是0x8780C
 * 例2：`Customize_CMD=hercules_prog auto H7 trig_button boost chip data0 0x8780C`
-  1. 目标芯片是HME-H7；通过烧录器的按键按下事件触发编程；使用最高可用档位时钟通讯
+  1. 目标芯片是HME-H7；通过编程器的按键按下事件触发编程；使用最高可用档位时钟通讯
   2. 烧录对象是Chip，长度是0x8780C
