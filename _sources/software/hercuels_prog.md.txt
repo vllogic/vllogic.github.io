@@ -5,7 +5,7 @@
 ## 一、准备工作
 ### 1.1 接口准备
 * `Vllink 2X`与`Vllink Basic2`的接口不兼容京微齐力标准接口，必须通过转接板转接！！！
-* 目前有两种转接板，分别是 [通用型转接板](../hardware/vllink_basic2_to_fpga.md) 与 [专用型转接板](../hardware/convbrd.md)
+* 目前有两种转接板，分别是 [FPGA通用转接板](../hardware/convbrd.md#fpga) 与 [京微齐力专用转接板](../hardware/convbrd.md#id2)
 ### 1.2 固件准备
 * 在`Fuxi`中生成`.acf`格式的固件
 * 依次点击菜单栏中的`Tools`->`Command-Line Windows...`，打开`Fuxi Design Console`
