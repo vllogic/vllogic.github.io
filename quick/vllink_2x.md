@@ -3,7 +3,7 @@
 ## 一、对比
 * `Vllink 2X`固件与`Vllink Basic2`通用
 * `Vllink 2X`硬件部分做了如下优化：
-  | 硬件对比 | Vllink 2X | Vllink Basic 2 |
+* | 硬件对比 | Vllink 2X | Vllink Basic 2 |
   | :--- | :--- | :--- |
   | 外壳 | **塑料外壳+PVC标签** | 热缩管 |
   | 独立蓝牙天线 | 无 | 预留 |
@@ -16,27 +16,27 @@
   | DC3 5V脚TVS (SMF5.0A) | **有** | 无 |
 
 ## 二、调试接口定义
-| 接口（定位见PVC标签） | 介绍 |
-| :---- | :---- |
-| TDI  | JTAG数据口<sup>3</sup> |
-| DIO / TMS  | JTAG模式口、SWD数据口<sup>3</sup> |
-| DCK / TCK  | JTAG时钟口、SWD时钟口<sup>3</sup> |
-| SRST  | 芯片复位口<sup>3</sup> |
-| TDO  | JTAG数据口<sup>3</sup> |
-| 5V  | 双向5V电源口<sup>1</sup> |
-| GND  | 共地口 |
-| VRef  | 参考电平及简易可调电压源<sup>2</sup> |
-| TXD  | 串口输出<sup>3</sup> |
-| RXD  | 串口输入<sup>3</sup> |
+* | 接口（定位见PVC标签） | 介绍 |
+  | :---- | :---- |
+  | TDI  | JTAG数据口<sup>3</sup> |
+  | DIO / TMS  | JTAG模式口、SWD数据口<sup>3</sup> |
+  | DCK / TCK  | JTAG时钟口、SWD时钟口<sup>3</sup> |
+  | SRST  | 芯片复位口<sup>3</sup> |
+  | TDO  | JTAG数据口<sup>3</sup> |
+  | 5V  | 双向5V电源口<sup>1</sup> |
+  | GND  | 共地口 |
+  | VRef  | 参考电平及简易可调电压源<sup>2</sup> |
+  | TXD  | 串口输出<sup>3</sup> |
+  | RXD  | 串口输入<sup>3</sup> |
 
   [1] `5V`脚支持供电双向切换，默认经理想二极管（CH213K）单向输入，支持软件开启5V输出。详见 [Vllink 2X 电源部分详细说明](../hardware/vllink_2x_pwr.md)
 
   [2] `VRef`默认输出3.3V，可配置为输入模式或输出其他电压。详见 [Vllink 2X 电源部分详细说明](../hardware/vllink_2x_pwr.md)
-
+  
   [3] 数据口的通讯电平由`VRef`决定。详见 [Vllink 2X 电源部分详细说明](../hardware/vllink_2x_pwr.md)
-<br>* 由于`VRef`默认输出`3.3V`，所以对于常见3.3V芯片，可以仅连接必要数据接口及GND
-<br>* 对于超过`VRef`电平的芯片，可将`VRev`接上芯片IO电平
-<br>* 对于低于`VRef`电平的芯片，必须调低`VRef`电平或者关闭`VRef`输出
+* 由于`VRef`默认输出`3.3V`，所以对于常见3.3V芯片，可以仅连接必要数据接口及GND
+* 对于超过`VRef`电平的芯片，可将`VRev`接上芯片IO电平
+* 对于低于`VRef`电平的芯片，必须调低`VRef`电平或者关闭`VRef`输出
 
 ## 三、模式介绍及切换
 ### 3.1 升级模式

@@ -41,3 +41,47 @@
 | OpenOCD V2-JTAG 15M | 26KB/S | 27KB/S | 16KB/S |
 | IAR-DAP V2-SWD 20M | 136KB/S | 135KB/S | 56KB/S |
 | IAR-DAP V2-JTAG 12M | 122KB/S | 118KB/S | 52KB/S |
+
+
+
+## 20260515
+* 平台：`Keil 5.36`, `IAR 8.40.2`, `Openocd 0.12.0+dev-gc15fd98`
+* 调试器：`Vllink 2X`, 固件版本：`V00.52-202605141203`
+* 对象：`STM32F407VGT6`, `AT32F407A`
+
+### Keil 5.36 测试
+* 接口：`CMSIS-DAP V2`
+* 计时：基于USB通信起止时间戳
+* | 模式 | 目标芯片 | 固件大小 | 全片擦除、编程、<br>校验总耗时(S) | 编程耗时(S) | 编程速度<br>(KB/S) |
+  | :----: | :----: | :----: | :----: | :----: | :----: |
+  | 有线 | STM32F407 | 1024KB | TODO  | TODO  | TODO  |
+  | 无线直连<sup>1</sup> | STM32F407 | 1024KB | TODO  | TODO  | TODO  |
+  | 无线网络<sup>2</sup> | STM32F407 | 1024KB | TODO  | TODO  | TODO  |
+  | 有线 | AT32F407A | 1024KB | 15.574 | 4.438 | 230.7 |
+  | 无线直连<sup>1</sup> | AT32F407A | 1024KB | 31.672 | 26.360 | 38.8 |
+  | 无线网络<sup>2</sup> | AT32F407A | 1024KB | 44.237 | 39.108 | 26.2 |
+
+  [1] 无线直连：一个调试器作为`AP`，连接电脑；一个或多个调试器作为`STA`，连接目标板。`AP`与`STA`直接建立无线连接
+
+  [2] 无线网络：`AP`调试器与`STA`调试器连接同一局域网的不同无线接入点
+
+### IAR 8.40.2 测试
+* 接口：`CMSIS-DAP V2`
+* 计时：基于USB通信起止时间戳、
+* | 模式 | 目标芯片 | 固件大小 | 全片擦除、编程、<br>校验总耗时(S) | 编程耗时(S) | 编程速度<br>(KB/S) |
+  | :----: | :----: | :----: | :----: | :----: | :----: |
+  | 有线 | STM32F407 | 1024KB | TODO  | TODO  | TODO  |
+  | 无线直连 | STM32F407 | 1024KB | TODO  | TODO  | TODO  |
+  | 无线网络 | STM32F407 | 1024KB | TODO  | TODO  | TODO  |
+
+### OpenOCD测试
+* 版本：`Open On-Chip Debugger 0.12.0+dev-gc15fd98 (2026-03-22-03:24)`
+* 启动命令：`./openocd.exe -s ../scripts -f interface/cmsis-dap.cfg -f target/stm32f4x.cfg -c "adapter speed 8000; transport select swd; init; reset halt"`
+* 测试命令：`flash write_image erase 00_1024KB.bin 0x08000000 bin`
+* 计时：基于命令行反馈数据
+* | 模式 | 目标芯片 | 固件大小 | 全片擦除、<br>编程总耗时(S) | 编程耗时(S) | 编程速度<br>(KB/S) |
+  | :----: | :----: | :----: | :----: | :----: | :----: |
+  | 有线 | STM32F407 | 1024KB | TODO  | TODO  | TODO  |
+  | 无线直连 | STM32F407 | 1024KB | TODO  | TODO  | TODO  |
+  | 无线网络 | STM32F407 | 1024KB | TODO  | TODO  | TODO  |
+
