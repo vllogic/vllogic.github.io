@@ -386,17 +386,6 @@
 </section>
 <section id="tcp-dap">
 <h3>4.7 无线模式：TCP-DAP<a class="headerlink" href="#tcp-dap" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>此模式仅需一个调试器，无需<code class="docutils literal notranslate"><span class="pre">AP</span></code>配合</p></li>
-<li><p>修改调试器的配置：<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器SSID</span></code>、<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器密码</span></code>以及<code class="docutils literal notranslate"><span class="pre">Mode3_TCP_UART=enable</span></code></p></li>
-<li><p>调整串口参数配置：默认<code class="docutils literal notranslate"><span class="pre">Mode3_TCP_UART_PARAM=115200.1p0.none</span></code></p></li>
-<li><p>切换到<code class="docutils literal notranslate"><span class="pre">STA</span></code>模式，在STA连上路由器后，查看STA的IP</p></li>
-<li><p>通过TCP客户端连接：STA_IPv4:20010</p></li>
-<li><p>连接后，TCP客户端发送的数据将通过串口<code class="docutils literal notranslate"><span class="pre">TXD</span></code>输出，串口<code class="docutils literal notranslate"><span class="pre">RXD</span></code>输入的数据将发送给TCP客户端</p></li>
-</ul>
-</section>
-<section id="tcp-uart">
-<h3>4.8 无线模式：TCP-UART<a class="headerlink" href="#tcp-uart" title="Link to this heading"></a></h3>
 <ul>
 <li><p>此模式仅需一个调试器，无需<code class="docutils literal notranslate"><span class="pre">AP</span></code>配合</p></li>
 <li><p>修改调试器的配置：<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器SSID</span></code>、<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器密码</span></code></p></li>
@@ -414,6 +403,17 @@
 </pre></div>
 </div>
 </li>
+</ul>
+</section>
+<section id="tcp-uart">
+<h3>4.8 无线模式：TCP-UART<a class="headerlink" href="#tcp-uart" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>此模式仅需一个调试器，无需<code class="docutils literal notranslate"><span class="pre">AP</span></code>配合</p></li>
+<li><p>修改调试器的配置：<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器SSID</span></code>、<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器密码</span></code>以及<code class="docutils literal notranslate"><span class="pre">Mode3_TCP_UART=enable</span></code></p></li>
+<li><p>调整串口参数配置：默认<code class="docutils literal notranslate"><span class="pre">Mode3_TCP_UART_PARAM=115200.1p0.none</span></code></p></li>
+<li><p>切换到<code class="docutils literal notranslate"><span class="pre">STA</span></code>模式，在STA连上路由器后，查看STA的IP</p></li>
+<li><p>通过TCP客户端连接：STA_IPv4:20010</p></li>
+<li><p>连接后，TCP客户端发送的数据将通过串口<code class="docutils literal notranslate"><span class="pre">TXD</span></code>输出，串口<code class="docutils literal notranslate"><span class="pre">RXD</span></code>输入的数据将发送给TCP客户端</p></li>
 </ul>
 </section>
 <section id="id12">

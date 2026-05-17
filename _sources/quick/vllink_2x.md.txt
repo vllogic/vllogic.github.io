@@ -112,13 +112,6 @@
 * 在无线指示灯稳定后，即可通过电脑端的配置工具选定任意调试器。详见 [Vllink Basic2 2026年新特性](../software/feature2026.md)
 ### 4.7 无线模式：TCP-DAP
 * 此模式仅需一个调试器，无需`AP`配合
-* 修改调试器的配置：`Wireless_Device_SSID=路由器SSID`、`Wireless_Device_SSID=路由器密码`以及`Mode3_TCP_UART=enable`
-* 调整串口参数配置：默认`Mode3_TCP_UART_PARAM=115200.1p0.none`
-* 切换到`STA`模式，在STA连上路由器后，查看STA的IP
-* 通过TCP客户端连接：STA_IPv4:20010
-* 连接后，TCP客户端发送的数据将通过串口`TXD`输出，串口`RXD`输入的数据将发送给TCP客户端
-### 4.8 无线模式：TCP-UART
-* 此模式仅需一个调试器，无需`AP`配合
 * 修改调试器的配置：`Wireless_Device_SSID=路由器SSID`、`Wireless_Device_SSID=路由器密码`
 * 切换到`STA`模式，在STA连上路由器后，查看STA的IP
 * 准备 [最新版OpenOCD，Windows](https://github.com/vllogic/openocd_cmsis-dap_v2/releases/tag/20260322)
@@ -133,6 +126,13 @@
     65536 bytes written at address 0x20000000
     downloaded 65536 bytes in 0.134932s (474.313 KiB/s)
     ```
+### 4.8 无线模式：TCP-UART
+* 此模式仅需一个调试器，无需`AP`配合
+* 修改调试器的配置：`Wireless_Device_SSID=路由器SSID`、`Wireless_Device_SSID=路由器密码`以及`Mode3_TCP_UART=enable`
+* 调整串口参数配置：默认`Mode3_TCP_UART_PARAM=115200.1p0.none`
+* 切换到`STA`模式，在STA连上路由器后，查看STA的IP
+* 通过TCP客户端连接：STA_IPv4:20010
+* 连接后，TCP客户端发送的数据将通过串口`TXD`输出，串口`RXD`输入的数据将发送给TCP客户端
 ### 4.9 无线模式：无线串口桥
 * 在`AP`与`STA`建立连接后，如果`AP`端没有打开CDC串口，两端的TTL串口将自动形成无线串口桥
 * 此状态下，一段的`RXD`接收的串口数据将通过另一端的`TXD`发出
