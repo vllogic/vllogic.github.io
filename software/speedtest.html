@@ -92,7 +92,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#id7">20260515</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#keil-5-36">Keil 5.36 测试</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#iar-8-40-2">IAR 8.40.2 测试</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#openocd">OpenOCD测试</a></li>
 </ul>
 </li>
@@ -322,93 +321,65 @@
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-center"><p>有线</p></td>
-<td class="text-center"><p>STM32F407</p></td>
-<td class="text-center"><p>1024KB</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
-</tr>
-<tr class="row-odd"><td class="text-center"><p>无线直连<sup>1</sup></p></td>
-<td class="text-center"><p>STM32F407</p></td>
-<td class="text-center"><p>1024KB</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
-</tr>
-<tr class="row-even"><td class="text-center"><p>无线网络<sup>2</sup></p></td>
-<td class="text-center"><p>STM32F407</p></td>
-<td class="text-center"><p>1024KB</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
-</tr>
-<tr class="row-odd"><td class="text-center"><p>有线</p></td>
 <td class="text-center"><p>AT32F407A</p></td>
 <td class="text-center"><p>1024KB</p></td>
-<td class="text-center"><p>15.574</p></td>
-<td class="text-center"><p>4.438</p></td>
+<td class="text-center"><p>15.5</p></td>
+<td class="text-center"><p>4.4</p></td>
 <td class="text-center"><p>230.7</p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p>无线直连<sup>1</sup></p></td>
+<tr class="row-odd"><td class="text-center"><p>无线直连<sup>1</sup></p></td>
 <td class="text-center"><p>AT32F407A</p></td>
 <td class="text-center"><p>1024KB</p></td>
-<td class="text-center"><p>31.672</p></td>
-<td class="text-center"><p>26.360</p></td>
+<td class="text-center"><p>31.6</p></td>
+<td class="text-center"><p>26.3</p></td>
 <td class="text-center"><p>38.8</p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p>无线网络<sup>2</sup></p></td>
+<tr class="row-even"><td class="text-center"><p>无线网络<sup>2</sup></p></td>
 <td class="text-center"><p>AT32F407A</p></td>
 <td class="text-center"><p>1024KB</p></td>
-<td class="text-center"><p>44.237</p></td>
-<td class="text-center"><p>39.108</p></td>
+<td class="text-center"><p>44.2</p></td>
+<td class="text-center"><p>39.1</p></td>
 <td class="text-center"><p>26.2</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>有线</p></td>
+<td class="text-center"><p>STM32F407</p></td>
+<td class="text-center"><p>1024KB</p></td>
+<td class="text-center"><p>19.8</p></td>
+<td class="text-center"><p>7.6</p></td>
+<td class="text-center"><p>133.3</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>无线直连<sup>1</sup></p></td>
+<td class="text-center"><p>STM32F407</p></td>
+<td class="text-center"><p>1024KB</p></td>
+<td class="text-center"><p>35.7</p></td>
+<td class="text-center"><p>22.4</p></td>
+<td class="text-center"><p>45.6</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>无线网络<sup>2</sup></p></td>
+<td class="text-center"><p>STM32F407</p></td>
+<td class="text-center"><p>1024KB</p></td>
+<td class="text-center"><p>53.4</p></td>
+<td class="text-center"><p>39.4</p></td>
+<td class="text-center"><p>25.9</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>对比：某Link V9<br>&#64;V7.86a</p></td>
+<td class="text-center"><p>STM32F407</p></td>
+<td class="text-center"><p>1024KB</p></td>
+<td class="text-center"><p>24.5</p></td>
+<td class="text-center"><p>12.9</p></td>
+<td class="text-center"><p>79.7</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>对比：某Link V11<br>&#64;V7.86a</p></td>
+<td class="text-center"><p>STM32F407</p></td>
+<td class="text-center"><p>1024KB</p></td>
+<td class="text-center"><p>32.8</p></td>
+<td class="text-center"><p>20.9</p></td>
+<td class="text-center"><p>48.8</p></td>
 </tr>
 </tbody>
 </table>
 <p>[1] 无线直连：一个调试器作为<code class="docutils literal notranslate"><span class="pre">AP</span></code>，连接电脑；一个或多个调试器作为<code class="docutils literal notranslate"><span class="pre">STA</span></code>，连接目标板。<code class="docutils literal notranslate"><span class="pre">AP</span></code>与<code class="docutils literal notranslate"><span class="pre">STA</span></code>直接建立无线连接</p>
 <p>[2] 无线网络：<code class="docutils literal notranslate"><span class="pre">AP</span></code>调试器与<code class="docutils literal notranslate"><span class="pre">STA</span></code>调试器连接同一局域网的不同无线接入点</p>
-</li>
-</ul>
-</section>
-<section id="iar-8-40-2">
-<h3>IAR 8.40.2 测试<a class="headerlink" href="#iar-8-40-2" title="Link to this heading"></a></h3>
-<ul>
-<li><p>接口：<code class="docutils literal notranslate"><span class="pre">CMSIS-DAP</span> <span class="pre">V2</span></code></p></li>
-<li><p>计时：基于USB通信起止时间戳、</p></li>
-<li><table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head text-center"><p>模式</p></th>
-<th class="head text-center"><p>目标芯片</p></th>
-<th class="head text-center"><p>固件大小</p></th>
-<th class="head text-center"><p>全片擦除、编程、<br>校验总耗时(S)</p></th>
-<th class="head text-center"><p>编程耗时(S)</p></th>
-<th class="head text-center"><p>编程速度<br>(KB/S)</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-center"><p>有线</p></td>
-<td class="text-center"><p>STM32F407</p></td>
-<td class="text-center"><p>1024KB</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
-</tr>
-<tr class="row-odd"><td class="text-center"><p>无线直连</p></td>
-<td class="text-center"><p>STM32F407</p></td>
-<td class="text-center"><p>1024KB</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
-</tr>
-<tr class="row-even"><td class="text-center"><p>无线网络</p></td>
-<td class="text-center"><p>STM32F407</p></td>
-<td class="text-center"><p>1024KB</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
-</tr>
-</tbody>
-</table>
 </li>
 </ul>
 </section>
@@ -433,23 +404,23 @@
 <tr class="row-even"><td class="text-center"><p>有线</p></td>
 <td class="text-center"><p>STM32F407</p></td>
 <td class="text-center"><p>1024KB</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
+<td class="text-center"><p>15.4</p></td>
+<td class="text-center"><p>8.9</p></td>
+<td class="text-center"><p>114.1</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>无线直连</p></td>
 <td class="text-center"><p>STM32F407</p></td>
 <td class="text-center"><p>1024KB</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
+<td class="text-center"><p>15.9</p></td>
+<td class="text-center"><p>9.4</p></td>
+<td class="text-center"><p>108.5</p></td>
 </tr>
 <tr class="row-even"><td class="text-center"><p>无线网络</p></td>
 <td class="text-center"><p>STM32F407</p></td>
 <td class="text-center"><p>1024KB</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
-<td class="text-center"><p>TODO</p></td>
+<td class="text-center"><p>16.7</p></td>
+<td class="text-center"><p>10.3</p></td>
+<td class="text-center"><p>98.9</p></td>
 </tr>
 </tbody>
 </table>
