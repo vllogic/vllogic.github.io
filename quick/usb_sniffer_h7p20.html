@@ -265,7 +265,10 @@
 <ol class="arabic simple">
 <li><ul class="simple">
 <li><p>问：捕获时，<code class="docutils literal notranslate"><span class="pre">Time</span></code>栏时间戳比现实时间慢，或者在使用过滤器后，不能实时观察到期望数据</p></li>
-<li><p>答：这是因为Wireshark显示层无法实时显示大量数据，可通过勾选<code class="docutils literal notranslate"><span class="pre">Fold</span> <span class="pre">empty</span> <span class="pre">frames</span></code>和<code class="docutils literal notranslate"><span class="pre">Exclude</span> <span class="pre">Line</span> <span class="pre">State</span></code>解决</p></li>
+<li><p>答：这是因为Wireshark显示层无法实时显示大量数据，提供几种方案
+<br>1. 勾选<code class="docutils literal notranslate"><span class="pre">Fold</span> <span class="pre">empty</span> <span class="pre">frames</span></code>，折叠空帧，推荐
+<br>2. 在<code class="docutils literal notranslate"><span class="pre">Wireshark</span></code>菜单栏中，取消<code class="docutils literal notranslate"><span class="pre">视图</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">着色分组列表</span></code>，这个功能对网络分析有用，但对大部分USB分析无意义
+<br>3. 勾选<code class="docutils literal notranslate"><span class="pre">Exclude</span> <span class="pre">Line</span> <span class="pre">State</span></code>，排除线路状态报文</p></li>
 </ul>
 </li>
 <li><ul class="simple">

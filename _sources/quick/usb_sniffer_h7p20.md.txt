@@ -56,7 +56,10 @@
 
 ## 三、常见问题
 1. * 问：捕获时，`Time`栏时间戳比现实时间慢，或者在使用过滤器后，不能实时观察到期望数据
-   * 答：这是因为Wireshark显示层无法实时显示大量数据，可通过勾选`Fold empty frames`和`Exclude Line State`解决
+   * 答：这是因为Wireshark显示层无法实时显示大量数据，提供几种方案
+    <br>1. 勾选`Fold empty frames`，折叠空帧，推荐
+    <br>2. 在`Wireshark`菜单栏中，取消`视图`->`着色分组列表`，这个功能对网络分析有用，但对大部分USB分析无意义
+    <br>3. 勾选`Exclude Line State`，排除线路状态报文
 2. * 问：捕获时能否自动识别速度，无需提前选定速度模式
    * 答：原作者未实现此项功能，本产品也不支持
 3. * 问：能否支持[USB PACKET VIEW](https://www.usbpacketviewer.com/download/)
