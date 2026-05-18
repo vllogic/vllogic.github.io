@@ -113,6 +113,7 @@
 ### 4.7 无线模式：TCP-DAP
 * 此模式仅需一个调试器，无需`AP`配合
 * 修改调试器的配置：`Wireless_Device_SSID=路由器SSID`、`Wireless_Device_SSID=路由器密码`
+* 修改调试器的配置：`Wireless_Host_Channel=0`（此项默认165信道，改0则为自动信道，通信质量将由路由器决定）
 * 切换到`STA`模式，在STA连上路由器后，查看STA的IP
 * 准备 [最新版OpenOCD，Windows](https://github.com/vllogic/openocd_cmsis-dap_v2/releases/tag/20260322)
 * 命令示例：`./openocd.exe -f interface/cmsis-dap.cfg -f target/stm32f4x.cfg -c "cmsis-dap backend tcp; cmsis-dap tcp host 192.168.1.183; cmsis-dap tcp port 4441; transport select swd; adapter speed 8000"` 注意：执行命令前修改IP
@@ -129,6 +130,7 @@
 ### 4.8 无线模式：TCP-UART
 * 此模式仅需一个调试器，无需`AP`配合
 * 修改调试器的配置：`Wireless_Device_SSID=路由器SSID`、`Wireless_Device_SSID=路由器密码`以及`Mode3_TCP_UART=enable`
+* 修改调试器的配置：`Wireless_Host_Channel=0`（此项默认165信道，改0则为自动信道，通信质量将由路由器决定）
 * 调整串口参数配置：默认`Mode3_TCP_UART_PARAM=115200.1p0.none`
 * 切换到`STA`模式，在STA连上路由器后，查看STA的IP
 * 通过TCP客户端连接：STA_IPv4:20010
