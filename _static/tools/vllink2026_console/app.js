@@ -1,5 +1,5 @@
 /**
- * 三模态主题管理器 (保持不变)
+ * 三模态主题管理器 (Dark / Auto / Light)
  */
 const ThemeManager = {
     btns: document.querySelectorAll('[data-theme]'),
@@ -47,13 +47,14 @@ const TabManager = {
 };
 
 /**
- * 数据区块管理模块 - 持续保留 UI 版
+ * 数据区块管理模块 (包含分片传文件、校验、无弹窗进度反馈)
  */
 const DataManager = {
     container: document.getElementById('tab-content-tbd'),
-    activeBuffers: {}, // 内存中持有的原始数据
+    activeBuffers: {}, // 内存中持有的原始数据缓存
 
     async load() {
+        if (!vllink.device) return; 
         this.container.innerHTML = `<div class="p-20 text-center animate-pulse text-slate-500 italic text-sm font-mono">Loading data segments...</div>`;
         vllink.isBusy = true;
         try {
@@ -77,8 +78,7 @@ const DataManager = {
                 const hasData = !!this.activeBuffers[i];
                 html += `
                 <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 flex flex-col gap-5 shadow-xl transition-all relative overflow-hidden">
-                    <!-- 标题行 -->
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center relative z-10">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-500 font-black text-xs border border-slate-200/50 dark:border-white/10">${i}</div>
                             <h3 class="font-black text-slate-700 dark:text-slate-200 uppercase tracking-tighter">Data Block ${i}</h3>
@@ -86,31 +86,22 @@ const DataManager = {
                         <span class="text-[10px] font-mono bg-slate-100 dark:bg-white/5 px-2 py-1 rounded text-slate-500">MAX: ${kb} KB</span>
                     </div>
 
-                    <!-- 进度 UI (持续显示) -->
-                    <div id="data-ui-${i}" class="space-y-3 bg-slate-50 dark:bg-black/20 p-4 rounded-2xl border border-slate-100 dark:border-white/5">
+                    <div id="data-ui-${i}" class="space-y-3 bg-slate-50 dark:bg-black/20 p-4 rounded-2xl border border-slate-100 dark:border-white/5 relative z-10">
                         <div class="flex justify-between items-center">
-                            <span id="data-status-text-${i}" class="text-[10px] font-black uppercase tracking-widest text-slate-400">准备就绪</span>
+                            <span id="data-status-text-${i}" class="text-[10px] font-black uppercase tracking-widest text-slate-400 transition-colors">准备就绪</span>
                             <span id="data-percent-${i}" class="text-[10px] font-mono text-slate-400">0%</span>
                         </div>
                         <div class="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                             <div id="data-bar-${i}" class="h-full bg-primary transition-all duration-300 w-0" style="box-shadow: 0 0 10px rgba(0, 212, 255, 0.3)"></div>
                         </div>
                         <div class="flex justify-end">
-                            <span id="data-speed-box-${i}" class="text-[9px] text-slate-400 font-mono opacity-60 italic">Speed: 0.0 KB/s</span>
+                            <span id="data-speed-box-${i}" class="text-[9px] text-slate-400 font-mono opacity-60 italic transition-opacity">Speed: 0.0 KB/s</span>
                         </div>
                     </div>
 
-                    <!-- 动作按钮 (持续显示) -->
-                    <div class="flex gap-3">
-                        <button onclick="DataManager.pickFile(${i}, ${kb})" id="btn-load-${i}" 
-                            class="flex-1 py-3 bg-primary text-white rounded-xl font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20">
-                            载入并写入
-                        </button>
-                        <button onclick="DataManager.verify(${i})" id="btn-verify-${i}" 
-                            ${hasData ? '' : 'disabled'}
-                            class="flex-1 py-3 border-2 border-primary/30 text-primary rounded-xl font-black text-xs hover:bg-primary/5 active:scale-95 transition-all disabled:opacity-30 disabled:grayscale disabled:pointer-events-none">
-                            回读校验
-                        </button>
+                    <div class="flex gap-3 relative z-10">
+                        <button onclick="DataManager.pickFile(${i}, ${kb})" id="btn-load-${i}" class="flex-1 py-3 bg-primary text-white rounded-xl font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20">载入并写入</button>
+                        <button onclick="DataManager.verify(${i})" id="btn-verify-${i}" ${hasData ? '' : 'disabled'} class="flex-1 py-3 border-2 border-primary/30 text-primary rounded-xl font-black text-xs hover:bg-primary/5 active:scale-95 transition-all disabled:opacity-30 disabled:grayscale disabled:pointer-events-none">回读校验</button>
                     </div>
                     <input type="file" id="input-file-${i}" class="hidden" onchange="DataManager.handlePick(${i}, ${kb})">
                 </div>`;
@@ -125,10 +116,12 @@ const DataManager = {
         const input = document.getElementById(`input-file-${idx}`);
         if (!input.files.length) return;
         const file = input.files[0];
+        
         if (file.size > maxKb * 1024) {
             this.showFeedback(idx, `文件超限 (MAX ${maxKb}KB)`, 'fail');
             input.value = ''; return;
         }
+
         const rawBuffer = await file.arrayBuffer();
         const alignedLen = Math.ceil(rawBuffer.byteLength / 256) * 256;
         const paddedData = new Uint8Array(alignedLen).fill(0xff);
@@ -142,7 +135,8 @@ const DataManager = {
         const statusText = document.getElementById(`data-status-text-${idx}`);
         const bar = document.getElementById(`data-bar-${idx}`);
         const speedBox = document.getElementById(`data-speed-box-${idx}`);
-        
+        if(!statusText || !bar || !speedBox) return;
+
         statusText.innerText = message.toUpperCase();
         statusText.classList.remove('text-primary', 'text-emerald-500', 'text-rose-500', 'animate-pulse');
         bar.classList.remove('bg-primary', 'bg-emerald-500', 'bg-rose-500');
@@ -150,16 +144,18 @@ const DataManager = {
         if (type === 'success') {
             statusText.classList.add('text-emerald-500');
             bar.classList.add('bg-emerald-500');
+            bar.style.boxShadow = "0 0 15px rgba(16, 185, 129, 0.5)";
             speedBox.classList.add('opacity-0');
         } else if (type === 'fail') {
             statusText.classList.add('text-rose-500');
             bar.classList.add('bg-rose-500');
+            bar.style.boxShadow = "0 0 15px rgba(244, 63, 94, 0.5)";
             speedBox.classList.remove('opacity-0');
         } else {
             statusText.classList.add('text-primary', 'animate-pulse');
             bar.classList.add('bg-primary');
+            bar.style.boxShadow = "0 0 10px rgba(0, 212, 255, 0.3)";
             speedBox.classList.remove('opacity-0');
-            speedBox.style.opacity = "1";
         }
     },
 
@@ -173,8 +169,6 @@ const DataManager = {
 
         this.showFeedback(idx, isWrite ? '写入中...' : '校验中...', 'work');
         vllink.isBusy = true;
-        
-        // 锁定所有交互
         btnLoad.disabled = true;
         btnVerify.disabled = true;
         
@@ -187,9 +181,7 @@ const DataManager = {
                     await vllink.writeFileChunk(idx, data.length, pos, chunk);
                 } else {
                     const hardwareChunk = await vllink.readFileChunk(idx, data.length, pos);
-                    if (chunk.some((val, j) => val !== hardwareChunk[j])) {
-                        throw new Error(`数据不一致 @ 0x${pos.toString(16)}`);
-                    }
+                    if (chunk.some((val, j) => val !== hardwareChunk[j])) throw new Error(`数据不一致 @ 0x${pos.toString(16)}`);
                 }
 
                 const totalDone = pos + 256;
@@ -201,19 +193,13 @@ const DataManager = {
                 percentTxt.innerText = `${percent}%`;
                 speedTxt.innerText = `Speed: ${speed} KB/s`;
             }
-
             this.showFeedback(idx, isWrite ? '写入成功 ✓' : '校验通过 ✓', 'success');
-
         } catch (e) {
             this.showFeedback(idx, e.message, 'fail');
         } finally {
             vllink.isBusy = false;
-            // 解锁逻辑
             btnLoad.disabled = false;
-            // 只有内存里有数据时才解锁校验按钮
-            if (this.activeBuffers[idx]) {
-                btnVerify.disabled = false;
-            }
+            if (this.activeBuffers[idx]) btnVerify.disabled = false;
         }
     },
 
@@ -224,13 +210,15 @@ const DataManager = {
 };
 
 /**
- * 配置编辑器模块 (保持不变)
+ * 配置编辑器模块 (包含分层架构、行号解耦与颜色反馈)
  */
 const ConfigEditor = {
     container: document.getElementById('tab-content-config'),
     editor: null, gutter: null, highlightLayer: null,
     originalLines: [], syncResults: [], isBusy: false, lastSelectedIdx: -1,
+
     init() { this.container.addEventListener('mouseleave', () => this.sync()); },
+
     updateStatus(type) {
         const dot = document.getElementById('editor-status-dot');
         const text = document.getElementById('editor-status-text');
@@ -245,8 +233,9 @@ const ConfigEditor = {
         dot.className = `w-2 h-2 rounded-full transition-colors ${s.color}`;
         text.innerText = s.label;
     },
+
     async load(manager) {
-        if (this.isBusy) return;
+        if (this.isBusy || !manager.device) return;
         this.isBusy = true; this.lockUI(true); manager.isBusy = true;
         try {
             this.container.innerHTML = `<div class="p-20 text-center animate-pulse text-slate-500 italic text-sm font-mono">Loading config...</div>`;
@@ -255,13 +244,15 @@ const ConfigEditor = {
             this.render(text);
             this.updateStatus('synced');
         } catch (e) {
-            this.container.innerHTML = `<div class="p-20 text-red-500 text-center">Load Failed: ${e.message}</div>`;
+            this.container.innerHTML = `<div class="p-20 text-red-500 text-center font-mono">Load Failed: ${e.message}</div>`;
         } finally { this.isBusy = false; manager.isBusy = false; this.lockUI(false); }
     },
+
     render(text) {
         const rows = text.replace(/\r/g, '').split('\n').filter(line => !line.trim().startsWith('Config_Password='));
         this.originalLines = [...rows];
         this.syncResults = new Array(rows.length).fill('none');
+
         this.container.innerHTML = `
             <div class="flex items-center justify-between mb-3 px-1">
                 <div class="flex items-center gap-3">
@@ -278,8 +269,11 @@ const ConfigEditor = {
         this.editor = document.getElementById('vllink-editor');
         this.gutter = document.getElementById('vllink-gutter');
         this.highlightLayer = document.getElementById('vllink-highlights');
+        
         this.editor.innerText = rows.join('\n');
         this.refreshUI();
+
+        // 监听行为
         this.editor.onscroll = () => {
             this.gutter.scrollTop = this.editor.scrollTop;
             this.highlightLayer.style.transform = `translateY(-${this.editor.scrollTop}px)`;
@@ -288,6 +282,7 @@ const ConfigEditor = {
         this.editor.onkeydown = (e) => { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); this.sync(); } };
         this.editor.onpaste = (e) => { e.preventDefault(); document.execCommand("insertText", false, (e.originalEvent || e).clipboardData.getData('text/plain')); };
     },
+
     refreshUI() {
         const lines = this.editor.innerText.split('\n');
         let gutterHTML = '', highlightHTML = '';
@@ -303,36 +298,56 @@ const ConfigEditor = {
         this.gutter.innerHTML = gutterHTML;
         this.highlightLayer.innerHTML = highlightHTML;
     },
+
     async sync() {
         if (!this.editor || this.isBusy) return;
         const userInputText = this.editor.innerText;
         const userInputLines = userInputText.split('\n');
         if (userInputText === this.originalLines.join('\n')) return this.updateStatus('synced');
-        this.updateStatus('syncing'); this.isBusy = true; this.lockUI(true); vllink.isBusy = true;
+        
+        this.updateStatus('syncing'); 
+        this.isBusy = true; 
+        this.lockUI(true); 
+        vllink.isBusy = true;
+
         try {
             const info = await vllink.getConfigInfo();
+            // 写入
             await vllink.writeConfig(userInputText, info.size);
+            // 回读校验
             const verifyText = await vllink.readConfig(info.size);
             const verifyRows = verifyText.replace(/\r/g, '').split('\n').filter(line => !line.trim().startsWith('Config_Password='));
+            
             this.syncResults = verifyRows.map((real, i) => {
                 const typed = (userInputLines[i] || "").trim();
                 return typed !== (this.originalLines[i] || "").trim() ? (typed === real.trim() ? 'success' : 'fail') : 'none';
             });
+            
             this.originalLines = [...verifyRows];
             this.editor.innerText = verifyRows.join('\n');
-            this.refreshUI(); this.updateStatus('synced');
+            this.refreshUI(); 
+            this.updateStatus('synced');
+
             setTimeout(() => { this.syncResults = []; this.refreshUI(); }, 3000);
-        } catch (e) { this.updateStatus('error'); } finally { this.isBusy = false; vllink.isBusy = false; this.lockUI(false); }
+        } catch (e) { 
+            this.updateStatus('error'); 
+        } finally { 
+            this.isBusy = false; 
+            vllink.isBusy = false; 
+            this.lockUI(false); 
+        }
     },
+
     lockUI(l) { document.body.classList.toggle('pointer-events-none', l); this.container.classList.toggle('opacity-50', l); }
 };
 
 /**
- * 状态机集成
+ * 核心逻辑集成与状态机 (包含静默重连与句柄释放)
  */
 const vllink = new VllinkManager();
 let pollTimer = null;
 let lastFingerprint = "";
+let lastDeviceCache = null;
 
 const UI = {
     connectBtn: document.getElementById('connectBtn'),
@@ -340,34 +355,125 @@ const UI = {
     status: document.getElementById('connectionStatus')
 };
 
-UI.connectBtn.addEventListener('click', async () => {
-    try {
-        await vllink.connect();
-        UI.status.innerText = "ONLINE: " + vllink.device.productName;
-        UI.connectBtn.innerText = "CONNECTED";
-        UI.connectBtn.classList.replace('bg-primary', 'bg-green-600');
-        if (pollTimer) clearInterval(pollTimer);
-        pollTimer = setInterval(async () => {
-            try {
-                const info = await vllink.queryInfo();
-                if (!info) return;
-                updateDisplay(info);
-                if (info.select_idx !== ConfigEditor.lastSelectedIdx) {
-                    ConfigEditor.lastSelectedIdx = info.select_idx;
-                    ConfigEditor.load(vllink);
-                    if (!TabManager.contents.data.classList.contains('hidden')) DataManager.load();
-                }
-            } catch (e) {
-                if (e.message.includes('disconnected') || e.message.includes('lost')) {
-                    clearInterval(pollTimer);
-                    UI.status.innerText = "OFFLINE";
-                    UI.connectBtn.innerText = "RECONNECT";
-                }
+// 提取的连接核心流程
+async function performConnection(autoDevice = null) {
+    await vllink.connect(autoDevice);
+    
+    // 缓存设备特征以备自动重连
+    lastDeviceCache = {
+        vid: vllink.device.vendorId,
+        pid: vllink.device.productId,
+        sn: vllink.device.serialNumber
+    };
+
+    ConfigEditor.lastSelectedIdx = -1;
+    ConfigEditor.originalLines = [];
+    DataManager.activeBuffers = {};
+    vllink.isBusy = false;
+    lastFingerprint = "";
+
+    UI.status.innerText = "ONLINE: " + vllink.device.productName;
+    UI.connectBtn.innerText = "Disconnect";
+    UI.connectBtn.classList.remove('bg-primary', 'bg-rose-500');
+    UI.connectBtn.classList.add('bg-green-600');
+    
+    if (pollTimer) clearInterval(pollTimer);
+    pollTimer = setInterval(async () => {
+        try {
+            const info = await vllink.queryInfo();
+            if (!info) return;
+            updateDisplay(info);
+            
+            if (info.select_idx !== ConfigEditor.lastSelectedIdx) {
+                ConfigEditor.lastSelectedIdx = info.select_idx;
+                ConfigEditor.load(vllink);
+                if (!TabManager.contents.data.classList.contains('hidden')) DataManager.load();
             }
-        }, 250);
-    } catch (e) { console.error(e); }
+        } catch (e) {
+            if (e.message.includes('disconnected') || e.name === 'NetworkError' || e.name === 'NotFoundError') {
+                handleDeviceDisconnect();
+            }
+        }
+    }, 250);
+}
+
+// 统一的断开处理（物理拔出 或 软件主动释放）
+async function handleDeviceDisconnect(manual = false) {
+    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+    
+    if (manual) {
+        if (typeof vllink.disconnect === 'function') await vllink.disconnect();
+    }
+
+    UI.status.innerText = "OFFLINE";
+    UI.connectBtn.innerText = "Connect Vllink";
+    UI.connectBtn.classList.remove('bg-green-600', 'bg-rose-500');
+    UI.connectBtn.classList.add('bg-primary');
+    UI.deviceList.innerHTML = `<div class="text-center py-10 text-slate-500 text-xs italic">Waiting for connection...</div>`;
+    lastFingerprint = "";
+
+    ConfigEditor.lastSelectedIdx = -1;
+    ConfigEditor.originalLines = [];
+    if (ConfigEditor.editor) ConfigEditor.editor.innerText = "";
+    ConfigEditor.updateStatus('error');
+    ConfigEditor.lockUI(false);
+    ConfigEditor.container.innerHTML = `<div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-20 flex flex-col items-center justify-center italic text-slate-500"><span class="text-4xl mb-4">🔌</span>Device disconnected...</div>`;
+    
+    DataManager.activeBuffers = {};
+    DataManager.container.innerHTML = `<div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-20 flex flex-col items-center justify-center italic text-slate-500"><span class="text-4xl mb-4">🔌</span>Device disconnected...</div>`;
+    
+    vllink.isBusy = false;
+    vllink.device = null;
+}
+
+// 连接按钮点击事件 (具备双向 Toggle 逻辑)
+UI.connectBtn.addEventListener('click', async () => {
+    // 已经连接时，点击执行断开（释放句柄给 OpenOCD）
+    if (vllink.device) {
+        await handleDeviceDisconnect(true);
+        return;
+    }
+    // 未连接时，执行连接
+    try {
+        await performConnection();
+    } catch (e) {
+        console.warn("Connect aborted or error: " + e.message);
+    }
 });
 
+// 按钮 Hover 效果 (仅在已连接状态时生效)
+UI.connectBtn.addEventListener('mouseenter', () => {
+    if(vllink.device) UI.connectBtn.classList.replace('bg-green-600', 'bg-rose-500');
+});
+UI.connectBtn.addEventListener('mouseleave', () => {
+    if(vllink.device) UI.connectBtn.classList.replace('bg-rose-500', 'bg-green-600');
+});
+
+// 浏览器原生 WebUSB 事件监听：自动重连
+navigator.usb.addEventListener('connect', async (event) => {
+    const dev = event.device;
+    if (!vllink.device && lastDeviceCache && 
+        dev.vendorId === lastDeviceCache.vid && 
+        dev.productId === lastDeviceCache.pid && 
+        dev.serialNumber === lastDeviceCache.sn) {
+        try {
+            UI.status.innerText = "AUTO CONNECTING...";
+            await performConnection(dev);
+        } catch (e) {
+            console.warn("Auto connect failed:", e);
+            handleDeviceDisconnect();
+        }
+    }
+});
+
+// 浏览器原生 WebUSB 事件监听：物理断开
+navigator.usb.addEventListener('disconnect', (event) => {
+    if (vllink.device && event.device === vllink.device) {
+        handleDeviceDisconnect();
+    }
+});
+
+// 列表交互：重启与切换
 UI.deviceList.addEventListener('click', async (e) => {
     const restartBtn = e.target.closest('.restart-btn');
     if (restartBtn) {
@@ -382,9 +488,11 @@ UI.deviceList.addEventListener('click', async (e) => {
     if (card) vllink.selectDebugger(parseInt(card.dataset.id));
 });
 
+// UI 渲染：设备列表刷新
 function updateDisplay(info) {
     const all = [{ ...info.local, id: 0, type: 'USB' }];
     info.remote.forEach(r => all.push({ ...r, type: 'WIFI' }));
+    
     const fingerprint = all.map(d => `${d.id}-${d.mac}`).join('|');
     if (fingerprint !== lastFingerprint) {
         UI.deviceList.innerHTML = all.map(dev => `
@@ -392,7 +500,7 @@ function updateDisplay(info) {
                 <div class="flex justify-between items-center">
                     <span class="text-sm font-black text-slate-800 dark:text-slate-50 truncate uppercase pr-6">${dev.alias}</span>
                     <div class="flex items-center gap-2">
-                        <button class="restart-btn opacity-0 group-hover:opacity-100 p-1 hover:bg-red-500/20 rounded text-red-500 transition-all">
+                        <button class="restart-btn opacity-0 group-hover:opacity-100 p-1 hover:bg-red-500/20 rounded text-red-500 transition-all" title="Restart">
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                         </button>
                         <span class="text-[10px] bg-slate-300/50 dark:bg-white/10 px-2 py-1 rounded font-black">${dev.type}</span>
@@ -402,18 +510,19 @@ function updateDisplay(info) {
                     <span class="uppercase tracking-tighter">Addr</span><span class="text-slate-600 dark:text-slate-300">${dev.mac}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-2 mt-1">
-                    <div class="flex flex-col"><span class="text-[9px] text-slate-400 uppercase font-black">Uptime</span><span class="uptime-val font-mono text-sm font-bold">00:00:00</span></div>
+                    <div class="flex flex-col"><span class="text-[9px] text-slate-400 uppercase font-black">Uptime</span><span class="uptime-val font-mono text-sm font-bold text-slate-700 dark:text-slate-200">00:00:00</span></div>
                     <div class="flex flex-col items-end"><span class="text-[9px] text-slate-400 uppercase font-black">Latency</span><span class="delay-val font-mono text-sm text-primary font-black">-</span></div>
                 </div>
             </div>`).join('');
         lastFingerprint = fingerprint;
     }
+    
     all.forEach(dev => {
         const card = UI.deviceList.querySelector(`[data-id="${dev.id}"]`);
         if (!card) return;
         card.classList.toggle('card-active', info.select_idx === dev.id);
-        const s = dev.id === 0 ? Number(info.local.us)/1e6 : Number(info.local.us - dev.us)/1e6;
-        card.querySelector('.uptime-val').innerText = formatTime(s);
+        const t = dev.id === 0 ? Number(info.local.us)/1e6 : Number(info.local.us - dev.us)/1e6;
+        card.querySelector('.uptime-val').innerText = formatTime(t);
         card.querySelector('.delay-val').innerText = dev.delay_us > 0 ? `${dev.delay_us} us` : "-";
     });
 }
@@ -426,6 +535,7 @@ function formatTime(s) {
     return `${h}:${m}:${sec}`;
 }
 
+// 页面全局初始化
 ThemeManager.init();
 TabManager.init();
 ConfigEditor.init();
