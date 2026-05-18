@@ -395,6 +395,7 @@
 <ul>
 <li><p>此模式仅需一个调试器，无需<code class="docutils literal notranslate"><span class="pre">AP</span></code>配合</p></li>
 <li><p>修改调试器的配置：<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器SSID</span></code>、<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器密码</span></code></p></li>
+<li><p>修改调试器的配置：<code class="docutils literal notranslate"><span class="pre">Wireless_Host_Channel=0</span></code>（此项默认165信道，改0则为自动信道，通信质量将由路由器决定）</p></li>
 <li><p>切换到<code class="docutils literal notranslate"><span class="pre">STA</span></code>模式，在STA连上路由器后，查看STA的IP</p></li>
 <li><p>准备 <a class="reference external" href="https://github.com/vllogic/openocd_cmsis-dap_v2/releases/tag/20260322">最新版OpenOCD，Windows</a></p></li>
 <li><p>命令示例：<code class="docutils literal notranslate"><span class="pre">./openocd.exe</span> <span class="pre">-f</span> <span class="pre">interface/cmsis-dap.cfg</span> <span class="pre">-f</span> <span class="pre">target/stm32f4x.cfg</span> <span class="pre">-c</span> <span class="pre">&quot;cmsis-dap</span> <span class="pre">backend</span> <span class="pre">tcp;</span> <span class="pre">cmsis-dap</span> <span class="pre">tcp</span> <span class="pre">host</span> <span class="pre">192.168.1.183;</span> <span class="pre">cmsis-dap</span> <span class="pre">tcp</span> <span class="pre">port</span> <span class="pre">4441;</span> <span class="pre">transport</span> <span class="pre">select</span> <span class="pre">swd;</span> <span class="pre">adapter</span> <span class="pre">speed</span> <span class="pre">8000&quot;</span></code> 注意：执行命令前修改IP</p></li>
@@ -416,6 +417,7 @@
 <ul class="simple">
 <li><p>此模式仅需一个调试器，无需<code class="docutils literal notranslate"><span class="pre">AP</span></code>配合</p></li>
 <li><p>修改调试器的配置：<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器SSID</span></code>、<code class="docutils literal notranslate"><span class="pre">Wireless_Device_SSID=路由器密码</span></code>以及<code class="docutils literal notranslate"><span class="pre">Mode3_TCP_UART=enable</span></code></p></li>
+<li><p>修改调试器的配置：<code class="docutils literal notranslate"><span class="pre">Wireless_Host_Channel=0</span></code>（此项默认165信道，改0则为自动信道，通信质量将由路由器决定）</p></li>
 <li><p>调整串口参数配置：默认<code class="docutils literal notranslate"><span class="pre">Mode3_TCP_UART_PARAM=115200.1p0.none</span></code></p></li>
 <li><p>切换到<code class="docutils literal notranslate"><span class="pre">STA</span></code>模式，在STA连上路由器后，查看STA的IP</p></li>
 <li><p>通过TCP客户端连接：STA_IPv4:20010</p></li>
