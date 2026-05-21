@@ -10,20 +10,44 @@ class VllinkManager {
             { vendorId: 0x1209, productId: 0x6666 }, 
             { vendorId: 0x0d28, productId: 0x0204 }
         ];
-        this.isBusy = false;
+        this.isBusy = false; // 通讯排队锁
     }
 
     /**
-     * @param {USBDevice} existingDevice - 用于拔插后的自动重连
+     * 连接设备并独占接口
+     * @param {USBDevice} existingDevice - 预期的设备实例
+     * @param {boolean} forceRequest - 是否强制弹出浏览器设备选择框
      */
-    async connect(existingDevice = null) {
+    async connect(existingDevice = null, forceRequest = false) {
         if (existingDevice) {
+            // 场景 1: 原生 connect 事件触发的自动重连
             this.device = existingDevice;
-        } else {
+        } else if (forceRequest) {
+            // 场景 2: 用户主动点击了断开后，要求强制弹窗重新选择
             this.device = await navigator.usb.requestDevice({ filters: this.filters });
+        } else {
+            // 场景 3: 常规点击或刷新开屏，尝试静默获取
+            const authorizedDevices = await navigator.usb.getDevices();
+            const matchedDevices = authorizedDevices.filter(d => 
+                this.filters.some(f => f.vendorId === d.vendorId && f.productId === d.productId)
+            );
+
+            if (matchedDevices.length > 0) {
+                // 【新特性】：优先寻找最后一次成功连接的设备 (通过 serialNumber 匹配)
+                const lastSn = localStorage.getItem('vllink-last-sn');
+                let target = matchedDevices.find(d => d.serialNumber && d.serialNumber === lastSn);
+                
+                // 如果没找到匹配 SN 的，默认连第一个
+                if (!target) target = matchedDevices[0];
+                this.device = target;
+            } else {
+                // 完全没授权过，只能弹窗
+                this.device = await navigator.usb.requestDevice({ filters: this.filters });
+            }
         }
-        
+
         await this.device.open();
+        
         const iface = this.device.configuration.interfaces.find(i => 
             i.alternate.interfaceClass === 0xFF && i.alternate.interfaceSubclass === 0x03
         );
@@ -31,6 +55,12 @@ class VllinkManager {
         
         this.interfaceNum = iface.interfaceNumber;
         await this.device.claimInterface(this.interfaceNum);
+
+        // 【新特性】：连接成功后，持久化记录当前设备的唯一序列号
+        if (this.device.serialNumber) {
+            localStorage.setItem('vllink-last-sn', this.device.serialNumber);
+        }
+
         return this.device;
     }
 
@@ -109,7 +139,6 @@ class VllinkManager {
             fileLimit: view.getUint32(12, true),
             fileLengths: [] 
         };
-
         for (let i = 0; i < 8; i++) {
             info.fileLengths.push(view.getUint16(16 + (i * 2), true));
         }
@@ -135,8 +164,10 @@ class VllinkManager {
             view.setUint32(6, totalSize, true);
             view.setUint32(10, offset, true);
             view.setUint32(14, len, true);
+            
             const resp = await this.dapExecute(pkg);
             if (resp[3] !== 0) break;
+            
             const chunkLen = new DataView(resp.buffer).getUint32(4, true);
             const chunkData = resp.slice(8, 8 + chunkLen);
             const tmp = new Uint8Array(completeData.length + chunkData.length);
@@ -150,8 +181,10 @@ class VllinkManager {
     async writeConfig(text, totalSize) {
         const encoder = new TextEncoder();
         const rawBytes = encoder.encode(text);
+        
         const fullPayload = new Uint8Array(totalSize);
         fullPayload.set(rawBytes.slice(0, totalSize));
+        
         let offset = 0;
         while (offset < totalSize) {
             const len = Math.min(256, totalSize - offset);
@@ -163,6 +196,7 @@ class VllinkManager {
             view.setUint32(10, offset, true);
             view.setUint32(14, len, true);
             pkg.set(fullPayload.slice(offset, offset + len), 18);
+            
             const resp = await this.dapExecute(pkg);
             if (resp[3] !== 0) throw new Error("Write Error");
             offset += len;
@@ -178,6 +212,7 @@ class VllinkManager {
         view.setUint32(10, pos, true);
         view.setUint32(14, 256, true);
         pkg.set(data256, 18);
+        
         const resp = await this.dapExecute(pkg);
         if (resp[3] !== 0) throw new Error(`Write failed @ 0x${pos.toString(16)} (Err: ${resp[3]})`);
     }
@@ -190,8 +225,10 @@ class VllinkManager {
         view.setUint32(6, fullLength, true);
         view.setUint32(10, pos, true);
         view.setUint32(14, 256, true);
+        
         const resp = await this.dapExecute(pkg);
         if (resp[3] !== 0) throw new Error(`Read failed @ 0x${pos.toString(16)}`);
+        
         const len = new DataView(resp.buffer).getUint32(4, true);
         return resp.slice(8, 8 + len);
     }
@@ -200,6 +237,7 @@ class VllinkManager {
         const view = new DataView(buffer);
         const decoder = new TextDecoder();
         const info = { select_idx: view.getUint8(0), local: null, remote: [] };
+        
         const parseNode = (offset) => {
             const macRaw = new Uint8Array(buffer, offset + 16, 6);
             const macStr = Array.from(macRaw).map(b => b.toString(16).padStart(2, '0').toUpperCase()).join(':');
@@ -207,6 +245,7 @@ class VllinkManager {
             let aliasStr = decoder.decode(aliasRaw).replace(/\0/g, '').trim();
             return { us: view.getBigUint64(offset, true), delay_us: view.getUint32(offset + 8, true), mac: macStr, alias: aliasStr || "Unnamed" };
         };
+        
         info.local = parseNode(32);
         for (let i = 0; i < 9; i++) {
             const offset = 32 + 48 + (i * 48);
