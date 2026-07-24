@@ -10,6 +10,10 @@
 5. 点击`Update`，等待一段时间后，完成更新
 
 ## 二、固件列表-正式版
+* [V00.54-202607241507](../_static/firmware/vllink_basic2.SVCommon0054202607241507.zip)
+  1. 支持京微齐力离线编程，详见 [京微齐力（Hercules）离线编程](../software/hercuels_prog)
+  2. 修复：从`V00.50`引入的看门狗优先级配置错误，此问题会导致调试器在某些持续任务中自动重启
+<br><br>
 * [V00.50-202604242049](../_static/firmware/vllink_basic2.SVCommon0050202604242049.zip)
   1. 支持新硬件`Vllink 2X`，此硬件细节详见 [Vllink 2X 快速上手](../quick/vllink_2x)
   2. 优化：综合调整底层通讯架构，无线速率提升10%左右
