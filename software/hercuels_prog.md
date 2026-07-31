@@ -25,7 +25,18 @@
 * `trig_once`模式下，编程器立刻执行编程过程，若未连接目标芯片，失败退出
 * `trig_button`模式下，可以先给编程器上电，然后接上已上电的目标芯片，按按键触发编程
 * `trig_vref`模式下，可以先给编程器上电，然后接上已上电的目标芯片，`VRef`脚电压被目标芯片抬高即自动触发烧录
+* `trig_rxd_rise`模式下，可以先给编程器上电，然后接上已上电的目标芯片，机台通过`RXD`脚给出上升沿即自动触发烧录
+* `trig_rxd_fall`模式下，可以先给编程器上电，然后接上已上电的目标芯片，机台通过`RXD`脚给出下降沿即自动触发烧录
 * 烧录过程中蓝灯闪烁；烧录成功绿灯常亮；烧录失败黄灯常亮
+* `pass_txd_rise`/`pass_txd_fall`配置后，烧录成功时`TXD`脚输出对应边沿提示机台
+* `fail_srst_rise`/`fail_srst_fall`配置后，烧录失败时`SRST`脚输出对应边沿提示机台
+### 1.5 接口电气特性
+* 下载器`DC3`接口的所有逻辑IO均经`74LVC1T45`电平转换，其外侧IO电平以`VRef`为参考电压
+* `VRef`为目标芯片的通讯电压，与机台控制板电压（记为`V_CTRL`）不一定匹配
+* 当`VRef`未上电时，`74LVC1T45`输出高阻，所有逻辑IO均无效
+* 任务过程中若`VRef`发生变化，`SRST`/`TXD`输出电平随之漂移，可能产生边沿毛刺，被机台误判为`pass`/`fail`提示
+* 在`VRef`与`V_CTRL`不一致的情况下，若电压偏差较小，可使用二极管/肖特基二极管匹配电平；若电压偏差较大，则需使用MOS/BJT/电平转换芯片/光耦等进阶匹配机制
+* 机台对接可用IO：`SRST`/`TXD`为输出（`VRef`有效时可输出`0V`或`VRef`电平），`RXD`为输入
 
 ## 二、命令
 * `hercules_prog`：京微齐力编程命令
@@ -34,7 +45,7 @@
 | :---: | :---: | :---: |
 | `auto` | 自动化执行离线编程功能 | 开发中 |
 ### 2.2 子命令说明-`auto`
-* 命令格式：`hercules_prog auto [target_type] [trig_type] <lz4> <autoreset> <boost> <flash [data_select] [addr] [size]> <chip [data_select] [size]>`
+* 命令格式：`hercules_prog auto [target_type] [trig_type] <lz4> <autoreset> <boost> <pass_txd_rise> <pass_txd_fall> <fail_srst_rise> <fail_srst_fall> <flash [data_select] [addr] [size]> <chip [data_select] [size]>`
 * `target_type`：芯片类型，必填
   | `target_type` | 芯片类型 |
   | :---: | :--- |
@@ -51,10 +62,17 @@
   | :---: | :--- |
   | `trig_vref` | VRef脚电平上升沿触发 |
   | `trig_button` | 按键按下事件触发 |
+  | `trig_rxd_rise` | RXD脚电平上升沿触发 |
+  | `trig_rxd_fall` | RXD脚电平下降沿触发 |
   | `trig_once` | 触发一次后退出 |
 * 【暂未支持】~~`lz4`：声明载入编程器的数据文件是lz4压缩格式，选填~~
 * `autoreset`：操作完毕后复位芯片，选填
 * `boost`：以最高可探测档位时钟与目标芯片通讯，可获得最快编程速度，但不建议启用，选填
+* `pass_txd_rise`：烧录成功后，`TXD`脚输出上升沿提示机台，选填
+* `pass_txd_fall`：烧录成功后，`TXD`脚输出下降沿提示机台，选填
+* `fail_srst_rise`：烧录失败后，`SRST`脚输出上升沿提示机台，选填
+* `fail_srst_fall`：烧录失败后，`SRST`脚输出下降沿提示机台，选填
+* 补充说明：`pass_txd_rise`与`pass_txd_fall`互斥，不能同时使用；`fail_srst_rise`与`fail_srst_fall`互斥，不能同时使用；`pass_txd_*`与`fail_srst_*`可同时使用
 * `flash [data_select] [addr] [size]`：对Flash编程
   1. `data_select`：当前仅支持`data0`，使用 [Vllink 2026 Console](https://vllogic.com/_static/tools/vllink2026_console/) 载入
   2. `addr`：目标Flash的编程起始地址，一般填入`0x0`，必须是以`0x`开头的十六进制
@@ -70,3 +88,7 @@
 * 例2：`Customize_CMD=hercules_prog auto H7 trig_button boost chip data0 0x8780C`
   1. 目标芯片是HME-H7；通过编程器的按键按下事件触发编程；使用最高可用档位时钟通讯
   2. 烧录对象是Chip，长度是0x8780C
+* 例3：`Customize_CMD=hercules_prog auto H7 trig_rxd_fall pass_txd_rise fail_srst_rise flash data0 0x0 0x8780C`
+  1. 目标芯片是HME-H7；机台通过`RXD`脚下降沿触发编程
+  2. 烧录成功后`TXD`脚输出上升沿提示机台；烧录失败后`SRST`脚输出上升沿提示机台
+  3. 烧录对象是Flash，烧录起始地址是0，长度是0x8780C
