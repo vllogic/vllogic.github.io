@@ -49,16 +49,76 @@
             <h1 class="font-bold tracking-tighter text-xl italic text-slate-800 dark:text-slate-100">VLLINK <span class="text-primary font-black">CONSOLE</span></h1>
         </div>
 
-        <!-- 三模态主题切换 -->
-        <div class="flex items-center bg-slate-200 dark:bg-slate-800 rounded-full p-1 border border-slate-300 dark:border-slate-700 w-48 relative">
-            <button data-theme="dark" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">深色</button>
-            <button data-theme="auto" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">AUTO</button>
-            <button data-theme="light" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">浅色</button>
-            <div id="themeSlider" class="absolute h-7 w-[31%] bg-primary rounded-full transition-all duration-300 shadow-lg"></div>
+        <div class="flex items-center gap-4">
+            <!-- 三模态主题切换 (右3) -->
+            <div class="flex items-center bg-slate-200 dark:bg-slate-800 rounded-full p-1 border border-slate-300 dark:border-slate-700 w-48 relative">
+                <button data-theme="dark" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">深色</button>
+                <button data-theme="auto" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">AUTO</button>
+                <button data-theme="light" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">浅色</button>
+                <div id="themeSlider" class="absolute h-7 w-[31%] bg-primary rounded-full transition-all duration-300 shadow-lg"></div>
+            </div>
+            <!-- 连接状态 (右2) -->
+            <div id="connectionStatus" class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Disconnected</div>
+            <!-- 工具导航 (右1) -->
+            <div class="relative" id="toolNav">
+                <button id="toolNavBtn" type="button" title="快速跳转到其他工具"
+                    class="flex items-center gap-1.5 py-1.5 px-3 rounded-xl text-[10px] font-black uppercase tracking-widest bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 transition-colors active:scale-95">
+                    <span>🧰</span><span class="hidden sm:inline">工具导航</span>
+                    <svg id="toolNavArrow" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                </button>
+                <div id="toolNavMenu" class="hidden absolute right-0 mt-2 w-64 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden z-50">
+                    <div class="px-4 py-2 text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 bg-slate-100/60 dark:bg-black/20 border-b border-slate-200 dark:border-slate-800">🧰 工具导航</div>
+                    <div class="flex items-center gap-3 px-4 py-3 bg-primary/10 border-b border-slate-200 dark:border-slate-800">
+                        <span class="text-lg">💻</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">VLLINK Console</span>
+                            <span class="text-[10px] text-slate-400">调试器控制台 · 配置查看编辑</span>
+                        </span>
+                        <span class="ml-auto text-[9px] font-black uppercase tracking-widest text-primary bg-primary/15 rounded-full px-2 py-0.5">当前</span>
+                    </div>
+                    <a href="../web_download_hercules/index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-colors border-b border-slate-200 dark:border-slate-800">
+                        <span class="text-lg">🔥</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">Hercules Download</span>
+                            <span class="text-[10px] text-slate-400">Flash 下载 · 芯片读取</span>
+                        </span>
+                        <span class="ml-auto text-[9px] text-slate-400">↗</span>
+                    </a>
+                    <a href="../web_program_hercules/index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-colors">
+                        <span class="text-lg">🏭</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">Hercules Program</span>
+                            <span class="text-[10px] text-slate-400">量产自动化 · 多片烧录</span>
+                        </span>
+                        <span class="ml-auto text-[9px] text-slate-400">↗</span>
+                    </a>
+                </div>
+            </div>
         </div>
-
-        <div id="connectionStatus" class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Disconnected</div>
     </header>
+
+    <script>
+        (function () {
+            var btn = document.getElementById('toolNavBtn');
+            var menu = document.getElementById('toolNavMenu');
+            var arrow = document.getElementById('toolNavArrow');
+            if (!btn || !menu) return;
+            function setOpen(open) {
+                menu.classList.toggle('hidden', !open);
+                if (arrow) arrow.style.transform = open ? 'rotate(180deg)' : '';
+            }
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                setOpen(menu.classList.contains('hidden'));
+            });
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('#toolNav')) setOpen(false);
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') setOpen(false);
+            });
+        })();
+    </script>
 
     <main class="flex h-[calc(100vh-4rem)]">
         <!-- 左侧面板 (25%): 负责设备连接与列表显示 -->

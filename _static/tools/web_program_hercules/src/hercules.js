@@ -1,6 +1,10 @@
 const VENDOR_ID_HERCULES = 0x90;
 
 const HERCULES_SUBCMD_GET_INFO = 0x0;
+const HERCULES_SUBCMD_TAKEOVER_TXD_RXD = 0x2;
+const HERCULES_SUBCMD_RELEASE_TXD_RXD  = 0x3;
+const HERCULES_SUBCMD_GET_STATUS       = 0x4;
+const HERCULES_SUBCMD_OUTPUT_TXD_SRST  = 0x5;
 const HERCULES_SUBCMD_PROBE_CHIP = 0x10;
 const HERCULES_SUBCMD_CHIP_WRITE = 0x20;
 const HERCULES_SUBCMD_FLASH_WRITE = 0x30;
@@ -47,6 +51,53 @@ function hercules_cmd_probe_chip() {
     return array;
 }
 
+function hercules_cmd_takeover_txd_rxd() {
+    var array = new Uint8Array(2);
+    array[0] = VENDOR_ID_HERCULES;
+    array[1] = HERCULES_SUBCMD_TAKEOVER_TXD_RXD;
+    return array;
+}
+
+function hercules_cmd_release_txd_rxd() {
+    var array = new Uint8Array(2);
+    array[0] = VENDOR_ID_HERCULES;
+    array[1] = HERCULES_SUBCMD_RELEASE_TXD_RXD;
+    return array;
+}
+
+function hercules_cmd_get_status() {
+    var array = new Uint8Array(2);
+    array[0] = VENDOR_ID_HERCULES;
+    array[1] = HERCULES_SUBCMD_GET_STATUS;
+    return array;
+}
+
+function hercules_cmd_output_txd_srst(txd_level, srst_level) {
+    var array = new Uint8Array(4);
+    array[0] = VENDOR_ID_HERCULES;
+    array[1] = HERCULES_SUBCMD_OUTPUT_TXD_SRST;
+    array[2] = txd_level ? 1 : 0;
+    array[3] = srst_level ? 1 : 0;
+    return array;
+}
+
+/* ============ ACF 注释头裁剪 (量产文件加载用) ============ */
+function getFlashWriteStartPos(fileData, type, target_type, cutAcf) {
+    var startPos = 0;
+    // 仅当文件表勾选 Cut ACF 且文件为 .acf 时才裁剪注释头部
+    if (cutAcf && type == 'acf') {
+        var view = new DataView(fileData);
+        while (view.getUint16(startPos, true) == 0x2f2f) {
+            startPos += 2;
+            while (view.getUint8(startPos) != 0x0a) {
+                startPos += 1;
+            }
+            startPos += 1;
+        }
+    }
+    return startPos;
+}
+
 function hercules_cmd_chip_write(common, target_bin, op_mask, full_length, data_pos, data_len) {
     var array = new Uint8Array(2 + 12 + 16 + data_len);
     array[0] = VENDOR_ID_HERCULES;
@@ -67,7 +118,9 @@ function hercules_cmd_chip_write(common, target_bin, op_mask, full_length, data_
     return array;
 }
 
-function hercules_cmd_flash_write(common, target_bin, op_mask, full_length, addr, data_pos, data_len) {
+// slice_pos: 数据切片起始(文件内偏移). 多文件虚拟文件时命令 data_pos 为相对头部地址偏移(含文件地址),
+// 与文件内偏移不同, 必须单独传入; 未传则向后兼容使用 data_pos (单文件场景两者相等)
+function hercules_cmd_flash_write(common, target_bin, op_mask, full_length, addr, data_pos, data_len, slice_pos) {
     var array = new Uint8Array(2 + 12 + 20 + data_len);
     array[0] = VENDOR_ID_HERCULES;
     array[1] = HERCULES_SUBCMD_FLASH_WRITE;
@@ -82,7 +135,8 @@ function hercules_cmd_flash_write(common, target_bin, op_mask, full_length, addr
     cmd[4] = data_len;
     array.set(new Uint8Array(cmd.buffer), 2 + 12);
 
-    var data = target_bin.slice(data_pos, data_pos + data_len);
+    var start = (slice_pos === undefined) ? data_pos : slice_pos;
+    var data = target_bin.slice(start, start + data_len);
     array.set(new Uint8Array(data), 2 + 12 + 20);
 
     return array;

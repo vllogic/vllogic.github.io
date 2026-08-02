@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>量产自动化网页 — 设计方案 v3.1 (web_program_hercules)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { primary: '#00d4ff', darkBg: '#0b1120' } } }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'base', securityLevel: 'loose',
+        themeVariables: { primaryColor: '#e0f7ff', primaryBorderColor: '#00d4ff', primaryTextColor: '#0b1120',
+                          lineColor: '#94a3b8', fontFamily: 'ui-monospace, monospace' } });</script>
+    <style>
+        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); }
+        .dark .glass { background: rgba(15,23,42,0.6); }
+        .accent-primary { accent-color: #00d4ff; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-darkBg text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-500">
+
+    <!-- ===== 顶部栏 ===== -->
+    <header class="h-16 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 sticky top-0 z-50 glass">
+        <div class="flex items-center gap-3">
+            <div class="w-2.5 h-2.5 bg-primary rounded-full animate-pulse shadow-[0_0_10px_#00d4ff]"></div>
+            <h1 class="font-bold tracking-tighter text-xl italic text-slate-800 dark:text-slate-100">
+                <span class="text-slate-400">HERCULES</span> <span class="text-primary font-black">PROGRAM</span>
+            </h1>
+            <span class="ml-2 text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500 bg-emerald-500/10 border border-emerald-500/30 rounded-full px-3 py-1">设计方案 v3.1 · 已实施</span>
+        </div>
+        <div class="flex items-center gap-6">
+            <!-- 三模态主题切换 (右3) -->
+            <div class="flex items-center bg-slate-200 dark:bg-slate-800 rounded-full p-1 border border-slate-300 dark:border-slate-700 w-48 relative">
+                <button data-theme="dark" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">深色</button>
+                <button data-theme="auto" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">AUTO</button>
+                <button data-theme="light" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">浅色</button>
+                <div id="themeSlider" class="absolute h-7 w-[31%] bg-primary rounded-full transition-all duration-300 shadow-lg"></div>
+            </div>
+            <!-- 连接状态 (右2) -->
+            <div class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">v3.1 · 已实施 · 2026-08-02</div>
+            <!-- 工具导航 (右1) -->
+            <div class="relative" id="toolNav">
+                <button id="toolNavBtn" type="button" title="快速跳转到其他工具"
+                    class="flex items-center gap-1.5 py-1.5 px-3 rounded-xl text-[10px] font-black uppercase tracking-widest bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 transition-colors active:scale-95">
+                    <span>🧰</span><span class="hidden sm:inline">工具导航</span>
+                    <svg id="toolNavArrow" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                </button>
+                <div id="toolNavMenu" class="hidden absolute right-0 mt-2 w-64 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden z-50">
+                    <div class="px-4 py-2 text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 bg-slate-100/60 dark:bg-black/20 border-b border-slate-200 dark:border-slate-800">🧰 工具导航</div>
+                    <a href="../vllink2026_console/index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-colors border-b border-slate-200 dark:border-slate-800">
+                        <span class="text-lg">💻</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">VLLINK Console</span>
+                            <span class="text-[10px] text-slate-400">调试器控制台 · 配置查看编辑</span>
+                        </span>
+                        <span class="ml-auto text-[9px] text-slate-400">↗</span>
+                    </a>
+                    <a href="../web_download_hercules/index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-colors border-b border-slate-200 dark:border-slate-800">
+                        <span class="text-lg">🔥</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">Hercules Download</span>
+                            <span class="text-[10px] text-slate-400">Flash 下载 · 芯片读取</span>
+                        </span>
+                        <span class="ml-auto text-[9px] text-slate-400">↗</span>
+                    </a>
+                    <div class="flex items-center gap-3 px-4 py-3 bg-primary/10">
+                        <span class="text-lg">🏭</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">Hercules Program</span>
+                            <span class="text-[10px] text-slate-400">量产自动化 · 多片烧录</span>
+                        </span>
+                        <span class="ml-auto text-[9px] font-black uppercase tracking-widest text-primary bg-primary/15 rounded-full px-2 py-0.5">当前</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        (function () {
+            var btn = document.getElementById('toolNavBtn');
+            var menu = document.getElementById('toolNavMenu');
+            var arrow = document.getElementById('toolNavArrow');
+            if (!btn || !menu) return;
+            function setOpen(open) {
+                menu.classList.toggle('hidden', !open);
+                if (arrow) arrow.style.transform = open ? 'rotate(180deg)' : '';
+            }
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                setOpen(menu.classList.contains('hidden'));
+            });
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('#toolNav')) setOpen(false);
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') setOpen(false);
+            });
+        })();
+    </script>
+
+    <div class="flex">
+        <!-- ===== 左侧目录 ===== -->
+        <aside class="w-64 shrink-0 border-r border-slate-200 dark:border-slate-800 p-6 sticky top-16 self-start max-h-[calc(100vh-4rem)] overflow-y-auto no-scrollbar hidden lg:block">
+            <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">目录</h2>
+            <nav class="space-y-1 text-sm">
+                <a href="#s1" class="block py-1.5 px-3 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-300 transition-colors">1. 概述与决策落实</a>
+                <a href="#s2" class="block py-1.5 px-3 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-300 transition-colors">2. 固件命令总览</a>
+                <a href="#s3" class="block py-1.5 px-3 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-300 transition-colors">3. 响应格式与状态解析</a>
+                <a href="#s4" class="block py-1.5 px-3 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-300 transition-colors">4. 触发检测（6 种方式）</a>
+                <a href="#s5" class="block py-1.5 px-3 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-300 transition-colors">5. 状态输出（电平保持）</a>
+                <a href="#s6" class="block py-1.5 px-3 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-300 transition-colors">6. 超时 / 重试 / 统计</a>
+                <a href="#s7" class="block py-1.5 px-3 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-300 transition-colors">7. 分布式文件与偏移</a>
+                <a href="#s8" class="block py-1.5 px-3 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-300 transition-colors">8. 量产流程状态机</a>
+                <a href="#s9" class="block py-1.5 px-3 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-300 transition-colors">9. 配置导出 / 载入</a>
+                <a href="#s10" class="block py-1.5 px-3 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-300 transition-colors">10. 浏览器与部署（Q3 详解）</a>
+                <a href="#s11" class="block py-1.5 px-3 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-300 transition-colors">11. UI 设计</a>
+                <a href="#s12" class="block py-1.5 px-3 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-300 transition-colors">12. 实施计划</a>
+                <a href="#s13" class="block py-1.5 px-3 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-300 transition-colors">13. 决策记录</a>
+            </nav>
+        </aside>
+
+        <!-- ===== 主内容 ===== -->
+        <main class="flex-1 max-w-4xl mx-auto p-8 space-y-6">
+
+            <!-- S1 概述 -->
+            <section id="s1" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">🎯</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">1 · 概述与决策落实</h2>
+                </div>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+                    基于 <code class="text-primary font-bold">web_download_hercules</code> 的协议与传输层，特化批量生产自动化量产网页。
+                    本版（v3.1）为<b>已实施版本</b>，在 v3.0 基础上追加：多文件虚拟单一文件烧写、占用空间重叠检测、烧录地址 0x100 对齐、触发稳定基线（修复 RXD 默认电平伪触发）、配置授权前置、量产中文件表锁定等（见下方 v3.1 实施摘要）。
+                </p>
+                <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-4 text-sm text-slate-600 dark:text-slate-300 mb-4">
+                    ✅ <b>v3.0 实施摘要</b>：
+                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                        <li>GET_STATUS 布局 / 数据大小：<b>确认</b>（payload 从 offset 4，packed 7 字节）</li>
+                        <li>状态动作时序：边沿动作<b>电平保持</b>，直到 VREF 变化或满足下次触发</li>
+                        <li>重试：<b>最小命令包重试</b>优先，失败回退整文件烧写；命令级 3s 超时；4 项统计口径</li>
+                        <li>重试计数：<b>块级与文件级双计数器独立</b>（上限均 retryCount），块级成功/彻底失败后清零</li>
+                        <li>VREF：仅 <code>vref_mv_valid</code> 判定触发；<code>vref_mv</code> 只做 UI 电压显示；<b>严格 0→1 上升沿</b>（首帧仅建立基线，不触发）</li>
+                        <li>触发方式新增<b>间隔触发</b>：烧录完成后等 N 秒（1-10s，默认 3s）自动烧下一片（§4.2）</li>
+                        <li>整片失败：<b>记录即可</b>，无停机策略（触发 + 状态输出已满足自动化）</li>
+                        <li>状态输出：<b>电平保持</b>，SRST 为普通 IO 直通 0/1（<b>无反相</b>），忙电平→成功/失败翻转→下一片恢复（§5）</li>
+                        <li>实时状态：新增<b>进度条 PROG</b>（烧录中青蓝 / 成功绿 / 失败红 / 重试琥珀，pass/fail 保持至下次烧录）+ <b>SESSION 徽章</b></li>
+                        <li>UI：配置卡片量产中<b>灰化锁定</b>；开始按钮<b>已连接+有文件才可用</b>（绿色），点击后灰化</li>
+                        <li>容量校验：PROBE 后若烧录地址总范围 <code>maxEnd &gt; capacity</code>，直接按错误处理（§7.1）</li>
+                        <li>多工位：预留接口，先单工位；TXD 接管：退出量产 RELEASE</li>
+                        <li>部署浏览器：<b>必须 Chrome / Edge</b>（WebUSB 硬性要求），详见 §10</li>
+                    </ul>
+                </div>
+                <div class="bg-sky-500/10 border border-sky-500/30 rounded-2xl p-4 text-sm text-slate-600 dark:text-slate-300 mb-4">
+                    ✅ <b>v3.1 实施摘要</b>：
+                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                        <li><b>配置授权前置</b>：必须先获得目录授权才能自动导入/导出配置；「📁 授权目录（内置固件及配置）」授权后显示目录名；导出/载入配置按钮仅授权后可用（灰化）（§9.3）</li>
+                        <li><b>文件表自定义选择控件</b>：左侧「📁 选择文件 / 🔄 更换」按钮 + 文件名文本（原生 file input 无法 JS 赋值，修复载入配置后左侧显示空白）</li>
+                        <li>移除烧写选项中的<b>全局 Auto Cut ACF</b>：ACF 头裁剪由文件表每行 Cut ACF（默认勾选）决定（§7）</li>
+                        <li><b>地址 0x100 对齐</b>：所有文件烧录地址必须 0x100 对齐，未对齐文件表红色告警并禁止开始量产（§7.2）</li>
+                        <li><b>占用空间重叠检测</b>：多文件实际烧写区间（ACF+CutACF 排除注释头）两两检测重叠，重叠红色告警并禁止开始量产（§7.2）</li>
+                        <li><b>多文件虚拟单一文件烧写</b>：按地址升序，<code>addr=首个文件地址</code>、<code>data_pos=相对头部偏移</code>、<code>full_length=最大偏移-基地址</code>、缝隙跳过；满足下载器完成判定与 Auto Run（§7.3）；含 <b>slice_pos 修复</b>（数据切片用文件内偏移，命令字段与切片索引分离）</li>
+                        <li><b>触发稳定基线</b>：边沿检测前连续 3 帧电平一致才作为基线，修复 RXD 默认高（上升沿）/默认低（下降沿）时接管瞬态造成的<b>点击开始即触发</b>伪边沿（§4.1）</li>
+                        <li><b>量产中文件表锁定</b>：开始量产后文件表卡片整体灰化锁定（选择/地址/CutACF/删除/添加全部禁用）+ 事件层兜底（§11）</li>
+                    </ul>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-center">
+                    <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4">
+                        <div class="text-2xl font-black text-primary mb-1">1</div><div class="text-[10px] uppercase tracking-widest text-slate-400 font-black">分布式文件<br>多文件 + 偏移地址</div>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4">
+                        <div class="text-2xl font-black text-primary mb-1">6</div><div class="text-[10px] uppercase tracking-widest text-slate-400 font-black">6 种触发<br>KEY/RXD/VREF/手动/间隔</div>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4">
+                        <div class="text-2xl font-black text-primary mb-1">3</div><div class="text-[10px] uppercase tracking-widest text-slate-400 font-black">强制校验 + 重试<br>状态动作可配置</div>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4">
+                        <div class="text-2xl font-black text-primary mb-1">4</div><div class="text-[10px] uppercase tracking-widest text-slate-400 font-black">配置一键<br>导出 / 载入</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- S2 命令总览 -->
+            <section id="s2" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">🧩</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">2 · 固件命令总览</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="text-left text-[10px] uppercase tracking-widest text-slate-400 border-b border-slate-200 dark:border-slate-700">
+                                <th class="py-2 pr-4">子命令</th><th class="py-2 pr-4">值</th><th class="py-2 pr-4">作用</th><th class="py-2">对应量产环节</th>
+                            </tr>
+                        </thead>
+                        <tbody class="font-mono text-slate-600 dark:text-slate-300 text-xs">
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 text-primary font-bold">GET_INFO</td><td class="py-2 pr-4">0x0</td><td class="py-2">协议版本 / 芯片支持数 / 速度表</td><td class="py-2 font-sans">连接后初始化</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 text-emerald-500 font-bold">TAKEOVER_TXD_RXD</td><td class="py-2 pr-4">0x2</td><td class="py-2">TXD→GPIO输出、RXD→按键输入（接管）</td><td class="py-2 font-sans">量产模式进入</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 text-emerald-500 font-bold">RELEASE_TXD_RXD</td><td class="py-2 pr-4">0x3</td><td class="py-2">恢复 TXD→UART、RXD 释放</td><td class="py-2 font-sans">量产模式退出</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 text-emerald-500 font-bold">GET_STATUS</td><td class="py-2 pr-4">0x4</td><td class="py-2">读 <code>vref_mv / vref_valid / rxd_logic / key_mode</code></td><td class="py-2 font-sans">触发检测（轮询）</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 text-emerald-500 font-bold">OUTPUT_TXD_SRST</td><td class="py-2 pr-4">0x5</td><td class="py-2">设置 TXD / SRST 引脚电平</td><td class="py-2 font-sans">状态输出</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4">PROBE_CHIP</td><td class="py-2 pr-4">0x10</td><td class="py-2">探测芯片（原有）</td><td class="py-2 font-sans">探测</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4">CHIP_WRITE</td><td class="py-2 pr-4">0x20</td><td class="py-2">芯片整体写（原有）</td><td class="py-2 font-sans">烧写</td></tr>
+                            <tr><td class="py-2 pr-4">FLASH_WRITE / READ / VERIFY</td><td class="py-2 pr-4">0x30/31/32</td><td class="py-2">Flash 读写校验（原有）</td><td class="py-2 font-sans">烧写 / 校验</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4 text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                    ⚠️ <code>TAKEOVER_TXD_RXD</code> 将 TXD 改为 GPIO（不影响 USB bulk 通讯）。退出量产时若已接管则执行 <code>RELEASE_TXD_RXD</code> 恢复。
+                </div>
+            </section>
+
+            <!-- S3 响应格式 -->
+            <section id="s3" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">📦</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">3 · 响应格式与状态解析（已确认）</h2>
+                </div>
+                <h3 class="font-black text-sm mb-2">3.1 统一响应布局</h3>
+                <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 text-xs overflow-x-auto mb-4"><code>[0]  = 0x90                      vendor id
+[1]  = subcmd                    子命令回显
+[2]  = cmdSts (DAP_OK = 0)       命令层状态
+[3]  = subSts (RESP_OK = 0)      子命令层状态
+[4:] = payload                   数据区  ✅ 已确认</code></pre>
+
+                <h3 class="font-black text-sm mb-2">3.2 GET_STATUS 响应解析（packed 7 字节，已确认）</h3>
+                <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 text-xs overflow-x-auto mb-4"><code>struct hercules_dap_vendor_status_t {   // VSF_CAL_PACKED
+    int32_t vref_mv;        // [4..8]   偏移4, 4字节  (单位 mV)   → 仅 UI 显示
+    bool    vref_mv_valid;  // [8]      偏移8, 1字节  (VREF 稳定) → 触发判定依据
+    bool    rxd_logic_level;// [9]      偏移9, 1字节  (RXD 电平)
+    bool    key_mode;       // [10]     偏移10,1字节  (模式键)
+}</code></pre>
+                <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 text-xs overflow-x-auto mb-4"><code>// JS 解析
+const v = new DataView(resp.buffer, resp.byteOffset + 4, resp.byteLength - 4);
+const status = {
+    vrefMv:    v.getInt32(0, true),   // 偏移 4
+    vrefValid: v.getUint8(4) !== 0,   // 偏移 8
+    rxdLogic:  v.getUint8(5) !== 0,   // 偏移 9
+    keyMode:   v.getUint8(6) !== 0    // 偏移 10
+};</code></pre>
+
+                <h3 class="font-black text-sm mb-2">3.3 命令请求格式</h3>
+                <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 text-xs overflow-x-auto"><code>get_status()            → [0x90, 0x04]
+takeover_txd_rxd()      → [0x90, 0x02]
+release_txd_rxd()       → [0x90, 0x03]
+output_txd_srst(t,s)    → [0x90, 0x05, txd_level(0/1), srst_level(0/1)]</code></pre>
+            </section>
+
+            <!-- S4 触发 -->
+            <section id="s4" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">🔍</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">4 · 触发检测（6 种方式）</h2>
+                </div>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                    ~100ms 轮询 <code>GET_STATUS</code>，按配置模式判定。除手动与间隔外均为<b>边沿事件</b>。
+                    <b>v3.1：边沿检测前先建立"稳定基线"</b>（连续 3 帧、约 300ms 电平一致），期间不触发；
+                    避免 <code>TAKEOVER</code>/上电瞬态在 RXD 默认高（上升沿）或默认低（下降沿）电平下产生<b>伪边沿导致点击开始即触发</b>。
+                    <b>VREF 触发只看 <code>vref_mv_valid</code>，且为严格 0→1 上升沿</b>：稳定基线后必须检测到 VREF 从无效→有效（掉电再上电）才触发；
+                    <code>vref_mv</code> 仅用于 UI 实时显示。prev 状态跨片保持（<code>_triggerPrev</code>），支持连续量产换片。
+                </p>
+                <div class="overflow-x-auto mb-4">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="text-left text-[10px] uppercase tracking-widest text-slate-400 border-b border-slate-200 dark:border-slate-700">
+                                <th class="py-2 pr-4">模式</th><th class="py-2 pr-4">判定条件（边沿）</th><th class="py-2">来源</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-600 dark:text-slate-300 font-mono text-xs">
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 text-primary font-bold font-sans">key-rising</td><td class="py-2 pr-4">keyMode 0 → 1</td><td class="py-2 font-sans">模式键按下</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 text-primary font-bold font-sans">rxd-rising</td><td class="py-2 pr-4">rxdLogic 0 → 1</td><td class="py-2 font-sans">RXD 上升沿</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 text-primary font-bold font-sans">rxd-falling</td><td class="py-2 pr-4">rxdLogic 1 → 0</td><td class="py-2 font-sans">RXD 下降沿</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 text-primary font-bold font-sans">vref-rising</td><td class="py-2 pr-4"><b>vrefValid</b> 0 → 1（严格，首帧不触发）</td><td class="py-2 font-sans">VREF 掉电再上电</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 text-primary font-bold font-sans">manual</td><td class="py-2 pr-4">网页按钮点击</td><td class="py-2 font-sans">人工</td></tr>
+                            <tr><td class="py-2 pr-4 text-emerald-500 font-bold font-sans">auto-timer</td><td class="py-2 pr-4">烧录完成后等 N 秒自动触发</td><td class="py-2 font-sans">间隔触发（1-10s，默认 3s）</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="font-black text-sm mb-2">4.1 边沿检测（v3.1：稳定基线 + 严格边沿 + 跨片保持）</h3>
+                <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 text-xs overflow-x-auto mb-4"><code>// 阶段1: 建立稳定基线 (连续 3 帧电平一致, 期间不触发), 吸收 TAKEOVER/上电瞬态
+const STABLE_FRAMES = 3;
+let prev = null, stable = 0;
+while (this.running) {
+    const s = await getStatus();
+    if (!prev) { prev = { key: s.keyMode, rxd: s.rxdLogic, vref: s.vrefValid }; stable = 1; }
+    else if (prev.key===s.keyMode && prev.rxd===s.rxdLogic && prev.vref===s.vrefValid) {
+        if (++stable >= STABLE_FRAMES) break;              // 基线稳定
+    } else { prev = { key: s.keyMode, rxd: s.rxdLogic, vref: s.vrefValid }; stable = 1; }
+    await sleep(100);
+}
+// 阶段2: 边沿检测 (只有从稳定基线发生跳变才触发, prev 跨片保持)
+while (this.running) {
+    const s = await getStatus();
+    if (mode === 'vref-rising') {                          // 严格 0→1: 基线 false, 掉电再上电才触发
+        if (prev.vref === false && s.vrefValid === true) { this._triggerPrev = {...}; return; }
+    } else if (mode === 'key-rising' && prev.key === false && s.keyMode === true) { ...return; }
+    else if (mode === 'rxd-rising' && prev.rxd === false && s.rxdLogic === true) { ...return; }
+    else if (mode === 'rxd-falling' && prev.rxd === true && s.rxdLogic === false) { ...return; }
+    prev = { key: s.keyMode, rxd: s.rxdLogic, vref: s.vrefValid };
+    this._triggerPrev = prev;
+    await sleep(100);
+}</code></pre>
+
+                <h3 class="font-black text-sm mb-2">4.2 间隔触发 auto-timer</h3>
+                <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4 text-sm text-slate-600 dark:text-slate-300 mb-4">
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>间隔秒数：下拉框 <b>1s ~ 10s，步进 1s，默认 3s</b>（内嵌于"间隔触发"选项右侧，未选中时禁用）</li>
+                        <li>开始量产<b>首次立即烧第一片</b>（<code>_autoFirst</code> 标记）；之后每片完成（无论成败）等待 N 秒自动触发下一片</li>
+                        <li>等待采用 100ms 分片循环，<b>点停止可随时中断</b></li>
+                        <li>进度条在间隔等待期间保持上片结果（绿/红），下一片开始恢复 0% 蓝色</li>
+                    </ul>
+                </div>
+                <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 text-xs overflow-x-auto"><code>if (mode === 'auto-timer') {
+    if (this._autoFirst) { this._autoFirst = false; return; }        // 首次立即
+    const ms = (this.cfg.trigger.autoInterval || 3) * 1000;
+    const steps = Math.max(1, Math.ceil(ms / 100));
+    for (let i = 0; i < steps && this.running; i++) await sleep(100); // 可被 stop 中断
+    return;
+}</code></pre>
+            </section>
+
+            <!-- S5 状态输出 -->
+            <section id="s5" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">🚦</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">5 · 状态输出（电平保持）</h2>
+                </div>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                    <code>TAKEOVER_TXD_RXD</code> 接管引脚后，网页用 <code>OUTPUT_TXD_SRST</code> 输出。
+                    <b>关键：SRST 为普通 IO，参数直通 0/1（写 0=低、写 1=高，无反相）</b>。
+                    <b>时序：烧录前及烧录时保持"忙电平"→ 成功/失败翻转为结果电平 → 下一片触发烧录恢复忙电平</b>。
+                    结果电平保持，不回空闲，产线 PLC 可稳定读取。
+                </p>
+                <div class="overflow-x-auto mb-4">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="text-left text-[10px] uppercase tracking-widest text-slate-400 border-b border-slate-200 dark:border-slate-700">
+                                <th class="py-2 pr-4">状态</th><th class="py-2 pr-4">TXD（按成功动作）</th><th class="py-2 pr-4">SRST（按失败动作）</th><th class="py-2">说明</th>
+                            </tr>
+                        </thead>
+                        <tbody class="font-mono text-slate-600 dark:text-slate-300 text-xs">
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-sans font-black">忙（烧录前/中）</td><td class="py-2 pr-4">rise→0 / fall→1</td><td class="py-2 pr-4">rise→0 / fall→1</td><td class="py-2 font-sans">signalReady/signalBusy 共同设置</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-sans font-black">成功动作</td><td class="py-2 pr-4">rise→1 / fall→0</td><td class="py-2 pr-4">保持</td><td class="py-2 font-sans">pass_txd_rise / pass_txd_fall / none</td></tr>
+                            <tr><td class="py-2 pr-4 font-sans font-black">失败动作</td><td class="py-2 pr-4">保持</td><td class="py-2 pr-4">rise→1 / fall→0</td><td class="py-2 font-sans">fail_srst_rise / fail_srst_fall / none</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 text-xs overflow-x-auto mb-4"><code>// 状态输出（电平保持模型，0/1 直通无反相）
+// _signalBusyLevels: 忙电平（烧录前/中保持）——上升沿→低(0)，下降沿→高(1)
+async _signalBusyLevels() {
+    let t = null, s = null;
+    if (passAction === 'pass_txd_rise') t = 0;
+    else if (passAction === 'pass_txd_fall') t = 1;
+    if (failAction === 'fail_srst_rise') s = 0;
+    else if (failAction === 'fail_srst_fall') s = 1;
+    if (t === null && s === null) return;          // 全部无动作: 不改变引脚
+    await outputTxdSrst(t, s);
+}
+signalReady() { if (enable) await _signalBusyLevels(); }   // 烧录前
+signalBusy()  { if (enable) await _signalBusyLevels(); }   // 烧录中 / 下一片恢复忙电平
+// 成功: 仅翻转 TXD 为成功电平 (rise→1, fall→0), SRST 保持
+signalPass()  { const t = a === 'pass_txd_rise' ? 1 : a === 'pass_txd_fall' ? 0 : null; if (t!==null) await outputTxdSrst(t, null); }
+// 失败: 仅翻转 SRST 为失败电平 (rise→1, fall→0), TXD 保持
+signalFail()  { const s = a === 'fail_srst_rise' ? 1 : a === 'fail_srst_fall' ? 0 : null; if (s!==null) await outputTxdSrst(null, s); }
+// outputTxdSrst(t, s): null 表示保持该引脚当前电平（内部 _outTxd/_outSrst 跟踪）</code></pre>
+                <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                    📌 结果电平保持到下一片触发；<code>failAction=none</code> 或 <code>passAction=none</code> 时不改对应引脚。
+                    退出量产 <code>RELEASE_TXD_RXD</code> 恢复。
+                </p>
+            </section>
+
+            <!-- S6 超时/重试/统计 -->
+            <section id="s6" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">🔁</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">6 · 超时 / 重试 / 统计</h2>
+                </div>
+
+                <h3 class="font-black text-sm mb-2">6.1 命令级超时（已决策）</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                    <b>单个命令 3 秒无响应判定超时</b>，超时即按重试机制重试（见 6.2）。触发等待本身不设超时，一直等到触发为止。
+                </p>
+
+                <h3 class="font-black text-sm mb-2">6.2 重试机制（已决策 · 双计数器独立）</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                    两个<b>独立计数器</b>，上限均为 <code>retryCount</code>（0-9，默认 2），互不影响：
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-600 dark:text-slate-300 mb-4">
+                    <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4">
+                        <div class="font-black mb-2 text-slate-700 dark:text-slate-200">① 块级重试（最小命令包）</div>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>烧写按 256B/包 分块发送，某块失败/超时 → <b>仅重发该命令包</b></li>
+                            <li>计数器 <code>blockRetry</code>：0..retryCount</li>
+                            <li><b>该块成功 → 清零</b>（下一个块从 0 重新开始）</li>
+                            <li><b>该块重试耗尽 → 清零</b>（升级为整文件回退）</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4">
+                        <div class="font-black mb-2 text-slate-700 dark:text-slate-200">② 整文件回退</div>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>块级彻底失败（或需重新擦除）→ <b>重新执行整个文件烧写过程</b></li>
+                            <li>计数器 <code>fileRetry</code>：0..retryCount</li>
+                            <li><b>整文件成功 → 清零</b>（进入下一个文件）</li>
+                            <li><b>整文件重试耗尽 → 清零</b>（该片判失败）</li>
+                        </ul>
+                    </div>
+                </div>
+                <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 text-xs overflow-x-auto mb-4"><code>// 双计数器独立重试伪代码
+let fileRetry = 0;
+for (const f of files) {
+    let done = false;
+    while (!done) {
+        let blockRetry = 0;                                  // 每次整文件尝试，块级计数从 0 开始
+        let pos = 0, ok = true;
+        while (pos < fileSize(f)) {
+            const resp = await sendBlock(f, pos);            // 发送单个 256B 命令包
+            if (!respOk(resp)) {
+                blockRetry++;
+                if (blockRetry > retryCount) { ok = false; break; }   // 块级耗尽 → 整文件回退
+                continue;                                     // 块级重试：仅重发该包（成功则自然清零）
+            }
+            blockRetry = 0;                                   // 块成功 → 清零
+            pos += 256;
+        }
+        if (ok) { stats.burn... ; done = true; break; }       // 整文件成功
+        fileRetry++;                                          // 整文件回退
+        if (fileRetry > retryCount) { stats.fail...; done = true; }  // 文件级耗尽 → 该片失败
+    }
+}</code></pre>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    块级与文件级计数<b>独立</b>：块级成功/彻底失败后清零，文件级成功/彻底失败后清零。
+                    两个计数器的失败均计入"含重试失败次数"（§6.3）。
+                </p>
+
+                <h3 class="font-black text-sm mb-2">6.3 统计口径（已决策，4 项）</h3>
+                <div class="overflow-x-auto mb-4">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="text-left text-[10px] uppercase tracking-widest text-slate-400 border-b border-slate-200 dark:border-slate-700">
+                                <th class="py-2 pr-4">指标</th><th class="py-2 pr-4">定义</th><th class="py-2">口径</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-600 dark:text-slate-300">
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-black text-primary">总烧录数</td><td class="py-2 pr-4">进入烧写流程的片数</td><td class="py-2 font-mono text-xs">不含重试</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-black text-primary">总成功数</td><td class="py-2 pr-4">烧写成功的片数</td><td class="py-2 font-mono text-xs">不含重试</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-black text-primary">总失败数</td><td class="py-2 pr-4">烧写失败的片数（重试耗尽后判失败）</td><td class="py-2 font-mono text-xs">不含重试</td></tr>
+                            <tr><td class="py-2 pr-4 font-black text-primary">含重试失败次数</td><td class="py-2 pr-4">所有重试动作（块级 + 文件级）累计失败次数</td><td class="py-2 font-mono text-xs">含重试</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">关系：<code>总烧录数 = 总成功数 + 总失败数</code>（均不含重试）；重试失败次数为独立累计。</p>
+            </section>
+
+            <!-- S7 分布式文件 -->
+            <section id="s7" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">📁</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">7 · 分布式文件与偏移地址</h2>
+                </div>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                    文件表每个文件独立起始地址。烧写地址 = 文件起始地址 + 文件内部头偏移（ACF 注释头 / 芯片头 +8/+8+64）。
+                </p>
+                <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 text-xs overflow-x-auto mb-4"><code>files: [
+  { name: "boot.bin",  addr: 0x000000, cutAcf: false },
+  { name: "app.acf",   addr: 0x008000, cutAcf: true  },
+  { name: "calib.bin", addr: 0x3F0000, cutAcf: false }
+]</code></pre>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    erase / verify 全局强制使能（见 §6 / §8），文件表不再逐文件配置擦除/校验开关。
+                    复用 <code>getFlashWriteStartPos</code> / <code>getChipWriteStartPos</code> / <code>dapTryFlashWrite(addr)</code>。
+                </p>
+
+                <h3 class="font-black text-sm mt-4 mb-2">7.1 容量校验（PROBE 后强制，已决策）</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+                    PROBE 后从 <code>common</code> 获取芯片实际 Flash 容量 <code>capacity</code>（字节）。
+                    <b>若烧录的数据地址总范围超出容量，直接按错误处理</b>（该片失败，不进入烧写）。
+                </p>
+                <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4 mb-4 font-mono text-sm text-slate-600 dark:text-slate-300">
+                    烧录范围末端 = max( 文件起始地址 <code class="text-primary">addr</code> + 实际写入长度 )
+                </div>
+                <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 text-xs overflow-x-auto mb-4"><code>// 容量校验伪代码（PROBE 成功后、开始烧写前执行）
+// capacity: 芯片 Flash 容量（字节，common.getUint32(8)）
+// writeLen(f): 该文件实际写入长度（ACF/芯片头裁剪后 byteLength）
+const maxEnd = files.reduce((m, f) => Math.max(m, f.addr + writeLen(f)), 0);
+if (maxEnd > capacity) {
+    return error(`Flash capacity insufficient: need ${maxEnd}B, chip has ${capacity}B`);
+}
+// chip_write 单文件场景：writeLen(file) > capacity 同样判错</code></pre>
+                <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                    📌 校验基于<b>裁剪后</b>的实际写入长度（ACF 注释头 / 芯片头偏移后的数据），地址范围取所有文件的并集末端。
+                </p>
+
+                <h3 class="font-black text-sm mt-4 mb-2">7.2 地址对齐与占用空间重叠检测（v3.1）</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    <b>每个文件的烧录地址必须按 0x100 对齐</b>（<code>addr % 0x100 == 0</code>），未对齐时文件表行内红色告警且禁止开始量产。
+                    多文件载入时自动检查各文件<b>实际烧写占用区间</b> <code>[addr, addr + 写入长度)</code> 是否相互重叠；
+                    <b>.acf 且 Cut ACF 时，头部（满足 CUT ACF 算法的指定长度，即注释头偏移）从占用计算中排除</b>：写入长度 = 文件总长 − 注释头偏移。
+                    未加载文件不参与重叠检测。
+                    <b>若重叠：文件表对应行显示红色告警「⚠ 与「xxx」地址重叠」，且禁止开始量产</b>（开始按钮灰化 + startRun 拦截）。
+                </p>
+
+                <h3 class="font-black text-sm mt-4 mb-2">7.3 多文件虚拟单一文件烧写（v3.1）</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    多文件在地址空间不重叠的前提下，被视作<b>一个单一虚拟文件</b>烧写：
+                </p>
+                <ul class="list-disc pl-5 text-sm text-slate-600 dark:text-slate-300 space-y-1 mb-3">
+                    <li><b>按地址升序烧写</b>，基地址 <code>baseAddr</code> = 首个文件地址（单文件时即该文件地址，命令与原有行为完全一致）</li>
+                    <li>每块 <code>data_pos = 文件地址 + 文件内偏移 − baseAddr</code>（首块 <code>data_pos == 0</code>，触发下载器 VDDQ/EFUSECLK 设置）</li>
+                    <li><b>full_length</b> = 最大偏移 − 基地址（<code>max(addr + 写入长度) − baseAddr</code>），所有块共用</li>
+                    <li><b>缝隙跳过</b>：文件之间的空隙不发送数据块</li>
+                    <li>完成判定 <code>data_pos + data_len == full_length</code> 由最大偏移文件的最后一块满足，下载器才执行 AUTORESET / 清理 VDDQ/EFUSECLK</li>
+                    <li><b>slice_pos 分离</b>（v3.1 修复）：命令字段 <code>data_pos</code> 为相对头部偏移（含文件地址），数据切片必须用<b>文件内偏移</b> <code>pos</code>（<code>hercules_cmd_flash_write</code> 第 8 参 <code>slice_pos</code>，未传则默认 <code>data_pos</code> 兼容单文件）</li>
+                </ul>
+            </section>
+
+            <!-- S8 状态机 -->
+            <section id="s8" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">🔄</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">8 · 量产流程状态机</h2>
+                </div>
+                <div class="mermaid">
+flowchart TD
+    A[打开网页] --> B[恢复目录授权 / 载入配置]
+    B --> C[连接 Vllink]
+    C --> D[GET_INFO 初始化]
+    D --> E{statusOut.enable?}
+    E -->|是| F[TAKEOVER_TXD_RXD 接管]
+    E -->|否| G
+    F --> G[signalReady 忙电平]
+    G --> H{等触发<br>6 种: KEY/RXD↑↓/VREF严格↑/手动/间隔}
+    H -->|触发| I[signalBusy 忙电平<br>进度条: 烧录中 0%]
+    I --> J[PROBE_CHIP]
+    J --> K{芯片支持?}
+    K -->|否| N
+    K -->|是| K2{容量足够?<br>maxEnd ≤ capacity}
+    K2 -->|否| N
+    K2 -->|是| L[烧写文件 1..N<br>强制 ERASE+VERIFY<br>命令3s超时+块级重试+文件回退<br>进度条推进]
+    L --> M{全部通过?}
+    M -->|是| O[signalPass / 进度条100%绿<br>统计: 烧录+1 成功+1 / 保持到下次烧录]
+    M -->|否| N[signalFail / 进度条红<br>统计: 烧录+1 失败+1<br>重试失败累计 / 保持到下次烧录]
+    O --> H
+    N --> H
+    H -->|手动停止| Q[RELEASE_TXD_RXD 若已接管]
+    Q --> R[汇总报表]
+                </div>
+                <ul class="list-disc pl-5 text-sm text-slate-600 dark:text-slate-300 space-y-1 mt-4">
+                    <li><b>连续量产</b>：烧完一片回到"等触发"，结果电平保持；换片触发后覆盖</li>
+                    <li><b>间隔触发</b>：烧录完成后（无论成败）等 N 秒（1-10s 默认 3s）自动触发下一片；首次立即</li>
+                    <li><b>失败处理</b>：记录 + 输出失败动作后<b>直接继续下一片</b>（无停机策略）</li>
+                    <li><b>超时</b>：单个命令 3s 无响应 → 触发重试；触发等待不设超时</li>
+                    <li><b>容量校验</b>：PROBE 后若烧录地址总范围 <code>maxEnd &gt; capacity</code> → 直接判错（§7.1）</li>
+                    <li><b>统计</b>：总烧录/成功/失败（不含重试）+ 含重试失败次数</li>
+                </ul>
+            </section>
+
+            <!-- S9 配置 -->
+            <section id="s9" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">💾</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">9 · 配置导出 / 载入</h2>
+                </div>
+                <h3 class="font-black text-sm mb-2">9.1 核心技术：File System Access API + IndexedDB</h3>
+                <div class="mermaid">
+sequenceDiagram
+    participant U as 用户
+    participant W as 量产网页
+    participant FS as 固件文件夹
+    U->>W: 首次打开，授权文件夹 (showDirectoryPicker)
+    W->>FS: 保存 config.json (文件表 + 触发 + 状态动作 + 相对路径)
+    W->>W: 目录句柄存入 IndexedDB
+    Note over W,FS: —— 关闭 / 重新打开 ——
+    W->>W: 从 IndexedDB 恢复句柄 → requestPermission
+    W->>FS: 自动读取 config.json
+    W->>FS: 按相对路径自动加载 boot.bin / app.acf ...
+    W-->>U: 配置 + 文件全部就绪，进入量产
+                </div>
+                <h3 class="font-black text-sm mt-4 mb-2">9.2 config.json Schema（v2.2）</h3>
+                <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 text-xs overflow-x-auto"><code>{
+  "schema": 4,
+  "product": "HME-SOM-2026",
+  "options": {
+    "autoProbe":    true,
+    "autoErase":    true,             // 量产强制，不可关闭
+    "autoVerify":   true,             // 量产强制，不可关闭
+    "autoRun":      false,
+    "retryCount":   2,                // 0-9，默认 2
+    "cmdTimeoutMs": 3000,             // 单个命令超时（3s → 触发重试）
+    "speedKHz":     48000
+  },
+  "trigger": {
+    "mode": "vref-rising",            // key-rising | rxd-rising | rxd-falling | vref-rising | manual | auto-timer
+    "autoInterval": 3                 // 间隔触发秒数 1-10，默认 3（仅 auto-timer 生效）
+  },
+  "statusOut": {
+    "enable":     true,
+    "passAction": "pass_txd_rise",    // none | pass_txd_rise | pass_txd_fall
+    "failAction": "fail_srst_rise"    // none | fail_srst_rise | fail_srst_fall
+  },
+  "files": [
+    { "name": "boot.bin", "addr": 0,       "cutAcf": false },
+    { "name": "app.acf",  "addr": 32768,   "cutAcf": true  }
+  ]
+}</code></pre>
+                <h3 class="font-black text-sm mt-4 mb-2">9.3 降级方案</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    若 File System Access API 不可用，降级为"手动选择"：配置项仍自动恢复，仅固件文件需重新点选。<b>两套都做，能力检测自动切换</b>。
+                </p>
+            </section>
+
+            <!-- S10 浏览器与部署 -->
+            <section id="s10" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">🌐</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">10 · 浏览器与部署（Q3 详解）</h2>
+                </div>
+                <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4 mb-4 text-sm text-slate-600 dark:text-slate-300">
+                    <b>结论：量产网页必须运行在 Chrome 或 Edge（Chromium 内核）上，且必须通过 HTTPS 或 localhost 访问。</b>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-600 dark:text-slate-300 mb-4">
+                    <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4">
+                        <div class="font-black mb-2 text-slate-700 dark:text-slate-200">为什么必须 Chrome/Edge？</div>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>量产工具依赖 <b>WebUSB API</b>（与 Vllink 通讯）——<b>只有 Chrome / Edge / Opera 支持</b></li>
+                            <li>Firefox 不支持 WebUSB；Safari 仅 macOS 14+ 部分支持 → 无法用于量产</li>
+                            <li>自动配置载入依赖 <b>File System Access API</b> —— 同样仅 Chromium 支持</li>
+                            <li>所以"锁定 Chrome/Edge"是<b>硬性要求，不是可选优化</b></li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4">
+                        <div class="font-black mb-2 text-slate-700 dark:text-slate-200">为什么必须 HTTPS / localhost？</div>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>WebUSB 与 File System Access 都是<b>安全上下文专属 API</b>（Secure Context）</li>
+                            <li>产线部署推荐：<b>本机 localhost + 桌面快捷方式</b>（免服务器）</li>
+                            <li>或局域网内 HTTPS 服务器（如 nginx + 自签证书），多工位共享同一页面</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4 text-sm text-slate-600 dark:text-slate-300">
+                    <b>推荐的产线部署形态（三选一）：</b>
+                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                        <li><b>① 单机 localhost</b>：网页文件放本机，浏览器打开 <code>http://localhost/web_program_hercules/index.html</code>，固定工位使用</li>
+                        <li><b>② 局域网 HTTPS</b>：一台内网服务器托管页面 + 自签证书，多台工位 PC 浏览器访问（File System Access 仍按各 PC 本地授权）</li>
+                        <li><b>③ 生产用 kiosk</b>：Chrome 全屏 kiosk 模式，屏蔽地址栏/右键，防止误操作</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- S11 UI -->
+            <section id="s11" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">🖥️</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">11 · UI 设计（量产控制面板）</h2>
+                </div>
+                <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 text-xs overflow-x-auto leading-relaxed"><code>┌──────────────────────────────────────────────────────┐
+│ 顶部栏: 量产 LOGO │ 目录授权/导出/载入 │ 主题 │ 连接状态 │
+├──────────────────────────────────────────────────────┤
+│ 连接区 (扁平): ●已连接 Connection │ DAP版本 │ 断开      │
+├──────────────┬───────────────┬──────────────────────┤
+│ 触发方式卡 (6选1)│ 烧写选项卡 (2×2+重试)│ 状态输出卡        │
+│ ○KEY0→1 ○RXD↑ │ ☑AutoErase(强制)  │ 成功 [无|TXD↑|TXD↓]│
+│ ○RXD↓  ○VREF↑ │ ☑AutoVerify(强制) │ 失败 [无|SRST↑|SRST↓]│
+│ ○手动  ○间隔触发│ ☑AutoRun          │ ☑接管引脚          │
+│        [3s▼]   │ 重试次数 [2▼]     │                   │
+├──────────────┼───────────────┼──────────────────────┤
+│ 量产统计      │ 实时状态       │ 量产控制            │
+│ 总烧录[0] 成功[0]│ VREF[--] RXD[--]│ [▶开始量产] [■停止]│
+│ 失败[0] 重试[0] │ KEY[--] SESSION[空闲]│ [👉手动触发]     │
+│              │ PROG [━━━━━━] 0%│ [📄导出CSV]          │
+├──────────────┴───────────────┴──────────────────────┤
+│ 烧写文件表: [选择文件][地址0x][CutACF][✓名称][✕] [+添加文件]│
+├──────────────────────────────────────────────────────┤
+│ 量产日志: 配置回显 / OUTPUT_TXD_SRST 回显 / 失败原因   │
+└──────────────────────────────────────────────────────┘</code></pre>
+                <div class="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                    <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4">
+                        <b>交互规则（v3.1）</b>：
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li><b>开始量产按钮</b>：需<b>已连接下载器 + 至少一个已加载固件</b>才可用（绿色），点击后灰化；量产结束恢复</li>
+                            <li><b>配置灰化锁定</b>：触发方式/烧写选项/状态输出三卡，量产中整体 <code>opacity-40 + grayscale + pointer-events-none</code> 并禁用控件</li>
+                            <li><b>进度条 PROG</b>：烧录中青蓝推进 / 成功绿 / 失败红 / 重试琥珀回退；pass/fail 保持到下次烧录开始才恢复 0% 蓝</li>
+                            <li><b>SESSION 徽章</b>：空闲/等待触发/烧录中/重试中/本片成功/本片失败，与进度阶段同步</li>
+                            <li><b>间隔秒数下拉</b>：内嵌于「间隔触发」右侧，未选中该模式时禁用；量产中随卡片锁定</li>
+                            <li>卡片统一扁平化（p-4），连接框/统计/实时/控制高度对齐</li>
+                            <li><b>烧写文件表锁定</b>（v3.1）：量产中文件表卡片整体灰化锁定（选择文件/更换、地址、Cut ACF、删除、+ 添加文件全部禁用），事件层 <code>engine.running</code> 兜底拦截</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4">
+                        <b>多工位预留</b>：量产引擎可实例化（<code>class MassProduceEngine</code>），每个工位一个实例 + 独立 UI 卡片；
+                        本版本仅实现单工位，接口为后续并行预留。
+                        <pre class="mt-2 font-mono text-xs leading-relaxed"><code>web_program_hercules/
+  index.html           # 量产控制面板 (UI)
+  src/engine.js        # MassProduceEngine: 连接/命令/触发/状态输出/重试/进度
+  src/app.js           # UI 逻辑: 主题/配置/文件表/开始停止/统计/进度渲染
+  src/hercules.js      # 命令构建 (GET_STATUS/OUTPUT_TXD_SRST/TAKEOVER/RELEASE 等)
+  src/dapv2.js         # 传输层复用
+  design.html          # 本设计方案</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- S12 实施计划 -->
+            <section id="s12" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">🗺️</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">12 · 实施计划（里程碑）</h2>
+                </div>
+                <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-3 mb-4 text-sm text-slate-600 dark:text-slate-300">
+                    ✅ <b>M1-M5 均已实施完成</b>（v3.0）。实施后追加：间隔触发、VREF 严格上升沿、SRST 直通不反相、进度条/SESSION、UI 灰化锁定与扁平化。
+                </div>
+                <div class="bg-sky-500/10 border border-sky-500/30 rounded-2xl p-3 mb-4 text-sm text-slate-600 dark:text-slate-300">
+                    ✅ <b>v3.1 追加</b>：配置授权前置（先授权目录）、导出/载入灰化 + 目录显示、文件表自定义选择控件、移除全局 Auto Cut ACF、地址 0x100 对齐、占用空间重叠检测、多文件虚拟单一文件烧写（含 slice_pos 修复）、触发稳定基线（RXD 默认电平伪触发修复）、量产中文件表锁定。
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="text-left text-[10px] uppercase tracking-widest text-slate-400 border-b border-slate-200 dark:border-slate-700">
+                                <th class="py-2 pr-4">阶段</th><th class="py-2 pr-4">内容</th><th class="py-2">依赖</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-600 dark:text-slate-300">
+                            <tr class="border-b border-slate-100 dark:border-slate-800">
+                                <td class="py-2 pr-4 font-black text-primary">M1 命令接入</td>
+                                <td class="py-2 pr-4"><code>hercules.js</code> 新增 4 条子命令构建 + GET_STATUS/OUTPUT_TXD_SRST 解析 + 命令级 3s 超时封装</td>
+                                <td class="py-2">固件已实现</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800">
+                                <td class="py-2 pr-4 font-black text-primary">M2 文件表 + 强制/重试</td>
+                                <td class="py-2 pr-4">多文件 + 地址烧写；强制 ERASE+VERIFY；块级重试 + 整文件回退；4 项统计</td>
+                                <td class="py-2">无</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800">
+                                <td class="py-2 pr-4 font-black text-primary">M3 触发 + 状态</td>
+                                <td class="py-2 pr-4">5 种触发检测 + 电平保持状态输出 + 量产循环闭环</td>
+                                <td class="py-2">M1</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800">
+                                <td class="py-2 pr-4 font-black text-primary">M4 配置</td>
+                                <td class="py-2 pr-4">config.json 导出/载入 + IndexedDB 目录句柄 + 自动加载文件 + 授权前置（先授权目录）</td>
+                                <td class="py-2">M2</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 pr-4 font-black text-primary">M5 统计/报表/部署</td>
+                                <td class="py-2 pr-4">CSV 日志、4 项统计面板、kiosk/HTTPS 部署说明</td>
+                                <td class="py-2">M3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- S13 决策记录 -->
+            <section id="s13" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">📋</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">13 · 决策记录（审核答复 → 方案落实）</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="text-left text-[10px] uppercase tracking-widest text-slate-400 border-b border-slate-200 dark:border-slate-700">
+                                <th class="py-2 pr-4">原问题</th><th class="py-2 pr-4">审核答复</th><th class="py-2">方案落实</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-600 dark:text-slate-300">
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">GET_STATUS 布局/大小</td><td class="py-2 pr-4">OK</td><td class="py-2">§3 确认，按 offset 4 / packed 7 字节解析</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">TAKEOVER RXD 方向</td><td class="py-2 pr-4">不用管</td><td class="py-2">不实现，直接读 rxd_logic 判定边沿</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">状态动作时序</td><td class="py-2 pr-4">保持到 VREF 变化 / 满足触发</td><td class="py-2">§5 电平保持模型</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">重试语义</td><td class="py-2 pr-4">最小命令包优先，回退整文件；4 项统计</td><td class="py-2">§6 块级重试 + 回退 + 统计口径</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">重试计数（补充）</td><td class="py-2 pr-4">块级与文件级独立计数，上限均 retryCount</td><td class="py-2">§6.2 双计数器，块级成功/耗尽后清零</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs">容量校验（补充）</td><td class="py-2 pr-4">烧录地址总范围超出芯片容量 → 直接判错</td><td class="py-2">§7.1 PROBE 后校验 maxEnd ≤ capacity</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">VREF 阈值</td><td class="py-2 pr-4">vref_mv_valid 判定，vref_mv 仅显示</td><td class="py-2">§4 触发只看 valid 边沿；电压仅 UI</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">Q1 触发超时</td><td class="py-2 pr-4">单命令 3s 超时 → 重试</td><td class="py-2">§6.1 cmdTimeoutMs=3000</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">Q2 整片失败</td><td class="py-2 pr-4">记录即可</td><td class="py-2">§8 失败记录后继续，无停机策略</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">Q3 部署浏览器</td><td class="py-2 pr-4">需探讨</td><td class="py-2">§10 必须 Chrome/Edge + HTTPS/localhost</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">Q4 首帧不触发</td><td class="py-2 pr-4">暂忽略，后续优化</td><td class="py-2">§4 注释标注，不实现</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">Q5 多工位</td><td class="py-2 pr-4">预留接口，先单工位</td><td class="py-2">§11 引擎可实例化，先单工位</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">Q6 TXD 接管冲突</td><td class="py-2 pr-4">设计本意；退出量产 RELEASE</td><td class="py-2">§2/§5 接管生命周期 + 退出释放</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3 间隔触发</td><td class="py-2 pr-4">烧录完成后等 N 秒自动下一片</td><td class="py-2">§4.2 1-10s 默认 3s，首次立即，可 stop 中断</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3 VREF 严格上升沿</td><td class="py-2 pr-4">开始量产 VREF 已高不应立即触发</td><td class="py-2">§4.1 首帧仅建基线，必须 0→1（掉电再上电）才触发</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3 SRST 直通不反相</td><td class="py-2 pr-4">SRST 是普通 IO，写 0=低 写 1=高</td><td class="py-2">§5 移除误加反相；忙电平→结果电平→下一片恢复</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3 进度条保持</td><td class="py-2 pr-4">烧录完成后进度条不立即回退</td><td class="py-2">§8/§11 pass/fail 保持至下次烧录开始恢复 0% 蓝</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs">v3 UI 交互</td><td class="py-2 pr-4">量产中锁定配置；开始按钮有条件可用</td><td class="py-2">§11 灰化锁定 + 开始按钮绿色/灰化</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3.1 授权前置</td><td class="py-2 pr-4">配置自动导入/导出必须先授权目录</td><td class="py-2">§9.3 授权前置 + 导出/载入灰化 + 目录显示</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3.1 地址对齐/重叠</td><td class="py-2 pr-4">烧录地址 0x100 对齐；多文件占用空间重叠告警并禁止量产</td><td class="py-2">§7.2 对齐 + 重叠检测 + 文件表红色告警</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3.1 多文件虚拟文件</td><td class="py-2 pr-4">多文件=虚拟单一文件，满足下载器完成判定与 Auto Run</td><td class="py-2">§7.3 baseAddr/full_length/data_pos + slice_pos 修复</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3.1 RXD 伪触发</td><td class="py-2 pr-4">RXD 默认电平下点击开始即触发不符合边沿机制（下降沿对称）</td><td class="py-2">§4.1 稳定基线（3 帧）吸收 TAKEOVER 瞬态</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs">v3.1 文件表锁定</td><td class="py-2 pr-4">量产中禁止修改烧写文件表</td><td class="py-2">§11 文件表卡片灰化锁定 + 事件兜底</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 页脚 -->
+            <div class="text-center text-[10px] text-slate-400 font-mono uppercase tracking-widest py-4">
+                Web Program Hercules · 设计方案 v3.1 · 已实施 · 2026-08-02
+            </div>
+        </main>
+    </div>
+
+    <script>
+        /* ============ 三模态主题 ============ */
+        const ThemeManager = {
+            btns: document.querySelectorAll('[data-theme]'),
+            slider: document.getElementById('themeSlider'),
+            init() {
+                const saved = localStorage.getItem('hercules-theme-preference') || 'auto';
+                this.apply(saved);
+                this.btns.forEach(b => b.addEventListener('click', () => this.apply(b.dataset.theme)));
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                    if (localStorage.getItem('hercules-theme-preference') === 'auto') this.apply('auto');
+                });
+            },
+            apply(mode) {
+                localStorage.setItem('hercules-theme-preference', mode);
+                const isDark = mode === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : mode === 'dark';
+                document.documentElement.classList.toggle('dark', isDark);
+                const i = Array.from(this.btns).findIndex(b => b.dataset.theme === mode);
+                if (this.slider) this.slider.style.left = `calc(${i * 33.33}% + 4px)`;
+                this.btns.forEach(b => {
+                    const act = b.dataset.theme === mode;
+                    b.classList.toggle('text-white', act);
+                    b.classList.toggle('text-slate-500', !act);
+                });
+            }
+        };
+        ThemeManager.init();
+    </script>
+</body>
+</html>

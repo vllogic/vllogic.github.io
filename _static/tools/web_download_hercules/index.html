@@ -1,130 +1,234 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="zh-CN">
+<head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Download For Hercules FPGA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { primary: '#00d4ff', darkBg: '#0b1120' } } }
+        }
+    </script>
     <link rel="stylesheet" type="text/css" href="style.css" />
-  </head>
-  <title>Web Download For Hercules FPGA</title>
-  <body>
-    <main style="max-width: 800px; margin: 0 auto;">
-      <a href="../update/index.html" target="_blank">固件更新</a>
-      <a href="../web_config_basic2/index.html" target="_blank">Basic2运行配置</a>
-      <a href="../web_config/index.html" target="_blank">HME运行配置</a>
-      <a href="../web_download_hercules/index.html" target="_blank">HME烧写</a>
-      <h1>Web Download For Hercules FPGA</h1>
-      <p></p>
-      <button id="connect-device">
-        Connect Vllink Hercules
-      </button>
-      <p></p>
-      <form action="">
-        <div>
-          <label>Version: </label>
-          <input
-            class="versionShow"
-            type="text"
-            id="versionShow"
-            disabled="disabled"
-            value="Unconnected"
-          />
+</head>
+<body class="bg-slate-50 dark:bg-darkBg text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-500">
+
+    <!-- 顶部栏 -->
+    <header class="h-16 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 sticky top-0 z-50 glass">
+        <div class="flex items-center gap-3">
+            <div class="w-2.5 h-2.5 bg-primary rounded-full animate-pulse shadow-[0_0_10px_#00d4ff]"></div>
+            <h1 class="font-bold tracking-tighter text-xl italic text-slate-800 dark:text-slate-100">HERCULES <span class="text-primary font-black">DOWNLOAD</span></h1>
         </div>
-      </form>
-      <p></p>
-      <fieldset>
-        <legend>Status</legend>
-        <div>
-          <input
-            class="statusOut"
-            type="text"
-            id="statusOut"
-            disabled="disabled"
-            value=""
-          />
+
+        <div class="flex items-center gap-6">
+            <!-- 三模态主题切换 (右3) -->
+            <div class="flex items-center bg-slate-200 dark:bg-slate-800 rounded-full p-1 border border-slate-300 dark:border-slate-700 w-48 relative">
+                <button data-theme="dark" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">深色</button>
+                <button data-theme="auto" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">AUTO</button>
+                <button data-theme="light" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">浅色</button>
+                <div id="themeSlider" class="absolute h-7 w-[31%] bg-primary rounded-full transition-all duration-300 shadow-lg"></div>
+            </div>
+            <!-- 连接状态 (右2) -->
+            <div id="connectionStatus" class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Disconnected</div>
+            <!-- 工具导航 (右1) -->
+            <div class="relative" id="toolNav">
+                <button id="toolNavBtn" type="button" title="快速跳转到其他工具"
+                    class="flex items-center gap-1.5 py-1.5 px-3 rounded-xl text-[10px] font-black uppercase tracking-widest bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 transition-colors active:scale-95">
+                    <span>🧰</span><span class="hidden sm:inline">工具导航</span>
+                    <svg id="toolNavArrow" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                </button>
+                <div id="toolNavMenu" class="hidden absolute right-0 mt-2 w-64 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden z-50">
+                    <div class="px-4 py-2 text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 bg-slate-100/60 dark:bg-black/20 border-b border-slate-200 dark:border-slate-800">🧰 工具导航</div>
+                    <a href="../vllink2026_console/index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-colors border-b border-slate-200 dark:border-slate-800">
+                        <span class="text-lg">💻</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">VLLINK Console</span>
+                            <span class="text-[10px] text-slate-400">调试器控制台 · 配置查看编辑</span>
+                        </span>
+                        <span class="ml-auto text-[9px] text-slate-400">↗</span>
+                    </a>
+                    <div class="flex items-center gap-3 px-4 py-3 bg-primary/10 border-b border-slate-200 dark:border-slate-800">
+                        <span class="text-lg">🔥</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">Hercules Download</span>
+                            <span class="text-[10px] text-slate-400">Flash 下载 · 芯片读取</span>
+                        </span>
+                        <span class="ml-auto text-[9px] font-black uppercase tracking-widest text-primary bg-primary/15 rounded-full px-2 py-0.5">当前</span>
+                    </div>
+                    <a href="../web_program_hercules/index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-colors">
+                        <span class="text-lg">🏭</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">Hercules Program</span>
+                            <span class="text-[10px] text-slate-400">量产自动化 · 多片烧录</span>
+                        </span>
+                        <span class="ml-auto text-[9px] text-slate-400">↗</span>
+                    </a>
+                </div>
+            </div>
         </div>
-      </fieldset>
-      <p></p>
-      <fieldset>
-        <legend>Chip Info</legend>
-        <form action="">
-          <div class="block" id="block-chip-name">
-            <label class="chipText">Chip Name:</label>
-            <input type="text" id="chip-name" disabled="disabled" />
-          </div>
-          <div class="block" id="block-flash-capacity">
-            <label class="chipText">Flash Capacity(KB):</label>
-            <input type="text" id="flash-capacity" disabled="disabled" />
-          </div>
-          <div class="block" id="block-auto-probe">
-            <label class="chipText">Auto Probe: </label>
-            <input type="checkbox" id="auto-probe" disabled="disabled" checked="true" />
-          </div>
-        </form>
-        <form></form>
-        <button class="probe" id="chip-probe" disabled="disabled">
-          Probe
-        </button>
-      </fieldset>
-      <p></p>
-      <fieldset>
-        <legend>Flash Download</legend>
-        <div class="block" id="block-auto-Erase">
-          <label class="chipText">Auto Erase: </label>
-          <input type="checkbox" id="auto-erase" disabled="disabled" checked="true" />
+    </header>
+
+    <script>
+        (function () {
+            var btn = document.getElementById('toolNavBtn');
+            var menu = document.getElementById('toolNavMenu');
+            var arrow = document.getElementById('toolNavArrow');
+            if (!btn || !menu) return;
+            function setOpen(open) {
+                menu.classList.toggle('hidden', !open);
+                if (arrow) arrow.style.transform = open ? 'rotate(180deg)' : '';
+            }
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                setOpen(menu.classList.contains('hidden'));
+            });
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('#toolNav')) setOpen(false);
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') setOpen(false);
+            });
+        })();
+    </script>
+
+    <main class="max-w-4xl mx-auto p-8 space-y-6">
+        <!-- 连接区 -->
+        <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xl">
+            <div class="flex items-center gap-4">
+                <div id="connDot" class="w-2.5 h-2.5 rounded-full bg-slate-400 shadow-[0_0_10px_rgba(100,116,139,0.6)]"></div>
+                <div class="flex flex-col">
+                    <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Connection</span>
+                    <span id="connText" class="text-sm font-black text-slate-700 dark:text-slate-200">未连接</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 font-mono text-xs">
+                    <span class="text-[9px] text-slate-400 uppercase font-black">DAP Version</span>
+                    <input id="versionShow" type="text" disabled value="Unconnected" class="w-28 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 text-sm font-mono text-primary font-black outline-none" />
+                </div>
+                <button id="connect-device" class="py-3 px-6 bg-primary text-white rounded-xl font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20">Connect Vllink Hercules</button>
+            </div>
         </div>
-        <div class="block" id="block-auto-verify">
-          <label class="chipText">Auto Verify: </label>
-          <input type="checkbox" id="auto-verify" disabled="disabled" checked="true" />
+
+        <!-- 状态 -->
+        <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="text-lg">📟</span>
+                <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Status</h2>
+            </div>
+            <input id="statusOut" type="text" disabled value="" class="w-full bg-slate-50 dark:bg-black/20 border border-slate-200 dark:border-white/5 rounded-xl px-4 py-2.5 text-sm font-mono text-slate-600 dark:text-slate-300 outline-none" />
         </div>
-        <div class="block" id="block-auto-reset">
-          <label class="chipText">Auto Run: </label>
-          <input type="checkbox" id="auto-reset" disabled="disabled" />
+
+        <!-- Chip Info -->
+        <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="text-lg">🔍</span>
+                <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Chip Info</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-[9px] text-slate-400 uppercase font-black">Chip Name</label>
+                    <input id="chip-name" type="text" disabled class="w-full bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-mono text-slate-700 dark:text-slate-200 outline-none" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-[9px] text-slate-400 uppercase font-black">Flash Capacity (KB)</label>
+                    <input id="flash-capacity" type="text" disabled class="w-full bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-mono text-slate-700 dark:text-slate-200 outline-none" />
+                </div>
+                <div class="flex flex-col justify-end gap-2.5">
+                    <label class="flex items-center gap-2.5 text-xs text-slate-600 dark:text-slate-300 select-none cursor-pointer">
+                        <input id="auto-probe" type="checkbox" checked disabled class="accent-primary w-4 h-4" /> Auto Probe
+                    </label>
+                    <button id="chip-probe" disabled class="w-full py-2.5 bg-primary text-white rounded-xl font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20 disabled:opacity-30 disabled:grayscale disabled:pointer-events-none">Probe</button>
+                </div>
+            </div>
         </div>
-        <input class="fileSelect" type="file" id="select-file-flash" accept=".acf,.bin" name="file" />
-        <p></p>
-        <button class="update" id="download-flash" disabled="disabled">
-          Update
-        </button>
-        <progress class="update" id="download-flash-process" max="100" value="0">
-        </progress>
-        <p></p>
-      </fieldset>
-      <p></p>
-      <fieldset>
-        <legend>Flash Read</legend>
-        <p></p>
-        <button class="update" id="read-flash" disabled="disabled">
-          Save
-        </button>
-        <progress class="update" id="read-flash-process" max="100" value="0">
-        </progress>
-        <p></p>
-      </fieldset>
-      <p></p>
-      <fieldset>
-        <legend>Chip Download</legend>
-        <p></p>
-        <input class="fileSelect" type="file" id="select-file-chip" accept=".acf,.bin" name="file" />
-        <p></p>
-        <button class="update" id="download-chip" disabled="disabled">
-          Update
-        </button>
-        <progress class="update" id="download-chip-process" max="100" value="0">
-        </progress>
-        <p></p>
-      </fieldset>
-      <p></p>
-      <fieldset>
-        <legend>Efuse</legend>
-        <p>此操作有风险，请通过离线编程器实现</p>
-      </fieldset>
-      <p></p>
-      <fieldset>
-        <legend>Readme</legend>
-        <h4><a href="http://www.vllogic.com/index.html" target="_blank">点此访问</a></h4>
-      </fieldset>
+
+        <!-- Flash Download -->
+        <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="text-lg">🔥</span>
+                <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Flash Download</h2>
+            </div>
+            <div class="flex flex-wrap gap-x-6 gap-y-2.5 mb-5">
+                <label class="flex items-center gap-2.5 text-xs text-slate-600 dark:text-slate-300 select-none cursor-pointer">
+                    <input id="auto-erase" type="checkbox" checked disabled class="accent-primary w-4 h-4" /> Auto Erase
+                </label>
+                <label class="flex items-center gap-2.5 text-xs text-slate-600 dark:text-slate-300 select-none cursor-pointer">
+                    <input id="auto-verify" type="checkbox" checked disabled class="accent-primary w-4 h-4" /> Auto Verify
+                </label>
+                <label class="flex items-center gap-2.5 text-xs text-slate-600 dark:text-slate-300 select-none cursor-pointer">
+                    <input id="auto-reset" type="checkbox" disabled class="accent-primary w-4 h-4" /> Auto Run
+                </label>
+                <label class="flex items-center gap-2.5 text-xs text-slate-600 dark:text-slate-300 select-none cursor-pointer" title="勾选后自动裁剪 .acf 文件的注释头部 (仅对 .acf 文件生效)">
+                    <input id="auto-acf-flash" type="checkbox" checked disabled class="accent-primary w-4 h-4" /> Auto Cut ACF
+                </label>
+            </div>
+            <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
+                <input id="select-file-flash" type="file" accept=".acf,.bin" class="flex-1 text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:bg-primary/10 file:text-primary file:font-black file:text-xs file:hover:bg-primary/20 file:transition-all" />
+                <button id="download-flash" disabled class="md:w-40 py-2.5 bg-primary text-white rounded-xl font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20 disabled:opacity-30 disabled:grayscale disabled:pointer-events-none">Update</button>
+            </div>
+            <div class="mt-4 h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                <div id="download-flash-process" class="h-full bg-primary w-0" style="box-shadow: 0 0 10px rgba(0, 212, 255, 0.3)"></div>
+            </div>
+        </div>
+
+        <!-- Flash Read -->
+        <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="text-lg">📥</span>
+                <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Flash Read</h2>
+            </div>
+            <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
+                <span class="flex-1 text-xs text-slate-500 italic font-mono">读取整片 Flash 并保存为 .bin 文件</span>
+                <button id="read-flash" disabled class="md:w-40 py-2.5 bg-primary text-white rounded-xl font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20 disabled:opacity-30 disabled:grayscale disabled:pointer-events-none">Save</button>
+            </div>
+            <div class="mt-4 h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                <div id="read-flash-process" class="h-full bg-primary w-0" style="box-shadow: 0 0 10px rgba(0, 212, 255, 0.3)"></div>
+            </div>
+        </div>
+
+        <!-- Chip Download -->
+        <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="text-lg">📦</span>
+                <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Chip Download</h2>
+            </div>
+            <div class="flex flex-wrap gap-x-6 gap-y-2.5 mb-5">
+                <label class="flex items-center gap-2.5 text-xs text-slate-600 dark:text-slate-300 select-none cursor-pointer" title="勾选后自动裁剪 .acf 文件的注释头部 (仅对 .acf 文件生效)">
+                    <input id="auto-acf-chip" type="checkbox" checked disabled class="accent-primary w-4 h-4" /> Auto Cut ACF
+                </label>
+            </div>
+            <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
+                <input id="select-file-chip" type="file" accept=".acf,.bin" class="flex-1 text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:bg-primary/10 file:text-primary file:font-black file:text-xs file:hover:bg-primary/20 file:transition-all" />
+                <button id="download-chip" disabled class="md:w-40 py-2.5 bg-primary text-white rounded-xl font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20 disabled:opacity-30 disabled:grayscale disabled:pointer-events-none">Update</button>
+            </div>
+            <div class="mt-4 h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                <div id="download-chip-process" class="h-full bg-primary w-0" style="box-shadow: 0 0 10px rgba(0, 212, 255, 0.3)"></div>
+            </div>
+        </div>
+
+        <!-- Efuse -->
+        <div class="glass border border-amber-500/30 dark:border-amber-400/20 rounded-3xl p-6 shadow-xl">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="text-lg">⚠️</span>
+                <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-amber-500">Efuse</h2>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400">此操作有风险，请通过离线编程器实现</p>
+        </div>
+
+        <!-- 相关工具 -->
+        <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-500 shadow-xl">
+            <span class="text-[9px] text-slate-400 uppercase font-black">相关工具</span>
+            <a href="../update/index.html" target="_blank" class="hover:text-primary transition-colors">固件更新</a>
+            <a href="../web_config_basic2/index.html" target="_blank" class="hover:text-primary transition-colors">Basic2 运行配置</a>
+            <a href="../web_config/index.html" target="_blank" class="hover:text-primary transition-colors">HME 运行配置</a>
+            <a href="http://www.vllogic.com/index.html" target="_blank" class="hover:text-primary transition-colors">官网</a>
+        </div>
     </main>
-    <script src="src/index.js"></script>
-    <script src="src/dapv2.js"></script>
     <script src="src/hercules.js"></script>
+    <script src="src/dapv2.js"></script>
+    <script src="src/index.js"></script>
   </body>
 </html>

@@ -1,43 +1,28 @@
-.block {
-  display: block;
-  margin: 10px;
+/* ============================================
+   Hercules FPGA Download - 辅助样式
+   主要样式由 Tailwind CDN + 类内联提供
+   ============================================ */
+
+/* 玻璃拟态背景 */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
-.center {
-  text-align: center;
+.dark .glass {
+  background: rgba(15, 23, 42, 0.6);
 }
-label.chipText {
-  display: inline-block;
-  width: 160px;
-  text-align: left;
+
+/* 勾选框强调色 */
+.accent-primary {
+  accent-color: #00d4ff;
 }
-button.probe {
-  position: relative;
-  left: 120px;
+
+/* 隐藏滚动条（可选） */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
-progress.probe {
-  position: relative;
-  left: 120px;
-  width: 170px;
-}
-button.update {
-  position: relative;
-  left: 108px;
-}
-progress.update {
-  position: relative;
-  left: 112px;
-  width: 170px;
-}
-input.fileSelect {
-  position: relative;
-  left: 103px;
-}
-input.versionShow {
-  width: 288px;
-}
-input.statusOut {
-  width: 750px;
-}
-textarea {
-  vertical-align: top;
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
