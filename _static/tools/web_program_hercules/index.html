@@ -109,7 +109,82 @@
         })();
     </script>
 
-    <main class="max-w-6xl mx-auto p-8 space-y-6">
+    <div class="max-w-7xl mx-auto p-8">
+        <div class="flex flex-col lg:flex-row gap-6 items-start">
+
+        <!-- ===== 左侧帮助侧边栏 (窄条, 点击向左展开; 再点收缩回窄条) ===== -->
+        <aside id="helpSidebar" class="shrink-0 overflow-hidden transition-all duration-300 ease-in-out lg:sticky lg:top-20" style="width:36px">
+        <div class="flex items-start gap-3">
+        <button id="helpToggle" type="button" title="展开/收缩使用帮助"
+            class="shrink-0 w-9 flex flex-col items-center gap-2 py-3 bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 rounded-2xl hover:bg-primary/15 transition-colors">
+            <span class="text-lg leading-none">❓</span>
+            <span class="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400" style="writing-mode:vertical-rl">使用帮助</span>
+        </button>
+        <div class="shrink-0 w-80 glass border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl">
+            <div class="px-4 py-3.5 space-y-3 text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-h-[calc(100vh-10rem)] overflow-y-auto no-scrollbar">
+                <div>
+                    <div class="font-black text-slate-700 dark:text-slate-200 mb-1">🚀 快速上手</div>
+                    <ol class="list-decimal pl-4 space-y-0.5">
+                        <li>点 <b>Connect Vllink</b> 连接下载器</li>
+                        <li>文件表中添加固件并填烧录地址（默认 0x0）</li>
+                        <li>选触发方式、状态输出动作与重试次数（默认2）</li>
+                        <li>点 <b>▶ 开始量产</b>，触发后自动烧录，结束点 <b>■ 停止</b></li>
+                    </ol>
+                </div>
+                <div>
+                    <div class="font-black text-slate-700 dark:text-slate-200 mb-1">🔍 触发方式（6 种）</div>
+                    <ul class="list-disc pl-4 space-y-0.5">
+                        <li><b>KEY Press</b>：下载器的模式键按下</li>
+                        <li><b>RXD ↑上升沿 / ↓下降沿</b>：RXD 脚上的电平跳变</li>
+                        <li><b>VREF ↑上升沿</b>：掉电再上电（严格 0→1）</li>
+                        <li><b>手动触发</b>：点 <b>👉 手动触发</b> 进行一次量产</li>
+                        <li><b>间隔触发</b>：烧完一片后按设定间隔自动烧下一片（首次立即）</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="font-black text-slate-700 dark:text-slate-200 mb-1">🚦 状态输出</div>
+                    <ul class="list-disc pl-4 space-y-0.5">
+                        <li>配置 <b>TXD 脚</b> 在烧录成功后的动作</li>
+                        <li>配置 <b>SRST 脚</b> 在烧录失败后的动作</li>
+                        <li>注意：TXD / SRST 两脚需 <b>VREF</b> 提供参考电平</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="font-black text-slate-700 dark:text-slate-200 mb-1">🔒 烧写选项</div>
+                    <ul class="list-disc pl-4 space-y-0.5">
+                        <li>Erase / Verify 量产强制开启</li>
+                        <li><b>Auto Run</b>：烧完自动复位</li>
+                        <li>重试次数：块级重试与整文件回退的上限（0-9）</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="font-black text-slate-700 dark:text-slate-200 mb-1">📁 文件表要点</div>
+                    <ul class="list-disc pl-4 space-y-0.5">
+                        <li>烧写地址须 <b>0x100 对齐</b>，否则告警禁止开始</li>
+                        <li>多文件地址重叠 → 红色告警禁止开始</li>
+                        <li>.acf + <b>Cut ACF</b>：自动裁剪文件头注释</li>
+                        <li>容量校验：烧写末端 ≤ 芯片容量</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="font-black text-slate-700 dark:text-slate-200 mb-1">💾 配置与报表</div>
+                    <ul class="list-disc pl-4 space-y-0.5">
+                        <li>先通过「📁 授权目录」让网页获得固件目录访问权限</li>
+                        <li>首次配置完成后点「💾 导出配置」，保存全部配置</li>
+                        <li>后续使用：先「📁 授权目录」，再「📂 载入配置」即可恢复</li>
+                        <li>「📄 导出报表 CSV」= 统计 + 逐片明细 + 日志</li>
+                    </ul>
+                </div>
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl px-3 py-2">
+                    ⚠️ 环境：<b>Chrome / Edge</b> + <b>HTTPS 或 localhost</b>（WebUSB）。
+                    统计：总烧录/成功/失败（不含重试）+ 含重试失败。
+                </div>
+            </div>
+        </div>
+        </div>
+        </aside>
+
+        <main class="flex-1 min-w-0 space-y-6">
 
         <!-- 连接区 -->
         <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-xl">
@@ -292,7 +367,22 @@
                 <div class="text-slate-500">-- 等待开始 --</div>
             </div>
         </div>
-    </main>
+        </main>
+        </div>
+    </div>
+
+    <script>
+        /* 左侧帮助栏: 窄条(36px) ↔ 完整面板(368px), 向左收缩/展开 */
+        (function () {
+            var sb = document.getElementById('helpSidebar');
+            var btn = document.getElementById('helpToggle');
+            if (!sb || !btn) return;
+            btn.addEventListener('click', function () {
+                var open = sb.style.width === '368px';
+                sb.style.width = open ? '36px' : '368px';
+            });
+        })();
+    </script>
 
     <script src="src/hercules.js"></script>
     <script src="src/dapv2.js"></script>
