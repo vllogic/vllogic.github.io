@@ -55,12 +55,24 @@ const engine = new MassProduceEngine();
 let fileRows = [];  // { fileName, addr, cutAcf, rawData, loaded }
 
 /* ================= 日志 ================= */
-function appendLog(msg) {
+// 日志行数上限: 批量量产(如 3 万片)时 DOM 节点数恒定, 避免内存暴涨/卡顿
+const MAX_LOG_LINES = 3000;
+
+function appendLog(msg, level = 'info') {
     const div = document.createElement('div');
     div.className = 'log-line';
+    if (level) div.dataset.level = level;   // debug/info/error: CSV 导出时过滤 debug 调试行
     div.textContent = `[${new Date().toLocaleTimeString('zh-CN', { hour12: false })}] ${msg}`;
     logBox.appendChild(div);
-    logBox.scrollTop = logBox.scrollHeight;
+    // 超出上限批量裁剪旧行, 保持 DOM 与 reflow 成本恒定
+    const over = logBox.childElementCount - MAX_LOG_LINES;
+    if (over > 0) {
+        for (let i = 0; i < over; i++) logBox.removeChild(logBox.firstElementChild);
+    }
+    // 仅当接近底部时自动滚动, 避免每次追加都强制同步 reflow
+    if (logBox.scrollTop + logBox.clientHeight >= logBox.scrollHeight - 40) {
+        logBox.scrollTop = logBox.scrollHeight;
+    }
 }
 
 /* ================= 统计 / 状态 UI ================= */
@@ -86,7 +98,8 @@ function updateProgress(p) {
     if (progressFill) progressFill.style.width = pct + '%';
     // 阶段颜色: 烧录中=青蓝, 重试=琥珀, 成功=绿, 失败=红, 等待/空闲=灰
     const colors = { burning: 'bg-sky-500', retry: 'bg-amber-400', pass: 'bg-emerald-500', fail: 'bg-rose-500', wait: 'bg-slate-400', idle: 'bg-slate-400' };
-    if (progressFill) progressFill.className = 'h-full rounded-full transition-all duration-300 ' + (colors[p.phase] || 'bg-sky-500');
+    // 注意: 进度条不加 transition-all duration-* — 每 256B 块高频更新, 300ms 过渡动画会严重滞后
+    if (progressFill) progressFill.className = 'h-full rounded-full ' + (colors[p.phase] || 'bg-sky-500');
     const labels = { burning: '烧录中', retry: '重试', pass: '成功', fail: '失败', wait: '等待', idle: '--' };
     if (progressText) {
         const label = labels[p.phase] || '';
@@ -109,7 +122,7 @@ function setConnectedUI(state) {
     // 兼容布尔调用: setConnectedUI(true/false) 与字符串调用
     if (state === true) state = 'connected';
     else if (state === false) state = 'disconnected';
-    appendLog('[UI] 连接状态 → ' + state);
+    appendLog('[UI] 连接状态 → ' + state, 'debug');
     if (state === 'connected') {
         connectBtn.textContent = 'Disconnect';
         connectBtn.classList.add('bg-green-600');
@@ -177,7 +190,7 @@ function collectCfg() {
             cmdTimeoutMs: 3000,
             speedKHz: 48000
         },
-        trigger: { mode: mode ? mode.value : 'vref-rising', autoInterval: parseInt(autoIntervalSel.value, 10) },
+        trigger: { mode: mode ? mode.value : 'vref-rising', autoInterval: parseFloat(autoIntervalSel.value) },
         statusOut: {
             enable: statusOutCb.checked,
             passAction: passActionSel.value,
@@ -196,7 +209,10 @@ function applyCfg(cfg) {
     if (cfg.trigger && cfg.trigger.mode) {
         const radio = document.querySelector(`input[name="trigger-mode"][value="${cfg.trigger.mode}"]`);
         if (radio) radio.checked = true;
-        if (cfg.trigger.autoInterval) autoIntervalSel.value = String(cfg.trigger.autoInterval);
+        // 仅当配置的间隔值在新选项列表中存在时才恢复 (旧配置值如 3/5/8 不在新列表则保持默认 2s)
+        if (cfg.trigger.autoInterval && [...autoIntervalSel.options].some(o => o.value === String(cfg.trigger.autoInterval))) {
+            autoIntervalSel.value = String(cfg.trigger.autoInterval);
+        }
     }
     updateIntervalRow();
     if (cfg.statusOut) {
@@ -598,23 +614,34 @@ function stopRun() {
 }
 
 /* ================= CSV 导出 ================= */
+// 报表结构: 头部统计 + 逐片明细(结构化, 3 万片也仅几 MB) + 最近日志(过滤 debug 调试行)
 function exportCsv() {
+    const esc = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
     const rows = [
-        ['时间', new Date().toLocaleString('zh-CN', { hour12: false })],
+        ['生产报表', 'web_program_hercules'],
+        ['导出时间', new Date().toLocaleString('zh-CN', { hour12: false })],
         ['总烧录(不含重试)', engine.stats.burn],
         ['成功(不含重试)', engine.stats.pass],
         ['失败(不含重试)', engine.stats.fail],
         ['含重试失败次数', engine.stats.retryFail],
         [],
-        ['日志']
+        ['=== 逐片明细 ==='],
+        ['序号', '时间', '结果', '详情']
     ];
-    document.querySelectorAll('#logBox .log-line').forEach(line => rows.push([line.textContent]));
-    const csv = rows.map(r => r.map(c => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
+    engine.getChipRecords().forEach((r, i) => {
+        rows.push([i + 1, r.t, r.ok ? 'PASS' : 'FAIL', r.msg]);
+    });
+    rows.push([], ['=== 日志 (最近 ' + MAX_LOG_LINES + ' 条, 已过滤调试信息) ===']);
+    document.querySelectorAll('#logBox .log-line').forEach(line => {
+        if (line.dataset.level === 'debug') return;   // 过滤调试行 (OUTPUT_TXD_SRST / [UI] / [USB])
+        rows.push([line.textContent]);
+    });
+    const csv = rows.map(r => r.map(esc).join(',')).join('\n');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' }));
     a.download = 'mass_report_' + Date.now() + '.csv';
     a.click();
-    appendLog('已导出报表 CSV');
+    appendLog('已导出报表 CSV (逐片明细 ' + engine.getChipRecords().length + ' 条)');
 }
 
 /* ================= 自动重连 ================= */
@@ -637,7 +664,7 @@ async function autoConnectOnLoad() {
 
 if (navigator.usb) {
     navigator.usb.addEventListener('connect', async (ev) => {
-        appendLog('[USB] connect 事件: ' + (ev.device.productName || ev.device.productId));
+        appendLog('[USB] connect 事件: ' + (ev.device.productName || ev.device.productId), 'debug');
         if (!engine.port) {
             try {
                 setConnectedUI('connecting');
@@ -649,7 +676,7 @@ if (navigator.usb) {
         }
     });
     navigator.usb.addEventListener('disconnect', (ev) => {
-        appendLog('[USB] disconnect 事件: ' + (ev.device.productName || ev.device.productId));
+        appendLog('[USB] disconnect 事件: ' + (ev.device.productName || ev.device.productId), 'debug');
         if (engine.port && ev.device === engine.port.device_) {
             engine.disconnect();
             setConnectedUI(false);
@@ -671,6 +698,11 @@ function init() {
     document.querySelectorAll('input[name="trigger-mode"]').forEach(r => r.addEventListener('change', updateIntervalRow));
     $('addFileBtn').addEventListener('click', addFileRow);
     $('exportCsvBtn').addEventListener('click', exportCsv);
+    const clearLogBtn = $('clearLogBtn');
+    if (clearLogBtn) clearLogBtn.addEventListener('click', () => {
+        logBox.innerHTML = '';
+        appendLog('日志已清空');
+    });
     $('authDirBtn').addEventListener('click', () => ConfigStore.authorizeDir());
     $('exportCfgBtn').addEventListener('click', exportConfig);
     $('loadCfgBtn').addEventListener('click', async () => {

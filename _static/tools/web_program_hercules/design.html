@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>量产自动化网页 — 设计方案 v3.1 (web_program_hercules)</title>
+    <title>量产自动化网页 — 设计方案 v3.2 (web_program_hercules)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -33,7 +33,7 @@
             <h1 class="font-bold tracking-tighter text-xl italic text-slate-800 dark:text-slate-100">
                 <span class="text-slate-400">HERCULES</span> <span class="text-primary font-black">PROGRAM</span>
             </h1>
-            <span class="ml-2 text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500 bg-emerald-500/10 border border-emerald-500/30 rounded-full px-3 py-1">设计方案 v3.1 · 已实施</span>
+            <span class="ml-2 text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500 bg-emerald-500/10 border border-emerald-500/30 rounded-full px-3 py-1">设计方案 v3.2 · 已实施</span>
         </div>
         <div class="flex items-center gap-6">
             <!-- 三模态主题切换 (右3) -->
@@ -44,7 +44,7 @@
                 <div id="themeSlider" class="absolute h-7 w-[31%] bg-primary rounded-full transition-all duration-300 shadow-lg"></div>
             </div>
             <!-- 连接状态 (右2) -->
-            <div class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">v3.1 · 已实施 · 2026-08-02</div>
+            <div class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">v3.2 · 已实施 · 2026-08-02</div>
             <!-- 工具导航 (右1) -->
             <div class="relative" id="toolNav">
                 <button id="toolNavBtn" type="button" title="快速跳转到其他工具"
@@ -138,7 +138,7 @@
                 </div>
                 <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
                     基于 <code class="text-primary font-bold">web_download_hercules</code> 的协议与传输层，特化批量生产自动化量产网页。
-                    本版（v3.1）为<b>已实施版本</b>，在 v3.0 基础上追加：多文件虚拟单一文件烧写、占用空间重叠检测、烧录地址 0x100 对齐、触发稳定基线（修复 RXD 默认电平伪触发）、配置授权前置、量产中文件表锁定等（见下方 v3.1 实施摘要）。
+                    本版（v3.2）为<b>已实施版本</b>，在 v3.1 基础上追加：量产日志批量安全（上限/分级/自动滚动/清空）、CSV 报表重构（统计+逐片明细+最近日志）、日志精简、间隔触发选项（0.25~10s 默认 2s）、触发方式标签更新等（见下方 v3.2 实施摘要）。
                 </p>
                 <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-4 text-sm text-slate-600 dark:text-slate-300 mb-4">
                     ✅ <b>v3.0 实施摘要</b>：
@@ -148,7 +148,7 @@
                         <li>重试：<b>最小命令包重试</b>优先，失败回退整文件烧写；命令级 3s 超时；4 项统计口径</li>
                         <li>重试计数：<b>块级与文件级双计数器独立</b>（上限均 retryCount），块级成功/彻底失败后清零</li>
                         <li>VREF：仅 <code>vref_mv_valid</code> 判定触发；<code>vref_mv</code> 只做 UI 电压显示；<b>严格 0→1 上升沿</b>（首帧仅建立基线，不触发）</li>
-                        <li>触发方式新增<b>间隔触发</b>：烧录完成后等 N 秒（1-10s，默认 3s）自动烧下一片（§4.2）</li>
+                        <li>触发方式新增<b>间隔触发</b>：烧录完成后等 N 秒（0.25/0.5/1/2/4/7/10s，默认 2s）自动烧下一片（§4.2）</li>
                         <li>整片失败：<b>记录即可</b>，无停机策略（触发 + 状态输出已满足自动化）</li>
                         <li>状态输出：<b>电平保持</b>，SRST 为普通 IO 直通 0/1（<b>无反相</b>），忙电平→成功/失败翻转→下一片恢复（§5）</li>
                         <li>实时状态：新增<b>进度条 PROG</b>（烧录中青蓝 / 成功绿 / 失败红 / 重试琥珀，pass/fail 保持至下次烧录）+ <b>SESSION 徽章</b></li>
@@ -169,6 +169,19 @@
                         <li><b>多文件虚拟单一文件烧写</b>：按地址升序，<code>addr=首个文件地址</code>、<code>data_pos=相对头部偏移</code>、<code>full_length=最大偏移-基地址</code>、缝隙跳过；满足下载器完成判定与 Auto Run（§7.3）；含 <b>slice_pos 修复</b>（数据切片用文件内偏移，命令字段与切片索引分离）</li>
                         <li><b>触发稳定基线</b>：边沿检测前连续 3 帧电平一致才作为基线，修复 RXD 默认高（上升沿）/默认低（下降沿）时接管瞬态造成的<b>点击开始即触发</b>伪边沿（§4.1）</li>
                         <li><b>量产中文件表锁定</b>：开始量产后文件表卡片整体灰化锁定（选择/地址/CutACF/删除/添加全部禁用）+ 事件层兜底（§11）</li>
+                    </ul>
+                </div>
+                <div class="bg-violet-500/10 border border-violet-500/30 rounded-2xl p-4 text-sm text-slate-600 dark:text-slate-300 mb-4">
+                    ✅ <b>v3.2 实施摘要</b>：
+                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                        <li><b>量产日志批量安全</b>：日志行数上限 <code>MAX_LOG_LINES=3000</code> + 批量裁剪（DOM/reflow 成本恒定，防 3 万片内存暴涨/卡顿）；仅接近底部时自动滚动；日志分级 debug/info，CSV 导出过滤 debug 调试行（§11）</li>
+                        <li><b>逐片结果记录</b>：engine 新增 <code>chipRecords / _recordChip / getChipRecords</code>（每片一条 {时间/结果/详情}，软上限 10 万，量产会话开始重置），作为生产报表结构化数据源（§11）</li>
+                        <li><b>CSV 报表重构</b>：导出「头部统计 + 逐片明细（序号/时间/结果/详情）+ 最近 3000 条日志（过滤调试行）」，体积与耗时大幅下降（§11）</li>
+                        <li><b>日志精简</b>：删除 <code>OUTPUT_TXD_SRST</code> 调试行；「容量校验通过」成功日志删除（仅容量不足时由失败路径输出）；虚拟文件布局信息改为量产会话开始输出一次，后续每片不重复（§8/§11）</li>
+                        <li><b>间隔触发选项</b>：0.25s / 0.5s / 1s / 2s / 4s / 7s / 10s，默认 2s；配置读取用 <code>parseFloat</code> 支持小数；旧配置值（3/5/8…）不在新列表则保持默认 2s（§4.2）</li>
+                        <li><b>触发方式标签</b>：KEY 0→1→KEY Press、RXD↑→RXD ↑上升沿、RXD↓→RXD ↓下降沿、VREF↑→VREF ↑上升沿、手动→手动触发（value 不变，仅显示文本）（§11）</li>
+                        <li><b>进度条去动画</b>：移除 <code>transition-all duration-300</code>（256B 块高频更新下动画滞后）（§11）</li>
+                        <li><b>清空日志按钮</b>：「🧹 清空日志」一键释放日志 DOM（§11）</li>
                     </ul>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-center">
@@ -279,7 +292,7 @@ output_txd_srst(t,s)    → [0x90, 0x05, txd_level(0/1), srst_level(0/1)]</code>
                             <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 text-primary font-bold font-sans">rxd-falling</td><td class="py-2 pr-4">rxdLogic 1 → 0</td><td class="py-2 font-sans">RXD 下降沿</td></tr>
                             <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 text-primary font-bold font-sans">vref-rising</td><td class="py-2 pr-4"><b>vrefValid</b> 0 → 1（严格，首帧不触发）</td><td class="py-2 font-sans">VREF 掉电再上电</td></tr>
                             <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 text-primary font-bold font-sans">manual</td><td class="py-2 pr-4">网页按钮点击</td><td class="py-2 font-sans">人工</td></tr>
-                            <tr><td class="py-2 pr-4 text-emerald-500 font-bold font-sans">auto-timer</td><td class="py-2 pr-4">烧录完成后等 N 秒自动触发</td><td class="py-2 font-sans">间隔触发（1-10s，默认 3s）</td></tr>
+                            <tr><td class="py-2 pr-4 text-emerald-500 font-bold font-sans">auto-timer</td><td class="py-2 pr-4">烧录完成后等 N 秒自动触发</td><td class="py-2 font-sans">间隔触发（0.25/0.5/1/2/4/7/10s，默认 2s）</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -312,7 +325,7 @@ while (this.running) {
                 <h3 class="font-black text-sm mb-2">4.2 间隔触发 auto-timer</h3>
                 <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4 text-sm text-slate-600 dark:text-slate-300 mb-4">
                     <ul class="list-disc pl-5 space-y-1">
-                        <li>间隔秒数：下拉框 <b>1s ~ 10s，步进 1s，默认 3s</b>（内嵌于"间隔触发"选项右侧，未选中时禁用）</li>
+                        <li>间隔秒数：下拉框 <b>0.25s / 0.5s / 1s / 2s / 4s / 7s / 10s，默认 2s</b>（内嵌于"间隔触发"选项右侧，未选中时禁用）</li>
                         <li>开始量产<b>首次立即烧第一片</b>（<code>_autoFirst</code> 标记）；之后每片完成（无论成败）等待 N 秒自动触发下一片</li>
                         <li>等待采用 100ms 分片循环，<b>点停止可随时中断</b></li>
                         <li>进度条在间隔等待期间保持上片结果（绿/红），下一片开始恢复 0% 蓝色</li>
@@ -320,7 +333,7 @@ while (this.running) {
                 </div>
                 <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 text-xs overflow-x-auto"><code>if (mode === 'auto-timer') {
     if (this._autoFirst) { this._autoFirst = false; return; }        // 首次立即
-    const ms = (this.cfg.trigger.autoInterval || 3) * 1000;
+    const ms = (this.cfg.trigger.autoInterval || 2) * 1000;
     const steps = Math.max(1, Math.ceil(ms / 100));
     for (let i = 0; i < steps && this.running; i++) await sleep(100); // 可被 stop 中断
     return;
@@ -554,7 +567,7 @@ flowchart TD
                 </div>
                 <ul class="list-disc pl-5 text-sm text-slate-600 dark:text-slate-300 space-y-1 mt-4">
                     <li><b>连续量产</b>：烧完一片回到"等触发"，结果电平保持；换片触发后覆盖</li>
-                    <li><b>间隔触发</b>：烧录完成后（无论成败）等 N 秒（1-10s 默认 3s）自动触发下一片；首次立即</li>
+                    <li><b>间隔触发</b>：烧录完成后（无论成败）等 N 秒（0.25/0.5/1/2/4/7/10s 默认 2s）自动触发下一片；首次立即</li>
                     <li><b>失败处理</b>：记录 + 输出失败动作后<b>直接继续下一片</b>（无停机策略）</li>
                     <li><b>超时</b>：单个命令 3s 无响应 → 触发重试；触发等待不设超时</li>
                     <li><b>容量校验</b>：PROBE 后若烧录地址总范围 <code>maxEnd &gt; capacity</code> → 直接判错（§7.1）</li>
@@ -598,7 +611,7 @@ sequenceDiagram
   },
   "trigger": {
     "mode": "vref-rising",            // key-rising | rxd-rising | rxd-falling | vref-rising | manual | auto-timer
-    "autoInterval": 3                 // 间隔触发秒数 1-10，默认 3（仅 auto-timer 生效）
+    "autoInterval": 2                 // 间隔触发秒数 0.25/0.5/1/2/4/7/10，默认 2（仅 auto-timer 生效）
   },
   "statusOut": {
     "enable":     true,
@@ -666,10 +679,12 @@ sequenceDiagram
 │ 连接区 (扁平): ●已连接 Connection │ DAP版本 │ 断开      │
 ├──────────────┬───────────────┬──────────────────────┤
 │ 触发方式卡 (6选1)│ 烧写选项卡 (2×2+重试)│ 状态输出卡        │
-│ ○KEY0→1 ○RXD↑ │ ☑AutoErase(强制)  │ 成功 [无|TXD↑|TXD↓]│
-│ ○RXD↓  ○VREF↑ │ ☑AutoVerify(强制) │ 失败 [无|SRST↑|SRST↓]│
-│ ○手动  ○间隔触发│ ☑AutoRun          │ ☑接管引脚          │
-│        [3s▼]   │ 重试次数 [2▼]     │                   │
+│ ○KEY Press      │ ☑AutoErase(强制)  │ 成功 [无|TXD↑|TXD↓]│
+│ ○RXD ↑上升沿    │ ☑AutoVerify(强制) │ 失败 [无|SRST↑|SRST↓]│
+│ ○RXD ↓下降沿    │ ☑AutoRun          │ ☑接管引脚          │
+│ ○VREF ↑上升沿   │ 重试次数 [2▼]     │                   │
+│ ○手动触发 ○间隔触发│                  │                   │
+│        [2s▼]   │                   │                   │
 ├──────────────┼───────────────┼──────────────────────┤
 │ 量产统计      │ 实时状态       │ 量产控制            │
 │ 总烧录[0] 成功[0]│ VREF[--] RXD[--]│ [▶开始量产] [■停止]│
@@ -678,7 +693,7 @@ sequenceDiagram
 ├──────────────┴───────────────┴──────────────────────┤
 │ 烧写文件表: [选择文件][地址0x][CutACF][✓名称][✕] [+添加文件]│
 ├──────────────────────────────────────────────────────┤
-│ 量产日志: 配置回显 / OUTPUT_TXD_SRST 回显 / 失败原因   │
+│ 量产日志(上限3000/清空): 状态/探测/烧写/成败 结果   │
 └──────────────────────────────────────────────────────┘</code></pre>
                 <div class="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-300">
                     <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4">
@@ -688,9 +703,22 @@ sequenceDiagram
                             <li><b>配置灰化锁定</b>：触发方式/烧写选项/状态输出三卡，量产中整体 <code>opacity-40 + grayscale + pointer-events-none</code> 并禁用控件</li>
                             <li><b>进度条 PROG</b>：烧录中青蓝推进 / 成功绿 / 失败红 / 重试琥珀回退；pass/fail 保持到下次烧录开始才恢复 0% 蓝</li>
                             <li><b>SESSION 徽章</b>：空闲/等待触发/烧录中/重试中/本片成功/本片失败，与进度阶段同步</li>
-                            <li><b>间隔秒数下拉</b>：内嵌于「间隔触发」右侧，未选中该模式时禁用；量产中随卡片锁定</li>
+                            <li><b>间隔秒数下拉</b>：内嵌于「间隔触发」右侧，未选中该模式时禁用；量产中随卡片锁定；选项 0.25/0.5/1/2/4/7/10s 默认 2s</li>
                             <li>卡片统一扁平化（p-4），连接框/统计/实时/控制高度对齐</li>
                             <li><b>烧写文件表锁定</b>（v3.1）：量产中文件表卡片整体灰化锁定（选择文件/更换、地址、Cut ACF、删除、+ 添加文件全部禁用），事件层 <code>engine.running</code> 兜底拦截</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4">
+                        <b>量产日志与报表（v3.2 批量安全）</b>：
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li><b>日志上限</b>：<code>MAX_LOG_LINES=3000</code>，超出批量裁剪旧行 → DOM 节点与 reflow 成本恒定（3 万片也不涨内存）</li>
+                            <li><b>自动滚动</b>：仅当接近底部时滚动，避免每行强制同步 reflow</li>
+                            <li><b>日志分级</b>：<code>debug</code>（OUTPUT_TXD_SRST、[UI] 连接状态、[USB] 事件）与 <code>info</code>；CSV 导出过滤 debug</li>
+                            <li><b>逐片记录</b>：engine 维护 <code>chipRecords</code>（每片 {时间/结果/详情}，软上限 10 万），量产开始重置</li>
+                            <li><b>CSV 报表</b>：头部统计 + 逐片明细（序号/时间/结果/详情）+ 最近 3000 条日志（过滤 debug）</li>
+                            <li><b>日志精简</b>：<code>OUTPUT_TXD_SRST</code> 调试行已删除；「容量校验通过」仅失败时输出；虚拟文件布局量产开始输出一次</li>
+                            <li><b>清空日志</b>：「🧹 清空日志」按钮一键释放日志 DOM</li>
+                            <li><b>进度条</b>：无 <code>transition-all duration-*</code>（256B 块高频更新下动画滞后）</li>
                         </ul>
                     </div>
                     <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-4">
@@ -718,6 +746,9 @@ sequenceDiagram
                 </div>
                 <div class="bg-sky-500/10 border border-sky-500/30 rounded-2xl p-3 mb-4 text-sm text-slate-600 dark:text-slate-300">
                     ✅ <b>v3.1 追加</b>：配置授权前置（先授权目录）、导出/载入灰化 + 目录显示、文件表自定义选择控件、移除全局 Auto Cut ACF、地址 0x100 对齐、占用空间重叠检测、多文件虚拟单一文件烧写（含 slice_pos 修复）、触发稳定基线（RXD 默认电平伪触发修复）、量产中文件表锁定。
+                </div>
+                <div class="bg-violet-500/10 border border-violet-500/30 rounded-2xl p-3 mb-4 text-sm text-slate-600 dark:text-slate-300">
+                    ✅ <b>v3.2 追加</b>：量产日志批量安全（上限 3000 / 分级 / 自动滚动 / 清空按钮）、逐片结果记录 + CSV 报表重构（统计 + 逐片明细 + 最近日志）、日志精简（删 OUTPUT_TXD_SRST / 容量校验仅失败输出 / 虚拟文件布局一次输出）、间隔触发选项 0.25~10s 默认 2s、触发方式标签更新（KEY Press / RXD ↑↓上升/下降沿 / 手动触发）、进度条去动画。
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
@@ -749,7 +780,7 @@ sequenceDiagram
                             </tr>
                             <tr>
                                 <td class="py-2 pr-4 font-black text-primary">M5 统计/报表/部署</td>
-                                <td class="py-2 pr-4">CSV 日志、4 项统计面板、kiosk/HTTPS 部署说明</td>
+                                <td class="py-2 pr-4">CSV 报表（统计 + 逐片明细 + 最近日志）、4 项统计面板、日志上限/清空、kiosk/HTTPS 部署说明</td>
                                 <td class="py-2">M3</td>
                             </tr>
                         </tbody>
@@ -784,7 +815,7 @@ sequenceDiagram
                             <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">Q4 首帧不触发</td><td class="py-2 pr-4">暂忽略，后续优化</td><td class="py-2">§4 注释标注，不实现</td></tr>
                             <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">Q5 多工位</td><td class="py-2 pr-4">预留接口，先单工位</td><td class="py-2">§11 引擎可实例化，先单工位</td></tr>
                             <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">Q6 TXD 接管冲突</td><td class="py-2 pr-4">设计本意；退出量产 RELEASE</td><td class="py-2">§2/§5 接管生命周期 + 退出释放</td></tr>
-                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3 间隔触发</td><td class="py-2 pr-4">烧录完成后等 N 秒自动下一片</td><td class="py-2">§4.2 1-10s 默认 3s，首次立即，可 stop 中断</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3 间隔触发</td><td class="py-2 pr-4">烧录完成后等 N 秒自动下一片</td><td class="py-2">§4.2 0.25/0.5/1/2/4/7/10s 默认 2s（v3.2 更新），首次立即，可 stop 中断</td></tr>
                             <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3 VREF 严格上升沿</td><td class="py-2 pr-4">开始量产 VREF 已高不应立即触发</td><td class="py-2">§4.1 首帧仅建基线，必须 0→1（掉电再上电）才触发</td></tr>
                             <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3 SRST 直通不反相</td><td class="py-2 pr-4">SRST 是普通 IO，写 0=低 写 1=高</td><td class="py-2">§5 移除误加反相；忙电平→结果电平→下一片恢复</td></tr>
                             <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3 进度条保持</td><td class="py-2 pr-4">烧录完成后进度条不立即回退</td><td class="py-2">§8/§11 pass/fail 保持至下次烧录开始恢复 0% 蓝</td></tr>
@@ -793,7 +824,12 @@ sequenceDiagram
                             <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3.1 地址对齐/重叠</td><td class="py-2 pr-4">烧录地址 0x100 对齐；多文件占用空间重叠告警并禁止量产</td><td class="py-2">§7.2 对齐 + 重叠检测 + 文件表红色告警</td></tr>
                             <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3.1 多文件虚拟文件</td><td class="py-2 pr-4">多文件=虚拟单一文件，满足下载器完成判定与 Auto Run</td><td class="py-2">§7.3 baseAddr/full_length/data_pos + slice_pos 修复</td></tr>
                             <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3.1 RXD 伪触发</td><td class="py-2 pr-4">RXD 默认电平下点击开始即触发不符合边沿机制（下降沿对称）</td><td class="py-2">§4.1 稳定基线（3 帧）吸收 TAKEOVER 瞬态</td></tr>
-                            <tr><td class="py-2 pr-4 font-mono text-xs">v3.1 文件表锁定</td><td class="py-2 pr-4">量产中禁止修改烧写文件表</td><td class="py-2">§11 文件表卡片灰化锁定 + 事件兜底</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3.1 文件表锁定</td><td class="py-2 pr-4">量产中禁止修改烧写文件表</td><td class="py-2">§11 文件表卡片灰化锁定 + 事件兜底</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3.2 日志批量安全</td><td class="py-2 pr-4">3 万片产生过多日志，占用 RAM / 卡顿</td><td class="py-2">§11 日志上限 3000 + 批量裁剪 + 仅底部自动滚动 + 清空按钮</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3.2 CSV 报表</td><td class="py-2 pr-4">导出全量日志会卡死且含调试噪音</td><td class="py-2">§11 统计 + 逐片明细 + 最近 3000 条日志（过滤 debug）</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3.2 日志精简</td><td class="py-2 pr-4">OUTPUT_TXD_SRST 调试行 / 容量校验通过行 / 重复虚拟文件行</td><td class="py-2">§8/§11 删除调试行；容量仅失败输出；虚拟文件布局会话开始输出一次</td></tr>
+                            <tr class="border-b border-slate-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono text-xs">v3.2 间隔选项</td><td class="py-2 pr-4">间隔触发需要更细粒度</td><td class="py-2">§4.2 0.25/0.5/1/2/4/7/10s 默认 2s；parseFloat 支持小数；旧值回退 2s</td></tr>
+                            <tr><td class="py-2 pr-4 font-mono text-xs">v3.2 触发标签</td><td class="py-2 pr-4">触发方式文案表达不清晰</td><td class="py-2">§11 KEY Press / RXD ↑上升沿 / RXD ↓下降沿 / VREF ↑上升沿 / 手动触发</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -801,7 +837,7 @@ sequenceDiagram
 
             <!-- 页脚 -->
             <div class="text-center text-[10px] text-slate-400 font-mono uppercase tracking-widest py-4">
-                Web Program Hercules · 设计方案 v3.1 · 已实施 · 2026-08-02
+                Web Program Hercules · 设计方案 v3.2 · 已实施 · 2026-08-02
             </div>
         </main>
     </div>
