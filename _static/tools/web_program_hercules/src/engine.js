@@ -33,6 +33,10 @@ class MassProduceEngine {
         this.chipValid = false;
         this.capacity = 0;
 
+        // 逐片结果记录 (生产报表数据源, 每片一条: {t, ok, msg})
+        this.chipRecords = [];
+        this.chipResultFn = () => {};
+
         // UI 回调
         this.logFn = () => {};
         this.statusFn = () => {};
@@ -44,7 +48,9 @@ class MassProduceEngine {
     setStatus(fn) { this.statusFn = fn || (() => {}); }
     setState(fn) { this.stateFn = fn || (() => {}); }
     setProgress(fn) { this.progressFn = fn || (() => {}); }
-    log(msg) { this.logFn(msg); }
+    setChipResult(fn) { this.chipResultFn = fn || (() => {}); }
+    getChipRecords() { return this.chipRecords; }
+    log(msg, level) { this.logFn(msg, level); }
 
     /* ================= 连接 / 断开 ================= */
     async connect(existingDevice = null) {
@@ -178,7 +184,6 @@ class MassProduceEngine {
         const ns = (s === null || s === undefined) ? (this._outSrst ?? 0) : s;
         this._outTxd = nt;
         this._outSrst = ns;
-        this.log(`OUTPUT_TXD_SRST: TXD=${nt} SRST=${ns}`);   // 真机核对发送值
         const resp = await this.request(hercules_cmd_output_txd_srst(nt, ns));
         if (!this.respOk(resp)) throw new Error('OUTPUT_TXD_SRST failed');
     }
@@ -215,7 +220,7 @@ class MassProduceEngine {
         }
         if (mode === 'auto-timer') {
             if (this._autoFirst) { this._autoFirst = false; return; }   // 首次立即烧第一片
-            const ms = (this.cfg.trigger.autoInterval || 3) * 1000;
+            const ms = (this.cfg.trigger.autoInterval || 2) * 1000;
             this.log(`⏳ 间隔触发: ${ms / 1000}s 后自动烧录下一片`);
             const steps = Math.max(1, Math.ceil(ms / 100));
             for (let i = 0; i < steps && this.running; i++) await sleep(100);   // 可被 stop 中断
@@ -383,6 +388,7 @@ class MassProduceEngine {
         this.cfg = cfg;
         this.running = true;
         this.stats = { burn: 0, pass: 0, fail: 0, retryFail: 0 };
+        this.chipRecords = [];      // 新会话重置逐片记录
         this._triggerPrev = null;   // 新量产会话重置触发状态
         this._autoFirst = true;     // 间隔触发: 新会话首次立即烧第一片
         this._progressBytes = 0;
@@ -392,6 +398,13 @@ class MassProduceEngine {
         try {
             if (this.cfg.statusOut.enable) await this.takeover();
             await this.signalReady();
+            // 多文件虚拟单一文件: 按地址升序烧写, 基地址 = 首个文件地址, full_length = 最大偏移 - 基地址
+            // 量产中文件表锁定, 布局不随片变化 → 会话开始计算一次并输出, 后续烧录不重复
+            const files = [...this.cfg.files].sort((a, b) => (a.addr || 0) - (b.addr || 0));
+            this._baseAddr = files.length ? (files[0].addr || 0) : 0;
+            const maxOffset = files.reduce((m, f) => Math.max(m, (f.addr || 0) + (f.data ? f.data.byteLength : 0)), 0);
+            this._fullLength = maxOffset - this._baseAddr;
+            this.log(`虚拟文件: 基地址 0x${this._baseAddr.toString(16)} full_length=0x${this._fullLength.toString(16)}B (最大偏移 0x${maxOffset.toString(16)}), 共 ${files.length} 个数据块区, 缝隙跳过`);
             while (this.running) {
                 await this.waitTrigger();
                 if (!this.running) break;
@@ -400,15 +413,8 @@ class MassProduceEngine {
                 this.log(`==== 开始烧写第 ${this.stats.burn} 片 ====`);
                 this.progressFn({ phase: 'burning', done: 0, total: totalBytes });   // 下次烧录开始: 恢复0%蓝色
                 try {
-                    await this.probeChip();                           // 触发后探测
-                    const maxEnd = this.checkCapacity(this.cfg.files);
-                    this.log(`  容量校验通过 (maxEnd=${maxEnd}B)`);
-                    // 多文件虚拟单一文件: 按地址升序烧写, 基地址 = 首个文件地址, full_length = 最大偏移 - 基地址
-                    const files = [...this.cfg.files].sort((a, b) => (a.addr || 0) - (b.addr || 0));
-                    this._baseAddr = files.length ? (files[0].addr || 0) : 0;
-                    const maxOffset = files.reduce((m, f) => Math.max(m, (f.addr || 0) + (f.data ? f.data.byteLength : 0)), 0);
-                    this._fullLength = maxOffset - this._baseAddr;
-                    this.log(`  虚拟文件: 基地址 0x${this._baseAddr.toString(16)} full_length=0x${this._fullLength.toString(16)}B (最大偏移 0x${maxOffset.toString(16)}), 共 ${files.length} 个数据块区, 缝隙跳过`);
+                    await this.probeChip();                           // 触发后探测 (输出: 探测: 芯片容量 ...)
+                    this.checkCapacity(files);                        // 容量不足时抛错, 由下方 catch 输出; 满足时不输出
                     this._progressBytes = 0;
                     let base = 0;
                     for (const f of files) {
@@ -420,11 +426,13 @@ class MassProduceEngine {
                     this.progressFn({ phase: 'pass', done: totalBytes, total: totalBytes });
                     await this.signalPass();
                     this.log(`✅ 第 ${this.stats.burn} 片成功`);
+                    this._recordChip(true, '第 ' + this.stats.burn + ' 片成功');
                 } catch (e) {
                     this.stats.fail++;
                     this.progressFn({ phase: 'fail', done: this._progressBytes, total: totalBytes });
                     await this.signalFail();
                     this.log(`❌ 第 ${this.stats.burn} 片失败: ${e.message}`);
+                    this._recordChip(false, '第 ' + this.stats.burn + ' 片失败: ' + e.message);
                 }
             }
         } catch (e) {
@@ -435,6 +443,14 @@ class MassProduceEngine {
             this.progressFn({ phase: 'idle', done: 0, total: totalBytes });
             this.stateFn('idle');
         }
+    }
+
+    // 记录逐片结果 (生产报表明细数据源)
+    _recordChip(ok, msg) {
+        const rec = { t: new Date().toLocaleString('zh-CN', { hour12: false }), ok, msg };
+        this.chipRecords.push(rec);
+        if (this.chipRecords.length > 100000) this.chipRecords.splice(0, this.chipRecords.length - 100000);   // 软上限防超长会话
+        this.chipResultFn(rec);
     }
 
     stop() {

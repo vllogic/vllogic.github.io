@@ -137,20 +137,19 @@
                     <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">触发方式</h2>
                 </div>
                 <div class="grid grid-cols-2 gap-2.5" id="triggerGroup">
-                    <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer"><input type="radio" name="trigger-mode" value="key-rising" class="accent-primary"><span>KEY 0→1</span></label>
-                    <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer"><input type="radio" name="trigger-mode" value="rxd-rising" class="accent-primary"><span>RXD ↑</span></label>
-                    <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer"><input type="radio" name="trigger-mode" value="rxd-falling" class="accent-primary"><span>RXD ↓</span></label>
-                    <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer"><input type="radio" name="trigger-mode" value="vref-rising" class="accent-primary" checked><span>VREF ↑</span></label>
-                    <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer"><input type="radio" name="trigger-mode" value="manual" class="accent-primary"><span>手动</span></label>
+                    <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer"><input type="radio" name="trigger-mode" value="key-rising" class="accent-primary"><span>KEY Press</span></label>
+                    <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer"><input type="radio" name="trigger-mode" value="rxd-rising" class="accent-primary"><span>RXD ↑上升沿</span></label>
+                    <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer"><input type="radio" name="trigger-mode" value="rxd-falling" class="accent-primary"><span>RXD ↓下降沿</span></label>
+                    <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer"><input type="radio" name="trigger-mode" value="vref-rising" class="accent-primary" checked><span>VREF ↑上升沿</span></label>
+                    <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer"><input type="radio" name="trigger-mode" value="manual" class="accent-primary"><span>手动触发</span></label>
                     <div class="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300">
                         <label class="flex items-center gap-1.5 cursor-pointer">
                             <input type="radio" name="trigger-mode" value="auto-timer" class="accent-primary">
                             <span>间隔触发</span>
                         </label>
-                        <select id="autoIntervalSel" disabled class="!py-0.5 w-14 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700 rounded-lg px-1 font-mono text-[10px] outline-none disabled:opacity-40">
-                            <option value="1">1s</option><option value="2">2s</option><option value="3" selected>3s</option>
-                            <option value="4">4s</option><option value="5">5s</option><option value="6">6s</option>
-                            <option value="7">7s</option><option value="8">8s</option><option value="9">9s</option><option value="10">10s</option>
+                        <select id="autoIntervalSel" disabled class="!py-0.5 w-16 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700 rounded-lg px-1 font-mono text-[10px] outline-none disabled:opacity-40">
+                            <option value="0.25">0.25s</option><option value="0.5">0.5s</option><option value="1">1s</option>
+                            <option value="2" selected>2s</option><option value="4">4s</option><option value="7">7s</option><option value="10">10s</option>
                         </select>
                     </div>
                 </div>
@@ -287,6 +286,7 @@
             <div class="flex items-center gap-3 mb-4">
                 <span class="text-lg">📜</span>
                 <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">量产日志</h2>
+                <button id="clearLogBtn" class="ml-auto py-1 px-3 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg font-black text-[10px] hover:bg-primary/20 transition-colors">🧹 清空日志</button>
             </div>
             <div id="logBox" class="h-48 overflow-y-auto bg-slate-900 text-slate-100 rounded-2xl p-4 text-xs font-mono leading-relaxed no-scrollbar">
                 <div class="text-slate-500">-- 等待开始 --</div>
