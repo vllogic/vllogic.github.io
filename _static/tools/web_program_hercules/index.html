@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Program Hercules - 量产工具</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { primary: '#00d4ff', darkBg: '#0b1120' } } }
+        }
+    </script>
+    <style>
+        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); }
+        .dark .glass { background: rgba(15,23,42,0.6); }
+        .accent-primary { accent-color: #00d4ff; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+        .btn-primary { @apply py-2.5 bg-primary text-white rounded-xl font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20 disabled:opacity-30 disabled:grayscale disabled:pointer-events-none; }
+        .input-dark { @apply w-full bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-mono text-slate-700 dark:text-slate-200 outline-none; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-darkBg text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-500">
+
+    <!-- ===== 顶部栏 ===== -->
+    <header class="h-16 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 sticky top-0 z-50 glass">
+        <div class="flex items-center gap-3">
+            <div class="w-2.5 h-2.5 bg-primary rounded-full animate-pulse shadow-[0_0_10px_#00d4ff]"></div>
+            <h1 class="font-bold tracking-tighter text-xl italic text-slate-800 dark:text-slate-100">
+                <span class="text-slate-400">HERCULES</span> <span class="text-primary font-black">PROGRAM</span>
+            </h1>
+            <span class="ml-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">量产工具</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="hidden md:flex items-center gap-2">
+                <button id="authDirBtn" class="py-1.5 px-3 rounded-lg text-[10px] font-black uppercase tracking-widest bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 transition-colors">📁 授权目录（内置固件及配置）</button>
+                <span id="authDirName" class="hidden max-w-[150px] truncate text-[10px] font-mono text-primary" title=""></span>
+                <button id="exportCfgBtn" disabled class="py-1.5 px-3 rounded-lg text-[10px] font-black uppercase tracking-widest bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 transition-colors disabled:opacity-30 disabled:grayscale disabled:pointer-events-none">💾 导出配置</button>
+                <button id="loadCfgBtn" disabled class="py-1.5 px-3 rounded-lg text-[10px] font-black uppercase tracking-widest bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 transition-colors disabled:opacity-30 disabled:grayscale disabled:pointer-events-none">📂 载入配置</button>
+            </div>
+            <!-- 三模态主题切换 -->
+            <div class="flex items-center bg-slate-200 dark:bg-slate-800 rounded-full p-1 border border-slate-300 dark:border-slate-700 w-40 relative">
+                <button data-theme="dark" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">深色</button>
+                <button data-theme="auto" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">AUTO</button>
+                <button data-theme="light" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">浅色</button>
+                <div id="themeSlider" class="absolute h-7 w-[31%] bg-primary rounded-full transition-all duration-300 shadow-lg"></div>
+            </div>
+            <div id="connStatus" class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Disconnected</div>
+            <!-- 工具导航 (右1) -->
+            <div class="relative" id="toolNav">
+                <button id="toolNavBtn" type="button" title="快速跳转到其他工具"
+                    class="flex items-center gap-1.5 py-1.5 px-3 rounded-xl text-[10px] font-black uppercase tracking-widest bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 transition-colors active:scale-95">
+                    <span>🧰</span><span class="hidden sm:inline">工具导航</span>
+                    <svg id="toolNavArrow" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                </button>
+                <div id="toolNavMenu" class="hidden absolute right-0 mt-2 w-64 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden z-50">
+                    <div class="px-4 py-2 text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 bg-slate-100/60 dark:bg-black/20 border-b border-slate-200 dark:border-slate-800">🧰 工具导航</div>
+                    <a href="../vllink2026_console/index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-colors border-b border-slate-200 dark:border-slate-800">
+                        <span class="text-lg">💻</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">VLLINK Console</span>
+                            <span class="text-[10px] text-slate-400">调试器控制台 · 配置查看编辑</span>
+                        </span>
+                        <span class="ml-auto text-[9px] text-slate-400">↗</span>
+                    </a>
+                    <a href="../web_download_hercules/index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-colors border-b border-slate-200 dark:border-slate-800">
+                        <span class="text-lg">🔥</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">Hercules Download</span>
+                            <span class="text-[10px] text-slate-400">Flash 下载 · 芯片读取</span>
+                        </span>
+                        <span class="ml-auto text-[9px] text-slate-400">↗</span>
+                    </a>
+                    <div class="flex items-center gap-3 px-4 py-3 bg-primary/10">
+                        <span class="text-lg">🏭</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">Hercules Program</span>
+                            <span class="text-[10px] text-slate-400">量产自动化 · 多片烧录</span>
+                        </span>
+                        <span class="ml-auto text-[9px] font-black uppercase tracking-widest text-primary bg-primary/15 rounded-full px-2 py-0.5">当前</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        (function () {
+            var btn = document.getElementById('toolNavBtn');
+            var menu = document.getElementById('toolNavMenu');
+            var arrow = document.getElementById('toolNavArrow');
+            if (!btn || !menu) return;
+            function setOpen(open) {
+                menu.classList.toggle('hidden', !open);
+                if (arrow) arrow.style.transform = open ? 'rotate(180deg)' : '';
+            }
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                setOpen(menu.classList.contains('hidden'));
+            });
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('#toolNav')) setOpen(false);
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') setOpen(false);
+            });
+        })();
+    </script>
+
+    <main class="max-w-6xl mx-auto p-8 space-y-6">
+
+        <!-- 连接区 -->
+        <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-xl">
+            <div class="flex items-center gap-4">
+                <div id="connDot" class="w-2.5 h-2.5 rounded-full bg-slate-400 shadow-[0_0_10px_rgba(100,116,139,0.6)]"></div>
+                <div class="flex flex-col">
+                    <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Connection</span>
+                    <span id="connText" class="text-sm font-black text-slate-700 dark:text-slate-200">未连接</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 font-mono text-xs">
+                    <span class="text-[9px] text-slate-400 uppercase font-black">DAP Version</span>
+                    <span id="versionShow" class="text-primary font-black">-</span>
+                </div>
+                <button id="connectBtn" class="py-2 px-5 bg-primary text-white rounded-xl font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20">Connect Vllink</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- 触发方式 -->
+            <div id="cfgCardTrigger" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-4 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">🔍</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">触发方式</h2>
+                </div>
+                <div class="grid grid-cols-2 gap-2.5" id="triggerGroup">
+                    <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer"><input type="radio" name="trigger-mode" value="key-rising" class="accent-primary"><span>KEY 0→1</span></label>
+                    <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer"><input type="radio" name="trigger-mode" value="rxd-rising" class="accent-primary"><span>RXD ↑</span></label>
+                    <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer"><input type="radio" name="trigger-mode" value="rxd-falling" class="accent-primary"><span>RXD ↓</span></label>
+                    <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer"><input type="radio" name="trigger-mode" value="vref-rising" class="accent-primary" checked><span>VREF ↑</span></label>
+                    <label class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 cursor-pointer"><input type="radio" name="trigger-mode" value="manual" class="accent-primary"><span>手动</span></label>
+                    <div class="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300">
+                        <label class="flex items-center gap-1.5 cursor-pointer">
+                            <input type="radio" name="trigger-mode" value="auto-timer" class="accent-primary">
+                            <span>间隔触发</span>
+                        </label>
+                        <select id="autoIntervalSel" disabled class="!py-0.5 w-14 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700 rounded-lg px-1 font-mono text-[10px] outline-none disabled:opacity-40">
+                            <option value="1">1s</option><option value="2">2s</option><option value="3" selected>3s</option>
+                            <option value="4">4s</option><option value="5">5s</option><option value="6">6s</option>
+                            <option value="7">7s</option><option value="8">8s</option><option value="9">9s</option><option value="10">10s</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 强制选项 -->
+            <div id="cfgCardOptions" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-4 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">🔒</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">烧写选项</h2>
+                </div>
+                <div class="grid grid-cols-2 gap-x-3 gap-y-2.5 text-xs text-slate-600 dark:text-slate-300">
+                    <label class="flex items-center gap-2 cursor-pointer"><input id="autoEraseLocked" type="checkbox" checked disabled class="accent-primary"> Auto Erase <span class="text-[9px] text-slate-400 uppercase font-black">(强制)</span></label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input id="autoVerifyLocked" type="checkbox" checked disabled class="accent-primary"> Auto Verify <span class="text-[9px] text-slate-400 uppercase font-black">(强制)</span></label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input id="autoRunCb" type="checkbox" class="accent-primary"> Auto Run</label>
+                </div>
+                <div class="flex items-center gap-2 pt-2.5 text-xs text-slate-600 dark:text-slate-300">
+                    <span class="text-slate-400">重试次数</span>
+                    <select id="retryCountSel" class="input-dark !py-1.5 w-20">
+                        <option value="0">0</option><option value="1">1</option><option value="2" selected>2</option>
+                        <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                        <option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option>
+                    </select>
+                    <span class="text-slate-400">(0-9)</span>
+                </div>
+            </div>
+
+            <!-- 状态动作 -->
+            <div id="cfgCardStatus" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-4 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-lg">🚦</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">状态输出</h2>
+                </div>
+                <div class="space-y-3 text-xs text-slate-600 dark:text-slate-300">
+                    <label class="flex items-center gap-2 cursor-pointer"><input id="statusOutCb" type="checkbox" checked class="accent-primary"> 接管引脚 (TAKEOVER/RELEASE)</label>
+                    <div class="flex items-center gap-2">
+                        <span class="text-slate-400 w-14">成功</span>
+                        <select id="passActionSel" class="input-dark !py-1.5 flex-1">
+                            <option value="none">无动作</option>
+                            <option value="pass_txd_rise" selected>TXD ↑ 上升沿</option>
+                            <option value="pass_txd_fall">TXD ↓ 下降沿</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-slate-400 w-14">失败</span>
+                        <select id="failActionSel" class="input-dark !py-1.5 flex-1">
+                            <option value="none">无动作</option>
+                            <option value="fail_srst_rise" selected>SRST ↑ 上升沿</option>
+                            <option value="fail_srst_fall">SRST ↓ 下降沿</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- 统计 -->
+            <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-4 shadow-xl">
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="text-lg">📊</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">量产统计</h2>
+                </div>
+                <div class="grid grid-cols-2 gap-1.5">
+                    <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-2 py-1.5 text-center"><div id="statBurn" class="text-2xl font-black text-slate-700 dark:text-slate-100">0</div><div class="text-[9px] uppercase tracking-widest text-slate-400 font-black">总烧录</div></div>
+                    <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-2 py-1.5 text-center"><div id="statPass" class="text-2xl font-black text-emerald-500">0</div><div class="text-[9px] uppercase tracking-widest text-slate-400 font-black">成功</div></div>
+                    <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-2 py-1.5 text-center"><div id="statFail" class="text-2xl font-black text-rose-500">0</div><div class="text-[9px] uppercase tracking-widest text-slate-400 font-black">失败</div></div>
+                    <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-2 py-1.5 text-center"><div id="statRetry" class="text-2xl font-black text-amber-500">0</div><div class="text-[9px] uppercase tracking-widest text-slate-400 font-black">重试失败</div></div>
+                </div>
+            </div>
+
+            <!-- 实时状态 -->
+            <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-4 shadow-xl">
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="text-lg">📟</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">实时状态</h2>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="flex items-center justify-between bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-3 py-2">
+                        <span class="text-slate-400 uppercase tracking-widest text-[9px] font-black">VREF</span>
+                        <div class="flex items-center gap-1.5"><span id="vrefVal" class="font-mono text-primary font-black text-sm">--.--V</span><span id="vrefState" class="text-[9px] px-1.5 py-0.5 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500">--</span></div>
+                    </div>
+                    <div class="flex items-center justify-between bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-3 py-2">
+                        <span class="text-slate-400 uppercase tracking-widest text-[9px] font-black">RXD</span><span id="rxdLevel" class="font-mono text-sm font-black text-slate-600 dark:text-slate-300">--</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-3 py-2">
+                        <span class="text-slate-400 uppercase tracking-widest text-[9px] font-black">KEY</span><span id="keyState" class="font-mono text-sm font-black text-slate-600 dark:text-slate-300">--</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-3 py-2">
+                        <span class="text-slate-400 uppercase tracking-widest text-[9px] font-black">SESSION</span>
+                        <span id="sessionState" class="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500 font-black">空闲</span>
+                    </div>
+                    <div class="col-span-2 flex items-center justify-between bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-3 py-2">
+                        <span class="text-slate-400 uppercase tracking-widest text-[9px] font-black">PROG</span>
+                        <div class="flex-1 mx-2 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                            <div id="progressFill" class="h-full w-0 rounded-full bg-slate-400 transition-all duration-300"></div>
+                        </div>
+                        <span id="progressText" class="font-mono text-xs font-black text-slate-500">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 操作 -->
+            <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-4 shadow-xl">
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="text-lg">▶️</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">量产控制</h2>
+                </div>
+                <div class="flex flex-col gap-2.5">
+                    <div class="flex gap-2">
+                        <button id="startBtn" disabled class="flex-1 !py-2.5 bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-400 rounded-xl font-black text-xs transition-all disabled:opacity-40 disabled:pointer-events-none">▶ 开始量产</button>
+                        <button id="stopBtn" disabled class="flex-1 py-2.5 bg-rose-500 text-white rounded-xl font-black text-xs hover:brightness-110 active:scale-95 transition-all disabled:opacity-30 disabled:grayscale disabled:pointer-events-none">■ 停止</button>
+                    </div>
+                    <button id="manualGoBtn" disabled class="py-2 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-xl font-black text-xs hover:bg-primary/20 transition-colors disabled:opacity-30 disabled:grayscale disabled:pointer-events-none">👉 手动触发</button>
+                    <button id="exportCsvBtn" class="py-2 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-xl font-black text-xs hover:bg-primary/20 transition-colors">📄 导出报表 CSV</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 文件表 -->
+        <div id="fileTableCard" class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                    <span class="text-lg">📁</span>
+                    <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">烧写文件表</h2>
+                </div>
+                <button id="addFileBtn" class="py-2 px-4 bg-primary/10 text-primary rounded-xl font-black text-xs hover:bg-primary/20 transition-colors">+ 添加文件</button>
+            </div>
+            <div id="fileTable" class="space-y-2.5"></div>
+            <p class="mt-3 text-[10px] text-slate-400 font-mono">烧写地址 = 文件起始地址 + 内部头偏移 (ACF 注释头 / 芯片头)。容量校验: max(addr+长度) ≤ 芯片容量。</p>
+        </div>
+
+        <!-- 日志 -->
+        <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-lg">📜</span>
+                <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">量产日志</h2>
+            </div>
+            <div id="logBox" class="h-48 overflow-y-auto bg-slate-900 text-slate-100 rounded-2xl p-4 text-xs font-mono leading-relaxed no-scrollbar">
+                <div class="text-slate-500">-- 等待开始 --</div>
+            </div>
+        </div>
+    </main>
+
+    <script src="src/hercules.js"></script>
+    <script src="src/dapv2.js"></script>
+    <script src="src/engine.js"></script>
+    <script src="src/app.js"></script>
+</body>
+</html>
