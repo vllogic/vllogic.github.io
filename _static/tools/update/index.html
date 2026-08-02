@@ -1,78 +1,298 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="zh-CN">
+<head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="style.css" />
-  </head>
-  <title>Vllink HID Update</title>
-  <body>
-    <main style="max-width: 800px; margin: 0 auto;">
-      <a href="../update/index.html" target="_blank">固件更新</a>
-      <a href="../web_config_basic2/index.html" target="_blank">Basic2运行配置</a>
-      <a href="../web_config/index.html" target="_blank">HME运行配置</a>
-      <a href="../web_download_hercules/index.html" target="_blank">HME烧写</a>
-      <h1>Vllink HID Update</h1>
-      <p></p>
-      <button id="connect-device">
-        Connect Vllink Device
-      </button>
-      <p></p>
-      <form action="">
-        <div>
-          <label>Hardware Info: </label>
-          <input
-            class="hwVersionShow"
-            type="text"
-            id="hwVersionShow"
-            disabled="disabled"
-            value="Unconnected"
-          />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vllink HID Update</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { primary: '#00d4ff', darkBg: '#0b1120' } } }
+        }
+    </script>
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); }
+        .dark .glass { background: rgba(15, 23, 42, 0.6); }
+        .accent-primary { accent-color: #00d4ff; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        /* 原生 <progress> 进度条美化 (核心逻辑通过 .value 更新, 保留原生元素) */
+        progress#download-process {
+            -webkit-appearance: none;
+            appearance: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 9999px;
+            background: transparent;
+            overflow: hidden;
+        }
+        progress#download-process::-webkit-progress-bar { background: transparent; }
+        progress#download-process::-webkit-progress-value {
+            background: #00d4ff;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+            border-radius: 9999px;
+            transition: width 0.2s ease;
+        }
+        progress#download-process::-moz-progress-bar {
+            background: #00d4ff;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+            border-radius: 9999px;
+        }
+        /* 全局字体微调: 小号字体整体放大 */
+        .text-\[9px\] { font-size: 11px !important; }
+        .text-\[10px\] { font-size: 12px !important; }
+        .text-xs { font-size: 14px !important; }
+        .text-sm { font-size: 15px !important; }
+        .file\:text-xs::file-selector-button { font-size: 13px !important; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-darkBg text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-500">
+
+    <!-- ===== 顶部栏 ===== -->
+    <header class="h-16 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 sticky top-0 z-50 glass">
+        <div class="flex items-center gap-3">
+            <div class="w-2.5 h-2.5 bg-primary rounded-full animate-pulse shadow-[0_0_10px_#00d4ff]"></div>
+            <h1 class="font-bold tracking-tighter text-xl italic text-slate-800 dark:text-slate-100">
+                <span class="text-slate-400">VLLINK</span> <span class="text-primary font-black">UPDATE</span>
+            </h1>
+            <span class="ml-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">固件升级</span>
         </div>
-      </form>
-      <p></p>
-      <form action="">
-        <div>
-          <label>Software Version: </label>
-          <input
-            class="swVersionShow"
-            type="text"
-            id="swVersionShow"
-            disabled="disabled"
-            value="Unconnected"
-          />
+
+        <div class="flex items-center gap-4">
+            <!-- 三模态主题切换 -->
+            <div class="flex items-center bg-slate-200 dark:bg-slate-800 rounded-full p-1 border border-slate-300 dark:border-slate-700 w-48 relative">
+                <button data-theme="dark" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">深色</button>
+                <button data-theme="auto" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">AUTO</button>
+                <button data-theme="light" class="flex-1 py-1 rounded-full text-[10px] font-bold z-10 transition-colors">浅色</button>
+                <div id="themeSlider" class="absolute h-7 w-[31%] bg-primary rounded-full transition-all duration-300 shadow-lg"></div>
+            </div>
+            <!-- 连接状态 (纯装饰, 由 HID connect/disconnect 事件更新) -->
+            <div id="connectionStatus" class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Disconnected</div>
+            <!-- 工具导航 -->
+            <div class="relative" id="toolNav">
+                <button id="toolNavBtn" type="button" title="快速跳转到其他工具"
+                    class="flex items-center gap-1.5 py-1.5 px-3 rounded-xl text-[10px] font-black uppercase tracking-widest bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 transition-colors active:scale-95">
+                    <span>🧰</span><span class="hidden sm:inline">工具导航</span>
+                    <svg id="toolNavArrow" class="w-3 h-3 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                </button>
+                <div id="toolNavMenu" class="hidden absolute right-0 mt-2 w-64 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden z-50">
+                    <div class="px-4 py-2 text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 bg-slate-100/60 dark:bg-black/20 border-b border-slate-200 dark:border-slate-800">🧰 工具导航</div>
+                    <div class="flex items-center gap-3 px-4 py-3 bg-primary/10 border-b border-slate-200 dark:border-slate-800">
+                        <span class="text-lg">📦</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">Vllink Update</span>
+                            <span class="text-[10px] text-slate-400">固件升级 · HID 烧录</span>
+                        </span>
+                        <span class="ml-auto text-[9px] font-black uppercase tracking-widest text-primary bg-primary/15 rounded-full px-2 py-0.5">当前</span>
+                    </div>
+                    <a href="../vllink2026_console/index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-colors border-b border-slate-200 dark:border-slate-800">
+                        <span class="text-lg">💻</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">VLLINK Console</span>
+                            <span class="text-[10px] text-slate-400">调试器控制台 · 配置查看编辑</span>
+                        </span>
+                        <span class="ml-auto text-[9px] text-slate-400">↗</span>
+                    </a>
+                    <a href="../web_download_hercules/index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-colors border-b border-slate-200 dark:border-slate-800">
+                        <span class="text-lg">🔥</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">Hercules Download</span>
+                            <span class="text-[10px] text-slate-400">Flash 下载 · 芯片读取</span>
+                        </span>
+                        <span class="ml-auto text-[9px] text-slate-400">↗</span>
+                    </a>
+                    <a href="../web_program_hercules/index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-colors">
+                        <span class="text-lg">🏭</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">Hercules Program</span>
+                            <span class="text-[10px] text-slate-400">量产自动化 · 多片烧录</span>
+                        </span>
+                        <span class="ml-auto text-[9px] text-slate-400">↗</span>
+                    </a>
+                </div>
+            </div>
         </div>
-      </form>
-      <p></p>
-      <fieldset>
-        <legend>Firmware Update</legend>
-        <p></p>
-        <input class="fileSelect" type="file" id="select-file" name="file" />
-        <p></p>
-        <div class="block" id="block-auto-reset">
-          <label class="chipText">Auto Reset: </label>
-          <input type="checkbox" id="auto-reset" disabled="disabled" checked="true" />
+    </header>
+
+    <script>
+        (function () {
+            var btn = document.getElementById('toolNavBtn');
+            var menu = document.getElementById('toolNavMenu');
+            var arrow = document.getElementById('toolNavArrow');
+            if (!btn || !menu) return;
+            function setOpen(open) {
+                menu.classList.toggle('hidden', !open);
+                if (arrow) arrow.style.transform = open ? 'rotate(180deg)' : '';
+            }
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                setOpen(menu.classList.contains('hidden'));
+            });
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('#toolNav')) setOpen(false);
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') setOpen(false);
+            });
+        })();
+    </script>
+
+    <div class="max-w-6xl mx-auto p-8">
+        <div class="flex flex-col lg:flex-row gap-6 items-start">
+
+        <!-- ===== 左侧帮助侧边栏 (窄条, 点击向左展开; 再点收缩回窄条) ===== -->
+        <aside id="helpSidebar" class="shrink-0 overflow-hidden transition-all duration-300 ease-in-out lg:sticky lg:top-20" style="width:432px">
+            <div class="flex items-start gap-3">
+                <button id="helpToggle" type="button" title="展开/收缩使用帮助"
+                    class="shrink-0 w-9 flex flex-col items-center gap-2 py-3 bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 rounded-2xl hover:bg-primary/15 transition-colors">
+                    <span class="text-lg leading-none">❓</span>
+                    <span class="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400" style="writing-mode:vertical-rl">使用帮助</span>
+                </button>
+                <div class="shrink-0 w-96 glass border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl">
+                    <div class="px-4 py-3.5 space-y-3 text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-h-[calc(100vh-10rem)] overflow-y-auto no-scrollbar">
+                        <div>
+                            <div class="font-black text-slate-700 dark:text-slate-200 mb-1">🚀 快速上手</div>
+                            <ol class="list-decimal pl-4 space-y-0.5">
+                                <li>先按住设备上的按键，再连接电脑</li>
+                                <li>点 <b>Connect Vllink Device</b>，在弹框中选择 <b>"Vllink xxx Update"</b> 再点击连接</li>
+                                <li>点「选择文件」打开需要刷入的固件</li>
+                                <li>点 <b>Update</b>，稍待片刻，固件更新完成</li>
+                            </ol>
+                            <p class="mt-1.5 flex items-start gap-1.5 text-amber-600 dark:text-amber-400">
+                                <span>❗</span>
+                                <span>若未进入升级模式，弹框中将找不到 <b>"Vllink xxx Update"</b>，无法连接</span>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="font-black text-slate-700 dark:text-slate-200 mb-1">📥 固件下载</div>
+                            <ul class="list-disc pl-4 space-y-0.5">
+                                <li><a href="https://vllogic.com/update/vllink_basic" target="_blank" class="text-cyan-600 dark:text-primary underline underline-offset-4 hover:brightness-110 transition-colors">Vllink Basic ↗</a></li>
+                                <li><a href="https://vllogic.com/update/vllink_basic2" target="_blank" class="text-cyan-600 dark:text-primary underline underline-offset-4 hover:brightness-110 transition-colors">Vllink Basic2 / 2X ↗</a></li>
+                                <li><a href="https://vllogic.com/update/vllink_box" target="_blank" class="text-cyan-600 dark:text-primary underline underline-offset-4 hover:brightness-110 transition-colors">Vllink Box / Box2 ↗</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="font-black text-slate-700 dark:text-slate-200 mb-1">ℹ️ 设备信息</div>
+                            <ul class="list-disc pl-4 space-y-0.5">
+                                <li><b>Hardware Info</b>：显示硬件序列号</li>
+                                <li><b>Software Version</b>：显示设备已有固件版本</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="font-black text-slate-700 dark:text-slate-200 mb-1">🔄 Auto Reset</div>
+                            <ul class="list-disc pl-4 space-y-0.5">
+                                <li>默认选中：更新完成后设备自动重启，进入正常模式</li>
+                                <li>取消勾选：更新完成后保持在升级模式，不自动重启</li>
+                            </ul>
+                        </div>
+                        <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl px-3 py-2">
+                            ⚠️ 环境：<b>Chrome / Edge</b> + <b>HTTPS 或 localhost</b>（WebHID）。
+                            <a href="http://www.vllogic.com/index.html" target="_blank" class="text-cyan-600 dark:text-primary underline underline-offset-4 hover:brightness-110 transition-colors">官网下载固件 ↗</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="flex-1 min-w-0 space-y-6">
+
+        <!-- 连接区 -->
+        <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-xl">
+            <div class="flex items-center gap-4">
+                <div class="w-2.5 h-2.5 rounded-full bg-slate-400"></div>
+                <div class="flex flex-col">
+                    <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Connection</span>
+                    <span class="text-sm font-black text-slate-700 dark:text-slate-200">WebHID Bootloader</span>
+                </div>
+            </div>
+            <button id="connect-device" class="py-2 px-5 bg-primary text-white rounded-xl font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20">
+                Connect Vllink Device
+            </button>
         </div>
-        <p></p>
-        <button class="update" id="download" disabled="disabled">
-          Update
-        </button>
-        <progress class="update" id="download-process" max="100" value="0">
-        </progress>
-      </fieldset>
-      <p></p>
-      <fieldset>
-        <legend>Readme</legend>
-        <h4>1. <a href="http://www.vllogic.com/index.html" target="_blank">下载固件</a></h4>
-        <h4>2. 先按住设备上的按键，再连接电脑</h4>
-        <h4>3. 选中弹框中的"Vllink xxx Update"，点击连接</h4>
-        <h4>4. 在"Hardware Info"栏目中会显示硬件序列号</h4>
-        <h4>5. 在"Software Version"栏目中会显示设备已有固件版本</h4>
-        <h4>6. 点击"选择文件"，打开需要刷入的固件</h4>
-        <h4>7. 点击"Update"，稍待片刻，固件更新完成</h4>
-        <h4>8. "Auto Reset"选项默认选中，在固件更新完成后，设备会自动重启，进入正常模式</h4>
-        <h4>9. 正常模式下，本升级程序无法与设备通讯</h4>
-      </fieldset>
-    </main>
+
+        <!-- 设备信息 -->
+        <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="text-lg">ℹ️</span>
+                <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Device Info</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-[9px] text-slate-400 uppercase font-black">Hardware Info</label>
+                    <input id="hwVersionShow" type="text" disabled value="Unconnected"
+                        class="w-full bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-mono text-slate-700 dark:text-slate-200 outline-none" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-[9px] text-slate-400 uppercase font-black">Software Version</label>
+                    <input id="swVersionShow" type="text" disabled value="Unconnected"
+                        class="w-full bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-mono text-slate-700 dark:text-slate-200 outline-none" />
+                </div>
+            </div>
+        </div>
+
+        <!-- 固件更新 -->
+        <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="text-lg">⬆️</span>
+                <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Firmware Update</h2>
+            </div>
+            <div class="space-y-4">
+                <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
+                    <input id="select-file" type="file" name="file"
+                        class="flex-1 text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:bg-primary/10 file:text-primary file:font-black file:text-xs file:hover:bg-primary/20 file:transition-all" />
+                    <button id="download" disabled
+                        class="md:w-40 py-2.5 bg-primary text-white rounded-xl font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20 disabled:opacity-30 disabled:grayscale disabled:pointer-events-none">
+                        Update
+                    </button>
+                </div>
+                <label class="flex items-center gap-2.5 text-xs text-slate-600 dark:text-slate-300 select-none cursor-pointer">
+                    <input id="auto-reset" type="checkbox" checked disabled class="accent-primary w-4 h-4" />
+                    Auto Reset <span class="text-[9px] text-slate-400 uppercase font-black">(更新完成后自动重启)</span>
+                </label>
+                <div class="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                    <progress id="download-process" max="100" value="0"></progress>
+                </div>
+            </div>
+        </div>
+
+        </main>
+        </div>
+    </div>
+
+    <!-- 左侧帮助栏: 窄条(36px) ↔ 完整面板(368px), 向左收缩/展开 -->
+    <script>
+        (function () {
+            var sb = document.getElementById('helpSidebar');
+            var btn = document.getElementById('helpToggle');
+            if (!sb || !btn) return;
+            btn.addEventListener('click', function () {
+                var open = sb.style.width === '432px';
+                sb.style.width = open ? '36px' : '432px';
+            });
+        })();
+    </script>
+
+    <!-- HID 连接状态装饰 (不影响核心逻辑, 仅更新顶部状态文字) -->
+    <script>
+        (function () {
+            var el = document.getElementById('connectionStatus');
+            if (!el || !navigator.hid) return;
+            function sync() {
+                navigator.hid.getDevices().then(function (devices) {
+                    el.textContent = devices.length > 0 ? 'Connected' : 'Disconnected';
+                    el.classList.toggle('text-primary', devices.length > 0);
+                }).catch(function () {});
+            }
+            navigator.hid.addEventListener('connect', sync);
+            navigator.hid.addEventListener('disconnect', sync);
+            sync();
+        })();
+    </script>
+
+    <script src="src/theme.js"></script>
     <script src="src/index.js"></script>
-  </body>
+</body>
 </html>
