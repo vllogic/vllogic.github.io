@@ -20,6 +20,7 @@ class MassProduceEngine {
         this._connecting = false;   // 连接互斥锁 (防并发连接同一设备)
         this._triggerPrev = null;   // 触发边沿检测的上一状态 (跨片保持, 支持连续量产换片)
         this._autoFirst = false;    // 间隔触发: 首次立即烧第一片标记
+        this._lastStatusFnAt = 0;   // statusFn UI 回调节流时间戳 (≥100ms)
         this._progressBytes = 0;    // 当前片已烧录累计字节 (用于进度条)
         this._outTxd = null;        // 状态输出: 当前 TXD 电平 (null=未设置)
         this._outSrst = null;       // 状态输出: 当前 SRST 电平 (null=未设置)
@@ -161,7 +162,12 @@ class MassProduceEngine {
             keyMode:   v.getUint8(6) !== 0
         };
         this._lastStatus = st;
-        this.statusFn(st);
+        // USB 事件驱动轮询下 getStatus 可达 ~1kHz, 节流 UI 回调到 10Hz 防止 DOM 写风暴 (状态判断不依赖回调)
+        const now = performance.now();
+        if (!this._lastStatusFnAt || now - this._lastStatusFnAt >= 100) {
+            this._lastStatusFnAt = now;
+            this.statusFn(st);
+        }
         return st;
     }
 
@@ -211,44 +217,51 @@ class MassProduceEngine {
     /* ================= 触发检测 (5 种) ================= */
     manualGo() { this._manualGo = true; }
 
+    // USB 事件驱动轮询: 不依赖 setTimeout, 页面切到后台时浏览器定时器节流不影响轮询节奏,
+    // 轮询节拍由 WebUSB 传输往返自然决定 (约 1-3ms/次, 比原 100ms 定时轮询更快且后台可用)。
+    // 失败时 sleep(100) 重试: 仅错误路径使用定时器, 后台被节流可接受。
+    async _pollStatus() {
+        try {
+            return await this.getStatus();
+        } catch (e) {
+            await sleep(100);
+            return null;
+        }
+    }
+
     async waitTrigger() {
         const mode = this.cfg.trigger.mode;
         if (mode === 'manual') {
-            while (this.running && !this._manualGo) await sleep(100);
+            // 持续 GET_STATUS: 等待期间实时刷新状态面板, 后台不被节流, 可被 stop 及时中断
+            while (this.running && !this._manualGo) await this._pollStatus();
             this._manualGo = false;
             return;
         }
         if (mode === 'auto-timer') {
             if (this._autoFirst) { this._autoFirst = false; return; }   // 首次立即烧第一片
             const ms = (this.cfg.trigger.autoInterval || 2) * 1000;
+            const end = performance.now() + ms;
             this.log(`⏳ 间隔触发: ${ms / 1000}s 后自动烧录下一片`);
-            const steps = Math.max(1, Math.ceil(ms / 100));
-            for (let i = 0; i < steps && this.running; i++) await sleep(100);   // 可被 stop 中断
+            // 用 performance.now() 计时 + USB 轮询推进: 后台定时器被节流也不影响间隔精度与 stop 响应
+            while (this.running && performance.now() < end) await this._pollStatus();
             return;
         }
-        // 边沿检测前先建立稳定基线: 连续 3 帧 (300ms) 电平一致才作为基线, 期间不触发。
+        // 边沿检测前先建立稳定基线: 连续 ≥3 帧且持续 ≥150ms 电平一致才作为基线, 期间不触发。
         // 避免 TAKEOVER/上电瞬态在默认高(RXD 上升沿)或默认低(RXD 下降沿)电平下产生伪边沿导致立刻触发。
         const STABLE_FRAMES = 3;
-        let prev = null, stable = 0;
+        const STABLE_MS = 150;
+        let prev = null, stable = 0, sameSince = 0;
         while (this.running) {
-            let s;
-            try {
-                s = await this.getStatus();
-            } catch (e) {
-                await sleep(100);
-                continue;
-            }
-            if (!prev) {
-                prev = { key: s.keyMode, rxd: s.rxdLogic, vref: s.vrefValid };
-                stable = 1;
-            } else if (prev.key === s.keyMode && prev.rxd === s.rxdLogic && prev.vref === s.vrefValid) {
-                stable++;
-                if (stable >= STABLE_FRAMES) break;   // 基线稳定, 进入边沿检测
+            const s = await this._pollStatus();
+            if (!s) continue;
+            const cur = { key: s.keyMode, rxd: s.rxdLogic, vref: s.vrefValid };
+            const now = performance.now();
+            if (!prev || prev.key !== cur.key || prev.rxd !== cur.rxd || prev.vref !== cur.vref) {
+                prev = cur; sameSince = now; stable = 1;
             } else {
-                prev = { key: s.keyMode, rxd: s.rxdLogic, vref: s.vrefValid };
-                stable = 1;
+                stable++;
+                if (stable >= STABLE_FRAMES && now - sameSince >= STABLE_MS) break;   // 基线稳定, 进入边沿检测
             }
-            await sleep(100);
         }
         if (!this.running) return;
         this._triggerPrev = prev;
@@ -281,7 +294,6 @@ class MassProduceEngine {
             }
             prev = { key: s.keyMode, rxd: s.rxdLogic, vref: s.vrefValid };
             this._triggerPrev = prev;
-            await sleep(100);
         }
     }
 

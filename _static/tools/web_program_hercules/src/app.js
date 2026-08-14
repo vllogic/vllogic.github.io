@@ -51,6 +51,58 @@ const fileTable = $('fileTable'), logBox = $('logBox');
 /* ================= 量产引擎 ================= */
 const engine = new MassProduceEngine();
 
+/* ================= 后台节流防护: 唤醒锁 + 节流检测 =================
+ * 量产引擎轮询已改为 USB 事件驱动, 后台不受定时器节流影响;
+ * 此处再防两类风险: (1) 显示器/系统休眠中断 USB 通信 → 唤醒锁;
+ * (2) 浏览器节流降频 → 红色横幅 + 日志提醒操作员保持页面前台。
+ */
+const bgWarnEl = $('bgWarn');
+const WakeGuard = {
+    locks: [],
+    _gen: 0,   // 代数计数: 防止停止瞬间迟到的 async 锁被误保留
+    async acquire() {
+        this.release();
+        const gen = this._gen;
+        if (!('wakeLock' in navigator)) {
+            appendLog('⚠ 浏览器不支持唤醒锁: 运行期间电脑休眠将中断量产, 请保持页面前台', 'error');
+            return false;
+        }
+        let got = false;
+        for (const type of ['screen', 'system']) {   // screen: 防显示器休眠; system: 防整机休眠 (Chrome 131+)
+            try {
+                const lock = await navigator.wakeLock.request(type);
+                if (gen !== this._gen) { try { lock.release(); } catch (_) { /* ignore */ } continue; }   // 已被停止: 丢弃迟到的锁
+                this.locks.push(lock);
+                got = true;
+                appendLog('唤醒锁已获取: ' + type, 'debug');
+            } catch (e) { /* 类型不支持/被拒绝: 忽略 */ }
+        }
+        if (!got && gen === this._gen) appendLog('⚠ 唤醒锁请求失败: 请勿让电脑休眠, 保持页面前台', 'error');
+        return got;
+    },
+    release() {
+        this._gen++;
+        for (const l of this.locks) { try { l.release(); } catch (_) { /* ignore */ } }
+        this.locks = [];
+    }
+};
+
+let _bgDrift = 0, _bgWarnShown = false, _bgTitle = document.title;
+function updateBgWarn() {
+    const show = engine.running && (document.hidden || _bgDrift > 2500);
+    if (bgWarnEl) {
+        bgWarnEl.classList.toggle('hidden', !show);
+        if (show) bgWarnEl.textContent = '⚠️ 页面在后台 / 浏览器节流中: 烧写轮询为 USB 事件驱动不受影响, 但请保持本标签页前台以获得最佳响应';
+    }
+    document.title = show ? '⚠ ' + _bgTitle : _bgTitle;
+    if (show && !_bgWarnShown) {
+        _bgWarnShown = true;
+        appendLog('⚠️ 页面处于后台, 浏览器将节流定时器: 量产引擎已采用 USB 事件驱动轮询(不受影响), 但请尽量保持本标签页前台', 'error');
+    } else if (!show) {
+        _bgWarnShown = false;
+    }
+}
+
 /* ================= 文件表状态 ================= */
 let fileRows = [];  // { fileName, addr, cutAcf, rawData, loaded }
 
@@ -716,6 +768,9 @@ function init() {
         const running = s === 'run';
         setConfigLocked(running);
         updateStartBtn();
+        if (running) WakeGuard.acquire();
+        else WakeGuard.release();
+        updateBgWarn();
     });
     setInterval(refreshStats, 400);
     setInterval(() => {
@@ -724,6 +779,28 @@ function init() {
         manualGoBtn.disabled = !(engine.running && engine.cfg && engine.cfg.trigger.mode === 'manual');
         updateStartBtn();
     }, 400);
+
+    // 后台节流检测: 以本定时器自身间隔漂移为信号 (前台 ~1s, 后台被降频到 ≥2.5s 即告警)
+    let tickLast = performance.now();
+    setInterval(() => {
+        const now = performance.now();
+        _bgDrift = now - tickLast;
+        tickLast = now;
+        updateBgWarn();
+    }, 1000);
+
+    // 页面可见性: 切到后台立即告警; 回到前台重新获取唤醒锁 (screen 锁在隐藏期间被浏览器自动释放)
+    document.addEventListener('visibilitychange', () => {
+        updateBgWarn();
+        if (!document.hidden && engine.running) WakeGuard.acquire();
+    });
+
+    // 量产运行中防止误关标签页 (当前片烧录被中断 = 该片报废)
+    window.addEventListener('beforeunload', (e) => {
+        if (!engine.running) return;
+        e.preventDefault();
+        e.returnValue = '';
+    });
 
     // 恢复已授权目录: 显示目录名并启用导出/载入配置
     (async () => {

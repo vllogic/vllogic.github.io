@@ -24,6 +24,9 @@
 </head>
 <body class="bg-slate-50 dark:bg-darkBg text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-500">
 
+    <!-- 后台节流告警横幅 (量产运行中页面被切到后台/被降频时显示) -->
+    <div id="bgWarn" class="hidden fixed top-0 inset-x-0 z-[100] bg-rose-500/95 text-white text-center py-1.5 px-4 text-[11px] font-black tracking-wide shadow-lg"></div>
+
     <!-- ===== 顶部栏 ===== -->
     <header class="h-16 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 sticky top-0 z-50 glass">
         <div class="flex items-center gap-3">
@@ -194,6 +197,11 @@
                 <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl px-3 py-2">
                     ⚠️ 环境：<b>Chrome / Edge</b> + <b>HTTPS 或 localhost</b>（WebUSB）。
                     统计：总烧录/成功/失败（不含重试）+ 含重试失败。
+                </div>
+                <div class="bg-primary/10 border border-primary/30 rounded-xl px-3 py-2">
+                    🏭 后台运行：烧写轮询为 <b>USB 事件驱动</b>，切到后台不受定时器节流影响；
+                    运行中自动获取<b>唤醒锁</b>防止显示器/系统休眠。若顶部出现<b>红色横幅</b>，
+                    说明浏览器正在节流，请将本标签页切回前台以获得最佳响应。
                 </div>
             </div>
         </div>
