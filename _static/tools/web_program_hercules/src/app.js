@@ -59,8 +59,10 @@ const engine = new MassProduceEngine();
 const bgWarnEl = $('bgWarn');
 const WakeGuard = {
     locks: [],
+    _gen: 0,   // 代数计数: 防止停止瞬间迟到的 async 锁被误保留
     async acquire() {
         this.release();
+        const gen = this._gen;
         if (!('wakeLock' in navigator)) {
             appendLog('⚠ 浏览器不支持唤醒锁: 运行期间电脑休眠将中断量产, 请保持页面前台', 'error');
             return false;
@@ -69,15 +71,17 @@ const WakeGuard = {
         for (const type of ['screen', 'system']) {   // screen: 防显示器休眠; system: 防整机休眠 (Chrome 131+)
             try {
                 const lock = await navigator.wakeLock.request(type);
+                if (gen !== this._gen) { try { lock.release(); } catch (_) { /* ignore */ } continue; }   // 已被停止: 丢弃迟到的锁
                 this.locks.push(lock);
                 got = true;
                 appendLog('唤醒锁已获取: ' + type, 'debug');
             } catch (e) { /* 类型不支持/被拒绝: 忽略 */ }
         }
-        if (!got) appendLog('⚠ 唤醒锁请求失败: 请勿让电脑休眠, 保持页面前台', 'error');
+        if (!got && gen === this._gen) appendLog('⚠ 唤醒锁请求失败: 请勿让电脑休眠, 保持页面前台', 'error');
         return got;
     },
     release() {
+        this._gen++;
         for (const l of this.locks) { try { l.release(); } catch (_) { /* ignore */ } }
         this.locks = [];
     }

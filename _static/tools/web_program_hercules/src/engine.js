@@ -20,6 +20,7 @@ class MassProduceEngine {
         this._connecting = false;   // 连接互斥锁 (防并发连接同一设备)
         this._triggerPrev = null;   // 触发边沿检测的上一状态 (跨片保持, 支持连续量产换片)
         this._autoFirst = false;    // 间隔触发: 首次立即烧第一片标记
+        this._lastStatusFnAt = 0;   // statusFn UI 回调节流时间戳 (≥100ms)
         this._progressBytes = 0;    // 当前片已烧录累计字节 (用于进度条)
         this._outTxd = null;        // 状态输出: 当前 TXD 电平 (null=未设置)
         this._outSrst = null;       // 状态输出: 当前 SRST 电平 (null=未设置)
@@ -161,7 +162,12 @@ class MassProduceEngine {
             keyMode:   v.getUint8(6) !== 0
         };
         this._lastStatus = st;
-        this.statusFn(st);
+        // USB 事件驱动轮询下 getStatus 可达 ~1kHz, 节流 UI 回调到 10Hz 防止 DOM 写风暴 (状态判断不依赖回调)
+        const now = performance.now();
+        if (!this._lastStatusFnAt || now - this._lastStatusFnAt >= 100) {
+            this._lastStatusFnAt = now;
+            this.statusFn(st);
+        }
         return st;
     }
 
