@@ -175,6 +175,14 @@ function uiUpdateHerculesCommon() {
           inputChipName.value = "H3";
         } else if (target_type == HERCULES_TARGET_TYPE_P0) {
           inputChipName.value = "P0";
+        } else if (target_type == HERCULES_TARGET_TYPE_P2) {
+          inputChipName.value = "P2";
+        } else if (target_type == HERCULES_TARGET_TYPE_P3) {
+          inputChipName.value = "P3";
+        } else if (target_type == HERCULES_TARGET_TYPE_H3P) {
+          inputChipName.value = "H3P";
+        } else if (target_type == HERCULES_TARGET_TYPE_EX1) {
+          inputChipName.value = "EX1";
         } else {
           inputChipName.value = "Unknown";
         }
@@ -718,6 +726,14 @@ function getChipWriteStartPos(fileData, type, target_type, cutAcf) {
   } else if (target_type == HERCULES_TARGET_TYPE_H3) {
     startPos += 8 + 64;
   } else if (target_type == HERCULES_TARGET_TYPE_P0) {
+    startPos += 8 + 64;
+  } else if (target_type == HERCULES_TARGET_TYPE_P2) {
+    startPos += 8 + 64;
+  } else if (target_type == HERCULES_TARGET_TYPE_P3) {
+    startPos += 8 + 64;
+  } else if (target_type == HERCULES_TARGET_TYPE_H3P) {
+    startPos += 8 + 64;
+  } else if (target_type == HERCULES_TARGET_TYPE_EX1) {
     startPos += 8 + 64;
   } else {
     startPos += 0;
