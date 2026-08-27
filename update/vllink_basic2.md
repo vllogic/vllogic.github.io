@@ -37,9 +37,10 @@
   2. 支持有线模式、无线直连模式，UART波特率不建议超过`1000000`
 
 ## 三、固件列表-预览版
-* [V00.56-202608021157](../_static/firmware/vllink_basic2.SVCommon0056202608021157.zip)
+* [V00.57-202608271342](../_static/firmware/vllink_basic2.SVCommon0057202608271342.zip)
   * 京微齐力离线编程：增加机台支持
   * 新增：[京微齐力在线量产工具](https://vllogic.com/_static/tools/web_program_hercules/)
+  * 新增：对新器件的支持
 * [V00.52-202605141203](../_static/firmware/vllink_basic2.SVCommon0052202605141203.zip)
   * 支持京微齐力离线编程，详见 [京微齐力（Hercules）离线编程](../software/hercuels_prog)
 * [V00.42-202604052002](../_static/firmware/vllink_basic2.SVCommon0042202604052002.zip)
