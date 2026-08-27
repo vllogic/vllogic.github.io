@@ -17,7 +17,7 @@
   ```
 * 十进制`555020`换算成十六进制，即：`0x8780C`，用例中会用到
 ### 1.3 离线编程器准备
-* 将离线编程器固件升级到 [V00.56-202608021157](../_static/firmware/vllink_basic2.SVCommon0056202608021157.zip) 或更高
+* 将离线编程器固件升级到 [V00.57-202608271342](../_static/firmware/vllink_basic2.SVCommon0057202608271342.zip) 或更高
 * 通过 [Vllink 2026 Console](https://vllogic.com/_static/tools/vllink2026_console/) 将`your_project_name.acf.bin`载入`Data Block 0`
 * 修改运行模式`Mode=customize`，此模式会强制配置`Vref_Voltage_mV=0`与`Vout=disable`
 * 根据需要修改`Customize_CMD`，修改方法见下文
