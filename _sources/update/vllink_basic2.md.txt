@@ -37,6 +37,8 @@
   2. 支持有线模式、无线直连模式，UART波特率不建议超过`1000000`
 
 ## 三、固件列表-预览版
+* [V00.58-202609080742](../_static/firmware/vllink_basic2.SVCommon0058202609080742.zip)
+  * 修复：一个SWD非OK状态下，计数器错误计数的问题
 * [V00.57-202608271342](../_static/firmware/vllink_basic2.SVCommon0057202608271342.zip)
   * 京微齐力离线编程：增加机台支持
   * 新增：[京微齐力在线量产工具](https://vllogic.com/_static/tools/web_program_hercules/)
