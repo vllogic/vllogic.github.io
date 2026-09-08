@@ -8,7 +8,7 @@
 5. 点击`Update`，等待一段时间后，完成更新。
 
 ## 固件列表
-* [V00.0-202609080857](../_static/firmware/vllink_box.SVCommon0007202609080857.zip)
+* [V00.07-202609080857](../_static/firmware/vllink_box.SVCommon0007202609080857.zip)
   1. 修复：一个SWD非OK状态下，计数器错误计数的问题
 * [V00.06-202510241312](../_static/firmware/vllink_box.SVCommon0006202510241312.zip)
   1. 优化：串口功能的部分优化
