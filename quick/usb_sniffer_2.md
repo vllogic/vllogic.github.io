@@ -20,11 +20,11 @@
 * [下载源二：Github Release](https://github.com/vllogic/usb_sniffer.extcap/releases)
 ### 2.2 软件安装
 * **方法一：解包即用**
-    1. 解压整合包中的`WiresharkPortable64_4.4.9.paf.zip`
-    2. 文件夹`WiresharkPortable64_4.4.9.paf`下的`WiresharkPortable64.exe`即为捕获软件
+    1. 解压整合包中的`WiresharkPortable64_4.6.8.paf.zip`
+    2. 文件夹`WiresharkPortable64_4.6.8.paf`下的`WiresharkPortable64.exe`即为捕获软件
 * **方法二：逐步安装**
-    1. 安装整合包中的`Wireshark-4.4.9-x64.exe`，或从 [Wireshark官网](https://www.wireshark.org/) 下载最新版安装
-    2. 启动`Wireshark`，点击`帮助`-`关于Wireshark`-`文件夹`，打开`Global Extcap path`文件夹，将整合包中的`usb_sniffer_win.exe`拷贝至此文件夹中，该插件亦可通过 [源码](https://github.com/vllogic/ataradov.usb-sniffer/tree/main/software) 自行构建
+    1. 安装整合包中的`Wireshark-4.6.8-x64.exe`，或从 [Wireshark官网](https://www.wireshark.org/) 下载最新版安装
+    2. 启动`Wireshark`，点击`帮助`-`关于Wireshark`-`文件夹`，打开`Personal Extcap path`文件夹，将整合包中的`capture_usb_vllogic.exe`拷贝至此文件夹中，该插件亦可通过 [源码](https://github.com/vllogic/ataradov.usb-sniffer/tree/main/software) 自行构建
     3. 重启`Wireshark`，确保插件被载入
 ### 2.3 Wireshark分析示例
 |接线示例，图中左侧`双A公USB3.0线`接主机，右侧白线接`采集对象母口`，蓝牙狗为`采集对象设备`|
