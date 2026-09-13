@@ -33,9 +33,9 @@ Github：https://github.com/vllogic
 ----------------------------
 
 ==================   ==================   ==================
-|Vllink 2X|_         |Vllink Basic2|_     |Vllogic USB Sniffer|_
+|Vllink 2X|_         |Vllink Basic2|_     |Vllogic USB Sniffer2|_
 ------------------   ------------------   ------------------
-`Vllink 2X`_         `Vllink Basic2`_     `Vllogic USB Sniffer`_
+`Vllink 2X`_         `Vllink Basic2`_     `Vllogic USB Sniffer2`_
 ==================   ==================   ==================
 
 .. |Vllink 2X| image:: _static/picture/vllink_2x_top_45.png
@@ -44,8 +44,8 @@ Github：https://github.com/vllogic
 .. |Vllink Basic2| image:: _static/picture/vllink_basic2_top_45.png
 .. _Vllink Basic2: quick/vllink_basic2.html
 
-.. |Vllogic USB Sniffer| image:: _static/picture/usb_sniffer_45_small.png
-.. _Vllogic USB Sniffer: quick/usb_sniffer_h7p20.html
+.. |Vllogic USB Sniffer2| image:: _static/picture/usb_sniffer2_45_small.png
+.. _Vllogic USB Sniffer2: quick/usb_sniffer_2.html
 
 .. toctree::
    :caption: 快速上手
