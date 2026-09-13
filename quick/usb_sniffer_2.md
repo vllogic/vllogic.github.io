@@ -1,25 +1,23 @@
 # USB Sniffer 2 快速上手
 
-## 注意：施工中
-
 ## 一、简介
 |铝合金外壳|PCBA|
 |:--:|:--:|
-|![](../_static/picture/usb_sniffer_45.png)|![](../_static/picture/usb_sniffer_2.pcba_text.800x595.png)|
+|![](../_static/picture/usb_sniffer2_45.png)|![](../_static/picture/usb_sniffer_2.pcba_text.800x595.png)|
 
 &emsp;&emsp;本产品为第二代USB协议分析工具，可配合 [Wireshark](https://www.wireshark.org/) 进行实时协议解析，支持`USB低速`、`USB全速`及`USB高速`。
 
 &emsp;&emsp;在上一代基础上，本版本将`CY7C68013A`升级为支持`USB3.0`的`CH32H417`，数据上报带宽可超过 400 MB/s；同时移除了对高速 USB 信号有影响的比较器，并优化 FPGA 算法，基于 PHY 层数据智能识别链路状态与传输速率。此外，预留`40Pin FFC`接口，内含 10 对 LVDS 差分信号（兼容 MIPI D-PHY），具备很强的扩展能力。
 
 &emsp;&emsp;产品硬件及上位机开源，支持二次开发。资料如下：
-<br>&emsp;&emsp;* [原理图](https://todo)
-<br>&emsp;&emsp;* [上位机源码](https://todo)
-<br>&emsp;&emsp;* [铝合金外壳](https://todo)
+<br>&emsp;&emsp;* [原理图](../_static/docs/usb_sniffer_2.Rev.20260820.pdf)
+<br>&emsp;&emsp;* [上位机源码](https://github.com/vllogic/usb_sniffer.extcap)
+<br>&emsp;&emsp;* [铝合金外壳](https://www.jlc-jdgf.com/machine-detail/621858041681838081)
  
 ## 二、快速上手
 ### 2.1 资源整合包
-* [下载源一：百度网盘](https://todo)
-* [下载源二：Github Release](https://todo)
+* [下载源一：百度网盘](https://pan.baidu.com/s/5JUr_pjg2ruN9iUGAtKdnkQ)
+* [下载源二：Github Release](https://github.com/vllogic/usb_sniffer.extcap/releases)
 ### 2.2 软件安装
 * **方法一：解包即用**
     1. 解压整合包中的`WiresharkPortable64_4.4.9.paf.zip`
@@ -28,14 +26,14 @@
     1. 安装整合包中的`Wireshark-4.4.9-x64.exe`，或从 [Wireshark官网](https://www.wireshark.org/) 下载最新版安装
     2. 启动`Wireshark`，点击`帮助`-`关于Wireshark`-`文件夹`，打开`Global Extcap path`文件夹，将整合包中的`usb_sniffer_win.exe`拷贝至此文件夹中，该插件亦可通过 [源码](https://github.com/vllogic/ataradov.usb-sniffer/tree/main/software) 自行构建
     3. 重启`Wireshark`，确保插件被载入
-### 2.3 Wireshark捕获
-|接线示例，图中黑线接`Wireshark`主机，白线接`采集对象母口`，蓝牙狗为`采集对象设备`|
+### 2.3 Wireshark分析示例
+|接线示例，图中左侧`双A公USB3.0线`接主机，右侧白线接`采集对象母口`，蓝牙狗为`采集对象设备`|
 |:--:|
-|![](../_static/picture/usb_sniffer_example.png)|
-1. 使用附件中的较长的编织线连接`Wireshark`主机`推荐主板上的USB3.0母口`与`分析仪带灯一侧TYPE-C口`
-2. 使用附件中较短的屏蔽线连接`采集对象母口`与`分析仪无灯一侧TYPE-C口`
-3. 启动`Wireshark`，在`捕获`中会出现一个`USB Sniffer`，点击其齿轮，根据目标设备速度选择`采集速度`，推荐勾选`Fold empty frames(折叠空帧)`，点击开始
-4. 连接`采集对象设备`与`A母`。正常情况下，USB通讯立即开始，Wireshark中会显示捕获到的数据
+|![](../_static/picture/usb_sniffer2_example.png)|
+1. 使用附件中的`双A公USB3.0线`连接运行`Wireshark`的主机，推荐使用`USB3.0母口`
+2. 使用附件中的`TYPE-C数据线`连接`采集对象母口`与`分析仪TYPE-C口`
+3. 启动`Wireshark`，在`捕获`中会出现一个`Vllogic: usb_sniffer`，点击其齿轮，根据目标设备速度选择`采集速度`，推荐勾选`Fold empty frames(折叠空帧)`，点击开始
+4. 连接`采集对象设备`与分析仪无灯一侧`USB2.0 A母`。正常情况下，USB通讯立即开始，Wireshark中会显示捕获到的数据
 ### 2.4 Wireshark分析示例
 1. `高速`U盘
     * [sniffer_hs_USBFlashDisk.pcapng](../_static/docs/sniffer_hs_USBFlashDisk.zip)
