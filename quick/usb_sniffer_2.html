@@ -19,7 +19,9 @@
       <script src="../_static/translations.js?v=beaddf03"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" /> 
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="USB Sniffer H7P20 快速上手" href="usb_sniffer_h7p20.html" />
+    <link rel="prev" title="Vllink Box2 快速上手" href="vllink_box2.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,12 +44,31 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="vllink_2x.html">Vllink 2X 快速上手</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic.html">Vllink Basic 快速上手</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_basic2.html">Vllink Basic2 快速上手</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_box.html">Vllink Box 快速上手</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_box2.html">Vllink Box2 快速上手</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">USB Sniffer 2 快速上手</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">一、简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">二、快速上手</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.1 资源整合包</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2.2 软件安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wireshark">2.3 Wireshark分析示例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">2.4 Wireshark分析示例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wireshark-u">2.5 Wireshark分析-以<code class="docutils literal notranslate"><span class="pre">高速</span></code>U盘为例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">三、常见问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">四、二次开发</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ch32417">4.1 CH32417部分</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#h7p20">4.2 H7P20部分</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">五、交流群</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="usb_sniffer_h7p20.html">USB Sniffer H7P20 快速上手</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
@@ -155,14 +176,14 @@
 <ul class="simple">
 <li><p><strong>方法一：解包即用</strong></p>
 <ol class="arabic simple">
-<li><p>解压整合包中的<code class="docutils literal notranslate"><span class="pre">WiresharkPortable64_4.4.9.paf.zip</span></code></p></li>
-<li><p>文件夹<code class="docutils literal notranslate"><span class="pre">WiresharkPortable64_4.4.9.paf</span></code>下的<code class="docutils literal notranslate"><span class="pre">WiresharkPortable64.exe</span></code>即为捕获软件</p></li>
+<li><p>解压整合包中的<code class="docutils literal notranslate"><span class="pre">WiresharkPortable64_4.6.8.paf.zip</span></code></p></li>
+<li><p>文件夹<code class="docutils literal notranslate"><span class="pre">WiresharkPortable64_4.6.8.paf</span></code>下的<code class="docutils literal notranslate"><span class="pre">WiresharkPortable64.exe</span></code>即为捕获软件</p></li>
 </ol>
 </li>
 <li><p><strong>方法二：逐步安装</strong></p>
 <ol class="arabic simple">
-<li><p>安装整合包中的<code class="docutils literal notranslate"><span class="pre">Wireshark-4.4.9-x64.exe</span></code>，或从 <a class="reference external" href="https://www.wireshark.org/">Wireshark官网</a> 下载最新版安装</p></li>
-<li><p>启动<code class="docutils literal notranslate"><span class="pre">Wireshark</span></code>，点击<code class="docutils literal notranslate"><span class="pre">帮助</span></code>-<code class="docutils literal notranslate"><span class="pre">关于Wireshark</span></code>-<code class="docutils literal notranslate"><span class="pre">文件夹</span></code>，打开<code class="docutils literal notranslate"><span class="pre">Global</span> <span class="pre">Extcap</span> <span class="pre">path</span></code>文件夹，将整合包中的<code class="docutils literal notranslate"><span class="pre">usb_sniffer_win.exe</span></code>拷贝至此文件夹中，该插件亦可通过 <a class="reference external" href="https://github.com/vllogic/ataradov.usb-sniffer/tree/main/software">源码</a> 自行构建</p></li>
+<li><p>安装整合包中的<code class="docutils literal notranslate"><span class="pre">Wireshark-4.6.8-x64.exe</span></code>，或从 <a class="reference external" href="https://www.wireshark.org/">Wireshark官网</a> 下载最新版安装</p></li>
+<li><p>启动<code class="docutils literal notranslate"><span class="pre">Wireshark</span></code>，点击<code class="docutils literal notranslate"><span class="pre">帮助</span></code>-<code class="docutils literal notranslate"><span class="pre">关于Wireshark</span></code>-<code class="docutils literal notranslate"><span class="pre">文件夹</span></code>，打开<code class="docutils literal notranslate"><span class="pre">Personal</span> <span class="pre">Extcap</span> <span class="pre">path</span></code>文件夹，将整合包中的<code class="docutils literal notranslate"><span class="pre">capture_usb_vllogic.exe</span></code>拷贝至此文件夹中，该插件亦可通过 <a class="reference external" href="https://github.com/vllogic/ataradov.usb-sniffer/tree/main/software">源码</a> 自行构建</p></li>
 <li><p>重启<code class="docutils literal notranslate"><span class="pre">Wireshark</span></code>，确保插件被载入</p></li>
 </ol>
 </li>
@@ -290,7 +311,10 @@
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="vllink_box2.html" class="btn btn-neutral float-left" title="Vllink Box2 快速上手" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="usb_sniffer_h7p20.html" class="btn btn-neutral float-right" title="USB Sniffer H7P20 快速上手" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

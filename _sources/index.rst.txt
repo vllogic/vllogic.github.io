@@ -56,6 +56,7 @@ Github：https://github.com/vllogic
    quick/vllink_basic2.md
    quick/vllink_box.md
    quick/vllink_box2.md
+   quick/usb_sniffer_2.md
    quick/usb_sniffer_h7p20.md
 
 .. toctree::
