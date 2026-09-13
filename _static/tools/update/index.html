@@ -188,8 +188,17 @@
                                 <li>取消勾选：更新完成后保持在升级模式，不自动重启</li>
                             </ul>
                         </div>
+                        <div>
+                            <div class="font-black text-slate-700 dark:text-slate-200 mb-1">🧪 USB Sniffer 2 升级</div>
+                            <ol class="list-decimal pl-4 space-y-0.5">
+                                <li>点 <b>Connect</b> 右侧 <b>▾</b> 箭头，选择 <b>USB Sniffer 2</b>（WebUSB）</li>
+                                <li>选择 <code>.iap</code> 升级包</li>
+                                <li>点 <b>Update</b>，完成后默认自动复位并进入新固件</li>
+                            </ol>
+                        </div>
                         <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl px-3 py-2">
-                            ⚠️ 环境：<b>Chrome / Edge</b> + <b>HTTPS 或 localhost</b>（WebHID）。
+                            ⚠️ 环境：<b>Chrome / Edge</b> + <b>HTTPS 或 localhost</b>
+                            （Vllink 走 WebHID，USB Sniffer 2 走 WebUSB）。
                             <a href="http://www.vllogic.com/index.html" target="_blank" class="text-cyan-600 dark:text-primary underline underline-offset-4 hover:brightness-110 transition-colors">官网下载固件 ↗</a>
                         </div>
                     </div>
@@ -199,18 +208,46 @@
 
         <main class="flex-1 min-w-0 space-y-6">
 
-        <!-- 连接区 -->
-        <div class="glass border border-slate-200 dark:border-slate-800 rounded-3xl px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-xl">
+        <!-- 连接区 (relative z-30: 使 ▾ 菜单悬浮在下方 Device Info 区块之上) -->
+        <div class="relative z-30 glass border border-slate-200 dark:border-slate-800 rounded-3xl px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-xl">
             <div class="flex items-center gap-4">
                 <div class="w-2.5 h-2.5 rounded-full bg-slate-400"></div>
                 <div class="flex flex-col">
                     <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Connection</span>
-                    <span class="text-sm font-black text-slate-700 dark:text-slate-200">WebHID Bootloader</span>
+                    <span id="transportLabel" class="text-sm font-black text-slate-700 dark:text-slate-200">WebHID Bootloader</span>
                 </div>
             </div>
-            <button id="connect-device" class="py-2 px-5 bg-primary text-white rounded-xl font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20">
-                Connect Vllink Device
-            </button>
+            <!-- 主按钮 = Vllink (WebHID); 右侧箭头可选 USB Sniffer 2 (WebUSB) -->
+            <div class="relative shrink-0" id="connectMenu">
+                <div class="flex items-stretch">
+                    <button id="connect-device" class="py-2 pl-5 pr-4 bg-primary text-white rounded-l-xl font-black text-xs hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20">
+                        Connect Vllink Device
+                    </button>
+                    <button id="connectMenuBtn" type="button" title="选择连接设备类型"
+                        class="py-2 px-2.5 bg-primary text-white rounded-r-xl border-l border-white/25 hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                    </button>
+                </div>
+                <div id="connectMenuList" class="hidden absolute right-0 mt-2 w-72 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden z-50">
+                    <div class="px-4 py-2 text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 bg-slate-100/60 dark:bg-black/20 border-b border-slate-200 dark:border-slate-800">选择连接设备</div>
+                    <button type="button" data-connect="hid" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-colors border-b border-slate-200 dark:border-slate-800 text-left">
+                        <span class="text-lg">🔌</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">Vllink 调试器</span>
+                            <span class="text-[10px] text-slate-400">WebHID · Bootloader</span>
+                        </span>
+                        <span class="ml-auto text-[9px] text-slate-400">↗</span>
+                    </button>
+                    <button type="button" data-connect="usb" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-colors text-left">
+                        <span class="text-lg">🧪</span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-xs font-black text-slate-700 dark:text-slate-200">USB Sniffer 2</span>
+                            <span class="text-[10px] text-slate-400">WebUSB · IAP 0x1209:0x6688</span>
+                        </span>
+                        <span class="ml-auto text-[9px] text-slate-400">↗</span>
+                    </button>
+                </div>
+            </div>
         </div>
 
         <!-- 设备信息 -->
@@ -221,14 +258,34 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex flex-col gap-1.5">
-                    <label class="text-[9px] text-slate-400 uppercase font-black">Hardware Info</label>
+                    <label id="hwLabel" class="text-[9px] text-slate-400 uppercase font-black">Hardware Info</label>
                     <input id="hwVersionShow" type="text" disabled value="Unconnected"
                         class="w-full bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-mono text-slate-700 dark:text-slate-200 outline-none" />
                 </div>
                 <div class="flex flex-col gap-1.5">
-                    <label class="text-[9px] text-slate-400 uppercase font-black">Software Version</label>
+                    <label id="swLabel" class="text-[9px] text-slate-400 uppercase font-black">Software Version</label>
                     <input id="swVersionShow" type="text" disabled value="Unconnected"
                         class="w-full bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-mono text-slate-700 dark:text-slate-200 outline-none" />
+                </div>
+            </div>
+            <!-- USB Sniffer 2 (WebUSB) 专属信息, 仅在该模式下显示 -->
+            <div id="snifferInfo" class="hidden mt-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[9px] text-slate-400 uppercase font-black">Build Date</label>
+                        <input id="buildDateShow" type="text" disabled value="Unconnected"
+                            class="w-full bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-mono text-slate-700 dark:text-slate-200 outline-none" />
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[9px] text-slate-400 uppercase font-black">Code Length</label>
+                        <input id="codeLengthShow" type="text" disabled value="Unconnected"
+                            class="w-full bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-mono text-slate-700 dark:text-slate-200 outline-none" />
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[9px] text-slate-400 uppercase font-black">Data Length</label>
+                        <input id="dataLengthShow" type="text" disabled value="Unconnected"
+                            class="w-full bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-mono text-slate-700 dark:text-slate-200 outline-none" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -275,22 +332,7 @@
         })();
     </script>
 
-    <!-- HID 连接状态装饰 (不影响核心逻辑, 仅更新顶部状态文字) -->
-    <script>
-        (function () {
-            var el = document.getElementById('connectionStatus');
-            if (!el || !navigator.hid) return;
-            function sync() {
-                navigator.hid.getDevices().then(function (devices) {
-                    el.textContent = devices.length > 0 ? 'Connected' : 'Disconnected';
-                    el.classList.toggle('text-primary', devices.length > 0);
-                }).catch(function () {});
-            }
-            navigator.hid.addEventListener('connect', sync);
-            navigator.hid.addEventListener('disconnect', sync);
-            sync();
-        })();
-    </script>
+    <!-- 连接状态文字由 src/index.js 统一管理 (Vllink WebHID / USB Sniffer 2 WebUSB) -->
 
     <script src="src/theme.js"></script>
     <script src="src/index.js"></script>
