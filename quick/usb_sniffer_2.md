@@ -9,11 +9,12 @@
 
 &emsp;&emsp;本产品为第二代USB协议分析工具，可配合 [Wireshark](https://www.wireshark.org/) 进行实时协议解析，支持`USB低速`、`USB全速`及`USB高速`。
 
-&emsp;&emsp;在上一代基础上，本版本将主控由`CY7C68013A`升级为支持`USB3.0`的`CH32H417`，数据上报带宽可超过 400 MB/s；同时移除了对高速 USB 信号有影响的比较器，并优化 FPGA 算法，基于 PHY 层数据智能识别链路状态与传输速率。此外，预留`40Pin FFC`接口，内含 10 对 LVDS 差分信号（兼容 MIPI D-PHY），具备很强的扩展能力。
+&emsp;&emsp;在上一代基础上，本版本将`CY7C68013A`升级为支持`USB3.0`的`CH32H417`，数据上报带宽可超过 400 MB/s；同时移除了对高速 USB 信号有影响的比较器，并优化 FPGA 算法，基于 PHY 层数据智能识别链路状态与传输速率。此外，预留`40Pin FFC`接口，内含 10 对 LVDS 差分信号（兼容 MIPI D-PHY），具备很强的扩展能力。
 
 &emsp;&emsp;产品硬件及上位机开源，支持二次开发。资料如下：
-&emsp;&emsp;&emsp;* [原理图](https://todo)
-&emsp;&emsp;&emsp;* [上位机源码](https://todo)
+<br>&emsp;&emsp;* [原理图](https://todo)
+<br>&emsp;&emsp;* [上位机源码](https://todo)
+<br>&emsp;&emsp;* [铝合金外壳](https://todo)
  
 ## 二、快速上手
 ### 2.1 资源整合包
@@ -58,11 +59,11 @@
    * 答：第二代已支持，如果自动模式未正确切换，可以手动选定速度模式
 2. * 问：能否支持[USB PACKET VIEW](https://www.usbpacketviewer.com/download/)
    * 答：不支持实时捕获，但可以导入分析，详见此网站第九章[hellofpga.com_usb-sniffer](http://www.hellofpga.com/index.php/2025/04/03/usb-sniffer/)
-3. * ~~问：捕获时，`Time`栏时间戳比现实时间慢，或者在使用过滤器后，不能实时观察到期望数据~~
-   * ~~答：这是因为Wireshark显示层无法实时显示大量数据，提供几种方案~~
-      1. ~~勾选`Fold empty frames`，折叠空帧，推荐~~
-      2. ~~在`Wireshark`菜单栏中，取消`视图`->`着色分组列表`，这个功能对网络分析有用，但对大部分USB分析无意义~~
-      3. ~~勾选`Exclude Line State`，排除线路状态报文~~
+3. * 问：捕获时，`Time`栏时间戳比现实时间慢，或者在使用过滤器后，不能实时观察到期望数据
+   * 答：这是因为Wireshark显示层无法实时显示大量数据，提供几种方案
+      1. 勾选`Fold empty frames`，折叠空帧，推荐
+      2. 在`Wireshark`菜单栏中，取消`视图`->`着色分组列表`，这个功能对网络分析有用，但对大部分USB分析无意义
+      3. 勾选`Exclude Line State`，排除线路状态报文
 
 ## 四、二次开发
 &emsp;&emsp;**`重要提示：`** **二次开发不提供技术支持，且开发过程中的焊接、烧录等行为会使得产品无法享受质保服务。**

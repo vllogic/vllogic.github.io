@@ -1,6 +1,6 @@
 {
   "name": "webupdate",
   "version": "2.0.0",
-  "description": "Vllink HID Update - 固件升级工具 (纯静态: Tailwind CDN + 原生 JS, 无需构建)",
+  "description": "Vllink Update - 固件升级工具: Vllink 调试器 (WebHID) + USB Sniffer 2 (WebUSB IAP). 纯静态: Tailwind CDN + 原生 JS, 无需构建",
   "main": "index.html"
 }
