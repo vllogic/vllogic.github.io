@@ -12,8 +12,8 @@
 &emsp;&emsp;产品硬件及上位机开源，支持二次开发。资料如下：
 <br>&emsp;&emsp;* [原理图](../_static/docs/usb_sniffer_2.Rev.20260820.pdf)
 <br>&emsp;&emsp;* [上位机源码](https://github.com/vllogic/usb_sniffer.extcap)
-<br>&emsp;&emsp;* [铝合金外壳](https://www.jlc-jdgf.com/machine-detail/621858041681838081)
- 
+<br>&emsp;&emsp;* [铝合金外壳](https://www.jlc-jdgf.com/machine-detail/621858041681838082)
+
 ## 二、快速上手
 ### 2.1 资源整合包
 * [下载源一：百度网盘](https://pan.baidu.com/s/5JUr_pjg2ruN9iUGAtKdnkQ)
@@ -62,6 +62,9 @@
       1. 勾选`Fold empty frames`，折叠空帧，推荐
       2. 在`Wireshark`菜单栏中，取消`视图`->`着色分组列表`，这个功能对网络分析有用，但对大部分USB分析无意义
       3. 勾选`Exclude Line State`，排除线路状态报文
+4. * 问：能否支持USB2.0理论峰值速度持续抓包
+   * 答：支持，当前这种峰值速率抓包对`Wireshark`压力非常大，容易出现GUI卡死进而传导给插件。故建议直接使用命令抓，抓完后再打开解析
+      1. 例：`./capture_usb_vllogic --capture --fifo ./test.pcapng --speed auto --fold`
 
 ## 四、二次开发
 &emsp;&emsp;**`重要提示：`** **二次开发不提供技术支持，且开发过程中的焊接、烧录等行为会使得产品无法享受质保服务。**

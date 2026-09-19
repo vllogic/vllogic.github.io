@@ -150,8 +150,8 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-center"><p><img alt="" src="../_images/usb_sniffer2_45.png" /></p></td>
-<td class="text-center"><p><img alt="" src="../_images/usb_sniffer_2.pcba_text.800x595.png" /></p></td>
+<tr class="row-even"><td class="text-center"><p><img alt="" src="../_images/usb_sniffer2_451.png" /></p></td>
+<td class="text-center"><p><img alt="" src="../_images/usb_sniffer_2.pcba_text.800x5951.png" /></p></td>
 </tr>
 </tbody>
 </table>
@@ -160,7 +160,7 @@
 <p>  产品硬件及上位机开源，支持二次开发。资料如下：
 <br>  * <a class="reference download internal" download="" href="../_downloads/b05a8be630bb7c21ef75fd4d977acca1/usb_sniffer_2.Rev.20260820.pdf"><span class="xref download myst">原理图</span></a>
 <br>  * <a class="reference external" href="https://github.com/vllogic/usb_sniffer.extcap">上位机源码</a>
-<br>  * <a class="reference external" href="https://www.jlc-jdgf.com/machine-detail/621858041681838081">铝合金外壳</a></p>
+<br>  * <a class="reference external" href="https://www.jlc-jdgf.com/machine-detail/621858041681838082">铝合金外壳</a></p>
 </section>
 <section id="id2">
 <h2>二、快速上手<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
@@ -197,7 +197,7 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-center"><p><img alt="" src="../_images/usb_sniffer2_example.png" /></p></td>
+<tr class="row-even"><td class="text-center"><p><img alt="" src="../_images/usb_sniffer2_example1.png" /></p></td>
 </tr>
 </tbody>
 </table>
@@ -249,10 +249,10 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-center"><p><img alt="" src="../_images/sniffer_hs_USBFlashDisk_f_syslog.png" /></p></td>
-<td class="text-center"><p><img alt="" src="../_images/sniffer_hs_USBFlashDisk_f_usbll.png" /></p></td>
-<td class="text-center"><p><img alt="" src="../_images/sniffer_hs_USBFlashDisk_f_usb.png" /></p></td>
-<td class="text-center"><p><img alt="" src="../_images/sniffer_hs_USBFlashDisk_f_usbms.png" /></p></td>
+<tr class="row-even"><td class="text-center"><p><img alt="" src="../_images/sniffer_hs_USBFlashDisk_f_syslog1.png" /></p></td>
+<td class="text-center"><p><img alt="" src="../_images/sniffer_hs_USBFlashDisk_f_usbll1.png" /></p></td>
+<td class="text-center"><p><img alt="" src="../_images/sniffer_hs_USBFlashDisk_f_usb1.png" /></p></td>
+<td class="text-center"><p><img alt="" src="../_images/sniffer_hs_USBFlashDisk_f_usbms1.png" /></p></td>
 </tr>
 </tbody>
 </table>
@@ -278,6 +278,15 @@
 <li><p>勾选<code class="docutils literal notranslate"><span class="pre">Fold</span> <span class="pre">empty</span> <span class="pre">frames</span></code>，折叠空帧，推荐</p></li>
 <li><p>在<code class="docutils literal notranslate"><span class="pre">Wireshark</span></code>菜单栏中，取消<code class="docutils literal notranslate"><span class="pre">视图</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">着色分组列表</span></code>，这个功能对网络分析有用，但对大部分USB分析无意义</p></li>
 <li><p>勾选<code class="docutils literal notranslate"><span class="pre">Exclude</span> <span class="pre">Line</span> <span class="pre">State</span></code>，排除线路状态报文</p></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><ul class="simple">
+<li><p>问：能否支持USB2.0理论峰值速度持续抓包</p></li>
+<li><p>答：支持，当前这种峰值速率抓包对<code class="docutils literal notranslate"><span class="pre">Wireshark</span></code>压力非常大，容易出现GUI卡死进而传导给插件。故建议直接使用命令抓，抓完后再打开解析</p>
+<ol class="arabic simple">
+<li><p>例：<code class="docutils literal notranslate"><span class="pre">./capture_usb_vllogic</span> <span class="pre">--capture</span> <span class="pre">--fifo</span> <span class="pre">./test.pcapng</span> <span class="pre">--speed</span> <span class="pre">auto</span> <span class="pre">--fold</span></code></p></li>
 </ol>
 </li>
 </ul>
