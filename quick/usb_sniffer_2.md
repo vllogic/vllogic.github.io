@@ -14,6 +14,9 @@
 <br>&emsp;&emsp;* [上位机源码](https://github.com/vllogic/usb_sniffer.extcap)
 <br>&emsp;&emsp;* [铝合金外壳](https://www.jlc-jdgf.com/machine-detail/621858041681838082)
 
+### 1.1 演示
+* [USB Sniffer 2 极速性能演示](../example/usb_sniffer2_extreme_test.md)
+
 ## 二、快速上手
 ### 2.1 资源整合包
 * [下载源一：百度网盘](https://pan.baidu.com/s/5JUr_pjg2ruN9iUGAtKdnkQ)
