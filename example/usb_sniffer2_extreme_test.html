@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>USB Sniffer 2 极速性能演示 &mdash; Vllogic  文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7d86a446"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Vllogic
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">快速上手</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_2x.html">Vllink 2X 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic.html">Vllink Basic 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_basic2.html">Vllink Basic2 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_box.html">Vllink Box 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/vllink_box2.html">Vllink Box2 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/usb_sniffer_2.html">USB Sniffer 2 快速上手</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick/usb_sniffer_h7p20.html">USB Sniffer H7P20 快速上手</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">硬件资料</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/convbrd.html">转接板资料</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_2x_pwr.html">Vllink 2X 电源部分详细说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic_vout.html">Vout口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_vref.html">VRef口使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_to_fpga.html">Basic2配套FPGA接口转接板</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_basic2_to_mipi10p_jtag20p.html">Basic2配套MINI-10P及JTAG-20P转接板</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_battboard.html">Vllink锂电池充放一体供电模块</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/vllink_uart.html">TTL串口使用说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">固件更新</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic.html">Vllink Basic 固件更新</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_basic2.html">Vllink Basic2 固件更新</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../update/vllink_box.html">Vllink Box &amp; Vllink Box2 固件更新</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发工具使用说明</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software/windows7_driver.html">Windows 驱动问题处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/iar.html">IAR 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/keil_mdk.html">Keil MDK 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/probe_rs.html">Probe RS 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/openocd.html">OpenOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/pyocd.html">PyOCD 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/freemaster.html">FreeMASTER 使用说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/speedtest.html">速度测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/tools.html">在线工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/hercuels_prog.html">京微齐力（Hercules）离线编程</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">应用实例</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="wireless_icp.html">无线ICP（在电路编程）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vscode_cortex_debug.html">使用VSCode的Cortex Debug调试任意固件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_rules.html">Linux下非root用户授权</a></li>
+<li class="toctree-l1"><a class="reference internal" href="over_local_area_network.html">局域网使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="over_internet.html">互联网使用</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software/webusb_protocol.html">WebUSB通讯协议</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">文档维护</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Vllogic</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">USB Sniffer 2 极速性能演示</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/example/usb_sniffer2_extreme_test.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usb-sniffer-2">
+<h1>USB Sniffer 2 极速性能演示<a class="headerlink" href="#usb-sniffer-2" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>准备<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>下载测试包 <a class="reference external" href="https://pan.baidu.com/s/5JUr_pjg2ruN9iUGAtKdnkQ">百度网盘</a> 或 <a class="reference external" href="https://github.com/vllogic/usb_sniffer.extcap/releases/download/V0.2/USBHS_MSC_Extreme_Test.zip">Github Release</a></p></li>
+<li><p>Windows主机，Linux及MacOS未测试</p></li>
+<li><p>一个高性能U盘或者高性能TF卡配读卡器，后文统称<code class="docutils literal notranslate"><span class="pre">U盘</span></code>，读取性能要达到USB2.0峰值<code class="docutils literal notranslate"><span class="pre">40MB/S</span></code></p></li>
+<li><p>将<code class="docutils literal notranslate"><span class="pre">USB_MSC_FILE</span></code>文件夹拷贝至<code class="docutils literal notranslate"><span class="pre">U盘</span></code>中，然后安全弹出</p></li>
+<li><p>准备好<code class="docutils literal notranslate"><span class="pre">USB</span> <span class="pre">Sniffer</span> <span class="pre">2</span></code>及线材</p></li>
+</ol>
+</section>
+<section id="id2">
+<h2>抓包<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>将<code class="docutils literal notranslate"><span class="pre">USB</span> <span class="pre">Sniffer</span> <span class="pre">2</span></code>通过USB3.0线材接3.0母口</p></li>
+<li><p>将<code class="docutils literal notranslate"><span class="pre">USB</span> <span class="pre">Sniffer</span> <span class="pre">2</span></code>的C口接2.0母口</p></li>
+<li><p><strong>【重要】特别说明，当前WireShark显示层无法满足极速抓包性能需求，不要试图通过GUI工具进行此项测试</strong></p></li>
+<li><p>打开<code class="docutils literal notranslate"><span class="pre">PowerShell</span></code>，执行：<code class="docutils literal notranslate"><span class="pre">&amp;</span> <span class="pre">&quot;$env:USERPROFILE\AppData\Roaming\Wireshark\extcap\capture_usb_vllogic.exe&quot;</span> <span class="pre">--capture</span> <span class="pre">--fifo</span> <span class="pre">&quot;$env:USERPROFILE\Desktop\msc_extreme.pcapng&quot;</span> <span class="pre">--speed</span> <span class="pre">auto</span> <span class="pre">--fold</span></code></p></li>
+<li><p>把<code class="docutils literal notranslate"><span class="pre">U盘</span></code>接上<code class="docutils literal notranslate"><span class="pre">USB</span> <span class="pre">Sniffer</span> <span class="pre">2</span></code>的母口</p></li>
+<li><p>主机中出现新磁盘，将磁盘中的<code class="docutils literal notranslate"><span class="pre">USB_MSC_FILE</span></code>文件夹拷贝出来，然后安全弹出</p></li>
+<li><p>移除<code class="docutils literal notranslate"><span class="pre">U盘</span></code></p></li>
+<li><p>回到<code class="docutils literal notranslate"><span class="pre">PowerShell</span></code>，<code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">C</span></code>结束捕获。</p></li>
+<li><p>桌面上出现一个<code class="docutils literal notranslate"><span class="pre">msc_extreme.pcapng</span></code>文件，就是针对这次MSC峰值读取所捕获的数据文件</p></li>
+</ol>
+</section>
+<section id="id3">
+<h2>分析方法<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<ul>
+<li><p>我已将<code class="docutils literal notranslate"><span class="pre">msc_extreme.pcapng</span></code>移动到<code class="docutils literal notranslate"><span class="pre">USBHS_MSC_Extreme_Test</span></code>，方便AI分析</p></li>
+<li><p>使用Agent打开<code class="docutils literal notranslate"><span class="pre">USBHS_MSC_Extreme_Test</span></code>文件夹，AI模型选择<code class="docutils literal notranslate"><span class="pre">DeepSeek</span> <span class="pre">V4.1</span> <span class="pre">Flash</span> <span class="pre">High</span></code>官方API，使用如下提示词：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>这是USB Sniffer 2 极速性能演示，做以下评估：
+1. 是否存在丢包或CRC错误
+2. MSC数据是否完整
+3. 抓包数据是否能与`USB_MSC_FILE`文件夹中的数据对应
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="ai">
+<h2>分析结果（独立评估前，可将此部分删除，防止误导AI）<a class="headerlink" href="#ai" title="Link to this heading"></a></h2>
+<p>分析完成。结论如下。</p>
+<section id="crc">
+<h3>1. 丢包 / CRC 错误：无<a class="headerlink" href="#crc" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>检查项</p></th>
+<th class="head"><p>数量</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CRC5 错误 <code class="docutils literal notranslate"><span class="pre">usbll.crc5.wrong</span></code></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>CRC16 错误 <code class="docutils literal notranslate"><span class="pre">usbll.crc16.wrong</span></code></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>Split CRC5 错误</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>非法 PID / PID 序列错误</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>重组错误/重叠/超长分片</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>带外信息通道中的 drop/overflow/lost 告警</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>唯一 1 个 <code class="docutils literal notranslate"><span class="pre">Malformed</span></code>：帧 332，枚举阶段一个 STRING 描述符响应只回了 2 字节（<code class="docutils literal notranslate"><span class="pre">04</span> <span class="pre">03</span></code>，bLength 却为 4），<strong>CRC 正确</strong>，属设备返回的短描述符，非总线错误。</p></li>
+<li><p>5 个 <code class="docutils literal notranslate"><span class="pre">short</span></code>（帧 471/489/584/991/1007）为 <code class="docutils literal notranslate"><span class="pre">INQUIRY</span> <span class="pre">allocation_length</span> <span class="pre">too</span> <span class="pre">small</span></code>，主机主动限制长度，Note 级，正常。</p></li>
+<li><p>带外通道只有 <code class="docutils literal notranslate"><span class="pre">Folded</span> <span class="pre">N</span> <span class="pre">empty</span> <span class="pre">frames</span></code>（空帧折叠，正常），无任何丢包告警。</p></li>
+</ul>
+</section>
+<section id="msc">
+<h3>2. MSC 数据完整性：完整<a class="headerlink" href="#msc" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>CBW 2732 个 ↔ CSW 2732 个，一一对应；<strong>CSW status 全部 = 0 (Good)，residue 全部 = 0</strong>。</p></li>
+<li><p>READ(10) 共 2530 条：每条 <code class="docutils literal notranslate"><span class="pre">捕获长度</span> <span class="pre">==</span> <span class="pre">dCBWDataTransferLength</span></code>，<strong>请求块数 321,905 == 实际捕获块数 321,905（164.8 MB），零缺失</strong>。</p></li>
+<li><p>无重复冲突（same 29 / conflict 0）。</p></li>
+</ul>
+</section>
+<section id="usb-msc-file">
+<h3>3. 与 <code class="docutils literal notranslate"><span class="pre">USB_MSC_FILE</span></code> 对应：逐字节一致<a class="headerlink" href="#usb-msc-file" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>文件在 U 盘上位于连续区间：磁盘偏移 <code class="docutils literal notranslate"><span class="pre">62,412,800</span></code>（LBA 121,900），共 2048 条 64 KiB READ，恰好顺序读一遍。</p></li>
+<li><p>利用文件自身的分页图案头（<code class="docutils literal notranslate"><span class="pre">0x5AA55AA5</span> <span class="pre">|</span> <span class="pre">页内偏移</span> <span class="pre">|</span> <span class="pre">~偏移</span> <span class="pre">|</span> <span class="pre">0xA5A55A5A</span></code>）自校验定位：<strong>32,768 / 32,768 页头全部捕获</strong>。</p></li>
+<li><p>重建 128 MiB：<strong>262,144 / 262,144 个 512B 块全部匹配，0 错误</strong>；</p></li>
+<li><p>重建 SHA256 <code class="docutils literal notranslate"><span class="pre">26d97d2c…b17</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stress_pat.bin</span></code> SHA256 <code class="docutils literal notranslate"><span class="pre">26d97d2c…b17</span></code> → <strong>完全一致</strong>。</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>附：性能<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>128 MiB 文件读取耗时 <strong>3.042 s ≈ 44.1 MB/s</strong>（超过 USB2.0 峰值 40 MB/s）。</p></li>
+<li><p>整包 1,015,713 帧 / 23.644 s ≈ 42,958 帧/s，全程零 CRC 错误、零丢包。</p></li>
+</ul>
+<p>三个问题结论均为正常：<strong>无丢包与 CRC 错误、MSC 数据完整、抓包内容与 <code class="docutils literal notranslate"><span class="pre">USB_MSC_FILE</span></code> 完全对应</strong>。</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022, Vllogic。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

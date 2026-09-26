@@ -51,22 +51,25 @@
 <li class="toctree-l1"><a class="reference internal" href="vllink_box.html">Vllink Box 快速上手</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vllink_box2.html">Vllink Box2 快速上手</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">USB Sniffer 2 快速上手</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">一、简介</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">二、快速上手</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id3">2.1 资源整合包</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">2.2 软件安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">一、简介</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.1 演示</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">二、快速上手</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2.1 资源整合包</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">2.2 软件安装</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#wireshark">2.3 Wireshark分析示例</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">2.4 Wireshark分析示例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">2.4 Wireshark分析示例</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#wireshark-u">2.5 Wireshark分析-以<code class="docutils literal notranslate"><span class="pre">高速</span></code>U盘为例</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">三、常见问题</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id7">四、二次开发</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id7">三、常见问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">四、二次开发</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#ch32417">4.1 CH32417部分</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#h7p20">4.2 H7P20部分</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id8">五、交流群</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">五、交流群</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="usb_sniffer_h7p20.html">USB Sniffer H7P20 快速上手</a></li>
@@ -161,18 +164,24 @@
 <br>  * <a class="reference download internal" download="" href="../_downloads/b05a8be630bb7c21ef75fd4d977acca1/usb_sniffer_2.Rev.20260820.pdf"><span class="xref download myst">原理图</span></a>
 <br>  * <a class="reference external" href="https://github.com/vllogic/usb_sniffer.extcap">上位机源码</a>
 <br>  * <a class="reference external" href="https://www.jlc-jdgf.com/machine-detail/621858041681838082">铝合金外壳</a></p>
-</section>
 <section id="id2">
-<h2>二、快速上手<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<h3>1.1 演示<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../example/usb_sniffer2_extreme_test.html"><span class="std std-doc">USB Sniffer 2 极速性能演示</span></a></p></li>
+</ul>
+</section>
+</section>
 <section id="id3">
-<h3>2.1 资源整合包<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<h2>二、快速上手<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<section id="id4">
+<h3>2.1 资源整合包<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://pan.baidu.com/s/5JUr_pjg2ruN9iUGAtKdnkQ">下载源一：百度网盘</a></p></li>
 <li><p><a class="reference external" href="https://github.com/vllogic/usb_sniffer.extcap/releases">下载源二：Github Release</a></p></li>
 </ul>
 </section>
-<section id="id4">
-<h3>2.2 软件安装<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="id5">
+<h3>2.2 软件安装<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><strong>方法一：解包即用</strong></p>
 <ol class="arabic simple">
@@ -208,8 +217,8 @@
 <li><p>连接<code class="docutils literal notranslate"><span class="pre">采集对象设备</span></code>与分析仪无灯一侧<code class="docutils literal notranslate"><span class="pre">USB2.0</span> <span class="pre">A母</span></code>。正常情况下，USB通讯立即开始，Wireshark中会显示捕获到的数据</p></li>
 </ol>
 </section>
-<section id="id5">
-<h3>2.4 Wireshark分析示例<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="id6">
+<h3>2.4 Wireshark分析示例<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">高速</span></code>U盘</p>
 <ul class="simple">
@@ -258,8 +267,8 @@
 </table>
 </section>
 </section>
-<section id="id6">
-<h2>三、常见问题<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<section id="id7">
+<h2>三、常见问题<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
 <li><ul class="simple">
 <li><p>问：捕获时能否自动识别速度，无需提前选定速度模式</p></li>
@@ -293,8 +302,8 @@
 </li>
 </ol>
 </section>
-<section id="id7">
-<h2>四、二次开发<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<section id="id8">
+<h2>四、二次开发<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
 <p>  <strong><code class="docutils literal notranslate"><span class="pre">重要提示：</span></code></strong> <strong>二次开发不提供技术支持，且开发过程中的焊接、烧录等行为会使得产品无法享受质保服务。</strong></p>
 <section id="ch32417">
 <h3>4.1 CH32417部分<a class="headerlink" href="#ch32417" title="Link to this heading"></a></h3>
@@ -309,8 +318,8 @@
 </ul>
 </section>
 </section>
-<section id="id8">
-<h2>五、交流群<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<section id="id9">
+<h2>五、交流群<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>QQ群：635683631</p></li>
 </ul>
