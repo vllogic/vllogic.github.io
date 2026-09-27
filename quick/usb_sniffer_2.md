@@ -15,7 +15,7 @@
 <br>&emsp;&emsp;* [铝合金外壳](https://www.jlc-jdgf.com/machine-detail/621858041681838082)
 
 ### 1.1 演示
-* [USB Sniffer 2 极速性能演示](../example/usb_sniffer2_extreme_test.md)
+* [AI Agent验证实例 -- USB Sniffer 2 极速性能演示](../example/usb_sniffer2_extreme_test.md)
 
 ## 二、快速上手
 ### 2.1 资源整合包

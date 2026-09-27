@@ -1,13 +1,13 @@
 # USB Sniffer 2 极速性能演示
 
-## 准备
+## 一、准备
 1. 下载测试包 [百度网盘](https://pan.baidu.com/s/5JUr_pjg2ruN9iUGAtKdnkQ) 或 [Github Release](https://github.com/vllogic/usb_sniffer.extcap/releases/download/V0.2/USBHS_MSC_Extreme_Test.zip)
 2. Windows主机，Linux及MacOS未测试
 3. 一个高性能U盘或者高性能TF卡配读卡器，后文统称`U盘`，读取性能要达到USB2.0峰值`40MB/S`
 4. 将`USB_MSC_FILE`文件夹拷贝至`U盘`中，然后安全弹出
 5. 准备好`USB Sniffer 2`及线材
 
-## 抓包
+## 二、抓包
 1. 将`USB Sniffer 2`通过USB3.0线材接3.0母口
 2. 将`USB Sniffer 2`的C口接2.0母口
 3. **【重要】特别说明，当前WireShark显示层无法满足极速抓包性能需求，不要试图通过GUI工具进行此项测试**
@@ -18,7 +18,7 @@
 8. 回到`PowerShell`，`Ctrl + C`结束捕获。
 9.  桌面上出现一个`msc_extreme.pcapng`文件，就是针对这次MSC峰值读取所捕获的数据文件
 
-## 分析方法
+## 三、分析方法
 * 我已将`msc_extreme.pcapng`移动到`USBHS_MSC_Extreme_Test`，方便AI分析
 * 使用Agent打开`USBHS_MSC_Extreme_Test`文件夹，AI模型选择`DeepSeek V4.1 Flash High`官方API，使用如下提示词：
     ```
@@ -28,7 +28,7 @@
     3. 抓包数据是否能与`USB_MSC_FILE`文件夹中的数据对应
     ```
 
-## 分析结果（独立评估前，可将此部分删除，防止误导AI）
+## 四、分析结果（独立评估前，可将此部分删除，防止诱导AI）
 分析完成。结论如下。
 
 ### 1. 丢包 / CRC 错误：无
