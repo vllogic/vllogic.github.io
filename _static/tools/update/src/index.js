@@ -65,6 +65,8 @@ const HID_FILTERS = [
   { vendorId: 0x1209, productId: 0x2501, usage: 0x01, usagePage: 0x0002 },
   // Vllink Module
   { vendorId: 0x1209, productId: 0x2504, usage: 0x01, usagePage: 0x0002 },
+  // Vllink 2F
+  { vendorId: 0x1209, productId: 0x2609, usage: 0x01, usagePage: 0x0002 },
 ];
 
 let hidDevice = null;
