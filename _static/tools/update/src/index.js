@@ -55,8 +55,6 @@ const HID_FILTERS = [
   { vendorId: 0x1209, productId: 0x2301, usage: 0x01, usagePage: 0x0002 },
   // Vllink Basic2
   { vendorId: 0x1209, productId: 0x2312, usage: 0x01, usagePage: 0x0002 },
-  // Vllink 2X
-  { vendorId: 0x1209, productId: 0x2512, usage: 0x01, usagePage: 0xff00 },
   // Vllink HME
   { vendorId: 0x1209, productId: 0x2303, usage: 0x01, usagePage: 0x0002 },
   // Vllink FPGA
@@ -65,8 +63,10 @@ const HID_FILTERS = [
   { vendorId: 0x1209, productId: 0x2501, usage: 0x01, usagePage: 0x0002 },
   // Vllink Module
   { vendorId: 0x1209, productId: 0x2504, usage: 0x01, usagePage: 0x0002 },
+  // Vllink 2X
+  { vendorId: 0x1209, productId: 0x2512, usage: 0x01, usagePage: 0xff00 },    // NOTE: 0xff00
   // Vllink 2F
-  { vendorId: 0x1209, productId: 0x2609, usage: 0x01, usagePage: 0x0002 },
+  { vendorId: 0x1209, productId: 0x2609, usage: 0x01, usagePage: 0xff00 },    // NOTE: 0xff00
 ];
 
 let hidDevice = null;
