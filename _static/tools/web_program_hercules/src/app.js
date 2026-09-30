@@ -36,12 +36,34 @@ const connectBtn = $('connectBtn'), startBtn = $('startBtn'), stopBtn = $('stopB
 const authDirName = $('authDirName'), exportCfgBtn = $('exportCfgBtn'), loadCfgBtn = $('loadCfgBtn');
 const autoRunCb = $('autoRunCb'), retryCountSel = $('retryCountSel');
 const statusOutCb = $('statusOutCb'), passActionSel = $('passActionSel'), failActionSel = $('failActionSel');
+const busyModeSel = $('busyModeSel'), busyHint = $('busyHint');
 const autoIntervalSel = $('autoIntervalSel');
 
 /* ================= 间隔触发: 秒数下拉启用/禁用 ================= */
 function updateIntervalRow() {
     const mode = document.querySelector('input[name="trigger-mode"]:checked');
     autoIntervalSel.disabled = !(mode && mode.value === 'auto-timer');
+}
+
+/* ================= BUSY 输出: 仅特定硬件 (VID/PID/bcdDevice) 有 BUSY 脚 =================
+ * 模式: high=烧录时高电平, low=烧录时低电平, hold_low=保持低电平
+ * 未连接时允许配置; 连到无 BUSY 脚的硬件时禁用并提示 (引擎侧也会强制恒低)。
+ */
+let _busyModePref = 'hold_low';   // 默认保持低电平
+function updateBusyUI() {
+    if (!busyModeSel) return;
+    const connected = !!(engine.port && engine.port.device_);
+    const capable = connected ? engine.isBusyCapable() : null;   // null = 未连接 (允许配置)
+    if (capable === false) {
+        if (!busyModeSel.disabled) _busyModePref = busyModeSel.value;
+        busyModeSel.value = 'hold_low';
+        busyModeSel.disabled = true;
+        if (busyHint) busyHint.classList.remove('hidden');
+    } else {
+        busyModeSel.value = _busyModePref;
+        busyModeSel.disabled = false;
+        if (busyHint) busyHint.classList.add('hidden');
+    }
 }
 const statBurn = $('statBurn'), statPass = $('statPass'), statFail = $('statFail'), statRetry = $('statRetry');
 const vrefVal = $('vrefVal'), vrefState = $('vrefState'), rxdLevel = $('rxdLevel'), keyState = $('keyState');
@@ -197,6 +219,7 @@ function setConnectedUI(state) {
         manualGoBtn.disabled = true;
     }
     updateStartBtn();
+    updateBusyUI();   // BUSY 可用性随连接设备变化
 }
 
 async function performConnect() {
@@ -231,7 +254,7 @@ async function performConnect() {
 function collectCfg() {
     const mode = document.querySelector('input[name="trigger-mode"]:checked');
     return {
-        schema: 4,
+        schema: 5,
         product: '',
         options: {
             autoProbe: true,
@@ -246,7 +269,8 @@ function collectCfg() {
         statusOut: {
             enable: statusOutCb.checked,
             passAction: passActionSel.value,
-            failAction: failActionSel.value
+            failAction: failActionSel.value,
+            busyMode: _busyModePref   // high / low / hold_low (硬件不支持时引擎强制恒低)
         },
         files: fileRows.map(r => ({ name: r.fileName, addr: r.addr, cutAcf: r.cutAcf, rawData: r.rawData }))
     };
@@ -271,6 +295,13 @@ function applyCfg(cfg) {
         statusOutCb.checked = cfg.statusOut.enable !== false;
         if (cfg.statusOut.passAction) passActionSel.value = cfg.statusOut.passAction;
         if (cfg.statusOut.failAction) failActionSel.value = cfg.statusOut.failAction;
+        // busyMode 新字段; 兼容仅有 busyActiveHigh 的旧配置
+        let bm = cfg.statusOut.busyMode;
+        if (!bm) bm = cfg.statusOut.busyActiveHigh === true ? 'high' : cfg.statusOut.busyActiveHigh === false ? 'low' : 'hold_low';
+        if (bm !== 'high' && bm !== 'low' && bm !== 'hold_low') bm = 'hold_low';
+        _busyModePref = bm;
+        if (busyModeSel) busyModeSel.value = bm;
+        updateBusyUI();
     }
     if (Array.isArray(cfg.files)) {
         fileRows = cfg.files.map(f => ({
@@ -626,7 +657,7 @@ function setConfigLocked(locked) {
         ftCard.classList.toggle('grayscale', locked);
         ftCard.querySelectorAll('input, button').forEach(el => { el.disabled = locked; });
     }
-    if (!locked) updateIntervalRow();   // 解锁后按触发模式恢复下拉状态
+    if (!locked) { updateIntervalRow(); updateBusyUI(); }   // 解锁后按触发模式/BUSY 硬件能力恢复下拉状态
 }
 
 /* ================= 量产控制 ================= */
@@ -654,7 +685,9 @@ async function startRun() {
     startBtn.disabled = true;
     stopBtn.disabled = false;
     setConfigLocked(true);
-    appendLog(`======== 量产开始 ======== (触发=${cfg.trigger.mode} 成功=${cfg.statusOut.passAction} 失败=${cfg.statusOut.failAction} 间隔=${cfg.trigger.autoInterval}s)`);
+    const bm = cfg.statusOut.busyMode;
+    const busyDesc = !engine.isBusyCapable() ? '无BUSY脚' : bm === 'high' ? '烧录高' : bm === 'low' ? '烧录低' : '保持低';
+    appendLog(`======== 量产开始 ======== (触发=${cfg.trigger.mode} 成功=${cfg.statusOut.passAction} 失败=${cfg.statusOut.failAction} BUSY=${busyDesc} 间隔=${cfg.trigger.autoInterval}s)`);
     engine.run(cfg);
 }
 
@@ -685,7 +718,7 @@ function exportCsv() {
     });
     rows.push([], ['=== 日志 (最近 ' + MAX_LOG_LINES + ' 条, 已过滤调试信息) ===']);
     document.querySelectorAll('#logBox .log-line').forEach(line => {
-        if (line.dataset.level === 'debug') return;   // 过滤调试行 (OUTPUT_TXD_SRST / [UI] / [USB])
+        if (line.dataset.level === 'debug') return;   // 过滤调试行 (OUTPUT_TSB / [UI] / [USB])
         rows.push([line.textContent]);
     });
     const csv = rows.map(r => r.map(esc).join(',')).join('\n');
@@ -748,6 +781,8 @@ function init() {
     stopBtn.addEventListener('click', stopRun);
     manualGoBtn.addEventListener('click', () => engine.manualGo());
     document.querySelectorAll('input[name="trigger-mode"]').forEach(r => r.addEventListener('change', updateIntervalRow));
+    if (busyModeSel) busyModeSel.addEventListener('change', () => { _busyModePref = busyModeSel.value; });
+    updateBusyUI();
     $('addFileBtn').addEventListener('click', addFileRow);
     $('exportCsvBtn').addEventListener('click', exportCsv);
     const clearLogBtn = $('clearLogBtn');

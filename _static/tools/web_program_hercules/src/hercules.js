@@ -1,10 +1,10 @@
 const VENDOR_ID_HERCULES = 0x90;
 
 const HERCULES_SUBCMD_GET_INFO = 0x0;
-const HERCULES_SUBCMD_TAKEOVER_TXD_RXD = 0x2;
-const HERCULES_SUBCMD_RELEASE_TXD_RXD  = 0x3;
+const HERCULES_SUBCMD_TAKEOVER_TRB     = 0x2;   // 接管 TXD RXD BUSY
+const HERCULES_SUBCMD_RELEASE_TRB      = 0x3;   // 释放 TXD RXD BUSY
 const HERCULES_SUBCMD_GET_STATUS       = 0x4;
-const HERCULES_SUBCMD_OUTPUT_TXD_SRST  = 0x5;
+const HERCULES_SUBCMD_OUTPUT_TSB       = 0x5;   // 设置 TXD SRST BUSY 电平
 const HERCULES_SUBCMD_PROBE_CHIP = 0x10;
 const HERCULES_SUBCMD_CHIP_WRITE = 0x20;
 const HERCULES_SUBCMD_FLASH_WRITE = 0x30;
@@ -55,17 +55,17 @@ function hercules_cmd_probe_chip() {
     return array;
 }
 
-function hercules_cmd_takeover_txd_rxd() {
+function hercules_cmd_takeover_trb() {
     var array = new Uint8Array(2);
     array[0] = VENDOR_ID_HERCULES;
-    array[1] = HERCULES_SUBCMD_TAKEOVER_TXD_RXD;
+    array[1] = HERCULES_SUBCMD_TAKEOVER_TRB;
     return array;
 }
 
-function hercules_cmd_release_txd_rxd() {
+function hercules_cmd_release_trb() {
     var array = new Uint8Array(2);
     array[0] = VENDOR_ID_HERCULES;
-    array[1] = HERCULES_SUBCMD_RELEASE_TXD_RXD;
+    array[1] = HERCULES_SUBCMD_RELEASE_TRB;
     return array;
 }
 
@@ -76,12 +76,13 @@ function hercules_cmd_get_status() {
     return array;
 }
 
-function hercules_cmd_output_txd_srst(txd_level, srst_level) {
-    var array = new Uint8Array(4);
+function hercules_cmd_output_tsb(txd_level, srst_level, busy_level) {
+    var array = new Uint8Array(5);
     array[0] = VENDOR_ID_HERCULES;
-    array[1] = HERCULES_SUBCMD_OUTPUT_TXD_SRST;
+    array[1] = HERCULES_SUBCMD_OUTPUT_TSB;
     array[2] = txd_level ? 1 : 0;
     array[3] = srst_level ? 1 : 0;
+    array[4] = busy_level ? 1 : 0;
     return array;
 }
 
