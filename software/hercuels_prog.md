@@ -1,6 +1,7 @@
 # 京微齐力（Hercules）离线编程
 * *支持硬件：`Vllink 2X`*
 * *支持硬件：`Vllink Basic2`*
+* *支持硬件：`Vllink 2F`*
 
 ## 一、准备工作
 ### 1.1 接口准备
@@ -28,6 +29,7 @@
 * `trig_rxd_rise`模式下，可以先给编程器上电，然后接上已上电的目标芯片，机台通过`RXD`脚给出上升沿即自动触发烧录
 * `trig_rxd_fall`模式下，可以先给编程器上电，然后接上已上电的目标芯片，机台通过`RXD`脚给出下降沿即自动触发烧录
 * 烧录过程中蓝灯闪烁；烧录成功绿灯常亮；烧录失败黄灯常亮
+* `busy_high`/`busy_low`配置后，烧录时，`Busy`脚输出对应电平
 * `pass_txd_rise`/`pass_txd_fall`配置后，烧录成功时`TXD`脚输出对应边沿提示机台
 * `fail_srst_rise`/`fail_srst_fall`配置后，烧录失败时`SRST`脚输出对应边沿提示机台
 ### 1.5 接口电气特性
@@ -45,7 +47,7 @@
 | :---: | :---: | :---: |
 | `auto` | 自动化执行离线编程功能 | 开发中 |
 ### 2.2 子命令说明-`auto`
-* 命令格式：`hercules_prog auto [target_type] [trig_type] <lz4> <autoreset> <boost> <pass_txd_rise> <pass_txd_fall> <fail_srst_rise> <fail_srst_fall> <flash [data_select] [addr] [size]> <chip [data_select] [size]>`
+* 命令格式：`hercules_prog auto [target_type] [trig_type] <lz4> <autoreset> <boost> <busy_high> <busy_low> <pass_txd_rise> <pass_txd_fall> <fail_srst_rise> <fail_srst_fall> <flash [data_select] [addr] [size]> <chip [data_select] [size]>`
 * `target_type`：芯片类型，必填
   | `target_type` | 芯片类型 |
   | :---: | :--- |
@@ -68,11 +70,13 @@
 * 【暂未支持】~~`lz4`：声明载入编程器的数据文件是lz4压缩格式，选填~~
 * `autoreset`：操作完毕后复位芯片，选填
 * `boost`：以最高可探测档位时钟与目标芯片通讯，可获得最快编程速度，但不建议启用，选填
+* `busy_high`：烧录时，`Busy`脚输出高电平，选填
+* `busy_low`：烧录时，`Busy`脚输出低电平，选填
 * `pass_txd_rise`：烧录成功后，`TXD`脚输出上升沿提示机台，选填
 * `pass_txd_fall`：烧录成功后，`TXD`脚输出下降沿提示机台，选填
 * `fail_srst_rise`：烧录失败后，`SRST`脚输出上升沿提示机台，选填
 * `fail_srst_fall`：烧录失败后，`SRST`脚输出下降沿提示机台，选填
-* 补充说明：`pass_txd_rise`与`pass_txd_fall`互斥，不能同时使用；`fail_srst_rise`与`fail_srst_fall`互斥，不能同时使用；`pass_txd_*`与`fail_srst_*`可同时使用
+* 补充说明：`busy_high`与`busy_low`互斥，不能同时使用；`pass_txd_rise`与`pass_txd_fall`互斥，不能同时使用；`fail_srst_rise`与`fail_srst_fall`互斥，不能同时使用；`busy_*`、`pass_txd_*`与`fail_srst_*`可同时使用
 * `flash [data_select] [addr] [size]`：对Flash编程
   1. `data_select`：当前仅支持`data0`，使用 [Vllink 2026 Console](https://vllogic.com/_static/tools/vllink2026_console/) 载入
   2. `addr`：目标Flash的编程起始地址，一般填入`0x0`，必须是以`0x`开头的十六进制
@@ -88,7 +92,8 @@
 * 例2：`Customize_CMD=hercules_prog auto H7 trig_button boost chip data0 0x8780C`
   1. 目标芯片是HME-H7；通过编程器的按键按下事件触发编程；使用最高可用档位时钟通讯
   2. 烧录对象是Chip，长度是0x8780C
-* 例3：`Customize_CMD=hercules_prog auto H7 trig_rxd_fall pass_txd_rise fail_srst_rise flash data0 0x0 0x8780C`
+* 例3：`Customize_CMD=hercules_prog auto H7 trig_rxd_fall busy_high pass_txd_rise fail_srst_rise flash data0 0x0 0x8780C`
   1. 目标芯片是HME-H7；机台通过`RXD`脚下降沿触发编程
-  2. 烧录成功后`TXD`脚输出上升沿提示机台；烧录失败后`SRST`脚输出上升沿提示机台
-  3. 烧录对象是Flash，烧录起始地址是0，长度是0x8780C
+  2. 烧录时，`Busy`脚输出高电平，仅对带`Busy`脚的的产品有效
+  3. 烧录成功后`TXD`脚输出上升沿提示机台；烧录失败后`SRST`脚输出上升沿提示机台
+  4. 烧录对象是Flash，烧录起始地址是0，长度是0x8780C
