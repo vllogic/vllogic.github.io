@@ -142,6 +142,7 @@
 <ul class="simple">
 <li><p><em>支持硬件：<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">2X</span></code></em></p></li>
 <li><p><em>支持硬件：<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">Basic2</span></code></em></p></li>
+<li><p><em>支持硬件：<code class="docutils literal notranslate"><span class="pre">Vllink</span> <span class="pre">2F</span></code></em></p></li>
 </ul>
 <section id="id1">
 <h2>一、准备工作<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
@@ -185,6 +186,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">trig_rxd_rise</span></code>模式下，可以先给编程器上电，然后接上已上电的目标芯片，机台通过<code class="docutils literal notranslate"><span class="pre">RXD</span></code>脚给出上升沿即自动触发烧录</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">trig_rxd_fall</span></code>模式下，可以先给编程器上电，然后接上已上电的目标芯片，机台通过<code class="docutils literal notranslate"><span class="pre">RXD</span></code>脚给出下降沿即自动触发烧录</p></li>
 <li><p>烧录过程中蓝灯闪烁；烧录成功绿灯常亮；烧录失败黄灯常亮</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">busy_high</span></code>/<code class="docutils literal notranslate"><span class="pre">busy_low</span></code>配置后，烧录时，<code class="docutils literal notranslate"><span class="pre">Busy</span></code>脚输出对应电平</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pass_txd_rise</span></code>/<code class="docutils literal notranslate"><span class="pre">pass_txd_fall</span></code>配置后，烧录成功时<code class="docutils literal notranslate"><span class="pre">TXD</span></code>脚输出对应边沿提示机台</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fail_srst_rise</span></code>/<code class="docutils literal notranslate"><span class="pre">fail_srst_fall</span></code>配置后，烧录失败时<code class="docutils literal notranslate"><span class="pre">SRST</span></code>脚输出对应边沿提示机台</p></li>
 </ul>
@@ -226,7 +228,7 @@
 <section id="auto">
 <h3>2.2 子命令说明-<code class="docutils literal notranslate"><span class="pre">auto</span></code><a class="headerlink" href="#auto" title="Link to this heading"></a></h3>
 <ul>
-<li><p>命令格式：<code class="docutils literal notranslate"><span class="pre">hercules_prog</span> <span class="pre">auto</span> <span class="pre">[target_type]</span> <span class="pre">[trig_type]</span> <span class="pre">&lt;lz4&gt;</span> <span class="pre">&lt;autoreset&gt;</span> <span class="pre">&lt;boost&gt;</span> <span class="pre">&lt;pass_txd_rise&gt;</span> <span class="pre">&lt;pass_txd_fall&gt;</span> <span class="pre">&lt;fail_srst_rise&gt;</span> <span class="pre">&lt;fail_srst_fall&gt;</span> <span class="pre">&lt;flash</span> <span class="pre">[data_select]</span> <span class="pre">[addr]</span> <span class="pre">[size]&gt;</span> <span class="pre">&lt;chip</span> <span class="pre">[data_select]</span> <span class="pre">[size]&gt;</span></code></p></li>
+<li><p>命令格式：<code class="docutils literal notranslate"><span class="pre">hercules_prog</span> <span class="pre">auto</span> <span class="pre">[target_type]</span> <span class="pre">[trig_type]</span> <span class="pre">&lt;lz4&gt;</span> <span class="pre">&lt;autoreset&gt;</span> <span class="pre">&lt;boost&gt;</span> <span class="pre">&lt;busy_high&gt;</span> <span class="pre">&lt;busy_low&gt;</span> <span class="pre">&lt;pass_txd_rise&gt;</span> <span class="pre">&lt;pass_txd_fall&gt;</span> <span class="pre">&lt;fail_srst_rise&gt;</span> <span class="pre">&lt;fail_srst_fall&gt;</span> <span class="pre">&lt;flash</span> <span class="pre">[data_select]</span> <span class="pre">[addr]</span> <span class="pre">[size]&gt;</span> <span class="pre">&lt;chip</span> <span class="pre">[data_select]</span> <span class="pre">[size]&gt;</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">target_type</span></code>：芯片类型，必填</p>
 <table class="docutils align-default">
 <thead>
@@ -291,11 +293,13 @@
 <li><p>【暂未支持】~~<code class="docutils literal notranslate"><span class="pre">lz4</span></code>：声明载入编程器的数据文件是lz4压缩格式，选填~~</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">autoreset</span></code>：操作完毕后复位芯片，选填</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">boost</span></code>：以最高可探测档位时钟与目标芯片通讯，可获得最快编程速度，但不建议启用，选填</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">busy_high</span></code>：烧录时，<code class="docutils literal notranslate"><span class="pre">Busy</span></code>脚输出高电平，选填</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">busy_low</span></code>：烧录时，<code class="docutils literal notranslate"><span class="pre">Busy</span></code>脚输出低电平，选填</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pass_txd_rise</span></code>：烧录成功后，<code class="docutils literal notranslate"><span class="pre">TXD</span></code>脚输出上升沿提示机台，选填</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pass_txd_fall</span></code>：烧录成功后，<code class="docutils literal notranslate"><span class="pre">TXD</span></code>脚输出下降沿提示机台，选填</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fail_srst_rise</span></code>：烧录失败后，<code class="docutils literal notranslate"><span class="pre">SRST</span></code>脚输出上升沿提示机台，选填</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fail_srst_fall</span></code>：烧录失败后，<code class="docutils literal notranslate"><span class="pre">SRST</span></code>脚输出下降沿提示机台，选填</p></li>
-<li><p>补充说明：<code class="docutils literal notranslate"><span class="pre">pass_txd_rise</span></code>与<code class="docutils literal notranslate"><span class="pre">pass_txd_fall</span></code>互斥，不能同时使用；<code class="docutils literal notranslate"><span class="pre">fail_srst_rise</span></code>与<code class="docutils literal notranslate"><span class="pre">fail_srst_fall</span></code>互斥，不能同时使用；<code class="docutils literal notranslate"><span class="pre">pass_txd_*</span></code>与<code class="docutils literal notranslate"><span class="pre">fail_srst_*</span></code>可同时使用</p></li>
+<li><p>补充说明：<code class="docutils literal notranslate"><span class="pre">busy_high</span></code>与<code class="docutils literal notranslate"><span class="pre">busy_low</span></code>互斥，不能同时使用；<code class="docutils literal notranslate"><span class="pre">pass_txd_rise</span></code>与<code class="docutils literal notranslate"><span class="pre">pass_txd_fall</span></code>互斥，不能同时使用；<code class="docutils literal notranslate"><span class="pre">fail_srst_rise</span></code>与<code class="docutils literal notranslate"><span class="pre">fail_srst_fall</span></code>互斥，不能同时使用；<code class="docutils literal notranslate"><span class="pre">busy_*</span></code>、<code class="docutils literal notranslate"><span class="pre">pass_txd_*</span></code>与<code class="docutils literal notranslate"><span class="pre">fail_srst_*</span></code>可同时使用</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">flash</span> <span class="pre">[data_select]</span> <span class="pre">[addr]</span> <span class="pre">[size]</span></code>：对Flash编程</p>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">data_select</span></code>：当前仅支持<code class="docutils literal notranslate"><span class="pre">data0</span></code>，使用 <a class="reference external" href="https://vllogic.com/_static/tools/vllink2026_console/">Vllink 2026 Console</a> 载入</p></li>
@@ -327,9 +331,10 @@
 <li><p>烧录对象是Chip，长度是0x8780C</p></li>
 </ol>
 </li>
-<li><p>例3：<code class="docutils literal notranslate"><span class="pre">Customize_CMD=hercules_prog</span> <span class="pre">auto</span> <span class="pre">H7</span> <span class="pre">trig_rxd_fall</span> <span class="pre">pass_txd_rise</span> <span class="pre">fail_srst_rise</span> <span class="pre">flash</span> <span class="pre">data0</span> <span class="pre">0x0</span> <span class="pre">0x8780C</span></code></p>
+<li><p>例3：<code class="docutils literal notranslate"><span class="pre">Customize_CMD=hercules_prog</span> <span class="pre">auto</span> <span class="pre">H7</span> <span class="pre">trig_rxd_fall</span> <span class="pre">busy_high</span> <span class="pre">pass_txd_rise</span> <span class="pre">fail_srst_rise</span> <span class="pre">flash</span> <span class="pre">data0</span> <span class="pre">0x0</span> <span class="pre">0x8780C</span></code></p>
 <ol class="arabic simple">
 <li><p>目标芯片是HME-H7；机台通过<code class="docutils literal notranslate"><span class="pre">RXD</span></code>脚下降沿触发编程</p></li>
+<li><p>烧录时，<code class="docutils literal notranslate"><span class="pre">Busy</span></code>脚输出高电平，仅对带<code class="docutils literal notranslate"><span class="pre">Busy</span></code>脚的的产品有效</p></li>
 <li><p>烧录成功后<code class="docutils literal notranslate"><span class="pre">TXD</span></code>脚输出上升沿提示机台；烧录失败后<code class="docutils literal notranslate"><span class="pre">SRST</span></code>脚输出上升沿提示机台</p></li>
 <li><p>烧录对象是Flash，烧录起始地址是0，长度是0x8780C</p></li>
 </ol>
