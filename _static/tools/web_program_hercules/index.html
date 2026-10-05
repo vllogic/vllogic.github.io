@@ -165,7 +165,8 @@
                     <ul class="list-disc pl-4 space-y-0.5">
                         <li>配置 <b>TXD 脚</b> 在烧录成功后的动作</li>
                         <li>配置 <b>SRST 脚</b> 在烧录失败后的动作</li>
-                        <li>注意：TXD / SRST 两脚需 <b>VREF</b> 提供参考电平</li>
+                        <li><b>BUSY 脚</b>（仅特定硬件）：烧录时高/低电平通知外部，或保持低电平；本片结束恢复</li>
+                        <li>注意：TXD / SRST / BUSY 三脚需 <b>VREF</b> 提供参考电平</li>
                     </ul>
                 </div>
                 <div>
@@ -283,7 +284,7 @@
                     <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">状态输出</h2>
                 </div>
                 <div class="space-y-3 text-xs text-slate-600 dark:text-slate-300">
-                    <label class="flex items-center gap-2 cursor-pointer"><input id="statusOutCb" type="checkbox" checked class="accent-primary"> 接管引脚 (TAKEOVER/RELEASE)</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input id="statusOutCb" type="checkbox" checked class="accent-primary"> 接管引脚 TXD/RXD/BUSY</label>
                     <div class="flex items-center gap-2">
                         <span class="text-slate-400 w-14">成功</span>
                         <select id="passActionSel" class="input-dark !py-1.5 flex-1">
@@ -300,6 +301,15 @@
                             <option value="fail_srst_fall">SRST ↓ 下降沿</option>
                         </select>
                     </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-slate-400 w-14">BUSY</span>
+                        <select id="busyModeSel" class="input-dark !py-1.5 flex-1">
+                            <option value="high">烧录时高电平</option>
+                            <option value="low">烧录时低电平</option>
+                            <option value="hold_low" selected>保持低电平</option>
+                        </select>
+                    </div>
+                    <div id="busyHint" class="text-[10px] font-bold text-amber-500 hidden">当前下载器硬件无 BUSY 脚，BUSY 固定保持低电平</div>
                 </div>
             </div>
         </div>

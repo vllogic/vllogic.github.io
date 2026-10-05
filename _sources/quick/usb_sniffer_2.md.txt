@@ -3,7 +3,7 @@
 ## 一、简介
 |铝合金外壳|PCBA|
 |:--:|:--:|
-|![](../_static/picture/usb_sniffer2_45.png)|![](../_static/picture/usb_sniffer_2.pcba_text.800x595.png)|
+|![](../_static/picture/usb_sniffer2_45.png)|![](../_static/picture/usb_sniffer_2.pcba_text.800x596.png)|
 
 &emsp;&emsp;本产品为第二代USB协议分析工具，可配合 [Wireshark](https://www.wireshark.org/) 进行实时协议解析，支持`USB低速`、`USB全速`及`USB高速`。
 

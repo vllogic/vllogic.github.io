@@ -2,7 +2,7 @@
  * Web Program Hercules - 量产引擎 (可实例化, 预留多工位)
  * -------------------------------------------------------------------------
  * 依赖: hercules.js (命令构建) / dapv2.js (bulk 传输)
- * 职责: 带超时请求层 / 触发检测(5种) / 状态输出(电平保持) /
+ * 职责: 带超时请求层 / 触发检测(5种) / 状态输出(电平保持, TXD/SRST/BUSY) /
  *       多文件烧写(强制 ERASE+VERIFY, 双计数器重试, 容量校验) / 统计(4项)
  * ========================================================================= */
 
@@ -24,6 +24,7 @@ class MassProduceEngine {
         this._progressBytes = 0;    // 当前片已烧录累计字节 (用于进度条)
         this._outTxd = null;        // 状态输出: 当前 TXD 电平 (null=未设置)
         this._outSrst = null;       // 状态输出: 当前 SRST 电平 (null=未设置)
+        this._outBusy = null;       // 状态输出: 当前 BUSY 电平 (null=未设置)
         this._baseAddr = 0;         // 多文件虚拟文件基地址 (按地址排序后首个文件地址)
         this._fullLength = 0;       // 虚拟文件总长 = 最大偏移 - 基地址 (AUTORESET/完成判定用)
 
@@ -172,26 +173,28 @@ class MassProduceEngine {
     }
 
     async takeover() {
-        const resp = await this.request(hercules_cmd_takeover_txd_rxd());
+        const resp = await this.request(hercules_cmd_takeover_trb());
         if (!this.respOk(resp)) throw new Error('TAKEOVER failed');
     }
 
     async release() {
         if (!this.port) return;
         try {
-            const resp = await this.request(hercules_cmd_release_txd_rxd());
+            const resp = await this.request(hercules_cmd_release_trb());
             if (!this.respOk(resp)) this.log('RELEASE 响应异常');
         } catch (e) { this.log('RELEASE: ' + e.message); }
     }
 
-    async outputTxdSrst(t, s) {
-        // null 表示保持该引脚当前电平 (单引脚更新时另一引脚传 null)
-        const nt = (t === null || t === undefined) ? (this._outTxd ?? 0) : t;
-        const ns = (s === null || s === undefined) ? (this._outSrst ?? 0) : s;
+    // 三脚电平输出: null 表示保持该引脚当前电平 (内部 _outTxd/_outSrst/_outBusy 跟踪)
+    async outputTsb(t, s, b) {
+        const nt = (t === null || t === undefined) ? (this._outTxd ?? 0) : (t ? 1 : 0);
+        const ns = (s === null || s === undefined) ? (this._outSrst ?? 0) : (s ? 1 : 0);
+        const nb = (b === null || b === undefined) ? (this._outBusy ?? 0) : (b ? 1 : 0);
         this._outTxd = nt;
         this._outSrst = ns;
-        const resp = await this.request(hercules_cmd_output_txd_srst(nt, ns));
-        if (!this.respOk(resp)) throw new Error('OUTPUT_TXD_SRST failed');
+        this._outBusy = nb;
+        const resp = await this.request(hercules_cmd_output_tsb(nt, ns, nb));
+        if (!this.respOk(resp)) throw new Error('OUTPUT_TSB failed');
     }
 
     async probeChip() {
@@ -301,34 +304,57 @@ class MassProduceEngine {
      * 语义: 烧录前及烧录时保持"忙电平", 成功后翻转为"成功电平", 下一片触发烧录恢复忙电平
      *   SRST 为普通 IO: 写0=低, 写1=高 (无反相)
      *   上升沿: 忙=低(0), 失败=高(1); 下降沿: 忙=高(1), 失败=低(0)
+     *   BUSY (仅特定硬件): high=烧录中高, low=烧录中低, hold_low=恒低; 无 BUSY 脚硬件恒低
      */
-    async _signalBusyLevels() {
+    // BUSY 脚仅存在于特定硬件 (VID 0x1209 / PID 0x6666 / bcdDevice 0x9040)
+    isBusyCapable() {
+        const d = this.port && this.port.device_;
+        if (!d) return false;
+        if (d.vendorId !== 0x1209 || d.productId !== 0x6666) return false;
+        // bcdDevice 0x9040 → WebUSB 拆为 major=0x90 / minor=0x4 / subminor=0x0; 这里按 nibble 还原比对
+        const maj = d.deviceVersionMajor || 0, min = d.deviceVersionMinor || 0, sub = d.deviceVersionSubminor || 0;
+        const bcd = (maj << 8) | (min << 4) | sub;
+        return bcd === 0x9040;
+    }
+    // BUSY 目标电平 (仅在接管引脚时调用): high=烧录中高, low=烧录中低, hold_low=恒低
+    // 无 BUSY 脚的硬件强制恒低 (0)
+    _busyLevel(isBusy) {
+        if (!this.isBusyCapable()) return 0;
+        const mode = this.cfg.statusOut.busyMode;
+        if (mode === 'high') return isBusy ? 1 : 0;
+        if (mode === 'low') return isBusy ? 0 : 1;
+        return 0;   // hold_low / 缺省: 恒低
+    }
+    async _signalBusyLevels(isBusy) {
         const p = this.cfg.statusOut.passAction, f = this.cfg.statusOut.failAction;
         let t = null, s = null;
         if (p === 'pass_txd_rise') t = 0;
         else if (p === 'pass_txd_fall') t = 1;
         if (f === 'fail_srst_rise') s = 0;          // 上升沿: 忙=低(0)
         else if (f === 'fail_srst_fall') s = 1;     // 下降沿: 忙=高(1)
-        if (t === null && s === null) return;   // 全部无动作: 不改变引脚
-        await this.outputTxdSrst(t, s);
+        const b = this._busyLevel(isBusy);
+        if (t === null && s === null && b === null) return;   // 全部无动作: 不改变引脚
+        await this.outputTsb(t, s, b);
     }
-    async signalReady() { if (this.cfg.statusOut.enable) await this._signalBusyLevels(); }
-    async signalBusy()  { if (this.cfg.statusOut.enable) await this._signalBusyLevels(); }
-    // 成功: TXD 翻转为成功电平, SRST 保持
+    async signalReady() { if (this.cfg.statusOut.enable) await this._signalBusyLevels(false); }
+    async signalBusy()  { if (this.cfg.statusOut.enable) await this._signalBusyLevels(true); }
+    // 成功: TXD 翻转为成功电平, SRST 保持, BUSY 撤销(烧录结束)
     async signalPass() {
         if (!this.cfg.statusOut.enable) return;
         const a = this.cfg.statusOut.passAction;
         const t = a === 'pass_txd_rise' ? 1 : a === 'pass_txd_fall' ? 0 : null;
-        if (t === null) return;   // 无动作
-        await this.outputTxdSrst(t, null);
+        const b = this._busyLevel(false);
+        if (t === null && b === null) return;   // 无动作
+        await this.outputTsb(t, null, b);
     }
-    // 失败: SRST 翻转为失败电平, TXD 保持
+    // 失败: SRST 翻转为失败电平, TXD 保持, BUSY 撤销(烧录结束)
     async signalFail() {
         if (!this.cfg.statusOut.enable) return;
         const a = this.cfg.statusOut.failAction;
         const s = a === 'fail_srst_rise' ? 1 : a === 'fail_srst_fall' ? 0 : null;
-        if (s === null) return;   // 无动作
-        await this.outputTxdSrst(null, s);
+        const b = this._busyLevel(false);
+        if (s === null && b === null) return;   // 无动作
+        await this.outputTsb(null, s, b);
     }
 
     /* ================= 容量校验 ================= */
