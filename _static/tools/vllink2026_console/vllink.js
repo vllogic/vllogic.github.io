@@ -11,6 +11,8 @@ class VllinkManager {
             { vendorId: 0x0d28, productId: 0x0204 }
         ];
         this.isBusy = false; // 通讯排队锁
+        this.powerCapable = false; // DAP_PowerCycle (0x0F) 支持标志
+        this.powerState = null;    // { status, config, power }
     }
 
     /**
@@ -125,6 +127,44 @@ class VllinkManager {
             request: 0x10, value: 0, index: this.interfaceNum
         }, 512);
         return new Uint8Array(resp.data.buffer);
+    }
+
+    /**
+     * 查询 DAP_PowerCycle (0x0F) 能力：DAP_Info(0xF0) 的 Info1 bit7
+     */
+    async queryPowerCapability() {
+        try {
+            const resp = await this.dapExecute(new Uint8Array([0x00, 0xF0]));
+            if (resp[0] !== 0x00 || resp[1] < 2) return false;
+            return (resp[3] & 0x80) !== 0;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    /**
+     * 查询电源状态（Channel=0x00 仅回读，不产生动作）
+     * @returns {{status:number, config:number, power:number}|null}
+     */
+    async queryPowerState() {
+        try {
+            const resp = await this.dapExecute(new Uint8Array([0x0F, 0x00, 0x01]));
+            if (resp[0] !== 0x0F) return null;
+            return { status: resp[1], config: resp[2], power: resp[3] };
+        } catch (e) {
+            return null;
+        }
+    }
+
+    /**
+     * 强制所选通道跌落 / 恢复
+     * @param {number} channelMask - bit0=VREF, bit1=VOUT_5V, 0xFF=全部
+     * @param {boolean} down - true=跌落(Off), false=恢复(On)
+     */
+    async setPowerDown(channelMask, down) {
+        const resp = await this.dapExecute(new Uint8Array([0x0F, channelMask & 0xFF, down ? 0x00 : 0x01]));
+        if (resp[0] !== 0x0F) return null;
+        return { status: resp[1], config: resp[2], power: resp[3] };
     }
 
     async getConfigInfo() {

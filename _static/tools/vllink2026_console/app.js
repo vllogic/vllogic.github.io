@@ -348,6 +348,7 @@ const vllink = new VllinkManager();
 let pollTimer = null;
 let lastFingerprint = "";
 let lastDeviceCache = null;
+let lastInfo = null;
 
 // 【新特性】：记录用户是否手动断开的临时标志位
 let forceManualSelection = false; 
@@ -375,6 +376,10 @@ async function performConnection(autoDevice = null, forceRequest = false) {
     vllink.isBusy = false;
     lastFingerprint = "";
 
+    // 探测目标电源跌落能力（DAP_PowerCycle 0x0F）与当前状态
+    vllink.powerCapable = await vllink.queryPowerCapability();
+    vllink.powerState = vllink.powerCapable ? await vllink.queryPowerState() : null;
+
     UI.status.innerText = "ONLINE: " + vllink.device.productName;
     UI.connectBtn.innerText = "Disconnect";
     UI.connectBtn.classList.remove('bg-primary', 'bg-rose-500');
@@ -386,6 +391,14 @@ async function performConnection(autoDevice = null, forceRequest = false) {
             const info = await vllink.queryInfo();
             if (!info) return;
             updateDisplay(info);
+
+            // 低频同步电源状态（避免每 250ms 都占用 DAP 通道）
+            if (vllink.powerCapable && !vllink.isBusy &&
+                (Date.now() - (vllink._powerStamp || 0) > 1500)) {
+                vllink._powerStamp = Date.now();
+                const st = await vllink.queryPowerState();
+                if (st) { vllink.powerState = st; refreshPowerButtons(info); }
+            }
             
             if (info.select_idx !== ConfigEditor.lastSelectedIdx) {
                 ConfigEditor.lastSelectedIdx = info.select_idx;
@@ -432,6 +445,9 @@ async function handleDeviceDisconnect(manual = false) {
     
     vllink.isBusy = false;
     vllink.device = null;
+    vllink.powerCapable = false;
+    vllink.powerState = null;
+    lastInfo = null;
 }
 
 // ==========================================
@@ -509,6 +525,32 @@ UI.connectBtn.addEventListener('mouseleave', () => {
 
 // 列表点击切换或重启
 UI.deviceList.addEventListener('click', async (e) => {
+    const powerBtn = e.target.closest('.power-btn');
+    if (powerBtn) {
+        e.stopPropagation();
+        if (powerBtn.disabled) return;
+        const card = powerBtn.closest('[data-id]');
+        if (!card || Number(card.dataset.id) !== lastInfo?.select_idx) return;
+
+        const bit = Number(powerBtn.dataset.ch);
+        const down = powerBtn.dataset.down === '1';
+        powerBtn.disabled = true;
+        vllink.isBusy = true;
+        try {
+            const st = await vllink.setPowerDown(bit, !down);
+            if (st) {
+                vllink.powerState = st;
+                if (lastInfo) refreshPowerButtons(lastInfo);
+            }
+        } catch (err) {
+            console.warn("Power control failed:", err);
+        } finally {
+            vllink.isBusy = false;
+            powerBtn.disabled = false;
+        }
+        return;
+    }
+
     const restartBtn = e.target.closest('.restart-btn');
     if (restartBtn) {
         e.stopPropagation();
@@ -523,6 +565,7 @@ UI.deviceList.addEventListener('click', async (e) => {
 });
 
 function updateDisplay(info) {
+    lastInfo = info;
     const all = [{ ...info.local, id: 0, type: 'USB' }];
     info.remote.forEach(r => all.push({ ...r, type: 'WIFI' }));
     
@@ -546,6 +589,11 @@ function updateDisplay(info) {
                     <div class="flex flex-col"><span class="text-[9px] text-slate-400 uppercase font-black">Uptime</span><span class="uptime-val font-mono text-sm font-bold text-slate-700 dark:text-slate-200">00:00:00</span></div>
                     <div class="flex flex-col items-end"><span class="text-[9px] text-slate-400 uppercase font-black">Latency</span><span class="delay-val font-mono text-sm text-primary font-black">-</span></div>
                 </div>
+                <div class="power-row hidden items-center gap-2 pt-1 border-t border-slate-200/60 dark:border-white/10">
+                    <span class="text-[9px] text-slate-400 uppercase font-black tracking-wider">跌落</span>
+                    <button class="power-btn" data-ch="1" title="VREF 跌落/恢复">VREF</button>
+                    <button class="power-btn" data-ch="2" title="VOUT 5V 跌落/恢复">VOUT</button>
+                </div>
             </div>`).join('');
         lastFingerprint = fingerprint;
     }
@@ -557,6 +605,54 @@ function updateDisplay(info) {
         const t = dev.id === 0 ? Number(info.local.us)/1e6 : Number(info.local.us - dev.us)/1e6;
         card.querySelector('.uptime-val').innerText = formatTime(t);
         card.querySelector('.delay-val').innerText = dev.delay_us > 0 ? `${dev.delay_us} us` : "-";
+    });
+
+    refreshPowerButtons(info);
+}
+
+/**
+ * 刷新设备卡片上的电源跌落按钮（仅当前选中节点 + 支持 0x0F + 通道已配置时显示）
+ */
+function refreshPowerButtons(info) {
+    const st = vllink.powerState;
+    UI.deviceList.querySelectorAll('.device-card').forEach(card => {
+        const isSelected = Number(card.dataset.id) === info.select_idx;
+        const row = card.querySelector('.power-row');
+        if (!row) return;
+
+        const show = isSelected && vllink.powerCapable && st;
+        row.classList.toggle('hidden', !show);
+        if (show) { row.classList.add('flex'); } else { row.classList.remove('flex'); }
+        if (!show) return;
+
+        row.querySelectorAll('.power-btn').forEach(btn => {
+            const bit = Number(btn.dataset.ch);
+            const name = bit === 1 ? 'VREF' : 'VOUT';
+            const configured = (st.config & bit) !== 0;
+            const powered = (st.power & bit) !== 0;
+            const down = configured && !powered;
+
+            btn.disabled = !configured;
+            btn.dataset.down = down ? '1' : '0';
+
+            if (!configured) {
+                /* 通道未配置：锁定为红色关闭态 */
+                btn.innerText = `${name} ✕`;
+                btn.title = `${name} 未配置（已在配置中关闭）`;
+                btn.className = 'power-btn text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded-md border transition-all ' +
+                    'border-rose-500/30 text-rose-500/60 bg-rose-500/5 cursor-not-allowed opacity-70';
+            } else if (down) {
+                btn.innerText = `${name} ↓`;
+                btn.title = `${name} 已跌落（点击恢复）`;
+                btn.className = 'power-btn text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded-md border transition-all active:scale-95 ' +
+                    'border-rose-500/50 text-rose-500 bg-rose-500/10 hover:bg-rose-500/20';
+            } else {
+                btn.innerText = `${name} ↑`;
+                btn.title = `${name} 正常输出（点击跌落）`;
+                btn.className = 'power-btn text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded-md border transition-all active:scale-95 ' +
+                    'border-emerald-500/50 text-emerald-500 bg-emerald-500/10 hover:bg-emerald-500/20';
+            }
+        });
     });
 }
 
