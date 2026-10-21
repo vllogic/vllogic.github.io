@@ -14,7 +14,17 @@
 <br>&emsp;&emsp;* [上位机源码](https://github.com/vllogic/usb_sniffer.extcap)
 <br>&emsp;&emsp;* [铝合金外壳](https://www.jlc-jdgf.com/machine-detail/621858041681838082)
 
-### 1.1 演示
+### 1.1 捕获方法
+* [Wireshark](https://www.wireshark.org/) GUI 实时捕获，优点是开源生态，解析全面
+* [capture_usb_vllogic](https://github.com/vllogic/usb_sniffer.extcap) 命令行捕获，优点是无实时解析瓶颈，适配Agent开发
+* `USBPV` GUI 插件实时捕获，优点是图形化报文
+
+### 1.2 分析方法
+* `Wireshark` 抓到的数据包可以直接在软件中人工分析或者将`pcapng`交付给Agent分析
+* `capture_usb_vllogic` 命令行捕获到数据建议交付给Agent分析
+* `USBPV` 抓到的数据包一般是人工分析
+
+### 1.2 演示
 * [AI Agent验证实例 -- USB Sniffer 2 极速性能演示](../example/usb_sniffer2_extreme_test.md)
 
 ## 二、快速上手
@@ -58,14 +68,14 @@
 ## 三、常见问题
 1. * 问：捕获时能否自动识别速度，无需提前选定速度模式
    * 答：第二代已支持，如果自动模式未正确切换，可以手动选定速度模式
-2. * 问：能否支持[USB PACKET VIEW](https://www.usbpacketviewer.com/download/)
-   * 答：不支持实时捕获，但可以导入分析，详见此网站第九章[hellofpga.com_usb-sniffer](http://www.hellofpga.com/index.php/2025/04/03/usb-sniffer/)
-3. * 问：捕获时，`Time`栏时间戳比现实时间慢，或者在使用过滤器后，不能实时观察到期望数据
+2. * 问：能否支持 [USB PACKET VIEW](https://www.usbpacketviewer.com/download/)
+   * 答：支持通过插件实时捕获，插件已放入资源包，源码见 [usbpv_plugin_usb_sniffer](https://github.com/vllogic/usbpv_plugin_usb_sniffer)；也可以导入分析，方法来自此网站第九章[hellofpga.com_usb-sniffer](http://www.hellofpga.com/index.php/2025/04/03/usb-sniffer/)
+1. * 问：捕获时，`Time`栏时间戳比现实时间慢，或者在使用过滤器后，不能实时观察到期望数据
    * 答：这是因为Wireshark显示层无法实时显示大量数据，提供几种方案
       1. 勾选`Fold empty frames`，折叠空帧，推荐
       2. 在`Wireshark`菜单栏中，取消`视图`->`着色分组列表`，这个功能对网络分析有用，但对大部分USB分析无意义
       3. 勾选`Exclude Line State`，排除线路状态报文
-4. * 问：能否支持USB2.0理论峰值速度持续抓包
+2. * 问：能否支持USB2.0理论峰值速度持续抓包
    * 答：支持，当前这种峰值速率抓包对`Wireshark`压力非常大，容易出现GUI卡死进而传导给插件。故建议直接使用命令抓，抓完后再打开解析
       1. 例：`./capture_usb_vllogic --capture --fifo ./test.pcapng --speed auto --fold`
 
