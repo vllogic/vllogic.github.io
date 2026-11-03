@@ -84,6 +84,7 @@ Github：https://github.com/vllogic
    :maxdepth: 1
    :caption: 开发工具使用说明
 
+   software/agent_skills.md
    software/windows7_driver.md
    software/iar.md
    software/keil_mdk.md
