@@ -37,6 +37,10 @@
   2. 支持有线模式、无线直连模式，UART波特率不建议超过`1000000`
 
 ## 三、固件列表-预览版
+* [V00.60-202610191716](../_static/firmware/vllink_basic2.SVCommon0060202610191716.zip)
+  * 新增：在`VRef`脚配置为输出模式时，支持通过`ID_DAP_PowerCycle`命令控制`VRef`脚的掉电与恢复
+  * 新增：在`VOut`脚配置为输出模式时，支持通过`ID_DAP_PowerCycle`命令控制`VOut`脚的掉电与恢复，此功能仅对`Vllink 2X`有效
+  * 说明：上述功能专为Agent开发设计，可实现对目标芯片电源的完全控制。详见 [Agent-Skills](../software/agent_skills.md)
 * [V00.58-202609080742](../_static/firmware/vllink_basic2.SVCommon0058202609080742.zip)
   * 修复：一个SWD非OK状态下，计数器错误计数的问题
 * [V00.57-202608271342](../_static/firmware/vllink_basic2.SVCommon0057202608271342.zip)
