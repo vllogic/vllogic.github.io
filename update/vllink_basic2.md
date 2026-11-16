@@ -11,10 +11,10 @@
 
 ## 二、固件列表-正式版
 * [V00.61-202611151522](../_static/firmware/vllink_basic2.SVCommon0061202611151522.zip)
-  * 修复：无线串口在`Linux`下异常的问题
-  * 新增：添加`ID_DAP_PowerCycle`命令，可控制`VRef`、`VOut`脚的掉电与恢复。详见 [Agent-Skills](../software/agent_skills.md)
-  * 修复：一个SWD非OK状态下，计数器错误计数的问题
-  * 维护：京微齐力器件及工具的迭代维护，新增[京微齐力在线量产工具](https://vllogic.com/_static/tools/web_program_hercules/)
+  1. 修复：无线串口在`Linux`下异常的问题
+  2. 新增：添加`ID_DAP_PowerCycle`命令，可控制`VRef`、`VOut`脚的掉电与恢复。详见 [Agent-Skills](../software/agent_skills.md)
+  3. 修复：一个SWD非OK状态下，计数器错误计数的问题
+  4. 维护：京微齐力器件及工具的迭代维护，新增[京微齐力在线量产工具](https://vllogic.com/_static/tools/web_program_hercules/)
 <br><br>
 * [V00.54-202607241507](../_static/firmware/vllink_basic2.SVCommon0054202607241507.zip)
   1. 支持京微齐力离线编程，详见 [京微齐力（Hercules）离线编程](../software/hercuels_prog)
