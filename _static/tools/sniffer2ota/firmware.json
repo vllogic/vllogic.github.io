@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "product": "USB Sniffer 2",
+  "generated": "2026-11-16T13:51:00+00:00",
+  "images": {
+    "stable": {
+      "file": "usb_sniffer2.20261116.dedfc8c.c31c945.iap",
+      "kind": "standard",
+      "size": 244224,
+      "sha256": "3bf03e9a992e50ea5ab2525e1750da8146e3a2e65be0b34f228fd3716d64efc7",
+      "blocks": 954,
+      "version": "0.1.0",
+      "versionRaw": 256,
+      "date": "2026-11-16",
+      "codeLength": 31576,
+      "dataLength": 212066,
+      "dataType": 2,
+      "codeCrc32": 3263390088,
+      "dataCrc32": 2989183220,
+      "codeHash": "dedfc8cC",
+      "dataHash": "c31c945C"
+    },
+    "free": {
+      "file": "usb_sniffer2.free_fpga.20261116.dedfc8c.iap",
+      "kind": "free",
+      "size": 23552,
+      "sha256": "16c503477245fb3f852737dcdcaece16130d7cfce94078133f6c16363e0cc875",
+      "blocks": 92,
+      "version": "0.1.0",
+      "versionRaw": 256,
+      "date": "2026-11-16",
+      "codeLength": 23268,
+      "dataLength": 0,
+      "dataType": 0,
+      "codeCrc32": 3180209735,
+      "dataCrc32": 0,
+      "codeHash": "dedfc8cC",
+      "dataHash": ""
+    },
+    "swd": {
+      "file": "usb_sniffer2.swd_enable_60sec.20261116.dedfc8c.iap",
+      "kind": "swd",
+      "size": 23808,
+      "sha256": "7cd833535ed37a15a4bbc8a534b1d66b10717e0937f9c469800846e1212ee8f3",
+      "blocks": 93,
+      "version": "0.1.0",
+      "versionRaw": 256,
+      "date": "2026-11-16",
+      "codeLength": 23304,
+      "dataLength": 0,
+      "dataType": 0,
+      "codeCrc32": 2908669222,
+      "dataCrc32": 0,
+      "codeHash": "dedfc8cC",
+      "dataHash": ""
+    }
+  }
+}
