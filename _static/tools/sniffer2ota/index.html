@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>USB Sniffer 2 固件升级</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230d1117' stroke='%23223044' stroke-width='1.2'/%3E%3Cpath d='M16 6v15M16 21l-4-4M16 21l4-4M16 11l-3-3H10v3M16 15l3-3h3v3' fill='none' stroke='%2300d4ff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='22' r='1.8' fill='%23ffb020'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./style.css" />
+  <script>
+    try {
+      const theme = localStorage.getItem('sniffer2-ota-theme');
+      if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+    } catch {}
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" />
+        <path class="v" d="M16 6v15M16 21l-4-4M16 21l4-4M16 11l-3-3H10v3M16 15l3-3h3v3" />
+        <circle class="l" cx="16" cy="22" r="1.8" />
+      </svg>
+      <div>
+        <h1>USB Sniffer 2 固件升级</h1>
+        <p class="subtitle">在浏览器中通过 WebUSB 更新分析仪固件</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button id="theme" class="ghost icon" type="button" title="切换浅色 / 深色" aria-label="切换浅色 / 深色">
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div id="banner" class="banner" hidden>
+      <strong id="banner-title"></strong>
+      <span id="banner-body"></span>
+    </div>
+
+    <section class="card" id="card-device">
+      <div class="card-head">
+        <span class="num">1</span>
+        <h2>连接设备</h2>
+        <span id="device-pill" class="pill" hidden>已连接</span>
+      </div>
+      <div id="device-empty" class="empty">
+        <p>连接 USB Sniffer 2 后即可升级。</p>
+        <p class="note">运行时可直接升级，不需要按键、跳线或单独的升级模式。</p>
+        <button id="connect" class="primary" type="button">选择 USB Sniffer 2</button>
+      </div>
+      <div id="device-info" hidden>
+        <div class="device-main">
+          <strong id="device-name"></strong>
+          <span id="device-serial" class="mono"></span>
+        </div>
+        <dl class="facts">
+          <div><dt>固件版本</dt><dd id="device-version">—</dd></div>
+          <div><dt>打包日期</dt><dd id="device-date">—</dd></div>
+          <div><dt>代码长度</dt><dd id="device-code">—</dd></div>
+          <div><dt>FPGA 数据</dt><dd id="device-data">—</dd></div>
+          <div><dt>代码哈希</dt><dd id="device-code-hash" class="mono">—</dd></div>
+          <div><dt>FPGA 哈希</dt><dd id="device-data-hash" class="mono">—</dd></div>
+          <div><dt>硬件掩码</dt><dd id="device-hw" class="mono">—</dd></div>
+        </dl>
+        <p id="device-note" class="note" hidden></p>
+        <div class="row-actions">
+          <button id="read-again" class="ghost small" type="button">重新读取</button>
+          <button id="disconnect" class="ghost small" type="button">断开</button>
+        </div>
+      </div>
+      <p id="device-error" class="error-text" hidden></p>
+    </section>
+
+    <section class="card" id="card-file">
+      <div class="card-head">
+        <span class="num">2</span>
+        <h2>选择固件</h2>
+      </div>
+      <p class="note">本站内置三种固件；也可以在下方选择本地 .iap 包。</p>
+
+      <div class="fw-grid" id="fw-grid">
+        <button type="button" class="fw-option" data-fw="stable">
+          <span class="fw-top"><strong>标准固件</strong><span class="badge ok">推荐</span></span>
+          <span class="fw-desc">完整功能：CH32H417 + FPGA 位流，包含最新修复。</span>
+          <span class="fw-meta" data-meta="stable">0.1.0 · 2026-11-16 · 238.5 KiB</span>
+        </button>
+
+        <button type="button" class="fw-option" data-fw="free">
+          <span class="fw-top"><strong>FPGA 自由开发固件</strong><span class="badge info">可回退</span></span>
+          <span class="fw-desc">CH32H417 不加载/复位 FPGA，FPGA 相关 IO 释放为输入；PB0 保留 25 MHz 时钟。FPGA 由外部 JTAG 配置。</span>
+          <span class="fw-meta" data-meta="free">0.1.0 · 2026-11-16 · 23.0 KiB</span>
+        </button>
+
+        <button type="button" class="fw-option danger" data-fw="swd">
+          <span class="fw-top"><strong>SWD 使能固件</strong><span class="badge bad">危险</span></span>
+          <span class="fw-desc">上电后、正常启动前约 60 秒内 DP / DN 恢复为 SWD；可用 WCH-Link 擦除并解除读保护。</span>
+          <span class="fw-meta" data-meta="swd">0.1.0 · 2026-11-16 · 23.3 KiB</span>
+        </button>
+      </div>
+
+      <label id="drop" class="drop">
+        <input id="file" type="file" accept=".iap,application/octet-stream" hidden />
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></svg>
+        <span>拖放本地 .iap 到这里，或</span>
+        <span class="button ghost small">选择本地文件</span>
+      </label>
+
+      <p id="package-status" class="note" hidden></p>
+      <p id="package-error" class="error-text" hidden></p>
+
+      <div id="package-box" hidden>
+        <div class="file-head">
+          <strong id="file-name"></strong>
+          <span id="file-source" class="pill"></span>
+        </div>
+        <dl class="facts">
+          <div><dt>固件版本</dt><dd id="file-version">—</dd></div>
+          <div><dt>打包日期</dt><dd id="file-date">—</dd></div>
+          <div><dt>文件大小</dt><dd id="file-size">—</dd></div>
+          <div><dt>代码长度</dt><dd id="file-code">—</dd></div>
+          <div><dt>FPGA 数据</dt><dd id="file-data">—</dd></div>
+          <div><dt>代码哈希</dt><dd id="file-code-hash" class="mono">—</dd></div>
+          <div><dt>FPGA 哈希</dt><dd id="file-data-hash" class="mono">—</dd></div>
+          <div class="wide"><dt>SHA-256</dt><dd class="hash"><code id="file-sha"></code><button id="copy-sha" class="link" type="button">复制</button></dd></div>
+        </dl>
+        <div id="precheck" class="precheck" aria-live="polite"></div>
+        <p id="package-note" class="notice" hidden></p>
+        <button id="file-change" class="ghost small" type="button">选择其他文件</button>
+      </div>
+    </section>
+
+    <section class="card" id="card-update">
+      <div class="card-head">
+        <span class="num">3</span>
+        <h2>写入固件</h2>
+      </div>
+      <p id="ready" class="muted"></p>
+      <div id="progress" class="progress" hidden role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="bar"><div id="bar-fill"></div></div>
+        <p id="phase-text" class="note"></p>
+      </div>
+      <button id="start" class="primary large" type="button" disabled>开始升级</button>
+      <div id="result" class="result" hidden>
+        <div class="result-icon" aria-hidden="true"></div>
+        <div>
+          <strong id="result-title"></strong>
+          <p id="result-body"></p>
+          <button id="result-btn" class="ghost small" type="button" hidden></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card secondary">
+      <details class="help">
+        <summary>三种内置固件</summary>
+        <ul>
+          <li><b>标准固件</b>：正常分析仪功能，CH32H417 启动时载入 FPGA 位流。</li>
+          <li><b>FPGA 自由开发固件</b>：CH32H417 不再载入或复位 FPGA，FPGA 相关 IO 释放为输入；仅 PB0 保留 25 MHz 时钟输出、PE14 保持高电平。可用外部 JTAG 自由开发，随时可以 OTA 回标准固件。</li>
+          <li><b>SWD 使能固件</b>：上电后、正常启动前约 60 秒内 DP / DN 恢复为 SWD，可用 WCH-Link 擦除 CH32H417 并解除读保护。<b>一旦擦除，分析仪功能永久失效，硬件不可逆退化为开发板。</b></li>
+        </ul>
+      </details>
+      <details class="help">
+        <summary>升级说明</summary>
+        <ul>
+          <li>仅使用 Chrome / Edge 等 Chromium 浏览器，并通过 HTTPS 或 localhost 打开。</li>
+          <li>升级前请关闭 PulseView、sigrok-cli、Wireshark 等占用设备的程序。</li>
+          <li>升级过程中请勿关闭页面或拔掉设备；复位后设备会短暂消失，这是正常现象。</li>
+          <li>刷入 SWD 使能固件后，设备需要多等约 60 秒才会重新枚举。</li>
+        </ul>
+      </details>
+      <details class="help">
+        <summary>设备没有重新出现？</summary>
+        <p>先拔掉设备，等待 3 秒再插回，然后点击“重新连接”。刷过 SWD 使能固件时请至少等待 60 秒。</p>
+        <p>如果仍然没有设备：断电，将 PC2 拉低后上电，设备会停在 Slot A 的 IAP 服务；连接后重新刷入固件，再断电并松开 PC2。</p>
+      </details>
+      <details id="log-box" class="log" hidden>
+        <summary>
+          <span>日志</span>
+          <button id="copy-log" class="link" type="button">复制</button>
+        </summary>
+        <pre id="log"></pre>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <span>USB Sniffer 2 固件升级</span>
+    <span>WebUSB · 0x1209:0x6688</span>
+  </footer>
+
+  <div id="warn" class="modal" hidden>
+    <div class="modal-card" role="alertdialog" aria-modal="true" aria-labelledby="warn-title">
+      <div class="warn-head">
+        <span class="badge bad">危险</span>
+        <h2 id="warn-title">SWD 使能固件刷入确认</h2>
+        <button id="warn-close" class="link warn-close" type="button" aria-label="取消">✕</button>
+      </div>
+      <ol id="warn-steps" class="warn-steps">
+        <li class="active">1</li>
+        <li>2</li>
+        <li>3</li>
+      </ol>
+      <p id="warn-body" class="warn-body"></p>
+      <p id="warn-hint" class="note"></p>
+      <div class="modal-actions">
+        <button id="warn-cancel" class="ghost" type="button">取消</button>
+        <button id="warn-next" class="danger" type="button" disabled>下一步（3）</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
